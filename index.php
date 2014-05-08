@@ -18,7 +18,39 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+
+	// Custom Environmental Function
+	function isEnv($env){
+		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
+		{
+			$envs = array(
+				'development' => 'gothamsoccer.info',
+				'testing' => 'play.oodle.io',
+				'production' => 'gothamsoccer.com'
+			);
+			
+			if (isset($envs[$env]) && strpos($_SERVER['SERVER_NAME'], $envs[$env]) !== false) 
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+
+	if( isEnv('development') )
+	{
+		define('ENVIRONMENT', 'development');
+	}
+	elseif( isEnv('testing') )
+	{
+		define('ENVIRONMENT', 'testing');
+	}
+	else
+	{
+		define('ENVIRONMENT', 'production');
+	}
+
+	//define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
