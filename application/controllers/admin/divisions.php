@@ -1,5 +1,5 @@
 <?php
-class Home extends Admin_Controller
+class Divisions extends Admin_Controller
 {
 	
 	function __construct()
@@ -9,7 +9,7 @@ class Home extends Admin_Controller
 
 	public function index()
 	{
-		$this->load->admin_template('dashboard');
+		$this->load->admin_template('divisions');
 	}
 
 }

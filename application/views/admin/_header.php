@@ -10,35 +10,35 @@
 
 	<!-- NEED TO WORK ON -->
 
-	<link href="assets/admin/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="assets/admin/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="assets/admin/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/css/animate.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/css/responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/admin/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/css/animate.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/css/responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
 
 	<!-- BEGIN CORE JS FRAMEWORK--> 
-	<script src="assets/admin/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/breakpoints.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/breakpoints.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script> 
 	<!-- END CORE JS FRAMEWORK --> 
 	<!-- BEGIN PAGE LEVEL JS --> 	
-	<script src="assets/admin/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script> 	
-	<script src="assets/admin/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script> 
-	<script src="assets/admin/plugins/pace/pace.min.js" type="text/javascript"></script>  
-	<script src="assets/admin/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script> 	
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/pace/pace.min.js" type="text/javascript"></script>  
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS --> 	
 	
 	<!-- BEGIN CORE TEMPLATE JS --> 
-	<script src="assets/admin/js/core.js" type="text/javascript"></script> 
-	<script src="assets/admin/js/chat.js" type="text/javascript"></script> 
-	<script src="assets/admin/js/demo.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/js/core.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/js/chat.js" type="text/javascript"></script> 
+	<script src="<?php echo base_url(); ?>assets/admin/js/demo.js" type="text/javascript"></script> 
 	<!-- END CORE TEMPLATE JS --> 
 
 	<!-- END NEED TO WORK ON -->
@@ -62,7 +62,7 @@
 			<!-- END MOBILE HEADER -->
 			<!-- BEGIN LOGO -->	
 			<a href="<?php echo base_url('admin'); ?>">
-				<img src="assets/admin/img/logo.png" class="logo" alt="" data-src="assets/admin/img/logo.png" data-src-retina="assets/admin/img/logo2x.png" width="222" height="21"/>
+				<img src="<?php echo base_url(); ?>assets/admin/img/logo.png" class="logo" alt="" data-src="<?php echo base_url(); ?>assets/admin/img/logo.png" data-src-retina="<?php echo base_url(); ?>assets/admin/img/logo2x.png" width="222" height="21"/>
 			</a>
 			<!-- END LOGO --> 
 		</div>
@@ -81,14 +81,12 @@
 				</ul>
 				<!-- END SLIM NAVIGATION TOGGLE -->				
 				<!-- BEGIN HEADER QUICK LINKS -->
-				<ul class="nav quick-section">
-					<!-- BEGIN SEARCH BOX -->
+				<!-- <ul class="nav quick-section">
 					<li class="m-r-10 input-prepend inside search-form no-boarder">
 						<span class="add-on"><span class="iconset top-search"></span></span>
 						<input name="" type="text" class="no-boarder" placeholder="Search Dashboard" style="width:250px;">
 					</li>
-					<!-- END SEARCH BOX -->
-				</ul>
+				</ul> -->
 				<!-- BEGIN HEADER QUICK LINKS -->				
 			</div>
 			<!-- END HEADER LEFT SIDE SECTION -->
@@ -109,7 +107,7 @@
 							<!-- BEGIN NOTIFICATION MESSAGE -->
 							<div class="notification-messages info">
 								<div class="user-profile">
-									<img src="assets/admin/img/profiles/d.jpg" alt="" data-src="assets/admin/img/profiles/d.jpg" data-src-retina="assets/admin/img/profiles/d2x.jpg" width="35" height="35">
+									<img src="<?php echo base_url(); ?>assets/admin/img/profiles/d.jpg" alt="" data-src="<?php echo base_url(); ?>assets/admin/img/profiles/d.jpg" data-src-retina="<?php echo base_url(); ?>assets/admin/img/profiles/d2x.jpg" width="35" height="35">
 								</div>
 								<div class="message-wrapper">
 									<div class="heading">Title of Notification</div>
