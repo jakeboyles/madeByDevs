@@ -9,7 +9,7 @@ class Home extends Site_Controller
 
 	public function index()
 	{
-		echo 'site view here<br>';
+		
 	}
 
 }
