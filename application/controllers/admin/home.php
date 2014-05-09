@@ -1,5 +1,5 @@
 <?php
-class Admin extends Admin_Controller
+class Home extends Admin_Controller
 {
 	
 	function __construct()
@@ -9,7 +9,7 @@ class Admin extends Admin_Controller
 
 	public function index()
 	{
-		echo 'admin view here';
+		echo 'admin view here<br>';
 	}
 
 }

@@ -5,7 +5,7 @@ class MY_Controller extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		echo 'coming from my controller';
+		echo 'coming from my controller<br>';
 	}
 
 }

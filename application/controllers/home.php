@@ -1,5 +1,5 @@
 <?php
-class Base extends Base_Controller
+class Home extends Site_Controller
 {
 	
 	function __construct()
@@ -9,7 +9,7 @@ class Base extends Base_Controller
 
 	public function index()
 	{
-		echo 'base view here';
+		echo 'site view here<br>';
 	}
 
 }
