@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Title Goes Here</title>
+	<title>Admin Panel - Gotham Soccer League</title>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -62,31 +62,9 @@
 			<!-- END MOBILE HEADER -->
 			<!-- BEGIN LOGO -->	
 			<a href="#">
-				<img src="assets/admin/img/logo.png" class="logo" alt="" data-src="assets/admin/img/logo.png" data-src-retina="assets/admin/img/logo2x.png" width="106" height="21"/>
+				<img src="assets/admin/img/logo.png" class="logo" alt="" data-src="assets/admin/img/logo.png" data-src-retina="assets/admin/img/logo2x.png" width="222" height="21"/>
 			</a>
 			<!-- END LOGO --> 
-			<!-- BEGIN LOGO NAV BUTTONS -->
-			<ul class="nav pull-right notifcation-center">	
-				<li class="dropdown" id="header_task_bar">
-					<a href="#" class="dropdown-toggle active" data-toggle="">
-						<div class="iconset top-home"></div>
-					</a>
-				</li>
-				<li class="dropdown" id="header_inbox_bar">
-					<a href="#" class="dropdown-toggle">
-						<div class="iconset top-messages"></div>
-						<span class="badge" id="msgs-badge">2</span>
-						</a>
-				</li>
-				<!-- BEGIN MOBILE CHAT TOGGLER -->
-				<li class="dropdown" id="portrait-chat-toggler" style="display:none">
-					<a href="#sidr" class="chat-menu-toggle">
-						<div class="iconset top-chat-white"></div>
-					</a>
-				</li>
-				<!-- END MOBILE CHAT TOGGLER -->				        
-			</ul>
-			<!-- END LOGO NAV BUTTONS -->
 		</div>
 		<!-- END NAVIGATION HEADER -->
 		<!-- BEGIN CONTENT HEADER -->
