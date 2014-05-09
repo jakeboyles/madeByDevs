@@ -9,7 +9,8 @@ class Home extends Admin_Controller
 
 	public function index()
 	{
-
+		$data['animals'] = array( 'cat','dog','mouse' );
+		$this->load->admin_template('dashboard', $data);
 	}
 
 }
