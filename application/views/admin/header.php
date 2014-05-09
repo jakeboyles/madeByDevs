@@ -61,7 +61,7 @@
 			</ul>
 			<!-- END MOBILE HEADER -->
 			<!-- BEGIN LOGO -->	
-			<a href="#">
+			<a href="<?php echo base_url('admin'); ?>">
 				<img src="assets/admin/img/logo.png" class="logo" alt="" data-src="assets/admin/img/logo.png" data-src-retina="assets/admin/img/logo2x.png" width="222" height="21"/>
 			</a>
 			<!-- END LOGO --> 
@@ -82,9 +82,6 @@
 				<!-- END SLIM NAVIGATION TOGGLE -->				
 				<!-- BEGIN HEADER QUICK LINKS -->
 				<ul class="nav quick-section">
-					<li class="quicklinks"><a href="#" class=""><div class="iconset top-reload"></div></a></li>
-					<li class="quicklinks"><span class="h-seperate"></span></li>
-					<li class="quicklinks"><a href="#" class=""><div class="iconset top-tiles"></div></a></li>
 					<!-- BEGIN SEARCH BOX -->
 					<li class="m-r-10 input-prepend inside search-form no-boarder">
 						<span class="add-on"><span class="iconset top-search"></span></span>
@@ -102,7 +99,7 @@
 					<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="Notifications">
 						<div class="user-details"> 
 							<div class="username">
-								<span class="badge badge-important">3</span>&nbsp;John<span class="bold">&nbsp;Smith</span>									
+								&nbsp;John<span class="bold">&nbsp;Smith</span>									
 							</div>						
 						</div> 
 						<div class="iconset top-down-arrow"></div>
@@ -124,12 +121,7 @@
 							<!-- END NOTIFICATION MESSAGE -->	
 						</div>				
 					</div>
-					<!-- END NOTIFICATION CENTER -->
-					<!-- BEGIN PROFILE PICTURE -->
-					<div class="profile-pic"> 
-						<img src="assets/admin/img/profiles/avatar_small.jpg" alt="" data-src="assets/admin/img/profiles/avatar_small.jpg" data-src-retina="assets/admin/img/profiles/avatar_small2x.jpg" width="35" height="35" /> 
-					</div>  
-					<!-- END PROFILE PICTURE -->     			
+					<!-- END NOTIFICATION CENTER -->   			
 				</div>
 				<!-- BEGIN HEADER NAV BUTTONS -->
 				<ul class="nav quick-section">
@@ -145,26 +137,7 @@
 							<li><a href="#"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Separated Link</a></li>
 						</ul>
 					</li>
-					<!-- END SETTINGS -->
-					<li class="quicklinks"><span class="h-seperate"></span></li> 
-					<!-- BEGIN CHAT SIDEBAR TOGGLE -->
-					<li class="quicklinks"> 	
-						<a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle">
-							<div class="iconset top-chat-dark"><span class="badge badge-important hide" id="chat-message-count">1</span></div>
-						</a> 
-						<!-- BEGIN OPTIONAL RECENT CHAT POP UP NOTIFICATION -->
-						<div class="simple-chat-popup chat-menu-toggle hide">
-							<div class="simple-chat-popup-arrow"></div>
-							<div class="simple-chat-popup-inner">
-								<div style="width:100px">
-									<div class="semi-bold">Name</div>
-									<div class="message">Message...</div>
-								</div>
-							</div>
-						</div>
-						<!-- END OPTIONAL RECENT CHAT POP UP NOTIFICATION -->
-					</li>
-					<!-- END CHAT SIDEBAR TOGGLE --> 
+					<!-- END SETTINGS -->	
 				</ul>
 				<!-- END HEADER NAV BUTTONS -->
 			</div>

@@ -5,7 +5,7 @@
 			<ul>	
 				<!-- Dashboard LINK -->
 				<li class="start active">
-					<a href="#">
+					<a href="<?php echo base_url('admin'); ?>">
 						<i class="icon-custom-home"></i>
 						<span class="title">Dashboard</span>
 						<span class="selected"></span>
