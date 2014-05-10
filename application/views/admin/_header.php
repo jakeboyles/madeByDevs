@@ -8,8 +8,7 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 
-	<!-- NEED TO WORK ON -->
-
+	<!-- BEGIN CORE TEMPLATE CSS -->
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -19,6 +18,12 @@
 	<link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url(); ?>assets/admin/css/responsive.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url(); ?>assets/admin/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+	<!-- END CORE TEMPLATE CSS -->
+
+	<!-- BEGIN CUSTOM CSS -->
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/jquery-datatable/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen">
+	<!-- END CUSTOM CSS -->
 
 	<!-- BEGIN CORE JS FRAMEWORK--> 
 	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
@@ -35,13 +40,19 @@
 	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS --> 	
 	
-	<!-- BEGIN CORE TEMPLATE JS --> 
+	<!-- BEGIN CORE TEMPLATE JS -->
 	<script src="<?php echo base_url(); ?>assets/admin/js/core.js" type="text/javascript"></script> 
-	<script src="<?php echo base_url(); ?>assets/admin/js/chat.js" type="text/javascript"></script> 
-	<script src="<?php echo base_url(); ?>assets/admin/js/demo.js" type="text/javascript"></script> 
+	<!-- <script src="<?php echo base_url(); ?>assets/admin/js/chat.js" type="text/javascript"></script> -->
+	<!-- <script src="<?php echo base_url(); ?>assets/admin/js/demo.js" type="text/javascript"></script> -->
 	<!-- END CORE TEMPLATE JS --> 
 
-	<!-- END NEED TO WORK ON -->
+	<!-- BEGIN CUSTOM JS -->
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-datatable/extra/js/TableTools.min.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/js/datatables.responsive.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/js/lodash.min.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/admin/js/custom.js" type="text/javascript"></script> 
+	<!-- END CUSTOM JS -->
 
 </head>
 <body class="">
