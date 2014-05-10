@@ -39,6 +39,10 @@
 							</tbody>
 						</table>
 
+						<div class="pagiation">
+							<?php echo $this->pagination->create_links(); ?>
+						</div>
+
 					</div>
 
 				</div>
