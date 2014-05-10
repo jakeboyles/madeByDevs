@@ -23,8 +23,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Pages</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/pages'); ?>">All Pages</a></li>
+						<li><a href="<?php echo base_url( 'admin/pages/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -34,8 +34,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Posts</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/posts'); ?>">All Posts</a></li>
+						<li><a href="<?php echo base_url( 'admin/posts/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -56,8 +56,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Divisions</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/divisions'); ?>">All Divisions</a></li>
+						<li><a href="<?php echo base_url( 'admin/divisions/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -67,8 +67,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Seasons</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/seasons'); ?>">All Seasons</a></li>
+						<li><a href="<?php echo base_url( 'admin/seasons/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -78,8 +78,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Sessions</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/sessions'); ?>">All Sessions</a></li>
+						<li><a href="<?php echo base_url( 'admin/sessions/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -89,8 +89,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Teams</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/teams'); ?>">All Teams</a></li>
+						<li><a href="<?php echo base_url( 'admin/teams/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -100,8 +100,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Locations</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/locations'); ?>">All Locations</a></li>
+						<li><a href="<?php echo base_url( 'admin/locations/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="">
@@ -111,8 +111,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Games</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/games'); ?>">All Games</a></li>
+						<li><a href="<?php echo base_url( 'admin/games/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -127,8 +127,8 @@
 						<span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="#">All Users</a></li>
-						<li><a href="#">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/users'); ?>">All Users</a></li>
+						<li><a href="<?php echo base_url( 'admin/users/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 			</ul>
