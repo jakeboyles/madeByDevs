@@ -11,12 +11,15 @@
 		 		<div class="grid simple ">
 
 					<div class="grid-title">
-						<h4>Divisions</h4>
+						<h4>List of Divisions</h4>
+						<div class="pull-right">
+							<a href="<?php echo base_url('admin/divisions/add'); ?>" class="btn btn-primary">Add New</a>
+						</div>
 					</div>
 
 					<div class="grid-body">
 							
-						<table class="table table-striped dataTable data-test">
+						<table class="table table-striped dataTable">
 							<thead>
 								<tr>
 									<th>id</th>
