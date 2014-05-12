@@ -16,7 +16,7 @@
 
 					<div class="grid-body">
 							
-						<table class="table table-striped">
+						<table class="table table-striped dataTable data-test">
 							<thead>
 								<tr>
 									<th>id</th>
@@ -40,7 +40,7 @@
 						</table>
 
 						<div class="pagiation">
-							<?php echo $this->pagination->create_links(); ?>
+							<?php //echo $this->pagination->create_links(); ?>
 						</div>
 
 					</div>

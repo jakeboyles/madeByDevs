@@ -10,6 +10,7 @@ class Divisions extends Admin_Controller
 	// Display Divisions in a Table Format
 	public function index()
 	{
+		/* Works - Traditional Pagination
 		// Set Vars
 		$limit = 2;
 
@@ -27,6 +28,13 @@ class Divisions extends Admin_Controller
 
 		// Load Divisions View
 		$this->load->admin_template( 'divisions', $data );
+		*/
+
+		$this->load->model( 'Divisions_model' );
+		$data['divisions'] = $this->Divisions_model->get_divisions();
+		$this->load->admin_template( 'divisions', $data );
+
+		//$this->load->view( 'admin/datatables' );
 	}
 
 }
