@@ -35,8 +35,8 @@
 									<td><?php echo $division['id']; ?></td>
 									<td><a href="<?php echo base_url('admin/divisions/edit/' . $division['id']); ?>"><?php echo $division['name']; ?></a></td>
 									<td><?php echo $division['league']; ?></td>
-									<td><?php echo $division['created']; ?></td>
-									<td><?php echo $division['modified']; ?></td>
+									<td><?php echo date( 'F d, Y', strtotime( $division['created'] ) ); ?></td>
+									<td><?php echo date( 'F d, Y', strtotime( $division['modified'] ) ); ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
