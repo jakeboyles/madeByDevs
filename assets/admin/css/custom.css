@@ -1,0 +1,9 @@
+/* Make Select Boxes Full Width */
+.select2-container {
+	width: 100%;
+}
+
+/* Fix the duplicate Arrow */
+.select2-search-choice-close:before {
+	content: '';
+}

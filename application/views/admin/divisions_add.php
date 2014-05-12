@@ -23,10 +23,20 @@
 
 							<div class="col-md-8 col-sm-8 col-xs-8">
 								<?php echo form_open( 'admin/add', array( 'id' => 'add-division-form') ); ?>
+
 									<div class="form-group">
-										<label class="form-label" for="division">Division Name</label>
+										<?php echo form_label( 'Division Name', 'name', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Men's First Division</span>
-										<?php echo form_input( array('name' => 'division', 'class' => 'form-control', 'id' => 'division') ); ?>
+										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name') ); ?>
+									</div>
+
+									<div class="form-group">
+										<?php echo form_label( 'Division Type', 'division_type', array( 'class' => 'form-label' ) ); ?>
+										<span class="help">e.g. Men's, Women's, or Youth</span>
+										<?php $division_type_options = array( '' => '', 1 => "Men's", 2 => "Women's", 3 => "Youth" ); ?>
+										<?php echo form_dropdown( 'division_type', $division_type_options, '', 'class="pretty-select"' ); ?>
+									</div>
+
 								<?php echo form_close(); ?>
 							</div>
 

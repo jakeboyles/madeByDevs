@@ -22,4 +22,9 @@ $(document).ready(function(){
     // Style Number of Results Dropdown
 	$('.dataTables_wrapper .dataTables_length select').addClass("select2-wrapper span12");
 	$(".select2-wrapper").select2({minimumResultsForSearch: -1});
+
+	/* ##############################################################################
+	# Generic Form JS
+	############################################################################# */
+	$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
 });
