@@ -13,7 +13,7 @@
 					<div class="grid-title">
 						<h4>List of Divisions</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/divisions/add'); ?>" class="btn btn-primary">Add New</a>
+							<a href="<?php echo base_url('admin/divisions/add'); ?>" class="btn btn-primary">Add New Division</a>
 						</div>
 					</div>
 
@@ -41,10 +41,6 @@
 								<?php endforeach; ?>
 							</tbody>
 						</table>
-
-						<div class="pagiation">
-							<?php //echo $this->pagination->create_links(); ?>
-						</div>
 
 					</div>
 
