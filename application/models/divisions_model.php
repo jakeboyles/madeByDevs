@@ -1,5 +1,5 @@
 <?php
-class Divisions_model extends CI_Model
+class Divisions_model extends MY_Model
 {
 
 	// Get Divisions
