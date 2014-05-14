@@ -78,8 +78,9 @@
 			<!-- END HEADER LEFT SIDE SECTION -->
 			<!-- BEGIN HEADER RIGHT SIDE SECTION -->
 			<div class="pull-right"> 
+
+				<!-- Username + Notifications
 				<div class="chat-toggler">	
-					<!-- BEGIN NOTIFICATION CENTER -->
 					<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="Notifications">
 						<div class="user-details"> 
 							<div class="username">
@@ -87,10 +88,9 @@
 							</div>						
 						</div> 
 						<div class="iconset top-down-arrow"></div>
-					</a>	
+					</a>
 					<div id="notification-list" style="display:none">
 						<div style="width:300px">
-							<!-- BEGIN NOTIFICATION MESSAGE -->
 							<div class="notification-messages info">
 								<div class="user-profile">
 									<img src="<?php echo base_url(); ?>assets/admin/img/profiles/d.jpg" alt="" data-src="<?php echo base_url(); ?>assets/admin/img/profiles/d.jpg" data-src-retina="<?php echo base_url(); ?>assets/admin/img/profiles/d2x.jpg" width="35" height="35">
@@ -102,11 +102,11 @@
 								</div>
 								<div class="clearfix"></div>									
 							</div>
-							<!-- END NOTIFICATION MESSAGE -->	
 						</div>				
-					</div>
-					<!-- END NOTIFICATION CENTER -->   			
+					</div>		
 				</div>
+				-->
+
 				<!-- BEGIN HEADER NAV BUTTONS -->
 				<ul class="nav quick-section">
 					<!-- BEGIN SETTINGS -->
@@ -115,15 +115,15 @@
 							<div class="iconset top-settings-dark"></div> 	
 						</a>
 						<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="user-options">
-							<li><a href="#">Normal Link</a></li>
-							<li><a href="#">Badge Link&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">2</span></a></li>
+							<li><a href="#">My Profile</a></li>
 							<li class="divider"></li>                
-							<li><a href="#"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Separated Link</a></li>
+							<li><a href="<?php echo base_url('admin/login/logout'); ?>"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Logout</a></li>
 						</ul>
 					</li>
 					<!-- END SETTINGS -->	
 				</ul>
 				<!-- END HEADER NAV BUTTONS -->
+
 			</div>
 			<!-- END HEADER RIGHT SIDE SECTION -->
 		</div> 

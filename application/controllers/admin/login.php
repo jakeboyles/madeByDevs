@@ -79,4 +79,14 @@ class Login extends Admin_Controller
 		) );
 	}
 
+	// Destory the Session and Send User to Login Page
+	public function logout()
+	{
+		// Destory The Session
+		$this->session->sess_destroy();
+
+		// Send the User to the Login Page
+		redirect('admin/login');
+	}
+
 }
