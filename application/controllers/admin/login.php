@@ -79,7 +79,7 @@ class Login extends Admin_Controller
 		) );
 	}
 
-	// Destory the Session and Send User to Login Page
+	// Log The User Out
 	public function logout()
 	{
 		// Destory The Session

@@ -10,9 +10,6 @@ class Authenticate_model extends MY_Model
 		{
 			return false;
 		}
-
-		// Datetime Value
-		$dateTime = date('Y-m-d H:i:s',time());
 		
 		// Salt to Use for Password Hash
 		$salt = $this->config->item('encryption_key');
@@ -34,7 +31,7 @@ class Authenticate_model extends MY_Model
 
 			// Update Last Login
 			$data = array(
-				'last_login' => $dateTime,
+				'last_login' => $this->date_time,
 			);
 			$this->db->where('id',$userID);
 			$this->db->update('users',$data);

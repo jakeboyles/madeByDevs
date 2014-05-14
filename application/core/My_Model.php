@@ -90,6 +90,11 @@ class MY_Model extends CI_Model
     protected $_temporary_return_type = NULL;
 
     /* --------------------------------------------------------------
+     * VARIABLES - CUSTOM ADDED TO MY_MODEL FRAMEWORK
+     * ------------------------------------------------------------ */
+    protected $date_time;
+
+    /* --------------------------------------------------------------
      * GENERIC METHODS
      * ------------------------------------------------------------ */
 
@@ -111,6 +116,9 @@ class MY_Model extends CI_Model
         array_unshift($this->before_update, 'protect_attributes');
 
         $this->_temporary_return_type = $this->return_type;
+
+        // Custom Modifications to Construct
+        $this->date_time = date('Y-m-d H:i:s',time());
     }
 
     /* --------------------------------------------------------------
@@ -937,4 +945,10 @@ class MY_Model extends CI_Model
         $method = ($multi) ? 'result' : 'row';
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
     }
+
+    /* --------------------------------------------------------------
+     * BEGIN CUSTOM METHODS TO MY_MODEL FRAMEWORK
+     * ------------------------------------------------------------ */
+
+
 }
