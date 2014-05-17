@@ -27,17 +27,17 @@ class Authenticate_model extends MY_Model
 		{
 			// Store variables
 			$row = $query->row();
-			$userID = $row->id;
+			$user_id = $row->id;
 
 			// Update Last Login
 			$data = array(
 				'last_login' => $this->date_time,
 			);
-			$this->db->where('id',$userID);
+			$this->db->where('id',$user_id);
 			$this->db->update('users',$data);
 
 			// Return User ID
-			return $userID;
+			return $user_id;
 		}
 
 		return false;

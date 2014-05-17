@@ -745,6 +745,28 @@ class MY_Model extends CI_Model
         return $row;
     }
 
+    /**
+    * MySQL INT insert USER ID for created_by column
+    */
+    public function created_by($row)
+    {
+        if( $user_id = $this->session->userdata('user_id') )
+        {
+            if (is_object($row))
+            {
+                $row->created_by = $user_id;
+            }
+            else
+            {
+                $row['created_by'] = $user_id;
+            }
+
+            return $row;
+        }
+
+        return false;
+    }
+
     /* --------------------------------------------------------------
      * QUERY BUILDER DIRECT ACCESS METHODS
      * ------------------------------------------------------------ */

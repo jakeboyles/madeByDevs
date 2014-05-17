@@ -2,7 +2,7 @@
 class Login extends Admin_Controller
 {
 	// Set Class Vars
-	var $userID; // Set in correctLogin()
+	var $user_id; // Set in correctLogin()
 
 	function __construct()
 	{
@@ -35,13 +35,13 @@ class Login extends Admin_Controller
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		// Check to See if Email/Password Combo Work
-		if(!empty($email) && !empty($password) && filter_var($email, FILTER_VALIDATE_EMAIL))
+		if( !empty($email) && !empty($password) && filter_var($email, FILTER_VALIDATE_EMAIL) )
 		{
-			$this->form_validation->set_rules('email','Email Address','callback_correctLogin');
+			$this->form_validation->set_rules('email','Email Address','callback_correct_login');
 		}
 
 		// Form Validation and Login Validation Passed
-		if ($this->form_validation->run())
+		if ( $this->form_validation->run() )
 		{
 			// Log the User In		
 			$this->_login();
@@ -52,15 +52,15 @@ class Login extends Admin_Controller
 	}
 
 	// Check for Correct Username and Password
-	public function correctLogin()
+	public function correct_login()
 	{			
 		// Store User ID
 		$this->load->model('Authenticate_model');
-		$this->userID = $this->Authenticate_model->login($this->input->post('email'), $this->input->post('password'));
+		$this->user_id = $this->Authenticate_model->login( $this->input->post('email'), $this->input->post('password') );
 
-		if(!$this->userID)
+		if(!$this->user_id)
 		{
-			$this->form_validation->set_message('correctLogin', 'You have either entered an incorrect username or password.');
+			$this->form_validation->set_message('correct_login', 'You have either entered an incorrect username or password.');
 			return false;
 		}
 		else
@@ -75,7 +75,7 @@ class Login extends Admin_Controller
 		// Store Session
 		$this->session->set_userdata( array(
 			'email' => $this->input->post('email'),
-			'userID' => $this->userID
+			'user_id' => $this->user_id
 		) );
 	}
 

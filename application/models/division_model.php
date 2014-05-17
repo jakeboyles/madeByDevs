@@ -1,8 +1,8 @@
 <?php
 class Division_model extends MY_Model
 {
-	// Update Created Column on an Insert Query
-	public $before_create = array( 'created_at' );
+	// Callbacks to MY_Model class to Run Before Record Inserts
+	public $before_create = array( 'created_at', 'created_by' );
 
 	// Get Divisions
 	public function get_records( $limit = FALSE, $offset = FALSE )
