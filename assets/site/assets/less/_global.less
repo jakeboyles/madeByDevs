@@ -4,7 +4,7 @@ body {
 	color: @blue;
 }
 h1 {
-	font-family: 'Roboto';
+	font-family: 'Roboto Slab';
 }
 h2, h3, h4, h5, h6 {
 	font-family: 'Open Sans';
@@ -37,6 +37,9 @@ h2, h4 {
 h3, h5, h6, p {
 	font-size: 24px;
 }
+.container .row a {
+	text-decoration: underline;
+}
 
 .standings {
 	thead>tr>th {
@@ -61,4 +64,59 @@ h3, h5, h6, p {
 }
 .standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
 	background: @blue-lighter;
+}
+.container .row {
+	.newsTitle {
+		color: #fff;
+		font-size: 50px;
+		text-align: left;
+		background: @blue;
+		text-transform: uppercase;
+		font-family: 'Roboto Slab';
+		padding: 24px 35px;
+	}
+	.newsLinks {
+		list-style: none;
+		margin-left: 0;
+		padding-left: 0;
+		li {
+			a {
+				display: block;
+				position: relative;
+				text-decoration: none;
+				background: @blue-royal;
+				color: #fff;
+				font-size: 30px;
+				font-weight: bold;
+				font-family: 'Open Sans';
+				padding: 24px 35px;
+				margin-bottom: 9px;
+				overflow: auto;
+				&:hover {
+					background: @blue;
+				}
+				i {
+					position: absolute;
+					right: 25px;
+				}
+				span {
+					width:85%;
+					display: block;
+					float: left;
+				}
+			}
+			&:last-child {
+				a {
+					background: #f0f1f1;
+					color: @gray;
+					text-align: center;
+					text-transform: uppercase;
+					&:hover {
+						background: @blue-royal;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
 }
