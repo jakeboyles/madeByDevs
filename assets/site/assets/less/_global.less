@@ -107,13 +107,83 @@ h3, h5, h6, p {
 			}
 			&:last-child {
 				a {
-					background: #f0f1f1;
+					background: @gray-light;
 					color: @gray;
 					text-align: center;
 					text-transform: uppercase;
 					&:hover {
 						background: @blue-royal;
 						color: #fff;
+					}
+				}
+			}
+		}
+	}
+	.dropdowns {
+		h3 {
+			color: #fff;
+			text-transform: uppercase;
+			background: @blue;
+			padding: 23px 52px;
+		}
+		ul {
+			padding-left: 0;
+			list-style: none;
+			li {
+				&:nth-child(even) {
+					background: @gray-light;
+				}
+				&.active {
+					background-color: @blue-royal;
+					a {
+						color: #fff;
+					}
+				}
+				&:hover {
+					background-color: @blue-royal;
+					a {
+						color: #fff;
+					}
+				}
+				a {
+					color: @gray;
+					text-decoration: none;
+					font-size: 30px;
+					font-weight: 600;
+					display: block;
+					padding: 45px 52px;
+					position: relative;
+					 i {
+					 	position: absolute;
+					 	right: 20px;
+					 	display: block;
+					 }
+				}
+				ul {
+					display: none;
+					background-color: @blue-royal;
+					li {
+						margin: 0 52px;
+						&:first-child {
+							border-top: 1px dashed #fff;
+						}
+						h5 {
+							text-transform: uppercase;
+							color: @blue;
+							font-size: 24px;
+							font-weight: 700;
+							margin-bottom: 0;
+						}
+						h6 {
+							color: #fff;
+							font-size: 30px;
+							font-weight: 600;
+							padding-bottom: 24px;
+							margin-top: 16px;
+						}
+						h6:last-child {
+							margin-bottom: 0;
+						}
 					}
 				}
 			}
