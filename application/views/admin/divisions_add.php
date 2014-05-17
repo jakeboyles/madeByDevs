@@ -8,7 +8,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-		 		<div class="grid simple ">
+		 		<div class="grid simple">
 
 					<div class="grid-title">
 						<h4>Add Division</h4>
@@ -22,7 +22,17 @@
 						<div class="row">
 
 							<div class="col-md-8 col-sm-8 col-xs-8">
-								<?php echo form_open( 'admin/add', array( 'id' => 'add-division-form') ); ?>
+
+								<!-- START Display Error Messages -->
+								<?php if(validation_errors() && $this->input->post()): ?>
+								<div class="alert alert-error">
+									<?php echo validation_errors(); ?>
+								</div>
+								<?php endif; ?>
+								<!-- END Display Error Messages -->
+
+								<!-- START Form -->
+								<?php echo form_open( 'admin/divisions/add', array( 'id' => 'add-division-form') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Division Name', 'name', array( 'class' => 'form-label' ) ); ?>
@@ -37,18 +47,20 @@
 										<?php echo form_dropdown( 'division_type', $division_type_options, '', 'class="pretty-select"' ); ?>
 									</div>
 
+									<button type="submit" class="btn btn-primary">Submit Form</button>
+
 								<?php echo form_close(); ?>
+								<!-- END Form -->
+
 							</div>
 
 						</div>
 
-					</div>
+					</div><!-- end .grid-body -->
 
-				</div>
-			</div>
-		</div>
+				</div><!-- end .grid -->
+			</div><!-- end .col-md-12 -->
+		</div><!-- end .row -->
 
-
-	</div>
-
-</div>
+	</div><!-- end .content -->
+</div><!-- end .page-content -->

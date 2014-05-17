@@ -670,11 +670,11 @@ class MY_Model extends CI_Model
     {
         if (is_object($row))
         {
-            $row->created_at = date('Y-m-d H:i:s');
+            $row->created = date('Y-m-d H:i:s');
         }
         else
         {
-            $row['created_at'] = date('Y-m-d H:i:s');
+            $row['created'] = date('Y-m-d H:i:s');
         }
 
         return $row;

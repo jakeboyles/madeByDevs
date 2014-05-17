@@ -30,13 +30,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach( $divisions as $division ): ?>
+								<?php foreach( $records as $record ): ?>
 								<tr>
-									<td><?php echo $division['id']; ?></td>
-									<td><a href="<?php echo base_url('admin/divisions/edit/' . $division['id']); ?>"><?php echo $division['name']; ?></a></td>
-									<td><?php echo $division['league']; ?></td>
-									<td><?php echo date( 'F d, Y', strtotime( $division['created'] ) ); ?></td>
-									<td><?php echo date( 'F d, Y', strtotime( $division['modified'] ) ); ?></td>
+									<td><?php echo $record['id']; ?></td>
+									<td><a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
+									<td><?php echo $record['league']; ?></td>
+									<td><?php echo date( 'F d, Y', strtotime( $record['created'] ) ); ?></td>
+									<td><?php echo date( 'F d, Y', strtotime( $record['modified'] ) ); ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
