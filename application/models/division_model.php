@@ -7,8 +7,9 @@ class Division_model extends MY_Model
 	// Get Divisions
 	public function get_records( $limit = FALSE, $offset = FALSE )
 	{
-		$this->db->select( 'd.id, d.name, d.created, d.modified, l.name as league' );
-		$this->db->join( 'leagues l', 'l.id = d.league_id' );
+		$this->db->select( 'd.id, d.name, d.created, d.modified, l.name as league, dt.type as division_type' );
+		$this->db->join( 'leagues l', 'l.id = d.league_id', 'left outer' );
+		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
 
 		// If Limit and Offset are Set ( For Pagination )
 		if( is_int( $limit ) )
@@ -38,7 +39,7 @@ class Division_model extends MY_Model
 			$data = array(
 				'league_id' => 1,
 				'name' => $post['name'],
-				'division_type' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
 			);
 
 			// Insert to Database and Store Insert ID

@@ -17,7 +17,25 @@ $(document).ready(function(){
 	//dataTableOptions["aaSorting"] = [[ 1, "asc" ]];
 
 	// Initialize Datatable
-	$('.dataTable').dataTable(dataTableOptions);
+	$('.dataTable').each(function() {
+		// Set Sort Column
+		var sortColumn = 0;
+		if( typeof $(this).attr('data-sort') !== 'undefined' && $(this).attr('data-sort').length ) {
+			sortColumn = $(this).attr('data-sort');
+		}
+		
+		// Set Sort Direction
+		var sortDirection = 'asc';
+		if( typeof $(this).attr('data-sort-direction') !== 'undefined' && $(this).attr('data-sort-direction').length ) {
+			sortDirection = $(this).attr('data-sort-direction');
+		}
+		
+		// Update Sort Option Per Table
+		dataTableOptions["aaSorting"] = [[ sortColumn, sortDirection ]];
+
+		// Initialize Datatable Per Table
+		$(this).dataTable(dataTableOptions);
+	});
 	
     // Style Number of Results Dropdown
 	$('.dataTables_wrapper .dataTables_length select').addClass("select2-wrapper span12");

@@ -19,12 +19,12 @@
 
 					<div class="grid-body">
 							
-						<table class="table table-striped dataTable">
+						<table class="table table-striped dataTable" data-sort="1" data-sort-direction="asc">
 							<thead>
 								<tr>
 									<th>id</th>
 									<th>Division</th>
-									<th>League</th>
+									<th>Division Type</th>
 									<th>Created</th>
 									<th>Modified</th>
 								</tr>
@@ -34,9 +34,9 @@
 								<tr>
 									<td><?php echo $record['id']; ?></td>
 									<td><a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
-									<td><?php echo $record['league']; ?></td>
-									<td><?php echo date( 'F d, Y', strtotime( $record['created'] ) ); ?></td>
-									<td><?php echo date( 'F d, Y', strtotime( $record['modified'] ) ); ?></td>
+									<td><?php echo $record['division_type']; ?></td>
+									<td><?php echo date( 'm/d/Y', strtotime( $record['created'] ) ); ?></td>
+									<td><?php echo date( 'm/d/Y', strtotime( $record['modified'] ) ); ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
