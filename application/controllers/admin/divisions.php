@@ -26,7 +26,7 @@ class Divisions extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Division_model->add_record( $this->input->post() ) )
+			if( $insert_id = $this->Division_model->insert_record( $this->input->post() ) )
 			{
 				redirect('admin/divisions/edit/' . $insert_id);
 			}
@@ -39,7 +39,20 @@ class Divisions extends Admin_Controller
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
-		$this->load->admin_template( 'divisions_edit' );
+		// Load User Agent Library for Referrer Add Record Message
+		$this->load->library('user_agent');
+
+		// If Form is Submitted Validate Form Data and Updated Record in Database
+		if( $this->input->post() && $this->_validation() && $id )
+		{
+			$this->Division_model->update_record( $id, $this->input->post() );
+		}
+
+		// Retrieve Record Data From Database
+		$data['record'] = $this->Division_model->get( $id );
+
+		// Load Edit Record Form
+		$this->load->admin_template( 'divisions_edit', $data );
 	}
 
 	// Delete a Record
@@ -56,6 +69,7 @@ class Divisions extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Division Name', 'required');
+		$this->form_validation->set_rules('division_type', 'Division Type', '');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

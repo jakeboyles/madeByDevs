@@ -6,15 +6,11 @@ $(document).ready(function(){
 	// Default DataTable Options
 	var dataTableOptions = 
 	{ "sDom": "<'row'<'col-md-6'l <'toolbar'>><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
-		//"aaSorting": [[ 1, "asc" ]],
 		"oLanguage": {
 			"sLengthMenu": "_MENU_ ",
 			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
 		}
 	}
-
-	// Conditional Default Column Sorting
-	//dataTableOptions["aaSorting"] = [[ 1, "asc" ]];
 
 	// Initialize Datatable
 	$('.dataTable').each(function() {
@@ -23,7 +19,7 @@ $(document).ready(function(){
 		if( typeof $(this).attr('data-sort') !== 'undefined' && $(this).attr('data-sort').length ) {
 			sortColumn = $(this).attr('data-sort');
 		}
-		
+
 		// Set Sort Direction
 		var sortDirection = 'asc';
 		if( typeof $(this).attr('data-sort-direction') !== 'undefined' && $(this).attr('data-sort-direction').length ) {

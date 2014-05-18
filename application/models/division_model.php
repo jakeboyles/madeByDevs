@@ -3,8 +3,9 @@ class Division_model extends MY_Model
 {
 	// Callbacks to MY_Model class to Run Before Record Inserts
 	public $before_create = array( 'created_at', 'created_by' );
+	public $return_type = 'array';
 
-	// Get Divisions
+	// Get Records
 	public function get_records( $limit = FALSE, $offset = FALSE )
 	{
 		$this->db->select( 'd.id, d.name, d.created, d.modified, l.name as league, dt.type as division_type' );
@@ -30,8 +31,8 @@ class Division_model extends MY_Model
 		return false;
 	}
 
-	// Add Division
-	public function add_record( $post = FALSE )
+	// Add Record
+	public function insert_record( $post = FALSE )
 	{
 		if( $post )
 		{
@@ -43,9 +44,29 @@ class Division_model extends MY_Model
 			);
 
 			// Insert to Database and Store Insert ID
-			$insert_id = $this->Division_model->insert( $data );
+			$insert_id = $this->insert( $data );
 
 			return $insert_id;
+		}
+
+		return false;
+	}
+
+	// Edit Record
+	public function update_record( $id = FALSE, $post = FALSE )
+	{
+		if( $id && $post )
+		{
+			// Update Data
+			$data = array(
+				'name' => $post['name'],
+				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+			);
+
+			// Update Record in Database
+			$this->update( $id, $data );
+
+			return true;
 		}
 
 		return false;
