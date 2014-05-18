@@ -32,8 +32,11 @@ class Divisions extends Admin_Controller
 			}
 		}
 
+		// Get a List of Division Types for Dropdown
+		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+
 		// Load Add Record Form View
-		$this->load->admin_template( 'divisions_add' );
+		$this->load->admin_template( 'divisions_add', $data );
 	}
 
 	// Edit Record View
@@ -47,6 +50,9 @@ class Divisions extends Admin_Controller
 		{
 			$this->Division_model->update_record( $id, $this->input->post() );
 		}
+
+		// Get a List of Division Types for Dropdown
+		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Division_model->get( $id );

@@ -520,10 +520,15 @@ class MY_Model extends CI_Model
     function dropdown()
     {
         $args = func_get_args();
+        $table = $this->_table;
 
         if(count($args) == 2)
         {
             list($key, $value) = $args;
+        }
+        elseif (count($args) == 3)
+        {
+            list($table, $key, $value) = $args;
         }
         else
         {
@@ -539,7 +544,7 @@ class MY_Model extends CI_Model
         }
 
         $result = $this->_database->select(array($key, $value))
-                           ->get($this->_table)
+                           ->get($table)
                            ->result();
 
         $options = array();

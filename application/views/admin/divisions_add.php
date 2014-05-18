@@ -43,8 +43,7 @@
 									<div class="form-group">
 										<?php echo form_label( 'Division Type', 'division_type', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Men's, Women's, or Youth</span>
-										<?php $division_type_options = array( '' => '', 1 => "Men's", 2 => "Women's", 3 => "Youth" ); ?>
-										<?php echo form_dropdown( 'division_type', $division_type_options, set_value('division_type'), 'class="pretty-select"' ); ?>
+										<?php echo form_dropdown( 'division_type', array( '' => '') + $division_types, set_value('division_type'), 'class="pretty-select"' ); ?>
 									</div>
 
 									<button type="submit" class="btn btn-primary">Create Record</button>
