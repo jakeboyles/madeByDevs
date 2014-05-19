@@ -675,11 +675,11 @@ class MY_Model extends CI_Model
     {
         if (is_object($row))
         {
-            $row->created = date('Y-m-d H:i:s');
+            $row->created_at = date('Y-m-d H:i:s');
         }
         else
         {
-            $row['created'] = date('Y-m-d H:i:s');
+            $row['created_at'] = date('Y-m-d H:i:s');
         }
 
         return $row;
@@ -764,6 +764,28 @@ class MY_Model extends CI_Model
             else
             {
                 $row['created_by'] = $user_id;
+            }
+
+            return $row;
+        }
+
+        return false;
+    }
+
+    /**
+    * MySQL INT insert USER ID for created_by column
+    */
+    public function modified_by($row)
+    {
+        if( $user_id = $this->session->userdata('user_id') )
+        {
+            if (is_object($row))
+            {
+                $row->modified_by = $user_id;
+            }
+            else
+            {
+                $row['modified_by'] = $user_id;
             }
 
             return $row;
