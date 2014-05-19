@@ -64,7 +64,10 @@ class Divisions extends Admin_Controller
 	// Delete a Record
 	public function delete( $id = FALSE )
 	{
-		// delete functionality will go here
+		if( $id )
+		{
+			
+		}
 	}
 
 	// Run Validation on Create / Edit Forms
