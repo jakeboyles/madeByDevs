@@ -57,31 +57,3 @@
 	</div>
 
 </div>
-
-<!-- Delete Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<br>
-				<h4 id="myModalLabel" class="semi-bold">Are you sure you want to delete this record?</h4>
-				<p class="no-margin">Any data that was tied to this record may be affected. This action cannot be reversed.</p>
-				<br>
-			</div>
-
-			<div class="modal-body">
-				<h3>Delete: <span class="data-row-label"></span></h3>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger" data-action="delete-row" data-id="">Delete Record</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-
