@@ -42,14 +42,14 @@ class Divisions extends Admin_Controller
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
-		// Load User Agent Library for Referrer Add Record Message
-		$this->load->library('user_agent');
-
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
 			$this->Division_model->update_record( $id, $this->input->post() );
 		}
+
+		// Load User Agent Library for Referrer Add Record Message
+		$this->load->library('user_agent');
 
 		// Get a List of Division Types for Dropdown
 		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );

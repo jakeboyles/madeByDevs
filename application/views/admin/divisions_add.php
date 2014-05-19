@@ -46,7 +46,7 @@
 										<?php echo form_dropdown( 'division_type', array( '' => '') + $division_types, set_value('division_type'), 'class="pretty-select"' ); ?>
 									</div>
 
-									<button type="submit" class="btn btn-primary">Create Record</button>
+									<button type="submit" class="btn btn-primary">Create Division</button>
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->

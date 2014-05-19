@@ -62,7 +62,7 @@
 										<?php echo form_dropdown( 'division_type', array( '' => '') + $division_types, set_value( 'division_type', $record['division_type_id'] ), 'class="pretty-select"' ); ?>
 									</div>
 
-									<button type="submit" class="btn btn-primary">Update Record</button>
+									<button type="submit" class="btn btn-primary">Update Division</button>
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->

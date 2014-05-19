@@ -6,18 +6,13 @@ class Division_model extends MY_Model
 	public $return_type = 'array';
 
 	// Get Records
-	public function get_records( $limit = FALSE, $offset = FALSE )
+	public function get_records( )
 	{
+		// Construct Query
 		$this->db->select( 'd.id, d.name, d.created, d.modified, l.name as league, dt.type as division_type' );
 		$this->db->join( 'leagues l', 'l.id = d.league_id', 'left outer' );
 		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
 
-		// If Limit and Offset are Set ( For Pagination )
-		if( is_int( $limit ) )
-		{
-			$this->db->limit( $limit, $offset );
-		}
-		
 		// Run Query
 		$query = $this->db->get( 'divisions d' );
 
