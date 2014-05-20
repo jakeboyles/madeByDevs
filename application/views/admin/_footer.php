@@ -13,11 +13,15 @@
 				<br>
 			</div>
 
-			<div class="modal-body">
+			<div class="modal-body text-center">
 				<h3>Delete: <span class="data-row-label"></span></h3>
 			</div>
 
 			<div class="modal-footer">
+				<div class="alert alert-error text-center hide">
+					This record cannot be deleted as there is data that is attached to it.
+				</div>
+
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-danger" data-action="delete-row" data-id="">Delete Record</button>
 			</div>

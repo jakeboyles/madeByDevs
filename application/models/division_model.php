@@ -9,7 +9,7 @@ class Division_model extends MY_Model
 	public function get_records( )
 	{
 		// Construct Query
-		$this->db->select( 'd.id, d.name, d.created, d.modified, l.name as league, dt.type as division_type' );
+		$this->db->select( 'd.id, d.name, d.created_at, d.modified_at, l.name as league, dt.type as division_type' );
 		$this->db->join( 'leagues l', 'l.id = d.league_id', 'left outer' );
 		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
 
@@ -62,6 +62,28 @@ class Division_model extends MY_Model
 			$this->update( $id, $data );
 
 			return true;
+		}
+
+		return false;
+	}
+
+	// Delete record
+	public function delete_record( $id = FALSE )
+	{
+		// If an ID Was Found in URL
+		if( $id )
+		{
+			// If this ID Belongs to Other Tables - Dont Delete It
+			// @ return: Return a string of error for ajax
+			if( $this->count_by( 'division_id', $id, 'seasons' ) > 0 )
+			{
+				echo 'error';
+			}
+			// Else Delete It from Database
+			else
+			{
+				$this->Division_model->delete( $id );
+			}
 		}
 
 		return false;

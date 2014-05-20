@@ -54,55 +54,6 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Delete Modal
 	############################################################################# */
-	/*
-	$('#delete-modal').on('show.bs.modal', function (e) {
-		// Modal Data Options
-		var modal = $(this).data('modal').options;
-		var rowLabel = modal.label;
-
-		// Modal HTML
-		var htmlLabel = $(this).find('.data-row-label');
-		htmlLabel.text( rowLabel );
-		console.log(htmlLabel);
-
-		// Update Delete Text
-
-
-		// do something...
-		console.log('test');
-	});
-	*/
-	/*
-	$('a[data-target="#delete-modal"]').on('click', function(e) {
-		// Prevent Default
-		e.preventDefault();
-
-		// Update Delete Modal HTML
-		var modalTarget = $( $(this).data('target') );
-		modalTarget.find('.data-row-label').text( $(this).data('label') );
-
-		// Update Data on Modal Container
-		modalTarget.data( 'id','test' );
-
-		// Show Modal
-		$(modalTarget).modal('show');
-	});
-
-	$('button[data-action="delete-row"]').on('click', function(e) {
-		// Grab Parent Modal Container
-		var modal = $(this).parents('.modal');
-		console.log( modal );
-		console.log( modal.data('awesome') );
-
-		// Prevent Default
-		e.preventDefault();
-
-		// Remove Row
-
-
-	});
-	*/
-
 	// Delete Modal: Update Modal Content
 	$('#delete-modal').on('show.bs.modal', function() {
 		// Find The Element that Triggered This Modal
@@ -111,6 +62,7 @@ $(document).ready(function(){
 		// Update HTML on Modal
 		var htmlLabel = $(this).find('.data-row-label');
 		htmlLabel.text( trigger.data('label') );
+		$('#delete-modal .alert-error').addClass('hide');
 	});
 
 	// Delete Modal: Delete Button Functionality ( what actually deletes the row )
@@ -126,21 +78,29 @@ $(document).ready(function(){
 		var table = $('.dataTable').dataTable();
 		var row =  $('.dataTable tr#' + rowID)[0];
 
-		// Remove Record from DB
+		// Remove Record from DB or Display Error Message
 		$.ajax({
-			//type: 'post',
 			url: ajaxURL,
-			//data: { id: rowID, csrf_token: csrf_token },
-			success: function(response){
-				console.log('made it to success function')
+			success: function(response) {
+
+				// Don't Delete and Throw Error Message
+				if( response === 'error' ){
+					$('#delete-modal .alert-error').removeClass('hide');
+				}
+				// Delete and Remove Row From DB and Table
+				else
+				{
+					// Remove Row From The Table ( DataTable )
+					table.fnDeleteRow( row, null, true );
+
+					// Close Delete Modal
+					$('#delete-modal').modal('hide');
+				}
+				
 			}
 		});
 		
-		// Remove Row From The Table ( DataTable )
-		table.fnDeleteRow( row, null, true );
-
-		// Close Delete Modal
-		$('#delete-modal').modal('hide');
+		
 
 	});
 

@@ -64,10 +64,15 @@ class Divisions extends Admin_Controller
 	// Delete a Record
 	public function delete( $id = FALSE )
 	{
+
 		if( $id )
 		{
-			
+			$this->Division_model->delete_record( $id );
+
+			return true;
 		}
+
+		return false;
 	}
 
 	// Run Validation on Create / Edit Forms
