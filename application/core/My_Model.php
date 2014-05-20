@@ -569,10 +569,21 @@ class MY_Model extends CI_Model
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
-        $where = func_get_args();
-        $this->_set_where($where);
+        $args = func_get_args();
 
-        return $this->_database->count_all_results($this->_table);
+        $this->_set_where( array_slice( $args, 0, 2 ) );
+
+        // Allow For another Table than $this->_table
+        if( !empty( $args[2] ) )
+        {
+            $table = $args[2];
+        }
+        else
+        {
+            $table = $this->_table;
+        }
+
+        return $this->_database->count_all_results( $table );
     }
 
     /**
