@@ -51,6 +51,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/js/datatables.responsive.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/js/lodash.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/admin/js/datatables.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 <!-- BEGIN CORE TEMPLATE JS -->

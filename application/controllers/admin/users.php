@@ -26,17 +26,17 @@ class Users extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Division_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->User_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/divisions/edit/' . $insert_id);
+				redirect('admin/users/edit/' . $insert_id);
 			}
 		}
 
 		// Get a List of Division Types for Dropdown
-		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
 
 		// Load Add Record Form View
-		$this->load->admin_template( 'divisions_add', $data );
+		$this->load->admin_template( 'users_add', $data );
 	}
 
 	// Edit Record View

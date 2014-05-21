@@ -1,6 +1,14 @@
 $(document).ready(function(){
 	
 	/* ##############################################################################
+	# Universal DatePicker Styling
+	############################################################################# */
+	$('.input-append.date').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	});
+
+	/* ##############################################################################
 	# For Bootstra's .modal()
 	# Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	############################################################################# */
