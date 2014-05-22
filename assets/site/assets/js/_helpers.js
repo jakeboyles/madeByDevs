@@ -4,14 +4,14 @@
 # Equal Height
 ##################################################################*/
 // Resize Height on Window Load
-jQuery(window).load(function() {
+/*jQuery(window).load(function() {
 	equalheight('.same-height');
 });
 
 // Resize Height on Window Resize
 jQuery(window).resize(function(){
 	equalheight('.same-height');
-});
+});*/
 
 /*##################################################################
 # Determine Bootstrap Environment

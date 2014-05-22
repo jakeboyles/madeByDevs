@@ -12,6 +12,7 @@ function updateNewsChevrons(callout) {
 $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.schedule li a');
+	$(".chosen-select").chosen();
 });
 $(document).on('click', '.schedule > li a', function(e) {
 	e.preventDefault();
