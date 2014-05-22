@@ -124,11 +124,7 @@
 											<div class="row">
 
 												<div class="input-append success date col-md-9">
-													<?php
-													$birthday = '';
-													if( set_value( 'birthday', $record['birthday'] ) )
-														$birthday = date('m/d/Y', strtotime( set_value( 'birthday', $record['birthday'] ) ) )
-													?>
+													<?php $birthday = ( set_value( 'birthday', $record['birthday'] ) ) ? date('m/d/Y', strtotime( set_value( 'birthday', $record['birthday'] ) ) ) : ''; ?>
 													<?php echo form_input( array( 'name' => 'birthday', 'class' => 'form-control', 'id' => 'birthday', 'value' => $birthday  ) ); ?>
 													<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
 												</div>

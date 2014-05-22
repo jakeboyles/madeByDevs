@@ -94,14 +94,21 @@ class User_model extends MY_Model
 		{
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
-			if( $this->count_by( 'division_id', $id, 'seasons' ) > 0 )
+			if( 
+				$this->count_by( 'division_id', $id, 'seasons' ) > 0
+				|| $this->count_by( 'captain_user_id', $id, 'teams' ) > 0
+				|| $this->count_by( 'player_id', $id, 'game_players_soccer' ) > 0
+				|| $this->count_by( 'player_id', $id, 'session_players' ) > 0
+				|| $this->count_by( 'official_id', $id, 'game_officials' ) > 0
+				|| $this->count_by( 'user_id', $id, 'posts' ) > 0
+			)
 			{
 				echo 'error';
 			}
 			// Else Delete It from Database
 			else
 			{
-				$this->Division_model->delete( $id );
+				$this->User_model->delete( $id );
 			}
 		}
 

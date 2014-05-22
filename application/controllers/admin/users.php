@@ -67,7 +67,7 @@ class Users extends Admin_Controller
 
 		if( $id )
 		{
-			$this->Division_model->delete_record( $id );
+			$this->User_model->delete_record( $id );
 
 			return true;
 		}
