@@ -90,11 +90,6 @@ class MY_Model extends CI_Model
     protected $_temporary_return_type = NULL;
 
     /* --------------------------------------------------------------
-     * VARIABLES - CUSTOM ADDED TO MY_MODEL FRAMEWORK
-     * ------------------------------------------------------------ */
-    protected $date_time;
-
-    /* --------------------------------------------------------------
      * GENERIC METHODS
      * ------------------------------------------------------------ */
 
@@ -116,9 +111,6 @@ class MY_Model extends CI_Model
         array_unshift($this->before_update, 'protect_attributes');
 
         $this->_temporary_return_type = $this->return_type;
-
-        // Custom Modifications to Construct
-        $this->date_time = date('Y-m-d H:i:s',time());
     }
 
     /* --------------------------------------------------------------
@@ -1009,6 +1001,51 @@ class MY_Model extends CI_Model
     /* --------------------------------------------------------------
      * BEGIN CUSTOM METHODS TO MY_MODEL FRAMEWORK
      * ------------------------------------------------------------ */
+    // Return a Date and Time in mysql Format
+    public function mysql_datetime( $datetime_string = FALSE )
+    {
+        if( $datetime_string )
+        {
+            $datetime = date( 'Y-m-d H:i:s', strtotime( $date_string ) );
+        }
+        else
+        {
+            $datetime = date( 'Y-m-d H:i:s', time() );
+        }
+
+        return $datetime;
+
+    }
+
+    // Return a Date in mysql Format
+    public function mysql_date( $date_string = FALSE )
+    {
+        if( $date_string )
+        {
+            $datetime = date( 'Y-m-d', strtotime( $date_string ) );
+        }
+        else
+        {
+            $datetime = date( 'Y-m-d', time() );
+        }
+
+        return $datetime;
+
+    }
+
+    // Set Password Hash
+    public function password_hash( $password = FALSE )
+    {
+        if( $password )
+        {
+            $salt = $this->config->item('encryption_key');
+            $password = sha1( $salt . $password );
+
+            return $password;
+        }
+
+        return $false;
+    }
 
 
 }
