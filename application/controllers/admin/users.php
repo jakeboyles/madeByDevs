@@ -28,11 +28,11 @@ class Users extends Admin_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->User_model->insert_record( $this->input->post() ) )
 			{
-				//redirect('admin/users/edit/' . $insert_id);
+				redirect('admin/users/edit/' . $insert_id);
 			}
 		}
 
-		// Get a List of Division Types for Dropdown
+		// Get a List of User Types for Dropdown
 		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
 
 		// Load Add Record Form View
@@ -45,20 +45,20 @@ class Users extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
-			$this->Division_model->update_record( $id, $this->input->post() );
+			$this->User_model->update_record( $id, $this->input->post() );
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
-		// Get a List of Division Types for Dropdown
-		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+		// Get a List of User Types for Dropdown
+		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
 
 		// Retrieve Record Data From Database
-		$data['record'] = $this->Division_model->get( $id );
+		$data['record'] = $this->User_model->get( $id );
 
 		// Load Edit Record Form
-		$this->load->admin_template( 'divisions_edit', $data );
+		$this->load->admin_template( 'users_edit', $data );
 	}
 
 	// Delete a Record

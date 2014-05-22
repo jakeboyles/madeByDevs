@@ -62,9 +62,20 @@ class User_model extends MY_Model
 		{
 			// Update Data
 			$data = array(
-				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'user_type_id' => $post['user_type_id'],
+				'email' => $post['email'],
+				'first_name' => $post['first_name'],
+				'last_name' => $post['last_name'],
+				'gender' => empty( $post['gender'] ) ? NULL : $post['gender'],
+				'postal' => empty( $post['postal'] ) ? NULL : $post['postal'],
+				'birthday' => empty( $post['birthday'] ) ? NULL : $this->mysql_date( $post['birthday'] )
 			);
+
+			// If Password was Set, Change It
+			if( !empty( $post['password'] ) )
+			{
+				$data['password'] = $this->password_hash( $post['password'] );
+			}
 
 			// Update Record in Database
 			$this->update( $id, $data );

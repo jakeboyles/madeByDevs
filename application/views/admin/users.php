@@ -45,7 +45,7 @@
 									<td><?php echo $record['last_name']; ?></td>
 									<td><?php echo $record['gender']; ?></td>
 									<td><?php echo $record['postal']; ?></td>
-									<td><?php echo $record['birthday']; ?></td>
+									<td><?php if( !empty( $record['birthday'] ) ) echo date( 'm/d/Y', strtotime( $record['birthday'] ) ); ?></td>
 									<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
 									<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
 									<td>
