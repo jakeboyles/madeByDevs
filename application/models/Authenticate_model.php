@@ -12,9 +12,8 @@ class Authenticate_model extends MY_Model
 		}
 		
 		// Salt to Use for Password Hash
-		$salt = $this->config->item('encryption_key');
-		$password = sha1($salt . $password);
-		
+		$password = $this->password_hash( $password );
+
 		// Look for a Match in The Database
 		$this->db->select('id');
 		$this->db->where('email',$email);
@@ -31,7 +30,7 @@ class Authenticate_model extends MY_Model
 
 			// Update Last Login
 			$data = array(
-				'last_login' => $this->date_time,
+				'last_login' => $this->mysql_datetime()
 			);
 			$this->db->where('id',$user_id);
 			$this->db->update('users',$data);
