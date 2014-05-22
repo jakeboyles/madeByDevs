@@ -28,7 +28,7 @@ class Users extends Admin_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->User_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/users/edit/' . $insert_id);
+				//redirect('admin/users/edit/' . $insert_id);
 			}
 		}
 
@@ -82,8 +82,24 @@ class Users extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('name', 'Division Name', 'required');
-		$this->form_validation->set_rules('division_type', 'Division Type', '');
+		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('gender', 'Gender', '');
+		$this->form_validation->set_rules('postal', 'Postal Code', '');
+		$this->form_validation->set_rules('birthday', 'Birthday', '');
+
+		if( $this->uri->segment(3) == 'add' )
+		{
+			$this->form_validation->set_rules('password', 'Password', 'required');
+			$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'required|matches[password]');
+		}
+		elseif( $this->uri->segment(3) == 'edit' && ( $this->input->post('password') || $this->input->post('password_confirm') ) )
+		{
+			$this->form_validation->set_rules('password', 'Password', '');
+			$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'matches[password]');
+		}
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

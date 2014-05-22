@@ -36,9 +36,14 @@ class User_model extends MY_Model
 		{
 			// Insert Data
 			$data = array(
-				'league_id' => 1,
-				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'user_type_id' => $post['user_type_id'],
+				'email' => $post['email'],
+				'password' => $this->password_hash( $post['password'] ),
+				'first_name' => $post['first_name'],
+				'last_name' => $post['last_name'],
+				'gender' => empty( $post['gender'] ) ? NULL : $post['gender'],
+				'postal' => empty( $post['postal'] ) ? NULL : $post['postal'],
+				'birthday' => empty( $post['birthday'] ) ? NULL : $this->mysql_date( $post['birthday'] )
 			);
 
 			// Insert to Database and Store Insert ID

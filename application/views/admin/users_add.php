@@ -18,7 +18,7 @@
 					</div>
 
 					<div class="grid-body">
-							
+
 						<div class="row">
 
 							<div class="col-md-8 col-sm-8 col-xs-8">
@@ -26,7 +26,10 @@
 								<!-- START Display Error Messages -->
 								<?php if(validation_errors() && $this->input->post()): ?>
 								<div class="alert alert-error">
-									<?php echo validation_errors(); ?>
+									<h4>Form Submission Errors</h3>
+									<ul>
+									<?php echo validation_errors('<li>','</li>'); ?>
+									</ul>
 								</div>
 								<?php endif; ?>
 								<!-- END Display Error Messages -->
@@ -37,13 +40,13 @@
 									<h3>Login Information</h3>
 
 									<div class="form-group">
-										<?php echo form_label( 'User Type', 'user_type', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'User Type*', 'user_type_id', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Admin, Official, Player</span>
-										<?php echo form_dropdown( 'user_type', array( '' => '') + $user_types, set_value('user_type'), 'class="pretty-select"' ); ?>
+										<?php echo form_dropdown( 'user_type_id', array( '' => '') + $user_types, set_value('user_type_id'), 'class="pretty-select"' ); ?>
 									</div>
 
 									<div class="form-group">
-										<?php echo form_label( 'Email', 'email', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'Email*', 'email', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">This will act as the username for the user.</span>
 										<?php echo form_input( array( 'name' => 'email', 'class' => 'form-control', 'id' => 'email', 'value' => set_value('email') ) ); ?>
 									</div>
@@ -51,16 +54,16 @@
 									<div class="row">
 
 										<div class="form-group col-md-6">
-											<?php echo form_label( 'Password', 'password', array( 'class' => 'form-label' ) ); ?>
+											<?php echo form_label( 'Password*', 'password', array( 'class' => 'form-label' ) ); ?>
 											<span class="help"></span>
-											<?php echo form_input( array( 'name' => 'password', 'class' => 'form-control', 'id' => 'password', 'value' => set_value('password') ) ); ?>
+											<?php echo form_password( array( 'name' => 'password', 'class' => 'form-control', 'id' => 'password', 'value' => set_value('password') ) ); ?>
 										</div>
 
 
 										<div class="form-group col-md-6">
-											<?php echo form_label( 'Re-Type Password', 'password-confirm', array( 'class' => 'form-label' ) ); ?>
+											<?php echo form_label( 'Re-Type Password*', 'password_confirm', array( 'class' => 'form-label' ) ); ?>
 											<span class="help"></span>
-											<?php echo form_input( array( 'name' => 'password-confirm', 'class' => 'form-control', 'id' => 'password-confirm', 'value' => set_value('password-confirm') ) ); ?>
+											<?php echo form_password( array( 'name' => 'password_confirm', 'class' => 'form-control', 'id' => 'password_confirm', 'value' => set_value('password_confirm') ) ); ?>
 										</div>
 
 									</div>
@@ -70,13 +73,13 @@
 									<div class="row">
 
 										<div class="form-group col-md-6">
-											<?php echo form_label( 'First Name', 'first_name', array( 'class' => 'form-label' ) ); ?>
+											<?php echo form_label( 'First Name*', 'first_name', array( 'class' => 'form-label' ) ); ?>
 											<span class="help"></span>
 											<?php echo form_input( array( 'name' => 'first_name', 'class' => 'form-control', 'id' => 'first_name', 'value' => set_value('first_name') ) ); ?>
 										</div>
 
 										<div class="form-group col-md-6">
-											<?php echo form_label( 'Last Name', 'last_name', array( 'class' => 'form-label' ) ); ?>
+											<?php echo form_label( 'Last Name*', 'last_name', array( 'class' => 'form-label' ) ); ?>
 											<span class="help"></span>
 											<?php echo form_input( array( 'name' => 'last_name', 'class' => 'form-control', 'id' => 'last_name', 'value' => set_value('last_name') ) ); ?>
 										</div>
@@ -85,12 +88,12 @@
 
 									<div class="row">
 
-										<div class="form-group col-md-3">
+										<div class="form-group col-md-6">
 											<?php echo form_label( 'Gender', 'gender', array( 'class' => 'form-label' ) ); ?>
 											<div class="radio radio-success">
-												<?php echo form_radio( array( 'name' => 'gender', 'id' => 'male', 'value' => 'Male' ) ); ?>
+												<?php echo form_radio( array( 'name' => 'gender', 'id' => 'male', 'value' => 'Male', 'checked' => ( set_value('gender') == 'Male' ) ? TRUE : FALSE ) ); ?>
 												<label for="male">Male</label>
-												<?php echo form_radio( array( 'name' => 'gender', 'id' => 'female', 'value' => 'Female' ) ); ?>
+												<?php echo form_radio( array( 'name' => 'gender', 'id' => 'female', 'value' => 'Female', 'checked' => ( set_value('gender') == 'Female' ) ? TRUE : FALSE ) ); ?>
 												<label for="female">Female</label>
 											</div>
 										</div>
@@ -101,7 +104,7 @@
 											<?php echo form_input( array( 'name' => 'postal', 'class' => 'form-control', 'id' => 'postal', 'value' => set_value('postal') ) ); ?>
 										</div>
 
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-3">
 											<?php echo form_label( 'Birthday', 'birthday', array( 'class' => 'form-label' ) ); ?>
 											<span class="help"></span>
 
