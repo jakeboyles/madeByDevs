@@ -1,7 +1,7 @@
 <?php
 class MY_Loader extends CI_Loader {
 
-	public function template($template_name, $vars = array(), $return = FALSE)
+	public function site_template($template_name, $vars = array(), $return = FALSE)
 	{
 		$content  = $this->view('_header', $vars, $return);
 		$content .= $this->view($template_name, $vars, $return);

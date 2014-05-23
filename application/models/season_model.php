@@ -5,6 +5,7 @@ class Season_model extends MY_Model
 	public $before_create = array( 'created_at', 'created_by' );
 	public $before_update = array( 'modified_by' );
 	public $return_type = 'array';
+	public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
 	public function get_records( )
@@ -55,7 +56,10 @@ class Season_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'division_id' => $post['division_id'],
+				'year_start' => $post['year_start'],
+				'year_end' => $post['year_end'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
 
 			// Update Record in Database
