@@ -806,7 +806,19 @@ class MY_Model extends CI_Model
      */
     public function order_by($criteria, $order = 'ASC')
     {
-        if ( is_array($criteria) )
+        // Used for Callbacks/Observers
+        if ( !empty( $this->callback_parameters ) )
+        {
+            $criteria = $this->callback_parameters[0];
+
+            if( !empty( $this->callback_parameters[1] ) )
+            {
+                $order = $this->callback_parameters[1];
+            }
+
+            $this->_database->order_by($criteria, $order);
+        }
+        elseif ( is_array($criteria) )
         {
             foreach ($criteria as $key => $value)
             {
