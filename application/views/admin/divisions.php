@@ -11,7 +11,7 @@
 		 		<div class="grid simple ">
 
 					<div class="grid-title">
-						<h4>List of Divisions</h4>
+						<h4 class="pull-left">List of Divisions</h4>
 						<div class="pull-right">
 							<a href="<?php echo base_url('admin/divisions/add'); ?>" class="btn btn-primary">Add New Division</a>
 						</div>
