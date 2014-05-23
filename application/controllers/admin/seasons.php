@@ -66,7 +66,7 @@ class Seasons extends Admin_Controller
 
 		if( $id )
 		{
-			$this->Division_model->delete_record( $id );
+			$this->Season_model->delete_record( $id );
 
 			return true;
 		}

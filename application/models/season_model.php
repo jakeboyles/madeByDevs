@@ -81,14 +81,17 @@ class Season_model extends MY_Model
 		{
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
-			if( $this->count_by( 'division_id', $id, 'seasons' ) > 0 )
+			if( 
+				$this->count_by( 'season_id', $id, 'sessions' ) > 0 
+				|| $this->count_by( 'current_season_id', $id, 'leagues' ) > 0
+			)
 			{
 				echo 'error';
 			}
 			// Else Delete It from Database
 			else
 			{
-				$this->Division_model->delete( $id );
+				$this->Season_model->delete( $id );
 			}
 		}
 
