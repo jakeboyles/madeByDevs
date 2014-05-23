@@ -26,7 +26,10 @@
 								<!-- START Display Error Messages -->
 								<?php if( validation_errors() && $this->input->post() ): ?>
 								<div class="alert alert-error">
-									<?php echo validation_errors(); ?>
+									<h4>Form Submission Errors</h3>
+									<ul>
+									<?php echo validation_errors('<li>','</li>'); ?>
+									</ul>
 								</div>
 								<?php endif; ?>
 								<!-- END Display Error Messages -->

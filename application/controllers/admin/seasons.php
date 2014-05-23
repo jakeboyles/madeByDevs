@@ -25,17 +25,17 @@ class Seasons extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Division_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->Season_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/divisions/edit/' . $insert_id);
+				redirect('admin/seasons/edit/' . $insert_id);
 			}
 		}
 
 		// Get a List of Division Types for Dropdown
-		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+		$data['divisions'] = $this->Season_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Load Add Record Form View
-		$this->load->admin_template( 'divisions_add', $data );
+		$this->load->admin_template( 'seasons_add', $data );
 	}
 
 	// Edit Record View

@@ -11,9 +11,9 @@
 		 		<div class="grid simple">
 
 					<div class="grid-title">
-						<h4>Edit Season</h4>
+						<h4>Add Season</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/seasons'); ?>" class="btn btn-primary">View Seasons</a>
+							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">View Seasons</a>
 						</div>
 					</div>
 
@@ -24,7 +24,7 @@
 							<div class="col-md-8 col-sm-8 col-xs-8">
 
 								<!-- START Display Error Messages -->
-								<?php if( validation_errors() && $this->input->post() ): ?>
+								<?php if(validation_errors() && $this->input->post()): ?>
 								<div class="alert alert-error">
 									<h4>Form Submission Errors</h3>
 									<ul>
@@ -34,35 +34,19 @@
 								<?php endif; ?>
 								<!-- END Display Error Messages -->
 
-								<!-- START Success Message -->
-								<?php if( !validation_errors() && $this->input->post() ): ?>
-								<div class="alert alert-success">
-									This record has been updated.
-								</div>
-								<?php endif; ?>
-								<!-- END Success Message -->
-								
-								<!-- START New Record Added Message -->
-								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/seasons/add') ): ?>
-								<div class="alert alert-success">
-									Record successfully added.
-								</div>
-								<?php endif; ?>
-								<!-- END New Record Added Message -->
-
 								<!-- START Form -->
-								<?php echo form_open( 'admin/seasons/edit/' . $record['id'], array( 'id' => 'edit-season-form') ); ?>
+								<?php echo form_open( 'admin/seasons/add/', array( 'id' => 'add-season-form') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Season Name*', 'name', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Spring 2014</span>
-										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name', $record['name'] ) ) ); ?>
+										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name' ) ) ); ?>
 									</div>
 
 									<div class="form-group">
 										<?php echo form_label( 'Division*', 'division_id', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Which division does this season belong to?</span>
-										<?php echo form_dropdown( 'division_id', array( '' => '') + $divisions, set_value( 'division_id', $record['division_id'] ), 'class="pretty-select"' ); ?>
+										<?php echo form_dropdown( 'division_id', array( '' => '') + $divisions, set_value( 'division_id' ), 'class="pretty-select"' ); ?>
 									</div>
 
 									<div class="row">
@@ -70,13 +54,13 @@
 										<div class="form-group col-md-6">
 											<?php echo form_label( 'Year Start*', 'year_start', array( 'class' => 'form-label' ) ); ?>
 											<span class="help">e.g. In what year will this season begin?</span>
-											<?php echo form_input( array('name' => 'year_start', 'class' => 'form-control', 'id' => 'year_start', 'value' => set_value( 'year_start', $record['year_start'] ) ) ); ?>
+											<?php echo form_input( array('name' => 'year_start', 'class' => 'form-control', 'id' => 'year_start', 'value' => set_value( 'year_start' ) ) ); ?>
 										</div>
 
 										<div class="form-group col-md-6">
 											<?php echo form_label( 'Year End*', 'year_end', array( 'class' => 'form-label' ) ); ?>
 											<span class="help">e.g. In what year will this season end?</span>
-											<?php echo form_input( array('name' => 'year_end', 'class' => 'form-control', 'id' => 'year_end', 'value' => set_value( 'year_end', $record['year_end'] ) ) ); ?>
+											<?php echo form_input( array('name' => 'year_end', 'class' => 'form-control', 'id' => 'year_end', 'value' => set_value( 'year_end' ) ) ); ?>
 										</div>
 
 									</div>
@@ -84,10 +68,10 @@
 									<div class="form-group">
 										<?php echo form_label( 'Season Description', 'description', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Add a short description of the season.</span>
-										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
+										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description' ) ) ); ?>
 									</div>
 
-									<button type="submit" class="btn btn-primary">Update Season</button>
+									<button type="submit" class="btn btn-primary">Create Season</button>
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->

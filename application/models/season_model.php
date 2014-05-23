@@ -34,9 +34,11 @@ class Season_model extends MY_Model
 		{
 			// Insert Data
 			$data = array(
-				'league_id' => 1,
 				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'division_id' => $post['division_id'],
+				'year_start' => $post['year_start'],
+				'year_end' => $post['year_end'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
 
 			// Insert to Database and Store Insert ID
