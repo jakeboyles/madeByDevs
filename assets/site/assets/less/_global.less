@@ -48,30 +48,7 @@ img {
 	max-width: 100%;
 }
 
-.standings {
-	thead>tr>th {
-		border-bottom: 2px dashed #fff;
-	}
-	thead {
-		background:@blue-light;
-		tr th {
-			color: #fff;
-			.padding(8,30);
-		}
-	}
-	tbody {
-		tr td {
-			.padding(30);
-			color: #fff;
-			&:first-child {
-				color: @blue;
-			}
-		}
-	}
-}
-.standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
-	background: @blue-lighter;
-}
+
 .container .row {
 	.newsTitle {
 		color: #fff;
@@ -236,9 +213,131 @@ img {
 		textarea.form-control {
 			height: auto;
 		}
+		.btn-file {
+		    position: relative;
+		    overflow: hidden;
+		}
+		.btn-file input[type=file] {
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    min-width: 100%;
+		    min-height: 100%;
+		    font-size: 999px;
+		    text-align: right;
+		    filter: alpha(opacity=0);
+		    opacity: 0;
+		    outline: none;
+		    background: white;
+		    cursor: inherit;
+		    display: block;
+		}
+	}
+	.team-standings {
+		.team-header {
+			background-color: @blue-light;
+			position: relative;
+			.team-name-primary {
+				color: @blue;
+				text-transform: uppercase;
+				border-top: 1px solid white;
+				font-family: 'Roboto Slab';
+				.font-size(80);
+				margin: 0;
+				position: relative;
+				top: 7px;
+				padding-left: 10px;
+				padding-left: 10rem;
+			}
+			.team-name-secondary {
+				text-transform: uppercase;
+				font-family: 'Roboto Slab';
+				color: #fff;
+				margin: 0;
+				.font-size(50);
+				border-bottom: 1px solid white;
+				position: relative;
+				bottom: 7px;
+				padding-left: 10px;
+				padding-left: 10rem;
+				font-weight: normal;
+			}
+			.team-date {
+				color: #fff;
+				position: absolute;
+				right:10px;
+				bottom: 0px;
+				font-weight: normal;
+			}
+		}
+		.standings {
+			a {
+				color: @blue;
+				text-decoration: none!important;
+				font-weight: bold;
+				&:hover {
+					color: darken(@blue,15%);
+				}
+			}
+			thead>tr>th {
+				border-bottom: 2px dashed #fff;
+			}
+			thead {
+				background:@blue-light;
+				tr th {
+					color: #fff;
+					.padding(8,30);
+				}
+			}
+			tbody {
+				tr td {
+					.padding(30);
+					color: #fff;
+					&:first-child {
+						color: @blue;
+					}
+				}
+			}
+		}
+		.standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
+			background: @blue-lighter;
+		}
+		&.alternate {
+			.team-header {
+				background-color: @gray;
+			}
+			.standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
+				background: @blue;
+			}
+			.standings.table-striped>tbody>tr:nth-child(odd)>td, .standings.table-striped>tbody>tr:nth-child(odd)>th {
+				background: @gray;
+			}
+			.standings {
+				a {
+					color: @gray-light;
+					&:hover {
+						color: darken(@gray-light,15%);
+					}
+				}
+				thead {
+					background:@gray;
+				}
+				tbody {
+					tr td {
+						&:first-child {
+							color: @gray-dark;
+						}
+					}
+				}
+			}
+		}
 	}
 }
-
+@media (max-width: 495px) { 
+	html {
+		font-size: .8px;
+	}
+}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) { 
 	html {

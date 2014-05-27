@@ -13,6 +13,11 @@ $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.schedule li a');
 	$(".chosen-select").chosen();
+	$('input').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    increaseArea: '20%' // optional
+  });
 });
 $(document).on('click', '.schedule > li a', function(e) {
 	e.preventDefault();
@@ -29,6 +34,13 @@ $(document).on('click', '.schedule > li a', function(e) {
 			$(this).parent().removeClass('active').removeClass('closing');
 		}
 	});
+});
+$(document)
+    .on('change', '.btn-file :file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $(this).parent().next('.help-block').html(label);
 });
 $(window).resize(function() {
         updateNewsChevrons('.newsLinks li');
