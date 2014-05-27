@@ -1,6 +1,10 @@
+html {
+	font-size: 1px;
+}
 body {
 	padding-top: 50px;
 	font-family: 'Open Sans';
+	.font-size(24);
 	color: @blue;
 }
 h1 {
@@ -29,13 +33,13 @@ h2, h4 {
 }
 
 h1 {
-	font-size: 40px;
+	.font-size(40);
 }
 h2, h4 {
-	font-size: 30px;
+	.font-size(30);
 }
 h3, h5, h6, p {
-	font-size: 24px;
+	.font-size(24);
 }
 .container .row a {
 	text-decoration: underline;
@@ -49,12 +53,12 @@ h3, h5, h6, p {
 		background:@blue-light;
 		tr th {
 			color: #fff;
-			padding: 8px 30px;
+			.padding(8,30);
 		}
 	}
 	tbody {
 		tr td {
-			padding: 30px;
+			.padding(30);
 			color: #fff;
 			&:first-child {
 				color: @blue;
@@ -68,12 +72,12 @@ h3, h5, h6, p {
 .container .row {
 	.newsTitle {
 		color: #fff;
-		font-size: 50px;
+		.font-size(50);
 		text-align: left;
 		background: @blue;
 		text-transform: uppercase;
 		font-family: 'Roboto Slab';
-		padding: 24px 35px;
+		.padding(24,35);
 	}
 	.newsLinks {
 		list-style: none;
@@ -86,11 +90,12 @@ h3, h5, h6, p {
 				text-decoration: none;
 				background: @blue-royal;
 				color: #fff;
-				font-size: 30px;
+				.font-size(30);
 				font-weight: bold;
 				font-family: 'Open Sans';
-				padding: 24px 35px;
+				.padding(24,35);
 				margin-bottom: 9px;
+				margin-bottom: 9rem;
 				overflow: auto;
 				&:hover {
 					background: @blue;
@@ -124,7 +129,7 @@ h3, h5, h6, p {
 			color: #fff;
 			text-transform: uppercase;
 			background: @blue;
-			padding: 23px 52px;
+			.padding(23,52);
 		}
 		ul {
 			padding-left: 0;
@@ -148,10 +153,10 @@ h3, h5, h6, p {
 				a {
 					color: @gray;
 					text-decoration: none;
-					font-size: 30px;
+					.font-size(30);
 					font-weight: 600;
 					display: block;
-					padding: 45px 52px;
+					.padding(45,52);
 					position: relative;
 					 i {
 					 	position: absolute;
@@ -170,16 +175,18 @@ h3, h5, h6, p {
 						h5 {
 							text-transform: uppercase;
 							color: @blue;
-							font-size: 24px;
+							.font-size(24);
 							font-weight: 700;
 							margin-bottom: 0;
 						}
 						h6 {
 							color: #fff;
-							font-size: 30px;
+							.font-size(30);
 							font-weight: 600;
 							padding-bottom: 24px;
+							padding-bottom: 24rem;
 							margin-top: 16px;
+							margin-top: 16rem;
 						}
 						h6:last-child {
 							margin-bottom: 0;
@@ -190,36 +197,54 @@ h3, h5, h6, p {
 		}
 	}
 	.form-control {
-		font-size: 14px;
+		.font-size(28);
 		height: 32px;
+		height: 55rem;
 	}
 	.selectbox {
 		margin-bottom: 20px;
+		margin-bottom: 20rem;
 	}
 	.chosen-container {
-		font-size: 14px;
+		.font-size(28);
 		width: 100%!important;
 		.chosen-single {
 			height: 32px;
+			height: 55rem;
 			span {
 				height: 32px;
+				height: 55rem;
 				padding-top: 3px;
+				padding-top: 3rem;
 			}
 		}
 		.chosen-results li {
-			padding: 12px 6px;
+			.padding(12,6);
 		}
 	}
 	form {
-		font-size: 14px;
+		.font-size(28);
 		p {
-			font-size: 14px;
+			.font-size(28);
 		}
 		.btn {
-			font-size: 14px;
+			.font-size(28);
 		}
 		textarea.form-control {
 			height: auto;
 		}
 	}
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+	html {
+		font-size: .7px;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {  }
