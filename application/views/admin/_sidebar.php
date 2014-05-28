@@ -49,17 +49,6 @@
 			<!-- League Management Menu -->
 			<p class="menu-title">League Management</p>
 			<ul>
-				<li class="<?php echo $this->uri->segment(2) == 'divisions' ? 'active open' : ''; ?>">
-					<a href="javascript:;">
-						<i class="fa fa-trophy"></i>
-						<span class="title">Divisions</span>
-						<span class="arrow <?php echo $this->uri->segment(2) == 'divisions' ? 'open' : ''; ?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li><a href="<?php echo base_url( 'admin/divisions'); ?>">All Divisions</a></li>
-						<li><a href="<?php echo base_url( 'admin/divisions/add'); ?>">Add New</a></li>
-					</ul>
-				</li>
 				<li class="<?php echo $this->uri->segment(2) == 'seasons' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-calendar"></i>
@@ -80,6 +69,17 @@
 					<ul class="sub-menu">
 						<li><a href="<?php echo base_url( 'admin/sessions'); ?>">All Sessions</a></li>
 						<li><a href="<?php echo base_url( 'admin/sessions/add'); ?>">Add New</a></li>
+					</ul>
+				</li>
+				<li class="<?php echo $this->uri->segment(2) == 'divisions' ? 'active open' : ''; ?>">
+					<a href="javascript:;">
+						<i class="fa fa-trophy"></i>
+						<span class="title">Divisions</span>
+						<span class="arrow <?php echo $this->uri->segment(2) == 'divisions' ? 'open' : ''; ?>"></span>
+					</a>
+					<ul class="sub-menu">
+						<li><a href="<?php echo base_url( 'admin/divisions'); ?>">All Divisions</a></li>
+						<li><a href="<?php echo base_url( 'admin/divisions/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 				<li class="<?php echo $this->uri->segment(2) == 'games' ? 'active open' : ''; ?>">

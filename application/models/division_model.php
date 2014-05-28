@@ -10,8 +10,7 @@ class Division_model extends MY_Model
 	public function get_records( )
 	{
 		// Construct Query
-		$this->db->select( 'd.id, d.name, d.created_at, d.modified_at, l.name as league, dt.type as division_type' );
-		$this->db->join( 'leagues l', 'l.id = d.league_id', 'left outer' );
+		$this->db->select( 'd.id, d.name, d.created_at, d.modified_at, dt.type as division_type' );
 		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
 
 		// Run Query
@@ -34,7 +33,6 @@ class Division_model extends MY_Model
 		{
 			// Insert Data
 			$data = array(
-				'league_id' => 1,
 				'name' => $post['name'],
 				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
 			);
@@ -71,12 +69,13 @@ class Division_model extends MY_Model
 	// Delete record
 	public function delete_record( $id = FALSE )
 	{
+		// To Do: This will all change based on new databse relationship structure
 		// If an ID Was Found in URL
 		if( $id )
 		{
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
-			if( $this->count_by( 'division_id', $id, 'seasons' ) > 0 )
+			if( $this->count_by( 'division_id', $id, 'games' ) > 0 )
 			{
 				echo 'error';
 			}
