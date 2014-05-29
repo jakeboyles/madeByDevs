@@ -34,6 +34,7 @@ class Season_model extends MY_Model
 		{
 			// Insert Data
 			$data = array(
+				'league_id' => 1,
 				'name' => $post['name'],
 				'year_start' => $post['year_start'],
 				'year_end' => $post['year_end'],
