@@ -31,19 +31,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach( $records as $record ): ?>
-								<tr id="<?php echo $record['id']; ?>">
-									<td><?php echo $record['id']; ?></td>
-									<td><a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
-									<td><?php echo $record['division_type']; ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
-									<td>
-										<a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
-										<a href="#" class="btn active btn-danger" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['name']; ?>" data-row-id="<?php echo $record['id']; ?>" data-ajax-url="<?php echo base_url('admin/divisions/delete/' . $record['id']); ?>"><i class="fa fa-times"></i></a>
-									</td>
-								</tr>
-								<?php endforeach; ?>
+								<?php if ( !empty($records) ): ?>
+									<?php foreach( $records as $record ): ?>
+									<tr id="<?php echo $record['id']; ?>">
+										<td><?php echo $record['id']; ?></td>
+										<td><a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
+										<td><?php echo $record['division_type']; ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
+										<td>
+											<a href="<?php echo base_url('admin/divisions/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
+											<a href="#" class="btn active btn-danger" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['name']; ?>" data-row-id="<?php echo $record['id']; ?>" data-ajax-url="<?php echo base_url('admin/divisions/delete/' . $record['id']); ?>"><i class="fa fa-times"></i></a>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
 							</tbody>
 						</table>
 

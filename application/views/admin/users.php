@@ -36,24 +36,26 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach( $records as $record ): ?>
-								<tr id="<?php echo $record['id']; ?>">
-									<td><?php echo $record['id']; ?></td>
-									<td><?php echo $record['user_type']; ?></td>
-									<td><?php echo $record['email']; ?></td>
-									<td><?php echo $record['first_name']; ?></td>
-									<td><?php echo $record['last_name']; ?></td>
-									<td><?php echo $record['gender']; ?></td>
-									<td><?php echo $record['postal']; ?></td>
-									<td><?php if( !empty( $record['birthday'] ) ) echo date( 'm/d/Y', strtotime( $record['birthday'] ) ); ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
-									<td>
-										<a href="<?php echo base_url('admin/users/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
-										<a href="#" class="btn active btn-danger" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['first_name'] . ' ' . $record['last_name']; ?>" data-row-id="<?php echo $record['id']; ?>" data-ajax-url="<?php echo base_url('admin/users/delete/' . $record['id']); ?>"><i class="fa fa-times"></i></a>
-									</td>
-								</tr>
-								<?php endforeach; ?>
+								<?php if ( !empty($records) ): ?>
+									<?php foreach( $records as $record ): ?>
+									<tr id="<?php echo $record['id']; ?>">
+										<td><?php echo $record['id']; ?></td>
+										<td><?php echo $record['user_type']; ?></td>
+										<td><?php echo $record['email']; ?></td>
+										<td><?php echo $record['first_name']; ?></td>
+										<td><?php echo $record['last_name']; ?></td>
+										<td><?php echo $record['gender']; ?></td>
+										<td><?php echo $record['postal']; ?></td>
+										<td><?php if( !empty( $record['birthday'] ) ) echo date( 'm/d/Y', strtotime( $record['birthday'] ) ); ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
+										<td>
+											<a href="<?php echo base_url('admin/users/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
+											<a href="#" class="btn active btn-danger" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['first_name'] . ' ' . $record['last_name']; ?>" data-row-id="<?php echo $record['id']; ?>" data-ajax-url="<?php echo base_url('admin/users/delete/' . $record['id']); ?>"><i class="fa fa-times"></i></a>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
 							</tbody>
 						</table>
 
