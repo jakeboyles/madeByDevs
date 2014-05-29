@@ -25,14 +25,17 @@ class Sessions extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Season_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->Session_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/seasons/edit/' . $insert_id);
+				redirect('admin/sessions/edit/' . $insert_id);
 			}
 		}
 
+		// Get a List of Division Types for Dropdown
+		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
+
 		// Load Add Record Form View
-		$this->load->admin_template( 'seasons_add' );
+		$this->load->admin_template( 'sessions_add', $data );
 	}
 
 	// Edit Record View
@@ -41,17 +44,20 @@ class Sessions extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
-			$this->Season_model->update_record( $id, $this->input->post() );
+			$this->Session_model->update_record( $id, $this->input->post() );
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
+		// Get a List of Division Types for Dropdown
+		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
+
 		// Retrieve Record Data From Database
-		$data['record'] = $this->Season_model->get( $id );
+		$data['record'] = $this->Session_model->get( $id );
 
 		// Load Edit Record Form
-		$this->load->admin_template( 'seasons_edit', $data );
+		$this->load->admin_template( 'sessions_edit', $data );
 	}
 
 	// Delete a Record
@@ -75,10 +81,8 @@ class Sessions extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('name', 'Season Name', 'required');
-		$this->form_validation->set_rules('year_start', 'Year Start', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('year_end', 'Year End', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('description', 'Description', '');
+		$this->form_validation->set_rules('name', 'Session Name', 'required');
+		$this->form_validation->set_rules('season_id', 'Season', 'required');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

@@ -57,9 +57,7 @@ class Session_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'season_id' => $post['season_id']
 			);
 
 			// Update Record in Database
