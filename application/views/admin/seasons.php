@@ -24,7 +24,7 @@
 								<tr>
 									<th>id</th>
 									<th>Season</th>
-									<th>Division</th>
+									<th>League</th>
 									<th>Year Start</th>
 									<th>Year End</th>
 									<th>Created</th>
@@ -33,21 +33,23 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach( $records as $record ): ?>
-								<tr id="<?php echo $record['id']; ?>">
-									<td><?php echo $record['id']; ?></td>
-									<td><a href="<?php echo base_url('admin/seasons/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
-									<td><?php echo $record['division_name']; ?></td>
-									<td><?php echo $record['year_start']; ?></td>
-									<td><?php echo $record['year_end']; ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
-									<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
-									<td>
-										<a href="<?php echo base_url('admin/seasons/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
-										<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/seasons/delete/' . $record['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['name']; ?>" data-row-id="<?php echo $record['id']; ?>"><i class="fa fa-times"></i></a>
-									</td>
-								</tr>
-								<?php endforeach; ?>
+								<?php if ( !empty($records) ): ?>
+									<?php foreach( $records as $record ): ?>
+									<tr id="<?php echo $record['id']; ?>">
+										<td><?php echo $record['id']; ?></td>
+										<td><a href="<?php echo base_url('admin/seasons/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
+										<td><?php echo $record['league_name']; ?></td>
+										<td><?php echo $record['year_start']; ?></td>
+										<td><?php echo $record['year_end']; ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
+										<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
+										<td>
+											<a href="<?php echo base_url('admin/seasons/edit/' . $record['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
+											<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/seasons/delete/' . $record['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['name']; ?>" data-row-id="<?php echo $record['id']; ?>"><i class="fa fa-times"></i></a>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
 							</tbody>
 						</table>
 

@@ -31,11 +31,8 @@ class Seasons extends Admin_Controller
 			}
 		}
 
-		// Get a List of Division Types for Dropdown
-		$data['divisions'] = $this->Season_model->dropdown( 'divisions', 'id', 'name' );
-
 		// Load Add Record Form View
-		$this->load->admin_template( 'seasons_add', $data );
+		$this->load->admin_template( 'seasons_add' );
 	}
 
 	// Edit Record View
@@ -49,9 +46,6 @@ class Seasons extends Admin_Controller
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
-
-		// Get a List of Division Types for Dropdown
-		$data['divisions'] = $this->Season_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Season_model->get( $id );
@@ -82,7 +76,6 @@ class Seasons extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Season Name', 'required');
-		$this->form_validation->set_rules('division_id', 'Division', 'required');
 		$this->form_validation->set_rules('year_start', 'Year Start', 'required|exact_length[4]|numeric');
 		$this->form_validation->set_rules('year_end', 'Year End', 'required|exact_length[4]|numeric');
 		$this->form_validation->set_rules('description', 'Description', '');

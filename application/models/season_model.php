@@ -11,8 +11,8 @@ class Season_model extends MY_Model
 	public function get_records( )
 	{
 		// Construct Query
-		$this->db->select( 's.id, s.name, s.year_start, s.year_end, s.created_at, s.modified_at, d.name as division_name' );
-		$this->db->join( 'divisions d', 's.division_id = d.id', 'left outer' );
+		$this->db->select( 's.id, s.name, s.year_start, s.year_end, s.created_at, s.modified_at, l.name as league_name' );
+		$this->db->join( 'leagues l', 'l.id = s.league_id', 'left outer' );
 
 		// Run Query
 		$query = $this->db->get( 'seasons s' );
@@ -35,7 +35,6 @@ class Season_model extends MY_Model
 			// Insert Data
 			$data = array(
 				'name' => $post['name'],
-				'division_id' => $post['division_id'],
 				'year_start' => $post['year_start'],
 				'year_end' => $post['year_end'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
@@ -58,7 +57,6 @@ class Season_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'division_id' => $post['division_id'],
 				'year_start' => $post['year_start'],
 				'year_end' => $post['year_end'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
