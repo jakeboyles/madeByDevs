@@ -263,7 +263,7 @@ img {
 				color: #fff;
 				margin: 0;
 				.font-size(50);
-				border-bottom: 1px solid white;
+				border-bottom: 0;
 				position: relative;
 				bottom: 0;
 				padding-left: 10px;
@@ -272,10 +272,11 @@ img {
 			}
 			.team-date {
 				color: #fff;
-				position: absolute;
-				right:10px;
-				bottom: -5px;
+				position: static;
 				font-weight: normal;
+				padding-left: 10px;
+				padding-left: 10rem;
+				border-bottom: 2px solid #fff;
 			}
 		}
 		.standings {
@@ -344,6 +345,9 @@ img {
 			}
 		}
 	}
+	.team-schedule .standings.table-striped>tbody>tr:nth-child(odd)>td, .team-schedule.standings.table-striped>tbody>tr:nth-child(odd)>th {
+		background: @gray-light;
+	}
 }
 @media (max-width: 495px) { 
 	html {
@@ -354,6 +358,21 @@ img {
 @media (min-width: @screen-sm-min) { 
 	html {
 		font-size: .7px;
+	}
+	.container .row {
+		.team-standings {
+			.team-header {
+				.team-name-secondary {
+					border-bottom: 1px solid white;
+				}
+				.team-date {
+					position: absolute;
+					right:10px;
+					bottom: -5px;
+					border-bottom: none;
+				}
+			}
+		}
 	}
 }
 
