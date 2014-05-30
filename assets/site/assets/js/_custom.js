@@ -35,6 +35,9 @@ $(document).on('click', '.schedule > li a', function(e) {
 		}
 	});
 });
+$(document).on('click', '.click-here', function() {
+	$(this).hide();
+});
 $(document)
     .on('change', '.btn-file :file', function() {
         var input = $(this),
