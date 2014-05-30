@@ -2,7 +2,7 @@ html {
 	font-size: 1px;
 }
 body {
-	padding-top: 50px;
+	padding-top: 200px;
 	font-family: 'Open Sans';
 	.font-size(24);
 	color: @blue;
@@ -51,6 +51,9 @@ img {
 	margin-bottom: 6px;
 	margin-bottom: 6rem;
 }
+.navbar-inverse {
+	background: @gray-lighter url(../img/header-blue.png)  0 65px repeat-x;
+}
 .flexible-container {
 	position: relative;
     padding-bottom: 56.25%;
@@ -73,7 +76,29 @@ img {
 		cursor: pointer;
     }
 }
-
+.container {
+	.navbar-header {
+		.navbar-brand {
+			text-indent: -9999px;
+			background: url(../img/gsl-logo.png) 0 10px no-repeat;
+			width: 332px;
+			height: 205px;
+			-webkit-background-size: contain;
+			background-size: contain;
+		}
+	}
+	.navbar-toggle {
+		top: 81px;
+		border: none;
+		i {
+			color: #fff;
+			.font-size(40);
+		}
+	}
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+	background: @blue-light;
+}
 .container .row {
 	.contact-header {
 		margin-bottom: 2px;
@@ -378,9 +403,25 @@ img {
 		background: @gray-light;
 	}
 }
+
 @media (max-width: 495px) { 
 	html {
 		font-size: .8px;
+	}
+	
+}
+@media (max-width: 417px) {
+	.container {
+		.navbar-header {
+			.navbar-brand {
+				text-indent: -9999px;
+				background: url(../img/gsl-logo.png) 0 10px no-repeat;
+				width: 80%;
+				height: 205px;
+				-webkit-background-size: contain;
+				background-size: contain;
+			}
+		}
 	}
 }
 /* Small devices (tablets, 768px and up) */
@@ -403,7 +444,26 @@ img {
 			}
 		}
 	}
+	.container {
+		.navbar-header {
+			.navbar-brand {
+				text-indent: -9999px;
+				background: url(../img/gsl-logo.png) 0 10px no-repeat;
+				width: 332px;
+				height: 205px;
+			}
+		}
+		.navbar-collapse {
+			.navbar-nav {
+				padding-top: 130px;
+				padding-top: 130rem;
+				padding-left: 25px;
+				padding-left: 25rem;
+			}
+		}
+	}
 }
+
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) { }
