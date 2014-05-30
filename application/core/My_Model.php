@@ -204,8 +204,13 @@ class MY_Model extends CI_Model
      * Insert a new row into the table. $data should be an associative array
      * of data to be inserted. Returns newly created ID.
      */
-    public function insert($data, $skip_validation = FALSE)
+    public function insert($data, $skip_validation = FALSE, $table = FALSE)
     {
+        if( $table === FALSE )
+        {
+            $table = $this->_table;
+        }
+
         if ($skip_validation === FALSE)
         {
             $data = $this->validate($data);
@@ -215,7 +220,7 @@ class MY_Model extends CI_Model
         {
             $data = $this->trigger('before_create', $data);
 
-            $this->_database->insert($this->_table, $data);
+            $this->_database->insert($table, $data);
             $insert_id = $this->_database->insert_id();
 
             $this->trigger('after_create', $insert_id);
