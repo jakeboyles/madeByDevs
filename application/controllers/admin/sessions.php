@@ -31,7 +31,7 @@ class Sessions extends Admin_Controller
 			}
 		}
 
-		// Get a List of Division Types for Dropdown
+		// Get a List of Seasons for Dropdown
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
 
 		// Load Add Record Form View
@@ -50,8 +50,11 @@ class Sessions extends Admin_Controller
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
-		// Get a List of Division Types for Dropdown
+		// Get a List of Seasons for Dropdown
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
+
+		// Get a List of Divisions for Checkboxes
+		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Session_model->get( $id );

@@ -6,6 +6,7 @@ class Session_model extends MY_Model
 	public $before_update = array( 'modified_by' );
 	public $return_type = 'array';
 	public $before_dropdown = array( 'order_by(name)' );
+	public $after_update = array( 'update_divisions' );
 
 	// Get Records
 	public function get_records( )
@@ -90,6 +91,30 @@ class Session_model extends MY_Model
 		}
 
 		return false;
+	}
+
+	// Update Divisions
+	public function update_divisions()
+	{
+		// Set Session ID
+		$session_id = $this->uri->segment(4);
+
+		// Remove Old Session/Division Relationships
+		$this->db->where( 'session_id', $session_id );
+		$this->db->delete( 'session_divisions' );
+
+		// Add Current Session/Division Relationships
+		if( !empty( $this->input->post('divisions') ) )
+		{	
+			foreach( $this->input->post('divisions') as $division )
+			{
+				$data = array(  
+					'session_id' => $session_id,
+					'division_id' => $division
+				);
+				$this->insert( $data, FALSE, 'session_divisions' );
+			}
+		}
 	}
 
 }
