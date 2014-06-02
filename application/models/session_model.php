@@ -84,8 +84,7 @@ class Session_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'season_id', $id, 'sessions' ) > 0 
-				|| $this->count_by( 'current_season_id', $id, 'leagues' ) > 0
+				$this->count_by( 'session_id', $id, 'games' ) > 0
 			)
 			{
 				echo 'error';
@@ -93,7 +92,12 @@ class Session_model extends MY_Model
 			// Else Delete It from Database
 			else
 			{
-				$this->Season_model->delete( $id );
+				// Remove Session/Division Relationships
+				$this->db->where( 'session_id', $id );
+				$this->db->delete( 'session_divisions' );
+
+				// Remove Session
+				$this->Session_model->delete( $id );
 			}
 		}
 

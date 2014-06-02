@@ -75,10 +75,9 @@ class Sessions extends Admin_Controller
 	// Delete a Record
 	public function delete( $id = FALSE )
 	{
-
 		if( $id )
 		{
-			$this->Season_model->delete_record( $id );
+			$this->Session_model->delete_record( $id );
 
 			return true;
 		}
