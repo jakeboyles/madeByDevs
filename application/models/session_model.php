@@ -3,10 +3,11 @@ class Session_model extends MY_Model
 {
 	// Callbacks to MY_Model class to Run Before Record Inserts
 	public $before_create = array( 'created_at', 'created_by' );
+	//public $after_create = array( 'update_divisions' );
 	public $before_update = array( 'modified_by' );
+	//public $after_update = array( 'update_divisions' );
 	public $return_type = 'array';
 	public $before_dropdown = array( 'order_by(name)' );
-	public $after_update = array( 'update_divisions' );
 
 	// Get Records
 	public function get_records( )
@@ -42,6 +43,9 @@ class Session_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
+			// Assign Terms ( divisions )
+			$this->_update_divisions( $insert_id );
+
 			return $insert_id;
 		}
 
@@ -61,6 +65,9 @@ class Session_model extends MY_Model
 
 			// Update Record in Database
 			$this->update( $id, $data );
+
+			// Assign Terms ( divisions )
+			$this->_update_divisions( $id );
 
 			return true;
 		}
@@ -117,28 +124,29 @@ class Session_model extends MY_Model
 		return false;
 	}
 
-	// Assign/Update Divisions To this Session
-	public function update_divisions()
+	private function _update_divisions( $id = FALSE )
 	{
-		// Set Session ID
-		$session_id = $this->uri->segment(4);
+		if( $id )
+		{
+			// Remove Old Session/Division Relationships
+			$this->db->where( 'session_id', $id );
+			$this->db->delete( 'session_divisions' );
 
-		// Remove Old Session/Division Relationships
-		$this->db->where( 'session_id', $session_id );
-		$this->db->delete( 'session_divisions' );
-
-		// Add Current Session/Division Relationships
-		if( !empty( $this->input->post('divisions') ) )
-		{	
-			foreach( $this->input->post('divisions') as $division )
-			{
-				$data = array(  
-					'session_id' => $session_id,
-					'division_id' => $division
-				);
-				$this->insert( $data, FALSE, 'session_divisions' );
+			// Add Current Session/Division Relationships
+			if( !empty( $this->input->post('divisions') ) )
+			{	
+				foreach( $this->input->post('divisions') as $division )
+				{
+					$data = array(  
+						'session_id' => $id,
+						'division_id' => $division
+					);
+					$this->insert( $data, FALSE, 'session_divisions' );
+				}
 			}
 		}
+
+		return false;	
 	}
 
 }

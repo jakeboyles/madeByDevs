@@ -34,6 +34,12 @@ class Sessions extends Admin_Controller
 		// Get a List of Seasons for Dropdown
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
 
+		// Get a List of Divisions for Checkboxes
+		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
+
+		// Get a list of divisions this Session has a relationship with
+		$data['related_divisions'] = $this->_get_related_divisions();
+
 		// Load Add Record Form View
 		$this->load->admin_template( 'sessions_add', $data );
 	}
@@ -108,12 +114,12 @@ class Sessions extends Admin_Controller
 			// If Form Was Submitted, Use Selected Divisions
 			if( !empty( $this->input->post('divisions') ) )
 			{
-				$selected_divisions = $this->input->post('divisions');
+				$related_divisions = $this->input->post('divisions');
 			}
 			// Else Load the related divisions from the database
 			else
 			{
-				$selected_divisions = $this->Session_model->select_divisions( $id );
+				$related_divisions = $this->Session_model->select_divisions( $id );
 			}
 		}
 		// For Add a Session
@@ -122,14 +128,14 @@ class Sessions extends Admin_Controller
 			// If Form Was Submitted, Use Selected Divisions
 			if( !empty( $this->input->post('divisions') ) )
 			{
-				$selected_divisions = $this->input->post('divisions');
+				$related_divisions = $this->input->post('divisions');
 			}
 		}
 
 		// If Related Divisions Are Set, Return Them
-		if( !empty( $selected_divisions ) )
+		if( !empty( $related_divisions ) )
 		{
-			return $selected_divisions;
+			return $related_divisions;
 		}
 
 		// Else Return False
