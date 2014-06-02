@@ -11,11 +11,10 @@ class Location_model extends MY_Model
 	public function get_records( )
 	{
 		// Construct Query
-		$this->db->select( 's.id, s.name, s.year_start, s.year_end, s.created_at, s.modified_at, l.name as league_name' );
-		$this->db->join( 'leagues l', 'l.id = s.league_id', 'left outer' );
+		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.created_at, l.modified_at' );
 
 		// Run Query
-		$query = $this->db->get( 'seasons s' );
+		$query = $this->db->get( 'locations l' );
 
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
