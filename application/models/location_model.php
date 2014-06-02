@@ -65,8 +65,16 @@ class Location_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
+				'phone' => empty( $post['phone'] ) ? NULL : $post['phone'],
+				'website' => empty( $post['website'] ) ? NULL : $post['website'],
+				'street_address' => empty( $post['street_address'] ) ? NULL : $post['street_address'],
+				'street_address_2' => empty( $post['street_address_2'] ) ? NULL : $post['street_address_2'],
+				'city' => empty( $post['city'] ) ? NULL : $post['city'],
+				'state' => empty( $post['state'] ) ? NULL : $post['state'],
+				'postal' => empty( $post['postal'] ) ? NULL : $post['postal'],
+				'map_latitude' => empty( $post['map_latitude'] ) ? NULL : $post['map_latitude'],
+				'map_longitude' => empty( $post['map_longitude'] ) ? NULL : $post['map_longitude'],
+				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
 
