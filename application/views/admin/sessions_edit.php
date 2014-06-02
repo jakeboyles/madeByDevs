@@ -2,8 +2,6 @@
 
 	<div class="content">
 
-		<?php echo '<pre>'; var_dump( $this->input->post() ); echo '</pre>'; ?>
-
 		<div class="page-title">	
 			<h3>Sessions</h3>		
 		</div>
@@ -81,16 +79,17 @@
 			<div class="col-md-4">
 		 		<div class="grid simple">
 					<div class="grid-title">
-						<h4 class="pull-left">Divisions</h4>
+						<h4 class="pull-left">Assign Divisions</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">View Divisions</a>
+							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">Edit Divisions</a>
 						</div>
 					</div>
 
 					<div class="grid-body">
 						<?php foreach( $divisions as $key => $val ): ?>
 							<div class="checkbox check-primary">
-								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key ) ); ?>
+								<?php $checked = ( !empty( $related_divisions ) && in_array( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
+								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>
 						<?php endforeach; ?>

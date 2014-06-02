@@ -93,7 +93,31 @@ class Session_model extends MY_Model
 		return false;
 	}
 
-	// Update Divisions
+	// Select Divisions Assigned to this Session
+	public function select_divisions( $id )
+	{
+		if( $id )
+		{
+			$this->db->select('division_id');
+			$this->db->where( 'session_id', $id );
+			$query = $this->db->get( 'session_divisions' );
+
+			if( $query->num_rows > 0 )
+			{
+				$divisions = array();
+				foreach( $query->result_array() as $division )
+				{
+					$divisions[] = $division['division_id'];
+				}
+
+				return $divisions;
+			}
+		}
+		
+		return false;
+	}
+
+	// Assign/Update Divisions To this Session
 	public function update_divisions()
 	{
 		// Set Session ID

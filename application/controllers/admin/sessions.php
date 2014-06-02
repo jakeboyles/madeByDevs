@@ -56,6 +56,9 @@ class Sessions extends Admin_Controller
 		// Get a List of Divisions for Checkboxes
 		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
+		// Get a list of divisions this Session has a relationship with
+		$data['related_divisions'] = $this->_get_related_divisions( $id );
+
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Session_model->get( $id );
 
@@ -93,6 +96,43 @@ class Sessions extends Admin_Controller
 			return true;
 		}
 		
+		return false;
+	}
+
+	// Get a list of divisions this Session has a relationship with
+	private function _get_related_divisions( $id = FALSE )
+	{
+		// For Edit A Session
+		if( $id )
+		{
+			// If Form Was Submitted, Use Selected Divisions
+			if( !empty( $this->input->post('divisions') ) )
+			{
+				$selected_divisions = $this->input->post('divisions');
+			}
+			// Else Load the related divisions from the database
+			else
+			{
+				$selected_divisions = $this->Session_model->select_divisions( $id );
+			}
+		}
+		// For Add a Session
+		else
+		{
+			// If Form Was Submitted, Use Selected Divisions
+			if( !empty( $this->input->post('divisions') ) )
+			{
+				$selected_divisions = $this->input->post('divisions');
+			}
+		}
+
+		// If Related Divisions Are Set, Return Them
+		if( !empty( $selected_divisions ) )
+		{
+			return $selected_divisions;
+		}
+
+		// Else Return False
 		return false;
 	}
 
