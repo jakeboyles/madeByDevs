@@ -134,7 +134,7 @@
 										</div>
 
 									</div>
-									
+
 									<div class="well well-small">
 										<i class="fa fa-info-circle"></i> You can find the latitude and longitude via an address by using the <a href="http://itouchmap.com/latlong.html" target="_blank">iTouchMap.com Tool</a>.
 									</div>
@@ -159,6 +159,29 @@
 				</div><!-- end .grid -->
 			</div><!-- end .col-md-12 -->
 		</div><!-- end .row -->
+
+		<!-- Display Location Fields -->
+		<div class="row">
+			<div class="col-md-12">
+		 		<div class="grid simple">
+
+					<div class="grid-title">
+						<h4>Location Fields</h4>
+						<div class="pull-right">
+							<a href="<?php echo base_url('admin/locations'); ?>" class="btn btn-primary">Add Field</a>
+						</div>
+					</div>
+
+					<div class="grid-body">
+							
+						Fields go here.
+
+					</div><!-- end .grid-body -->
+
+				</div><!-- end .grid -->
+			</div><!-- end .col-md-12 -->
+		</div><!-- end .row -->
+
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->
