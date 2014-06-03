@@ -37,7 +37,7 @@
 										<td><?php echo date( 'm/d/Y', strtotime( $field['created_at'] ) ); ?></td>
 										<td><?php echo date( 'm/d/Y', strtotime( $field['modified_at'] ) ); ?></td>
 										<td>
-											<a href="<?php echo base_url('admin/locations/edit/' . $field['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
+											<a href="#" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
 											<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/locations/delete/' . $field['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $field['name']; ?>" data-row-id="<?php echo $field['id']; ?>"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
