@@ -41,6 +41,8 @@ $(document).on('click', '.click-here', function() {
 });
 $(document).on('click', '.navbar-toggle', function() {
 	$('.full-width-nav').slideToggle();
+}).on('click', '.close',function() {
+	$('.full-width-nav').slideToggle();
 });
 $(document)
     .on('change', '.btn-file :file', function() {
