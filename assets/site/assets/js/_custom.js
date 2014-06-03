@@ -41,7 +41,9 @@ $(document).on('click', '.click-here', function() {
 });
 $(document).on('click', '.navbar-toggle', function() {
 	$('.full-width-nav').slideToggle();
-}).on('click', '.close',function() {
+});
+$(document).on('click', '.closeMenu',function(e) {
+	e.preventDefault();
 	$('.full-width-nav').slideToggle();
 });
 $(document)
