@@ -9,7 +9,7 @@ $(document).ready(function(){
 	});
 
 	/* ##############################################################################
-	# For Bootstra's .modal()
+	# For Bootstrap's .modal()
 	# Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	############################################################################# */
 	$('[data-toggle="modal"]').on('click', function() {
@@ -108,7 +108,67 @@ $(document).ready(function(){
 			}
 		});
 		
-		
+	});
+
+	/* ##############################################################################
+	# Generic JavaScript Add/Edit Modal's
+	############################################################################# */
+	// Add/Edit Modal: Update Modal Content
+	$('#add-modal, #edit-modal').on('hide.bs.modal', function() {
+		// Set Vars
+		var formErrorContainer = $(this).find('#ajax-form-errors');
+		var thisForm = $(this).find('form');
+
+		// Reset Form on Modal Close
+		if( $(this).is('#add-modal') )
+		{
+			thisForm.trigger('reset');
+		}
+
+		// Hide Errors on Modal Close
+		formErrorContainer.addClass('hide');
+	});
+
+	// Add/Edit Modal Form
+	$('#ajax-add-record-form, #ajax-edit-record-form').on('submit', function(e){
+		// Prevent Default Function
+		e.preventDefault();
+
+		// Set Vars
+		var thisForm = $(this);
+		var modal = $(this).parents('.modal');
+		var modalTrigger = modal.data('trigger');
+		var ajaxURL = modalTrigger.data('ajax-url');
+		var formErrorContainer = $(modal).find('#ajax-form-errors');
+		var formErrorList = $(modal).find('#ajax-form-errors ul');
+		var table = $('.dataTable').dataTable();
+
+		// AJAX Request to Add Record
+		$.ajax({
+			url: ajaxURL,
+			type: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(response) {
+
+				// Error
+				if( response.result === 'error' )
+				{
+					formErrorList.html( response.errors );
+					formErrorContainer.removeClass('hide');
+				}
+				// Success
+				else
+				{
+					// Add Record to DataTable View
+					$('.dataTable').dataTable().fnAddData( response.row );
+
+					// Close the Modal
+					modal.modal('hide');
+				}
+				
+			}
+		});
 
 	});
 

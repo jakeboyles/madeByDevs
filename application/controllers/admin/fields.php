@@ -79,17 +79,9 @@ class Fields extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Location Name', 'required');
-		$this->form_validation->set_rules('phone', 'Phone', '');
-		$this->form_validation->set_rules('website', 'Website', '');
-		$this->form_validation->set_rules('street_address', 'Street Address', '');
-		$this->form_validation->set_rules('street_address_2', 'Street Address 2', '');
-		$this->form_validation->set_rules('city', 'City', '');
-		$this->form_validation->set_rules('state', 'State', '');
-		$this->form_validation->set_rules('postal', 'Postal', '');
 		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
 		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
 		$this->form_validation->set_rules('map_zoom', 'Map Zoom', '');
-		$this->form_validation->set_rules('description', 'Location Description', '');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

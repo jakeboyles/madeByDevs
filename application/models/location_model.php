@@ -8,10 +8,20 @@ class Location_model extends MY_Model
 	public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( )
+	public function get_records( $parent_id )
 	{
 		// Construct Query
-		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.created_at, l.modified_at' );
+		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
+
+		// If Parent ID is Set, Fetch Locations By this Parent ID
+		if( $parent_id )
+		{
+			$this->db->where( 'parent_id', $parent_id );
+		}
+		else
+		{
+			$this->db->where( 'parent_id', NULL );
+		}
 
 		// Run Query
 		$query = $this->db->get( 'locations l' );
@@ -106,6 +116,46 @@ class Location_model extends MY_Model
 			{
 				$this->Season_model->delete( $id );
 			}
+		}
+
+		return false;
+	}
+
+	// Insert a Field for this Location
+	public function insert_location_field( $post = FALSE )
+	{
+		if( $post )
+				{
+			// Insert Data
+			$data = array(
+				'name' => $post['name'],
+				'parent_id' => $post['parent_id'],
+				'map_latitude' => empty( $post['map_latitude'] ) ? NULL : $post['map_latitude'],
+				'map_longitude' => empty( $post['map_longitude'] ) ? NULL : $post['map_longitude'],
+				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom']
+			);
+
+			// Insert to Database and Store Insert ID
+			$insert_id = $this->insert( $data );
+
+			// Construct Data Array
+			$data_array = array(
+				'result' => 'success',
+				'row' => array(
+					$insert_id, 
+					$post['name'], 
+					$post['map_latitude'], 
+					$post['map_longitude'], 
+					$post['map_zoom'], 
+					date('m/d/Y', time() ), 
+					date('m/d/Y', time() ), 
+					'<a href="#" class="btn active btn-primary"><i class="fa fa-edit"></i></a> 
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url('admin/fields/delete/' . $insert_id) . '" data-toggle="modal" data-target="#delete-modal" data-label="" data-row-id="' . $insert_id . '"><i class="fa fa-times"></i></a>'
+				)
+			);
+
+			// Return JSON
+			return $data_array;
 		}
 
 		return false;

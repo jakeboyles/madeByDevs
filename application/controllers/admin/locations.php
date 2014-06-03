@@ -25,7 +25,7 @@ class Locations extends Admin_Controller
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post() && $this->_validation() )
+		if( $this->input->post('add-location') && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Location_model->insert_record( $this->input->post() ) )
@@ -42,13 +42,16 @@ class Locations extends Admin_Controller
 	public function edit( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() && $this->_validation() && $id )
+		if( $this->input->post('edit-location') && $this->_validation() && $id )
 		{
 			$this->Location_model->update_record( $id, $this->input->post() );
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
+
+		// Get a List of Location Fields for this Location
+		$data['fields'] = $this->Location_model->get_records( $id );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Location_model->get( $id );
@@ -88,9 +91,56 @@ class Locations extends Admin_Controller
 		$this->form_validation->set_rules('postal', 'Postal', '');
 		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
 		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
-		$this->form_validation->set_rules('map_zoom', 'Map Zoom', '');
+		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'numeric');
 		$this->form_validation->set_rules('description', 'Location Description', '');
 		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	// Retrieve Fields
+	public function get_fields( $parent_id = FALSE )
+	{
+
+	}
+
+	// Add a Field
+	public function add_field( $parent_id = FALSE )
+	{
+		if( $this->input->post('add_field') && $this->_field_validation() )
+		{
+			// Insert Record Into Database
+			// Create JSON For DataTable View
+			$data = $this->Location_model->insert_location_field( $this->input->post() );
+		}
+		else
+		{
+			$data = array(
+				'result' => 'error',
+				'errors' => validation_errors( '<li>','</li>' )
+			);
+		}
+
+		echo json_encode( $data );
+	}
+
+	// Location Field Validation
+	private function _field_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('name', 'Field Name', 'required');
+		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
+		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
+		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'numeric');
+
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
 		{
