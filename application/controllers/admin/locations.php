@@ -103,13 +103,7 @@ class Locations extends Admin_Controller
 		return false;
 	}
 
-	// Retrieve Fields
-	public function get_fields( $parent_id = FALSE )
-	{
-
-	}
-
-	// Add a Field
+	// Add a Location Field
 	public function add_field( $parent_id = FALSE )
 	{
 		if( $this->input->post('add_field') && $this->_field_validation() )
@@ -129,20 +123,41 @@ class Locations extends Admin_Controller
 		echo json_encode( $data );
 	}
 
-	// Edit a Field
+	// Edit a Location Field
 	public function edit_field( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post('edit-field') && $this->_field_validation() && $id )
+		if( $this->input->post('edit_field') && $id )
 		{
-			$this->Location_model->update_record( $id, $this->input->post() );
+			$data = array();
+
+			// If Validation Passed
+			if( $this->_field_validation() )
+			{
+				// Update Record in Database
+				// Create JSON For DataTable View
+				$data = $this->Location_model->update_location_field( $id, $this->input->post() );
+
+			}
+			// If Validation Failed Send Errors
+			else
+			{
+				$data = array(
+					'result' => 'error',
+					'errors' => validation_errors( '<li>','</li>' )
+				);
+			}
+
+			echo json_encode( $data );
 		}
+		else
+		{
+			// Retrieve Record Data From Database
+			$data['record'] = $this->Location_model->get( $id );
 
-		// Retrieve Record Data From Database
-		$data['record'] = $this->Location_model->get( $id );
-
-		// Load Edit Record Form
-		$this->load->view('admin/parts/location_fields_edit_form', $data);
+			// Load Edit Record Form
+			$this->load->view('admin/parts/location_fields_edit_form', $data);
+		}
 	}
 
 	// Location Field Validation

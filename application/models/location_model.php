@@ -137,7 +137,7 @@ class Location_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
-			// Construct Data Array
+			// Construct Data Array for JSON via AJAX
 			$data_array = array(
 				'result' => 'success',
 				'insert_id' => $insert_id,
@@ -154,7 +154,47 @@ class Location_model extends MY_Model
 				)
 			);
 
-			// Return JSON
+			// Return Data Array
+			return $data_array;
+		}
+
+		return false;
+	}
+
+	// Edit Record
+	public function update_location_field( $id = FALSE, $post = FALSE )
+	{
+		if( $id && $post )
+		{
+			// Update Data
+			$data = array(
+				'name' => $post['name'],
+				'map_latitude' => empty( $post['map_latitude'] ) ? NULL : $post['map_latitude'],
+				'map_longitude' => empty( $post['map_longitude'] ) ? NULL : $post['map_longitude'],
+				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom'],
+			);
+
+			// Update Record in Database
+			$this->update( $id, $data );
+
+			// Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'update_id' => $id,
+				'row' => array(
+					$id, 
+					$post['name'], 
+					$post['map_latitude'], 
+					$post['map_longitude'], 
+					$post['map_zoom'], 
+					date('m/d/Y', strtotime( $post['created_at'] ) ),
+					date('m/d/Y', time() ), 
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>'
+				)
+			);
+			
+			// Return Data Array
 			return $data_array;
 		}
 

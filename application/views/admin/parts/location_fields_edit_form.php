@@ -25,3 +25,6 @@
 	</div>
 
 </div>
+
+
+<?php echo form_hidden( 'created_at', $record['created_at'] ); ?>

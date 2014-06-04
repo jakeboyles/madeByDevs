@@ -86,10 +86,6 @@ $(document).ready(function(){
 		var table = $('.dataTable').dataTable();
 		var row = $('.dataTable tr#' + rowID)[0];
 
-		console.log( table );
-		//console.log(rowID);
-		console.log(row);
-
 		// Remove Record from DB or Display Error Message
 		$.ajax({
 			url: ajaxURL,
@@ -164,6 +160,8 @@ $(document).ready(function(){
 		var formErrorContainer = $(modal).find('.ajax-form-errors');
 		var formErrorList = $(modal).find('.ajax-form-errors ul');
 		var table = $('.dataTable').dataTable();
+		var rowID = modalTrigger.data('row-id');
+		var row = $('.dataTable tr#' + rowID)[0];
 
 		// AJAX Request to Add Record
 		$.ajax({
@@ -182,12 +180,22 @@ $(document).ready(function(){
 				// Success
 				else
 				{
-					// Add Record to DataTable View
-					var addID = table.fnAddData( response.row );
+					// Add Row To DataTable View
+					if( thisForm.is('#ajax-add-record-form') )
+					{
+						// Add Record to DataTable View
+						var addID = table.fnAddData( response.row );
 
-					// Add an ID to the TR of the row just Added
-					var theNode = table.fnSettings().aoData[addID[0]].nTr; 
-					theNode.setAttribute( 'id', response.insert_id );
+						// Add an ID to the TR of the row just Added
+						var theNode = table.fnSettings().aoData[addID[0]].nTr; 
+						theNode.setAttribute( 'id', response.insert_id );
+					}
+
+					// Update Row In DataTable View
+					if( thisForm.is('#ajax-edit-record-form') )
+					{
+						table.fnUpdate( response.row, row );
+					}
 
 					// Close the Modal
 					modal.modal('hide');
