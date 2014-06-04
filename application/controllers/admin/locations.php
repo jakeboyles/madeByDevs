@@ -63,7 +63,6 @@ class Locations extends Admin_Controller
 	// Delete a Record
 	public function delete( $id = FALSE )
 	{
-
 		if( $id )
 		{
 			$this->Location_model->delete_record( $id );

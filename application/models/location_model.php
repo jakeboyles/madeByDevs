@@ -8,7 +8,7 @@ class Location_model extends MY_Model
 	public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( $parent_id )
+	public function get_records( $parent_id = FALSE )
 	{
 		// Construct Query
 		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
@@ -110,9 +110,19 @@ class Location_model extends MY_Model
 			{
 				echo 'error';
 			}
-			// Else Delete It from Database
+			// Else Delete Location From DB including fields
 			else
 			{
+				// See if this Location had a Parent ID
+				$location = $this->Location_model->get( $id );
+
+				// Delete Children (locations fields) of this Location
+				if( $location['parent_id'] == NULL )
+				{
+					$this->Location_model->delete_by( array( 'parent_id' => $id ) );
+				}
+
+				// Delete This Location
 				$this->Location_model->delete( $id );
 			}
 		}
