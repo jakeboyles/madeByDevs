@@ -12,7 +12,7 @@ $(document).ready(function(){
 	# For Bootstrap's .modal()
 	# Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	############################################################################# */
-	$('[data-toggle="modal"]').on('click', function() {
+	$('body').on('click', '[data-toggle="modal"]', function() {
 		$( $(this).data('target') ).data('trigger', $(this) );
 	});
 
@@ -84,7 +84,11 @@ $(document).ready(function(){
 		var ajaxURL = modalTrigger.data('ajax-url');
 		var csrf_token = $('.dataTable thead tr input[name="csrf_token"]').val();
 		var table = $('.dataTable').dataTable();
-		var row =  $('.dataTable tr#' + rowID)[0];
+		var row = $('.dataTable tr#' + rowID)[0];
+
+		console.log( table );
+		//console.log(rowID);
+		console.log(row);
 
 		// Remove Record from DB or Display Error Message
 		$.ajax({
@@ -113,10 +117,10 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Generic JavaScript Add/Edit Modal's
 	############################################################################# */
-	// Add/Edit Modal: Update Modal Content
+	// Add/Edit Modal: Update Modal Content When Modal Closes
 	$('#add-modal, #edit-modal').on('hide.bs.modal', function() {
 		// Set Vars
-		var formErrorContainer = $(this).find('#ajax-form-errors');
+		var formErrorContainer = $(this).find('.ajax-form-errors');
 		var thisForm = $(this).find('form');
 
 		// Reset Form on Modal Close
@@ -129,6 +133,24 @@ $(document).ready(function(){
 		formErrorContainer.addClass('hide');
 	});
 
+	// Edit Modal: Update Field Values on Modal Open
+	$('#edit-modal').on('show.bs.modal', function() {
+		// Find The Element that Triggered This Modal
+		var trigger = $(this).data('trigger');
+
+		// Vars
+		var ajaxURL = trigger.data('ajax-url');
+		var formFieldsContainer = $(this).find('.form-fields');
+
+		// Load in Edit Fields
+		$.ajax({
+			url: ajaxURL,
+			success: function( response ) {
+				formFieldsContainer.html( response );
+			}
+		});
+	});
+
 	// Add/Edit Modal Form
 	$('#ajax-add-record-form, #ajax-edit-record-form').on('submit', function(e){
 		// Prevent Default Function
@@ -139,8 +161,8 @@ $(document).ready(function(){
 		var modal = $(this).parents('.modal');
 		var modalTrigger = modal.data('trigger');
 		var ajaxURL = modalTrigger.data('ajax-url');
-		var formErrorContainer = $(modal).find('#ajax-form-errors');
-		var formErrorList = $(modal).find('#ajax-form-errors ul');
+		var formErrorContainer = $(modal).find('.ajax-form-errors');
+		var formErrorList = $(modal).find('.ajax-form-errors ul');
 		var table = $('.dataTable').dataTable();
 
 		// AJAX Request to Add Record
@@ -161,16 +183,19 @@ $(document).ready(function(){
 				else
 				{
 					// Add Record to DataTable View
-					$('.dataTable').dataTable().fnAddData( response.row );
+					var addID = table.fnAddData( response.row );
+
+					// Add an ID to the TR of the row just Added
+					var theNode = table.fnSettings().aoData[addID[0]].nTr; 
+					theNode.setAttribute( 'id', response.insert_id );
 
 					// Close the Modal
 					modal.modal('hide');
 				}
-				
+
 			}
 		});
 
 	});
 
 });
-

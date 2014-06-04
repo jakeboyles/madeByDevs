@@ -140,6 +140,7 @@ class Location_model extends MY_Model
 			// Construct Data Array
 			$data_array = array(
 				'result' => 'success',
+				'insert_id' => $insert_id,
 				'row' => array(
 					$insert_id, 
 					$post['name'], 
@@ -148,8 +149,8 @@ class Location_model extends MY_Model
 					$post['map_zoom'], 
 					date('m/d/Y', time() ), 
 					date('m/d/Y', time() ), 
-					'<a href="#" class="btn active btn-primary"><i class="fa fa-edit"></i></a> 
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url('admin/fields/delete/' . $insert_id) . '" data-toggle="modal" data-target="#delete-modal" data-label="" data-row-id="' . $insert_id . '"><i class="fa fa-times"></i></a>'
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $insert_id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $insert_id . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $insert_id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $insert_id . '"><i class="fa fa-times"></i></a>'
 				)
 			);
 

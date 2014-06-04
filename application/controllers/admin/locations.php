@@ -91,7 +91,7 @@ class Locations extends Admin_Controller
 		$this->form_validation->set_rules('postal', 'Postal', '');
 		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
 		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
-		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'numeric');
+		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'less_than[20]');
 		$this->form_validation->set_rules('description', 'Location Description', '');
 		
 		// Return True if Validation Passes
@@ -129,6 +129,22 @@ class Locations extends Admin_Controller
 		echo json_encode( $data );
 	}
 
+	// Edit a Field
+	public function edit_field( $id = FALSE )
+	{
+		// If Form is Submitted Validate Form Data and Updated Record in Database
+		if( $this->input->post('edit-field') && $this->_field_validation() && $id )
+		{
+			$this->Location_model->update_record( $id, $this->input->post() );
+		}
+
+		// Retrieve Record Data From Database
+		$data['record'] = $this->Location_model->get( $id );
+
+		// Load Edit Record Form
+		$this->load->view('admin/parts/location_fields_edit_form', $data);
+	}
+
 	// Location Field Validation
 	private function _field_validation()
 	{
@@ -139,7 +155,7 @@ class Locations extends Admin_Controller
 		$this->form_validation->set_rules('name', 'Field Name', 'required');
 		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
 		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
-		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'numeric');
+		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'less_than[20]');
 
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
