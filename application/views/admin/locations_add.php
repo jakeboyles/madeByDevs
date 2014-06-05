@@ -131,6 +131,7 @@
 
 									<button type="submit" class="btn btn-primary">Create Location</button>
 
+								<?php echo form_hidden( 'add_location', TRUE ); ?>
 								<?php echo form_close(); ?>
 								<!-- END Form -->
 

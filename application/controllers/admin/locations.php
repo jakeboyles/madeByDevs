@@ -25,7 +25,7 @@ class Locations extends Admin_Controller
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post('add-location') && $this->_validation() )
+		if( $this->input->post('add_location') && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Location_model->insert_record( $this->input->post() ) )
@@ -42,7 +42,7 @@ class Locations extends Admin_Controller
 	public function edit( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post('edit-location') && $this->_validation() && $id )
+		if( $this->input->post('edit_location') && $this->_validation() && $id )
 		{
 			$this->Location_model->update_record( $id, $this->input->post() );
 		}

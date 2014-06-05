@@ -147,6 +147,7 @@
 
 									<button type="submit" class="btn btn-primary">Update Location</button>
 
+								<?php echo form_hidden( 'edit_location', TRUE ); ?>
 								<?php echo form_close(); ?>
 								<!-- END Form -->
 
