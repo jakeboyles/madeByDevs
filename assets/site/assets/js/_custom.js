@@ -30,6 +30,14 @@ $(document).ready(function(){
 	  $("html").click(function(){
 	    $('.click-here').show();
 	  });
+	  //jquery mobile events setup
+	  $(".click-here").on('tap',function(event){
+	    event.stopPropagation();
+	    $(this).hide();
+	  });
+	  $("html").on('tap',function(){
+	    $('.click-here').show();
+	  });
 });
 $(document).on('click', '.schedule > li a', function(e) {
 	e.preventDefault();
@@ -46,9 +54,6 @@ $(document).on('click', '.schedule > li a', function(e) {
 			$(this).parent().removeClass('active').removeClass('closing');
 		}
 	});
-});
-$(document).on('click', '.click-here', function() {
-	$(this).hide();
 });
 $(document).on('click', '.navbar-toggle', function() {
 	$('.full-width-nav').slideToggle();
