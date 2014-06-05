@@ -19,6 +19,17 @@ $(document).ready(function(){
     increaseArea: '20%' // optional
   });
 	$('.full-width-nav .navigation').html($('.navbar-collapse').html());
+	$('.standings tbody tr').first().children('td').css('border-top', 'none');
+	  $(".flexible-container").click(function(event){
+	    event.stopPropagation();
+	  });
+	  $(".click-here").click(function(event){
+	    event.stopPropagation();
+	    $(this).hide();
+	  });
+	  $("html").click(function(){
+	    $('.click-here').show();
+	  });
 });
 $(document).on('click', '.schedule > li a', function(e) {
 	e.preventDefault();

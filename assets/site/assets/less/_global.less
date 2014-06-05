@@ -392,8 +392,13 @@ img {
 					color: darken(@blue,15%);
 				}
 			}
-			thead>tr {
+			.dashed {
+				height: 1px;
 				border-bottom: 2px dashed #fff;
+			}
+			thead>tr>th {
+				border-top: none;
+				border-bottom: none;
 			}
 			thead>tr th {
 				padding: 0;
