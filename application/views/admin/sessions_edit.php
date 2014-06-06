@@ -64,7 +64,7 @@
 									<?php echo form_dropdown( 'season_id', array( '' => '') + $seasons, set_value( 'season_id', $record['season_id'] ), 'class="pretty-select"' ); ?>
 								</div>
 
-								<button type="submit" class="btn btn-success">Update Session</button>
+								<button type="submit" class="btn btn-primary">Update Session</button>
 
 							</div>
 
@@ -100,6 +100,9 @@
 		</div><!-- end .row -->
 		<?php echo form_close(); ?>
 		<!-- END Form -->
+
+		<!-- Games -->
+		<?php $this->load->view('admin/games'); ?>
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

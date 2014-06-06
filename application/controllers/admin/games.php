@@ -14,7 +14,7 @@ class Games extends Admin_Controller
 	// Display All Records View
 	public function index()
 	{
-		$data['records'] = $this->Game_model->get_records();
+		$data['games'] = $this->Game_model->get_records();
 		$this->load->admin_template( 'games', $data );
 	}
 

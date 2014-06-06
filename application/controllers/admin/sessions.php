@@ -56,6 +56,13 @@ class Sessions extends Admin_Controller
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
+		// Store Games in this Session to the Data Array
+		$this->load->model( 'Game_model' );
+		$args = array(
+			'where' => array( 'session_id' => $id )
+		);
+		$data['games'] = $this->Game_model->get_records( $args );
+
 		// Get a List of Seasons for Dropdown
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
 

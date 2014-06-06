@@ -8,14 +8,28 @@ class Game_model extends MY_Model
 	public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( )
+	public function get_records( $args = FALSE )
 	{
 		// Construct Query
-		$this->db->select( 's.id, s.name, s.year_start, s.year_end, s.created_at, s.modified_at, l.name as league_name' );
-		$this->db->join( 'leagues l', 'l.id = s.league_id', 'left outer' );
+		$this->db->select( '
+			g.id, g.session_id, g.division_id, g.location_id, g.game_time, g.team_home_id, g.team_away_id, g.score_home, g.score_away, g.created_at, g.modified_at,
+			l.name as location
+		' );
+		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
+		//$this->db->join( 'teams t', 't.id = g.team_away_id', 'left outer' );
+		$this->db->join( 'locations l', 'l.id = g.location_id', 'left outer' );
+
+		// Load Games Based off of The Where Statement
+		if( !empty( $args['where'] ) )
+		{
+			//echo '<pre>'; var_dump( $args['where'] ); echo '</pre>';
+			//exit();
+
+			$this->db->where( $args['where'] );
+		}
 
 		// Run Query
-		$query = $this->db->get( 'seasons s' );
+		$query = $this->db->get( 'games g' );
 
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
