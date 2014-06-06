@@ -16,12 +16,10 @@
 						<tr>
 							<th>id</th>
 							<th>Division</th>
-							<th>Location</th>
-							<th>Game Time</th>
 							<th>Home Team</th>
 							<th>Away Team</th>
-							<th>Home Score</th>
-							<th>Away Score</th>
+							<th>Location</th>
+							<th>Game Time</th>
 							<th><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></th>
 						</tr>
 					</thead>
@@ -30,13 +28,11 @@
 							<?php foreach( $games as $game ): ?>
 							<tr id="<?php echo $game['id']; ?>">
 								<td><?php echo $game['id']; ?></td>
-								<td><?php echo $game['division_id']; ?></td>
-								<td><?php echo $game['location_id']; ?></td>
+								<td><?php echo $game['division']; ?></td>
+								<td><?php echo $game['home_team']; ?> (<?php echo !empty( $game['score_home'] ) ? $game['score_home'] : 0; ?>)</td>
+								<td><?php echo $game['away_team']; ?> (<?php echo !empty( $game['score_away'] ) ? $game['score_away'] : 0; ?>)</td>
+								<td><?php echo $game['location']; ?></td>
 								<td><?php echo date( 'm/d/Y g:i A', strtotime( $game['game_time'] ) ); ?></td>
-								<td><?php echo $game['team_home_id']; ?></td>
-								<td><?php echo $game['team_away_id']; ?></td>
-								<td><?php echo $game['score_home']; ?></td>
-								<td><?php echo $game['score_away']; ?></td>
 								<td>
 									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/locations/edit_field/' . $game['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-edit"></i></a>
 									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/locations/delete/' . $game['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $game['team_home_id'] . ' vs ' . $game['team_away_id']; ?>" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-times"></i></a>

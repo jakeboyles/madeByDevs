@@ -81,7 +81,7 @@
 					<div class="grid-title">
 						<h4 class="pull-left">Assign Divisions</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">Edit Divisions</a>
+							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">View Divisions</a>
 						</div>
 					</div>
 
