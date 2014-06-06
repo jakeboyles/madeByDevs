@@ -514,50 +514,6 @@ class MY_Model extends CI_Model
     /**
      * Retrieve and generate a form_dropdown friendly array
      */
-    /*
-    function dropdown()
-    {
-        $args = func_get_args();
-        $table = $this->_table;
-
-        if(count($args) == 2)
-        {
-            list($key, $value) = $args;
-        }
-        elseif (count($args) == 3)
-        {
-            list($table, $key, $value) = $args;
-        }
-        else
-        {
-            $key = $this->primary_key;
-            $value = $args[0];
-        }
-
-        $this->trigger('before_dropdown', array( $key, $value ));
-
-        if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
-        {
-            $this->_database->where($this->soft_delete_key, FALSE);
-        }
-
-        $result = $this->_database->select(array($key, $value))
-                           ->get($table)
-                           ->result();
-
-        $options = array();
-
-        foreach ($result as $row)
-        {
-            $options[$row->{$key}] = $row->{$value};
-        }
-
-        $options = $this->trigger('after_dropdown', $options);
-
-        return $options;
-    }
-    */
-
     function dropdown()
     {
         $args = func_get_args();
@@ -584,6 +540,9 @@ class MY_Model extends CI_Model
             $key = $this->primary_key;
             $value = $args[0];
         }
+
+        // Set a Default Where
+        $this->_database->where( $value . ' IS NOT NULL' );
 
         // Set Default Order By
         if( empty( $orderby ) )
