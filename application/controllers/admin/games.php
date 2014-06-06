@@ -35,6 +35,12 @@ class Games extends Admin_Controller
 		$this->load->admin_template( 'games_add' );
 	}
 
+	// AJAX Add Record
+	public function add_ajax()
+	{
+		//$this->load->view()
+	}
+
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{

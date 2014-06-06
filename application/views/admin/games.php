@@ -5,7 +5,7 @@
 			<div class="grid-title">
 				<h4>Games Scheduled in this Session</h4>
 				<div class="pull-right">
-					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/locations/add_field/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Field</a>
+					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/games/add_ajax/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Game</a>
 				</div>
 			</div>
 
@@ -54,7 +54,7 @@
 </div><!-- end .row -->
 
 <!-- Load in Add Record Modal -->
-<?php //$this->load->view('admin/games_add'); ?>
+<?php $this->load->view('admin/games_add_ajax'); ?>
 
 <!-- Load in Edit Record Modal -->
 <?php //$this->load->view('admin/games_edit'); ?>

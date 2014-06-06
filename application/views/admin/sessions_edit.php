@@ -88,7 +88,7 @@
 					<div class="grid-body">
 						<?php foreach( $divisions as $key => $val ): ?>
 							<div class="checkbox check-primary">
-								<?php $checked = ( !empty( $related_divisions ) && in_array( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
+								<?php $checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
 								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>

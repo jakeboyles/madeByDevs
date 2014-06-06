@@ -109,16 +109,17 @@ class Session_model extends MY_Model
 	{
 		if( $id )
 		{
-			$this->db->select('division_id');
-			$this->db->where( 'session_id', $id );
-			$query = $this->db->get( 'session_divisions' );
+			$this->db->select('sd.division_id, d.name');
+			$this->db->join('divisions d','d.id = sd.division_id', 'left outer');
+			$this->db->where( 'sd.session_id', $id );
+			$query = $this->db->get( 'session_divisions sd' );
 
 			if( $query->num_rows > 0 )
 			{
 				$divisions = array();
 				foreach( $query->result_array() as $division )
 				{
-					$divisions[] = $division['division_id'];
+					$divisions[ $division['division_id'] ] = $division['name'];
 				}
 
 				return $divisions;

@@ -35,10 +35,10 @@ class Sessions extends Admin_Controller
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
 
 		// Get a List of Divisions for Checkboxes
-		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
+		//$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Get a list of divisions this Session has a relationship with
-		$data['related_divisions'] = $this->_get_related_divisions();
+		//$data['related_divisions'] = $this->_get_related_divisions();
 
 		// Load Add Record Form View
 		$this->load->admin_template( 'sessions_add', $data );
