@@ -5,14 +5,18 @@ class Team_model extends MY_Model
 	public $before_create = array( 'created_at', 'created_by' );
 	public $before_update = array( 'modified_by' );
 	public $return_type = 'array';
-	//public $before_dropdown = array( 'order_by(email)' );
 
 	// Get Records
 	public function get_records( )
 	{
 		// Construct Query
-		$this->db->select( 't.id, t.captain_user_id, t.name, t.description, t.team_logo, t.status, t.created_at, t.modified_at, u.first_name, u.last_name, u.email' );
+		$this->db->select('
+			t.id, t.captain_user_id, t.name, t.description, t.team_logo, t.status, t.created_at, t.modified_at, u.first_name, u.last_name, 
+			u.id as user_id, u.email, 
+			d.id as division_id, d.name as division
+		');
 		$this->db->join( 'users u', 'u.id = t.captain_user_id', 'left outer' );
+		$this->db->join( 'divisions d', 'd.id = t.division_id', 'left outer' );
 
 		// Run Query
 		$query = $this->db->get( 'teams t' );
@@ -36,6 +40,7 @@ class Team_model extends MY_Model
 			$data = array(
 				'status' => 'active',
 				'name' => $post['name'],
+				'division_id' => $post['division_id'],
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
@@ -57,6 +62,7 @@ class Team_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
+				'division_id' => $post['division_id'],
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);

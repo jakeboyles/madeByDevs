@@ -31,7 +31,10 @@ class Teams extends Admin_Controller
 			}
 		}
 
-		// Create Data (Pull Users) for Team Captain Dropdown
+		// Create Data for Divisions Dropdown
+		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+
+		// Create Data for Team Captain Dropdown
 		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'email' );
 
 		// Load Add Record Form View
@@ -49,6 +52,9 @@ class Teams extends Admin_Controller
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
+
+		// Create Data for Divisions Dropdown
+		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Create Data (Pull Users) for Team Captain Dropdown
 		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'email' );
@@ -82,6 +88,7 @@ class Teams extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Team Name', 'required');
+		$this->form_validation->set_rules('division_id', 'Division', 'required');
 		$this->form_validation->set_rules('captain_user_id', 'Team Captain', '');
 		$this->form_validation->set_rules('description', 'Team Description', '');
 		

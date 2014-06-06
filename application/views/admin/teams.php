@@ -24,6 +24,7 @@
 								<tr>
 									<th>id</th>
 									<th>Team</th>
+									<th>Division</th>
 									<th>Captain</th>
 									<th>Created</th>
 									<th>Modified</th>
@@ -36,7 +37,8 @@
 									<tr id="<?php echo $record['id']; ?>">
 										<td><?php echo $record['id']; ?></td>
 										<td><a href="<?php echo base_url('admin/teams/edit/' . $record['id']); ?>"><?php echo $record['name']; ?></a></td>
-										<td><?php echo $record['first_name'] . ' ' . $record['last_name']; ?></td>
+										<td><a target="_blank" href="<?php echo base_url('admin/divisions/edit/' . $record['division_id']); ?>"><?php echo $record['division']; ?></a></td>
+										<td><a target="_blank" href="<?php echo base_url('admin/users/edit/' . $record['user_id']); ?>"><?php echo $record['first_name'] . ' ' . $record['last_name']; ?></a></td>
 										<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
 										<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
 										<td>
