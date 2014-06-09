@@ -18,8 +18,8 @@
 	<!-- END PLUGIN CSS -->
 
 	<!-- BEGIN CORE CSS FRAMEWORK -->
-	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url(); ?>assets/admin/css/animate.min.css" rel="stylesheet" type="text/css"/>
 	<!-- END CORE CSS FRAMEWORK -->

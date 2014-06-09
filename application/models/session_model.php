@@ -129,6 +129,7 @@ class Session_model extends MY_Model
 		return false;
 	}
 
+	// Assign Divisions to an Individual Session
 	private function _update_divisions( $id = FALSE )
 	{
 		if( $id )
@@ -153,5 +154,4 @@ class Session_model extends MY_Model
 
 		return false;	
 	}
-
 }

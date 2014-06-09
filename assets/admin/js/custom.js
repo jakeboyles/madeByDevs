@@ -9,12 +9,16 @@ $(document).ready(function(){
 	});
 
 	/* ##############################################################################
-	# For Bootstrap's .modal()
-	# Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
+	# Bootstrap Functions
 	############################################################################# */
+	// For Bootstrap's .modal()
+	// Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	$('body').on('click', '[data-toggle="modal"]', function() {
 		$( $(this).data('target') ).data('trigger', $(this) );
 	});
+
+	// Initialize Popover
+	$('[data-toggle="popover"]').popover();
 
 	/* ##############################################################################
 	# DataTables
@@ -215,7 +219,7 @@ $(document).ready(function(){
 		// Vars
 		var divisionID = $(this).val()
 		var formContainer = $('.teams-dropdowns');
-		var ajaxURL = '';
+		var ajaxURL = $(this).data('ajax-url') + '/' + divisionID;
 
 		// Display Team Dropdown Fields
 		if( divisionID.length )
@@ -223,7 +227,8 @@ $(document).ready(function(){
 			$.ajax({
 				url: ajaxURL,
 				success: function( response ) {
-					console.log( response );
+					//console.log( response );
+					formContainer.html( response );
 				}
 			});
 		}

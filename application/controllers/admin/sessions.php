@@ -149,9 +149,14 @@ class Sessions extends Admin_Controller
 	}
 
 	// AJAX Load Teams
-	public function get_teams()
+	public function get_teams_by_division( $division_id = FALSE )
 	{
-		$this->load->view( 'admin/parts/games_teams_fields' );
+		// Return a List of Usable Teams
+		$this->load->model( 'Team_model' );
+		$data['teams'] = $this->Team_model->get_teams_by_division( $division_id );
+
+		// Load Teams Form View
+		$this->load->view( 'admin/parts/team_dropdowns', $data );
 	}
 
 }

@@ -101,4 +101,28 @@ class Team_model extends MY_Model
 		return false;
 	}
 
+	// Get a list of Teams by Division ID
+	public function get_teams_by_division( $division_id = FALSE )
+	{
+		if( $division_id )
+		{
+			$rows = $this->get_many_by( 'division_id', $division_id );
+
+			// If Teams were Found, Construct an Array and Return them
+			if( !empty( $rows ) )
+			{
+				$teams = array();
+				foreach( $rows as $row )
+				{
+					$teams[ $row['id'] ] = $row['name'];
+				}
+
+				return $teams;
+			}
+
+		}
+
+		return false;
+	}
+
 }
