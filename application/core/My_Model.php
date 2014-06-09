@@ -534,6 +534,11 @@ class MY_Model extends CI_Model
         {
             list($table, $key, $value, $orderby) = $args;
         }
+         // Set Where, usage: dropdown( $table, $key, $value, $orderby, $where )
+        elseif (count($args) == 5)
+        {
+            list($table, $key, $value, $orderby, $where) = $args;
+        }
         // Defaults to loading the Primary Key and the value you pass through, usage: dropdown ( $value )
         else
         {
@@ -542,7 +547,14 @@ class MY_Model extends CI_Model
         }
 
         // Set a Default Where
-        $this->_database->where( $value . ' IS NOT NULL' );
+        if( empty( $where ) )
+        {
+            $this->_database->where( $value . ' IS NOT NULL' );
+        }
+        else
+        {
+            $this->_database->where( $where );
+        }
 
         // Set Default Order By
         if( empty( $orderby ) )
