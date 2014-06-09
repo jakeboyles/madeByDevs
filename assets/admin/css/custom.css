@@ -12,3 +12,13 @@
 .grid-title {
 	overflow: hidden;
 }
+
+/* Make Z-index higher for jquery plugins over Modal */
+.popover {
+	z-index: 9999 !important;
+}
+
+/* Add Generic Styling for a Pointer */
+.pointer {
+	cursor: pointer;
+}

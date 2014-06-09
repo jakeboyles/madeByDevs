@@ -15,6 +15,7 @@
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/boostrap-checkbox/css/bootstrap-checkbox.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url(); ?>assets/admin/plugins/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
 	<!-- END PLUGIN CSS -->
 
 	<!-- BEGIN CORE CSS FRAMEWORK -->

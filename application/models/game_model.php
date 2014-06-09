@@ -12,7 +12,7 @@ class Game_model extends MY_Model
 	{
 		// Construct Query
 		$this->db->select( '
-			g.id, g.session_id, g.division_id, g.location_id, g.game_time, g.team_home_id, g.team_away_id, g.score_home, g.score_away, g.created_at, g.modified_at,
+			g.id, g.session_id, g.division_id, g.location_id, g.game_date_time, g.team_home_id, g.team_away_id, g.score_home, g.score_away, g.created_at, g.modified_at,
 			l.name as location,
 			d.name as division,
 			t.name as home_team,

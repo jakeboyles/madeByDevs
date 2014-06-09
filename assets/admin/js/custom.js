@@ -1,24 +1,44 @@
 $(document).ready(function(){
 	
 	/* ##############################################################################
-	# Universal DatePicker Styling
+	# Universal Functions
 	############################################################################# */
+	// Date Picker
 	$('.input-append.date').datepicker({
 		autoclose: true,
-		todayHighlight: true
+		todayHighlight: true,
+		//beforeShow: function() { $('#datepicker').css("z-index", 9999); }
 	});
 
-	/* ##############################################################################
-	# Bootstrap Functions
-	############################################################################# */
+	// Date Mask
+	$('.date-mask').mask("99/99/9999");
+
+	// Timepicker Styling
+	$('.timepicker-default').timepicker();
+
 	// For Bootstrap's .modal()
 	// Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	$('body').on('click', '[data-toggle="modal"]', function() {
 		$( $(this).data('target') ).data('trigger', $(this) );
 	});
 
-	// Initialize Popover
-	$('[data-toggle="popover"]').popover();
+	// Initialize Popover for Standard Content
+	//$('[data-toggle="popover"]').popover();
+
+	// Initialize Popover for Modal Content
+	var popOverSettings = {
+		//container: 'body',
+		container: '.modal',
+		html: true,
+		selector: '[data-toggle="popover"]', //Sepcify the selector here
+		content: function () {
+			return $('#popover-content').html();
+		}
+	}
+	$('body').popover(popOverSettings);
+	$('a[data-toggle="popover"]').on('click', function(e){
+		e.preventDefault();
+	});
 
 	/* ##############################################################################
 	# DataTables
@@ -61,7 +81,11 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Generic Form JS
 	############################################################################# */
-	$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
+	function loadSelect2()
+	{
+		$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
+	}
+	loadSelect2();
 
 	/* ##############################################################################
 	# Delete Modal
@@ -227,8 +251,11 @@ $(document).ready(function(){
 			$.ajax({
 				url: ajaxURL,
 				success: function( response ) {
-					//console.log( response );
+					// Load Results to Dom
 					formContainer.html( response );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+					loadSelect2();
 				}
 			});
 		}
