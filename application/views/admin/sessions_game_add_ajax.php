@@ -26,7 +26,7 @@
 					<div class="form-group">
 						<?php echo form_label( 'Division*', 'division_id', array( 'class' => 'form-label' ) ); ?>
 						<!-- <span class="help">e.g. </span> -->
-						<?php echo form_dropdown( 'division_id', array( '' => '') + $related_divisions, set_value( 'division_id' ), 'class="pretty-select"' ); ?>
+						<?php echo form_dropdown( 'division_id', array( '' => '') + $related_divisions, set_value( 'division_id' ), 'id="game-divisions-dropdown" class="pretty-select" data-toggle="teams"' ); ?>
 					</div>
 
 					<div class="well well-small">
@@ -34,7 +34,7 @@
 					</div>
 
 					<!-- This Loads in Via AJAX After a Division is Selected -->
-					<div class="teams"></div>
+					<div class="teams-dropdowns"></div>
 
 					<div class="form-group">
 						<?php echo form_label( 'Game Date/Time*', 'game_time', array( 'class' => 'form-label' ) ); ?>

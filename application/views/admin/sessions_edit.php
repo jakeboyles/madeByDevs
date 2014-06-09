@@ -102,7 +102,7 @@
 		<!-- END Form -->
 
 		<!-- Games -->
-		<?php $this->load->view('admin/games'); ?>
+		<?php $this->load->view('admin/sessions_games'); ?>
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

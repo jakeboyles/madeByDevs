@@ -206,4 +206,38 @@ $(document).ready(function(){
 
 	});
 
+	/* ##############################################################################
+	# Games Functionality on Sessions Edit Page
+	############################################################################# */
+	$('body').on('change', '#game-divisions-dropdown', function(e){
+		e.preventDefault();
+
+		// Vars
+		var divisionID = $(this).val()
+		var formContainer = $('.teams-dropdowns');
+		var ajaxURL = '';
+
+		// Display Team Dropdown Fields
+		if( divisionID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					console.log( response );
+				}
+			});
+		}
+		// Remove Team Dropdown Fields
+		else
+		{
+			formContainer.html('');
+		}
+		
+	});
+
 });
+
+
+
+
+

@@ -148,4 +148,10 @@ class Sessions extends Admin_Controller
 		return false;
 	}
 
+	// AJAX Load Teams
+	public function get_teams()
+	{
+		$this->load->view( 'admin/parts/games_teams_fields' );
+	}
+
 }

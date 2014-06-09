@@ -50,7 +50,7 @@
 </div><!-- end .row -->
 
 <!-- Load in Add Record Modal -->
-<?php $this->load->view('admin/games_add_ajax'); ?>
+<?php $this->load->view('admin/sessions_game_add_ajax'); ?>
 
 <!-- Load in Edit Record Modal -->
 <?php //$this->load->view('admin/games_edit'); ?>
