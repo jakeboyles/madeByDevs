@@ -173,6 +173,9 @@ $(document).ready(function(){
 			url: ajaxURL,
 			success: function( response ) {
 				formFieldsContainer.html( response );
+
+				// Re-Initialize jQuery Plugins on Dynamic Content
+				loadSelect2();
 			}
 		});
 	});

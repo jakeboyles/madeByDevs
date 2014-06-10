@@ -160,7 +160,7 @@ class Game_model extends MY_Model
 					$game['away_team'], 
 					$game['location'],
 					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
-					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_game_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
 					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
 				)
 			);

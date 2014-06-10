@@ -45,7 +45,7 @@
 								<td><?php echo $game['location']; ?></td>
 								<td><?php echo date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ); ?></td>
 								<td>
-									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/games/edit_game_ajax/' . $game['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-edit"></i></a>
+									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/games/edit_ajax/' . $game['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-edit"></i></a>
 									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/games/delete/' . $game['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $game['home_team'] . ' vs ' . $game['away_team']; ?>" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-times"></i></a>
 								</td>
 							</tr>
@@ -64,4 +64,5 @@
 <?php $this->load->view('admin/sessions_game_add_ajax'); ?>
 
 <!-- Load in Edit Record Modal -->
-<?php //$this->load->view('admin/games_edit'); ?>
+<?php $this->load->view('admin/sessions_game_edit_ajax'); ?>
+
