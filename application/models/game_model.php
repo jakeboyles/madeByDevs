@@ -104,8 +104,8 @@ class Game_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'season_id', $id, 'sessions' ) > 0 
-				|| $this->count_by( 'current_season_id', $id, 'leagues' ) > 0
+				$this->count_by( 'game_id', $id, 'game_officials' ) > 0 
+				|| $this->count_by( 'game_id', $id, 'game_players_soccer' ) > 0
 			)
 			{
 				echo 'error';
@@ -113,7 +113,7 @@ class Game_model extends MY_Model
 			// Else Delete It from Database
 			else
 			{
-				$this->Season_model->delete( $id );
+				$this->Game_model->delete( $id );
 			}
 		}
 
@@ -160,8 +160,8 @@ class Game_model extends MY_Model
 					$game['away_team'], 
 					$game['location'],
 					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
-					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_game_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
 				)
 			);
 
