@@ -35,12 +35,6 @@ class Games extends Admin_Controller
 		$this->load->admin_template( 'games_add' );
 	}
 
-	// AJAX Add Record
-	public function add_ajax()
-	{
-		//$this->load->view()
-	}
-
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
@@ -81,10 +75,14 @@ class Games extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('name', 'Season Name', 'required');
-		$this->form_validation->set_rules('year_start', 'Year Start', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('year_end', 'Year End', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('description', 'Description', '');
+		$this->form_validation->set_rules('session_id', 'Session', 'required');
+		$this->form_validation->set_rules('division_id', 'Division', 'required');
+		$this->form_validation->set_rules('location_id', 'Location', 'required');
+		$this->form_validation->set_rules('location_field_id', 'Location Field', '');
+		$this->form_validation->set_rules('team_home_id', 'Home Team', 'required');
+		$this->form_validation->set_rules('team_away_id', 'Away Team', 'required|callback_valid_teams');
+		$this->form_validation->set_rules('game_date', 'Game Date', 'required');
+		$this->form_validation->set_rules('game_time', 'Game Time', 'required');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
@@ -93,6 +91,48 @@ class Games extends Admin_Controller
 		}
 		
 		return false;
+	}
+
+	// Validation Rule to Make Sure Two Seperate Teams were Selected
+	public function valid_teams( $str )
+	{
+		$team_home_id = $this->input->post( 'team_home_id' );
+		$team_away_id = $this->input->post( 'team_away_id' );
+
+		if( !empty( $team_home_id ) && !empty( $team_away_id ) )
+		{
+			if( $team_home_id == $team_away_id )
+			{
+				$this->form_validation->set_message( 'valid_teams', 'You must select two seperate teams.' );
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		return true;
+	}
+
+	// Add New Record via AJAX
+	public function add_ajax()
+	{
+		if( $this->input->post('add_game') && $this->_validation() )
+		{
+			// Insert Record Into Database
+			// Create JSON For DataTable View
+			$data = $this->Game_model->insert_game_ajax( $this->input->post() );
+		}
+		else
+		{
+			$data = array(
+				'result' => 'error',
+				'errors' => validation_errors( '<li>','</li>' )
+			);
+		}
+
+		echo json_encode( $data );
 	}
 
 }

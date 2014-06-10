@@ -180,4 +180,14 @@ class Locations extends Admin_Controller
 		return false;
 	}
 
+	// Select a List of Fields By Location ID
+	public function get_fields_ajax( $location_id = FALSE )
+	{
+		// Fetch Data
+		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', 'name ASC', 'parent_id = ' . $location_id );
+
+		// Display View
+		$this->load->view( 'admin/parts/location_fields_dropdown', $data );
+	}
+
 }

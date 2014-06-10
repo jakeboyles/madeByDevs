@@ -1056,7 +1056,7 @@ class MY_Model extends CI_Model
     {
         if( $datetime_string )
         {
-            $datetime = date( 'Y-m-d H:i:s', strtotime( $date_string ) );
+            $datetime = date( 'Y-m-d H:i:s', strtotime( $datetime_string ) );
         }
         else
         {

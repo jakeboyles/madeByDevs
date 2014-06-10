@@ -7,7 +7,7 @@ class Session_model extends MY_Model
 	public $before_update = array( 'modified_by' );
 	//public $after_update = array( 'update_divisions' );
 	public $return_type = 'array';
-	public $before_dropdown = array( 'order_by(name)' );
+	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
 	public function get_records( )

@@ -27,7 +27,7 @@
 						<?php echo form_label( 'Division*', 'division_id', array( 'class' => 'form-label' ) ); ?>
 						<!-- <a href="#" data-toggle="popover" data-placement="right" data-content="Note that these are the active divisions for this session."><i class="fa fa-question-circle"></i></a> -->
 						<span class="help">Note that these are the active divisions for this session.</span>
-						<?php echo form_dropdown( 'division_id', array( '' => '') + $related_divisions, set_value( 'division_id' ), 'id="game-divisions-dropdown" class="pretty-select" data-ajax-url="' . base_url('admin/sessions/get_teams_by_division') . '"' ); ?>
+						<?php echo form_dropdown( 'division_id', array( '' => '') + $related_divisions, set_value( 'division_id' ), 'id="game-divisions-dropdown" class="pretty-select" data-ajax-url="' . base_url('admin/sessions/get_teams_by_division_ajax') . '"' ); ?>
 					</div>
 
 					<!-- This Loads in Via AJAX After a Division is Selected -->
@@ -38,18 +38,14 @@
 						<div class="form-group col-md-6">
 							<?php echo form_label( 'Location*', 'location_id', array( 'class' => 'form-label' ) ); ?>
 							<!-- <span class="help">e.g. </span> -->
-							<?php echo form_dropdown( 'location_id', array( '' => '') + $related_divisions, set_value( 'location_id' ), 'class="pretty-select" data-ajax-url="' . base_url('admin/locations/get_locations') . '"' ); ?>
+							<?php echo form_dropdown( 'location_id', array( '' => '') + $locations, set_value( 'location_id' ), 'id="game-locations-dropdown" class="pretty-select" data-ajax-url="' . base_url('admin/locations/get_fields_ajax') . '"' ); ?>
 						</div>
 
 						<div class="form-group col-md-6">
-							<?php echo form_label( 'Field', 'location_field_id', array( 'class' => 'form-label' ) ); ?>
-							<!-- <span class="help">e.g. </span> -->
-							<?php echo form_dropdown( 'location_field_id', array( '' => '') + $related_divisions, set_value( 'location_field_id' ), 'class="pretty-select"' ); ?>
+							<div class="location-fields-dropdown hide"></div>
 						</div>
 
 					</div>
-
-					
 
 					<div class="row">
 
@@ -62,11 +58,9 @@
 						<div class="form-group col-md-6">
 							<?php echo form_label( 'Game Time*', 'game_time', array( 'class' => 'form-label' ) ); ?>
 							<!-- <span class="help">e.g. </span> -->
-							<?php //echo form_input( array('name' => 'game_time', 'class' => 'form-control', 'id' => 'game_time', 'value' => set_value( 'game_time' ) ) ); ?>
-
 							<div>
 								<div class="input-append bootstrap-timepicker-component">
-									<input type="text" class="timepicker-default span12">
+									<?php echo form_input( array('name' => 'game_time', 'class' => 'form-control timepicker-default', 'id' => 'game_time', 'value' => set_value( 'game_time' ) ) ); ?>
 									<span class="add-on"><span class="arrow"></span><i class="fa fa-clock-o"></i></span>
 								</div>
 							</div>
@@ -86,8 +80,8 @@
 					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Add Game</button>
 				</div>
 
-				<?php echo form_hidden( 'parent_id', $record['id'] ); ?>
-				<?php echo form_hidden( 'add_field', TRUE ); ?>
+				<?php echo form_hidden( 'session_id', $record['id'] ); ?>
+				<?php echo form_hidden( 'add_game', TRUE ); ?>
 			<?php echo form_close(); ?>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

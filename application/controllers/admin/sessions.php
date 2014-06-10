@@ -35,7 +35,7 @@ class Sessions extends Admin_Controller
 		$data['seasons'] = $this->Session_model->dropdown( 'seasons', 'id', 'name' );
 
 		// Get a List of Divisions for Checkboxes
-		//$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
+		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Get a list of divisions this Session has a relationship with
 		//$data['related_divisions'] = $this->_get_related_divisions();
@@ -71,6 +71,9 @@ class Sessions extends Admin_Controller
 
 		// Get a list of divisions this Session has a relationship with
 		$data['related_divisions'] = $this->_get_related_divisions( $id );
+
+		// Get a list of Locations
+		$data['locations'] = $this->Session_model->dropdown( 'locations', 'id', 'name', 'name ASC', 'parent_id IS NULL' );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Session_model->get( $id );
@@ -149,7 +152,7 @@ class Sessions extends Admin_Controller
 	}
 
 	// AJAX Load Teams
-	public function get_teams_by_division( $division_id = FALSE )
+	public function get_teams_by_division_ajax( $division_id = FALSE )
 	{
 		// Return a List of Usable Teams
 		$this->load->model( 'Team_model' );

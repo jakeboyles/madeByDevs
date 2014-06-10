@@ -5,7 +5,7 @@ class Game_model extends MY_Model
 	public $before_create = array( 'created_at', 'created_by' );
 	public $before_update = array( 'modified_by' );
 	public $return_type = 'array';
-	public $before_dropdown = array( 'order_by(name)' );
+	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
 	public function get_records( $args = FALSE )
@@ -35,8 +35,16 @@ class Game_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
-			$rows = $query->result_array();
-			return $rows;
+			if( !empty( $args['limit'] ) && $args['limit'] == 1 )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
 		}
 
 		return false;
@@ -107,6 +115,58 @@ class Game_model extends MY_Model
 			{
 				$this->Season_model->delete( $id );
 			}
+		}
+
+		return false;
+	}
+
+	// AJAX Insert Record
+	public function insert_game_ajax( $post = FALSE )
+	{
+		if( $post )
+		{
+			// Parsing
+			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
+
+			// Insert Data
+			$data = array(
+				'session_id' => $post['session_id'],
+				'division_id' => $post['division_id'],
+				'location_id' => $post['location_id'],
+				'location_field_id' => empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id' => $post['team_home_id'],
+				'team_away_id' => $post['team_away_id'],
+				'game_date_time' => $game_date_time,
+				'game_type' => 'soccer'
+			);
+
+			// Insert to Database and Store Insert ID
+			$insert_id = $this->insert( $data );
+
+			// Fetch This Game From the Database
+			//$game = $this->get( $insert_id );
+			$game = $this->get_records( array( 'where' => 'g.id = ' . $insert_id, 'limit' => 1 ) );
+
+			//echo '<pre>'; var_dump( $game ); echo '</pre>';
+
+			// Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'insert_id' => $insert_id,
+				'row' => array(
+					$insert_id, 
+					$game['division'], 
+					$game['home_team'], 
+					$game['away_team'], 
+					$game['location'],
+					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
+				)
+			);
+
+			// Return Data Array
+			return $data_array;
 		}
 
 		return false;

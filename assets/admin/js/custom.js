@@ -237,6 +237,7 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Games Functionality on Sessions Edit Page
 	############################################################################# */
+	// Load Teams Dropdowns Based on Division
 	$('body').on('change', '#game-divisions-dropdown', function(e){
 		e.preventDefault();
 
@@ -262,6 +263,39 @@ $(document).ready(function(){
 		// Remove Team Dropdown Fields
 		else
 		{
+			formContainer.html('');
+		}
+		
+	});
+
+	// Load Location Fields Based on Location Selection
+	$('body').on('change', '#game-locations-dropdown', function(e){
+		e.preventDefault();
+
+		// Vars
+		var locationID = $(this).val()
+		var formContainer = $('.location-fields-dropdown');
+		var ajaxURL = $(this).data('ajax-url') + '/' + locationID;
+
+		// Display Location Fields Dropdown
+		if( locationID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+					loadSelect2();
+				}
+			});
+		}
+		// Remove Location Fields Dropdown
+		else
+		{
+			formContainer.addClass('hide');
 			formContainer.html('');
 		}
 		
