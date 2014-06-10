@@ -96,9 +96,9 @@ class User_model extends MY_Model
 			// @ return: Return a string of error for ajax
 			if( 
 				$this->count_by( 'captain_user_id', $id, 'teams' ) > 0
-				|| $this->count_by( 'player_id', $id, 'game_players_soccer' ) > 0
-				|| $this->count_by( 'player_id', $id, 'session_players' ) > 0
-				|| $this->count_by( 'official_id', $id, 'game_officials' ) > 0
+				|| $this->count_by( 'user_id', $id, 'game_players_soccer' ) > 0
+				|| $this->count_by( 'user_id', $id, 'session_players' ) > 0
+				|| $this->count_by( 'user_id', $id, 'game_officials' ) > 0
 				|| $this->count_by( 'user_id', $id, 'posts' ) > 0
 			)
 			{
