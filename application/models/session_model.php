@@ -154,4 +154,41 @@ class Session_model extends MY_Model
 
 		return false;	
 	}
+
+	// Get a list of divisions this Session has a relationship with
+	public function get_related_divisions( $id = FALSE )
+	{
+		// For Edit A Session
+		if( $id )
+		{
+			// If Form Was Submitted, Use Selected Divisions
+			if( !empty( $this->input->post('divisions') ) )
+			{
+				$related_divisions = $this->input->post('divisions');
+			}
+			// Else Load the related divisions from the database
+			else
+			{
+				$related_divisions = $this->select_divisions( $id );
+			}
+		}
+		// For Add a Session
+		else
+		{
+			// If Form Was Submitted, Use Selected Divisions
+			if( !empty( $this->input->post('divisions') ) )
+			{
+				$related_divisions = $this->input->post('divisions');
+			}
+		}
+
+		// If Related Divisions Are Set, Return Them
+		if( !empty( $related_divisions ) )
+		{
+			return $related_divisions;
+		}
+
+		// Else Return False
+		return false;
+	}
 }

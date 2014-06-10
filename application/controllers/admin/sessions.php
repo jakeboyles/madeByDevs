@@ -38,7 +38,7 @@ class Sessions extends Admin_Controller
 		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Get a list of divisions this Session has a relationship with
-		//$data['related_divisions'] = $this->_get_related_divisions();
+		//$data['related_divisions'] = $this->Session_model->get_related_divisions();
 
 		// Load Add Record Form View
 		$this->load->admin_template( 'sessions_add', $data );
@@ -70,7 +70,7 @@ class Sessions extends Admin_Controller
 		$data['divisions'] = $this->Session_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Get a list of divisions this Session has a relationship with
-		$data['related_divisions'] = $this->_get_related_divisions( $id );
+		$data['related_divisions'] = $this->Session_model->get_related_divisions( $id );
 
 		// Get a list of Locations
 		$data['locations'] = $this->Session_model->dropdown( 'locations', 'id', 'name', 'name ASC', 'parent_id IS NULL' );
@@ -112,43 +112,6 @@ class Sessions extends Admin_Controller
 			return true;
 		}
 		
-		return false;
-	}
-
-	// Get a list of divisions this Session has a relationship with
-	private function _get_related_divisions( $id = FALSE )
-	{
-		// For Edit A Session
-		if( $id )
-		{
-			// If Form Was Submitted, Use Selected Divisions
-			if( !empty( $this->input->post('divisions') ) )
-			{
-				$related_divisions = $this->input->post('divisions');
-			}
-			// Else Load the related divisions from the database
-			else
-			{
-				$related_divisions = $this->Session_model->select_divisions( $id );
-			}
-		}
-		// For Add a Session
-		else
-		{
-			// If Form Was Submitted, Use Selected Divisions
-			if( !empty( $this->input->post('divisions') ) )
-			{
-				$related_divisions = $this->input->post('divisions');
-			}
-		}
-
-		// If Related Divisions Are Set, Return Them
-		if( !empty( $related_divisions ) )
-		{
-			return $related_divisions;
-		}
-
-		// Else Return False
 		return false;
 	}
 
