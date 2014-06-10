@@ -48,7 +48,7 @@ class Sessions extends Admin_Controller
 	public function edit( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() && $this->_validation() && $id )
+		if( $this->input->post( 'edit_session' ) && $this->_validation() && $id )
 		{
 			$this->Session_model->update_record( $id, $this->input->post() );
 		}
@@ -104,6 +104,7 @@ class Sessions extends Admin_Controller
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Session Name', 'required');
 		$this->form_validation->set_rules('season_id', 'Season', 'required');
+		//$this->form_validation->set_rules('divisions', 'Divisions', 'callback_check_active_divisions');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

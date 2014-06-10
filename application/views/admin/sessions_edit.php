@@ -86,9 +86,16 @@
 					</div>
 
 					<div class="grid-body">
+
 						<?php foreach( $divisions as $key => $val ): ?>
 							<div class="checkbox check-primary">
-								<?php $checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
+								<?php 
+								if( empty( $this->input->post() ) ):
+									$checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE;
+								else:
+									$checked = in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE;
+								endif;
+								?>
 								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>
@@ -100,6 +107,7 @@
 			</div><!-- end .col-md-4 -->
 
 		</div><!-- end .row -->
+		<?php echo form_hidden( 'edit_session', TRUE ); ?>
 		<?php echo form_close(); ?>
 		<!-- END Form -->
 

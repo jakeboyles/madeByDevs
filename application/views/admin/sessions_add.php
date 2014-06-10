@@ -48,7 +48,7 @@
 									<?php echo form_dropdown( 'season_id', array( '' => '') + $seasons, set_value( 'season_id' ), 'class="pretty-select"' ); ?>
 								</div>
 
-								<button type="submit" class="btn btn-success">Update Session</button>
+								<button type="submit" class="btn btn-primary">Update Session</button>
 
 							</div>
 
@@ -72,7 +72,7 @@
 					<div class="grid-body">
 						<?php foreach( $divisions as $key => $val ): ?>
 							<div class="checkbox check-primary">
-								<?php $checked = ( !empty( $related_divisions ) && in_array( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
+								<?php $checked = !empty( $this->input->post( 'divisions' ) ) && in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE; ?>
 								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>
