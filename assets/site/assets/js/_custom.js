@@ -8,6 +8,7 @@ function updateNewsChevrons(callout) {
 		position = (lheight/2) - (cheight/2);
 		chev.css('top', position);
 	});
+	$('.full-width-nav').height($('body').height()+100);
 }
 $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
