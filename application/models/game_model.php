@@ -125,7 +125,7 @@ class Game_model extends MY_Model
 	{
 		if( $post )
 		{
-			// Parsing
+			// Combine Date and Time Form Fields into a Single mySQL datetime Field
 			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
 
 			// Insert Data
@@ -137,6 +137,8 @@ class Game_model extends MY_Model
 				'team_home_id' => $post['team_home_id'],
 				'team_away_id' => $post['team_away_id'],
 				'game_date_time' => $game_date_time,
+				'score_home' => 0,
+				'score_away' => 0,
 				'game_type' => 'soccer'
 			);
 
@@ -144,20 +146,19 @@ class Game_model extends MY_Model
 			$insert_id = $this->insert( $data );
 
 			// Fetch This Game From the Database
-			//$game = $this->get( $insert_id );
 			$game = $this->get_records( array( 'where' => 'g.id = ' . $insert_id, 'limit' => 1 ) );
 
-			//echo '<pre>'; var_dump( $game ); echo '</pre>';
-
 			// Construct Data Array for JSON via AJAX
+			$score_home = !empty( $game['score_home'] ) ? $game['score_home'] : 0;
+			$score_away = !empty( $game['score_away'] ) ? $game['score_away'] : 0;
 			$data_array = array(
 				'result' => 'success',
 				'insert_id' => $insert_id,
 				'row' => array(
 					$insert_id, 
 					$game['division'], 
-					$game['home_team'], 
-					$game['away_team'], 
+					$game['home_team'] . ' (' . $score_home . ')', 
+					$game['away_team'] . ' (' . $score_away . ')',  
 					$game['location'],
 					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
@@ -165,6 +166,58 @@ class Game_model extends MY_Model
 				)
 			);
 
+			// Return Data Array
+			return $data_array;
+		}
+
+		return false;
+	}
+
+	// Edit Record
+	public function update_game_ajax( $id = FALSE, $post = FALSE )
+	{
+		if( $id && $post )
+		{
+			// Combine Date and Time Form Fields into a Single mySQL datetime Field
+			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
+
+			// Update Data
+			$data = array(
+				//'session_id' => $post['session_id'],
+				'division_id' => $post['division_id'],
+				'location_id' => $post['location_id'],
+				'location_field_id' => empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id' => $post['team_home_id'],
+				'team_away_id' => $post['team_away_id'],
+				'game_date_time' => $game_date_time,
+				'score_home' => empty( $post['score_home'] ) && $post['score_home'] != 0 ? NULL : $post['score_home'],
+				'score_away' => empty( $post['score_away'] ) && $post['score_away'] != 0 ? NULL : $post['score_away'],
+			);
+
+			// Update Record in Database
+			$this->update( $id, $data );
+
+			// Fetch This Game From the Database
+			$game = $this->get_records( array( 'where' => 'g.id = ' . $id, 'limit' => 1 ) );
+
+			// Construct Data Array for JSON via AJAX
+			$score_home = !empty( $game['score_home'] ) ? $game['score_home'] : 0;
+			$score_away = !empty( $game['score_away'] ) ? $game['score_away'] : 0;
+			$data_array = array(
+				'result' => 'success',
+				'update_id' => $game['id'],
+				'row' => array(
+					$game['id'], 
+					$game['division'], 
+					$game['home_team'] . ' (' . $score_home . ')', 
+					$game['away_team'] . ' (' . $score_away . ')', 
+					$game['location'],
+					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
+				)
+			);
+			
 			// Return Data Array
 			return $data_array;
 		}

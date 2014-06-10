@@ -83,6 +83,8 @@ class Games extends Admin_Controller
 		$this->form_validation->set_rules('team_away_id', 'Away Team', 'required|callback_valid_teams');
 		$this->form_validation->set_rules('game_date', 'Game Date', 'required');
 		$this->form_validation->set_rules('game_time', 'Game Time', 'required');
+		$this->form_validation->set_rules('score_home', 'Home Score', 'numeric');
+		$this->form_validation->set_rules('score_away', 'Away Score', 'numeric');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
@@ -138,9 +140,27 @@ class Games extends Admin_Controller
 	// Edit Record via AjAX
 	public function edit_ajax( $id = FALSE )
 	{
-		if( $this->input->post('edit_field') && $id )
+		if( $this->input->post('edit_game') && $id )
 		{
-			// do edit stuff
+			$data = array();
+
+			// If Validation Passed
+			if( $this->_validation() )
+			{
+				// Update Record in Database
+				// Create JSON For DataTable View
+				$data = $this->Game_model->update_game_ajax( $id, $this->input->post() );
+			}
+			// If Validation Failed Send Errors
+			else
+			{
+				$data = array(
+					'result' => 'error',
+					'errors' => validation_errors( '<li>','</li>' )
+				);
+			}
+
+			echo json_encode( $data );
 		}
 		// Display View
 		else

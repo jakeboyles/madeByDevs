@@ -33,7 +33,7 @@
 		<?php echo form_dropdown( 'location_id', array( '' => '') + $locations, set_value( 'location_id', $record['location_id'] ), 'id="game-locations-dropdown" class="pretty-select" data-ajax-url="' . base_url('admin/locations/get_fields_ajax') . '"' ); ?>
 	</div>
 
-	<?php if( !empty( $record['location_field_id'] ) ): ?>
+	<?php if( !empty( $location_fields ) ): ?>
 	<div class="form-group col-md-6">
 		<div class="location-fields-dropdown">
 			<?php echo form_label( 'Field', 'location_field_id', array( 'class' => 'form-label' ) ); ?>
@@ -66,3 +66,20 @@
 	</div>
 
 </div>
+
+<div class="row">
+
+	<div class="form-group col-md-6">
+		<?php echo form_label( 'Home Score', 'score_home', array( 'class' => 'form-label' ) ); ?>
+		<!-- <span class="help">e.g. </span> -->
+		<?php echo form_input( array('name' => 'score_home', 'class' => 'form-control', 'id' => 'score_home', 'value' => set_value( 'score_home', $record['score_home'] == NULL ? 0 : $record['score_home'] ) ) ); ?>
+	</div>
+
+	<div class="form-group col-md-6">
+		<?php echo form_label( 'Away Score', 'score_away', array( 'class' => 'form-label' ) ); ?>
+		<!-- <span class="help">e.g. </span> -->
+		<?php echo form_input( array('name' => 'score_away', 'class' => 'form-control', 'id' => 'score_away', 'value' => set_value( 'score_away', $record['score_away'] == NULL ? 0 : $record['score_away']  ) ) ); ?>
+	</div>
+
+</div>
+

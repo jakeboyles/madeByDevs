@@ -79,7 +79,7 @@
 					</div>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Add Game</button>
+					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Schedule Game</button>
 				</div>
 
 				<?php echo form_hidden( 'session_id', $record['id'] ); ?>
