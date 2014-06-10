@@ -50,7 +50,7 @@
 	<div class="form-group col-md-6">
 		<?php echo form_label( 'Game Date*', 'game_date', array( 'class' => 'form-label' ) ); ?>
 		<span class="help">mm/dd/yyyy format</span>
-		<?php echo form_input( array('name' => 'game_date', 'class' => 'form-control date-mask', 'id' => 'game_date', 'value' => set_value( 'game_date' ) ) ); ?>
+		<?php echo form_input( array('name' => 'game_date', 'class' => 'form-control date-mask', 'id' => 'game_date', 'value' => set_value( 'game_date', date('m/d/Y', strtotime( $record['game_date_time'] ) ) ) ) ); ?>
 	</div>
 
 	<div class="form-group col-md-6">
@@ -58,7 +58,7 @@
 		<!-- <span class="help">e.g. </span> -->
 		<div>
 			<div class="input-append bootstrap-timepicker-component">
-				<?php echo form_input( array('name' => 'game_time', 'class' => 'form-control timepicker-default', 'id' => 'game_time', 'value' => set_value( 'game_time' ) ) ); ?>
+				<?php echo form_input( array('name' => 'game_time', 'class' => 'form-control timepicker-default', 'id' => 'game_time', 'value' => set_value( 'game_time', date('h:i A', strtotime( $record['game_date_time'] ) ) ) ) ); ?>
 				<span class="add-on"><span class="arrow"></span><i class="fa fa-clock-o"></i></span>
 			</div>
 		</div>

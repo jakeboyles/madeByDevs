@@ -176,6 +176,8 @@ $(document).ready(function(){
 
 				// Re-Initialize jQuery Plugins on Dynamic Content
 				loadSelect2();
+				$('.date-mask').mask("99/99/9999");
+				$('.timepicker-default').timepicker();
 			}
 		});
 	});
