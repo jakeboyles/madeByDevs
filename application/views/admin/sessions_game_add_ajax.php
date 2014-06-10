@@ -1,3 +1,5 @@
+<?php if( !empty( $related_divisions ) ): ?>
+
 <!-- Add Record Modal -->
 <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	<div class="modal-dialog">
@@ -86,3 +88,5 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
+
+<?php endif; ?>

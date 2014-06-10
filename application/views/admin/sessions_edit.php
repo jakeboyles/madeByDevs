@@ -93,6 +93,8 @@
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>
 						<?php endforeach; ?>
+
+						<button type="submit" class="btn btn-primary">Update Divisions</button>
 					</div>
 				</div>
 			</div><!-- end .col-md-4 -->

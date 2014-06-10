@@ -4,9 +4,20 @@
 
 			<div class="grid-title">
 				<h4>Games Scheduled in this Session</h4>
+
+				
 				<div class="pull-right">
-					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/games/add_ajax/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Game</a>
+					<!-- Only Show Add Game Button if Divisions Have Been Assigned to this Session -->
+					<?php if( !empty($related_divisions) ): ?>
+						<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/games/add_ajax/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Schedule Game</a>
+					<?php else: ?>
+						<div class="alert alert-warning">
+							<i class="fa fa-info-circle"></i> Assign a division to this session to begin scheduling games.
+						</div>
+					<?php endif; ?>
 				</div>
+
+				
 			</div>
 
 			<div class="grid-body">
