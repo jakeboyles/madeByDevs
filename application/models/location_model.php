@@ -105,7 +105,7 @@ class Location_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'location_id', $id, 'games' ) > 0 
+				$this->count_by( array( 'table' => 'games', 'where' => 'location_id = ' . $id ) ) > 0 
 			)
 			{
 				echo 'error';

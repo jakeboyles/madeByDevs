@@ -85,8 +85,8 @@ class Team_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'season_id', $id, 'sessions' ) > 0 
-				|| $this->count_by( 'current_season_id', $id, 'leagues' ) > 0
+				$this->count_by( array( 'table' => 'sessions', 'where' => 'season_id = ' . $id ) ) > 0 
+				|| $this->count_by( array( 'table' => 'leagues', 'where' => 'current_season_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';

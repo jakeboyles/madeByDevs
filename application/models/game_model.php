@@ -104,8 +104,8 @@ class Game_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'game_id', $id, 'game_officials' ) > 0 
-				|| $this->count_by( 'game_id', $id, 'game_players_soccer' ) > 0
+				$this->count_by( array( 'table' => 'game_officials', 'where' => 'game_id = ' . $id ) ) > 0 
+				|| $this->count_by( array( 'table' => 'game_players_soccer', 'where' => 'game_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';

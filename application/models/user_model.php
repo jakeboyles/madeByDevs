@@ -95,11 +95,10 @@ class User_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'captain_user_id', $id, 'teams' ) > 0
-				|| $this->count_by( 'user_id', $id, 'game_players_soccer' ) > 0
-				|| $this->count_by( 'user_id', $id, 'session_players' ) > 0
-				|| $this->count_by( 'user_id', $id, 'game_officials' ) > 0
-				|| $this->count_by( 'user_id', $id, 'posts' ) > 0
+				$this->count_by( array( 'table' => 'teams', 'where' => 'captain_user_id = ' . $id ) ) > 0
+				|| $this->count_by( array( 'table' => 'game_players_soccer', 'where' => 'user_id = ' . $id ) ) > 0
+				|| $this->count_by( array( 'table' => 'session_players', 'where' => 'user_id = ' . $id ) ) > 0
+				|| $this->count_by( array( 'table' => 'game_officials', 'where' => 'user_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';

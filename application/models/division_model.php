@@ -76,8 +76,8 @@ class Division_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( 'division_id', $id, 'games' ) > 0 
-				|| $this->count_by( 'division_id', $id, 'teams' ) > 0 
+				$this->count_by( array( 'table' => 'games', 'where' => 'division_id = ' . $id ) ) > 0 
+				|| $this->count_by( array( 'table' => 'teams', 'where' => 'division_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';
