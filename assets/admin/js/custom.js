@@ -146,11 +146,13 @@ $(document).ready(function(){
 		// Set Vars
 		var formErrorContainer = $(this).find('.ajax-form-errors');
 		var thisForm = $(this).find('form');
+		var thisFormSelects = $(this).find('form select');
 
 		// Reset Form on Modal Close
 		if( $(this).is('#add-modal') )
 		{
-			thisForm.trigger('reset');
+			thisForm.trigger( 'reset' );
+			thisFormSelects.select2( 'val',  '' );
 		}
 
 		// Hide Errors on Modal Close
