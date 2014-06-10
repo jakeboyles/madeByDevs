@@ -592,21 +592,23 @@ class MY_Model extends CI_Model
     /**
      * Fetch a count of rows based on an arbitrary WHERE call.
      */
-    public function count_by()
+    public function count_by( $args = FALSE )
     {
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
         {
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
-        $args = func_get_args();
-
-        $this->_set_where( array_slice( $args, 0, 2 ) );
+        // Set Where Clause
+        if( !empty( $args['where'] ) )
+        {
+            $this->_set_where( array( $args['where'] ) );
+        }
 
         // Allow For another Table than $this->_table
-        if( !empty( $args[2] ) )
+        if( !empty( $args['table']) )
         {
-            $table = $args[2];
+            $table = $args['table'];
         }
         else
         {
@@ -619,14 +621,19 @@ class MY_Model extends CI_Model
     /**
      * Fetch a total count of rows, disregarding any previous conditions
      */
-    public function count_all()
+    public function count_all( $table = FALSE )
     {
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
         {
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
-        return $this->_database->count_all($this->_table);
+        if( $table == FALSE )
+        {
+            $table = $this->_table;
+        }
+
+        return $this->_database->count_all( $table );
     }
 
     /**

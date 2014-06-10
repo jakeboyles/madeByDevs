@@ -56,6 +56,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/admin/plugins/bootstrapv3/js/popover.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-inputmask/jquery.inputmask.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/admin/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 <!-- BEGIN CORE TEMPLATE JS -->
