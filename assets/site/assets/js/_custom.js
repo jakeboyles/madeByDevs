@@ -12,6 +12,7 @@ function updateNewsChevrons(callout) {
 $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.schedule li a');
+	updateNewsChevrons('.footer-links li a');
 	$(".chosen-select").chosen();
 	$('input').iCheck({
     checkboxClass: 'icheckbox_square-blue',
@@ -65,13 +66,14 @@ $(document).on('click', '.closeMenu',function(e) {
 $(document)
     .on('change', '.btn-file :file', function() {
         var input = $(this),
-            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            numFiles = input.get(0).files.length ? input.get(0).files.length : 1,
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
         $(this).parent().next('.help-block').html(label);
 });
 $(window).resize(function() {
         updateNewsChevrons('.newsLinks li');
         updateNewsChevrons('.schedule li a');
+        updateNewsChevrons('.footer-links li a');
         if ($(window).width() < 1080) {
 		  }
 		 else {
