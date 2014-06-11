@@ -83,7 +83,7 @@
 						<h4 class="text-black no-margin semi-bold">Blog Posts</h4>
 						<h2 class="text-black bold "><span data-animation-duration="900" data-value="<?php echo $post_total; ?>" class="animate-number">0</span></h2>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/page/'); ?>" class="btn btn-primary">View Posts <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="<?php echo base_url('admin/posts/'); ?>" class="btn btn-primary">View Posts <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -97,7 +97,7 @@
 						<h4 class="text-black no-margin semi-bold">Pages</h4>
 						<h2 class="text-black bold "><span data-animation-duration="900" data-value="<?php echo $page_total; ?>" class="animate-number">0</span></h2>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/posts/'); ?>" class="btn btn-primary">View Pages <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="<?php echo base_url('admin/pages/'); ?>" class="btn btn-primary">View Pages <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 						<div class="clearfix"></div>
 					</div>
