@@ -117,10 +117,8 @@
 							<div class="iconset top-settings-dark"></div> 	
 						</a>
 						<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="user-options">
-							<!--
-							<li><a href="#">My Profile</a></li>
-							<li class="divider"></li>
-							-->                
+							<li><a href="<?php echo base_url('admin/users/edit/' . $this->session->userdata('user_id') ) ; ?>">My Profile</a></li>
+							<li class="divider"></li>             
 							<li><a href="<?php echo base_url('admin/login/logout'); ?>"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Logout</a></li>
 						</ul>
 					</li>
