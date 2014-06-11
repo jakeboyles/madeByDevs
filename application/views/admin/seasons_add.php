@@ -13,7 +13,7 @@
 					<div class="grid-title">
 						<h4>Add Season</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">View Seasons</a>
+							<a href="<?php echo base_url('admin/seasons'); ?>" class="btn btn-primary">View Seasons</a>
 						</div>
 					</div>
 

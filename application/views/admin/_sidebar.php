@@ -38,12 +38,14 @@
 						<li><a href="<?php echo base_url( 'admin/posts/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
+				<!--
 				<li class="">
 					<a href="#">
 						<i class="fa fa-cog"></i>
 						<span class="title">Theme Settings</span>
 					</a>
 				</li>
+				-->
 			</ul>
 
 			<!-- League Management Menu -->
