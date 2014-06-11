@@ -158,28 +158,34 @@ class Session_model extends MY_Model
 	// Get a list of divisions this Session has a relationship with
 	public function get_related_divisions( $id = FALSE )
 	{
-		// For Edit A Session
-		if( $id )
+		// If Post is Submitted Grab Divisions By Post Array
+		if( !empty( $this->input->post('divisions') ) )
 		{
-			// If Form Was Submitted, Use Selected Divisions
-			if( !empty( $this->input->post('divisions') ) )
+			// Fetch Divisions
+			$this->db->select( 'd.id, d.name' );
+			$this->db->where_in( 'd.id', $this->input->post('divisions') );
+			$query = $this->db->get( 'divisions d' );
+
+			if($query->num_rows > 0)
 			{
-				$related_divisions = $this->input->post('divisions');
+				$rows = $query->result_array();
+
+				// Structure Array
+				$related_divisions = array();
+				foreach( $rows as $row )
+				{
+					$related_divisions[ $row['id'] ] = $row['name'];
+				}
 			}
-			// Else Load the related divisions from the database
-			else
+		}
+		else
+		{
+			// For Edit Division
+			if( $id )
 			{
 				$related_divisions = $this->select_divisions( $id );
 			}
-		}
-		// For Add a Session
-		else
-		{
-			// If Form Was Submitted, Use Selected Divisions
-			if( !empty( $this->input->post('divisions') ) )
-			{
-				$related_divisions = $this->input->post('divisions');
-			}
+
 		}
 
 		// If Related Divisions Are Set, Return Them

@@ -87,15 +87,14 @@
 
 					<div class="grid-body">
 
+						<?php
+						//echo '<pre>'; var_dump( $divisions ); echo '</pre>';
+						//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
+						?>
+
 						<?php foreach( $divisions as $key => $val ): ?>
 							<div class="checkbox check-primary">
-								<?php 
-								if( empty( $this->input->post() ) ):
-									$checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE;
-								else:
-									$checked = in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE;
-								endif;
-								?>
+								<?php $checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
 								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
 								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 							</div>
