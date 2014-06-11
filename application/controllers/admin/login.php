@@ -2,7 +2,7 @@
 class Login extends Admin_Controller
 {
 	// Set Class Vars
-	var $user_id; // Set in correctLogin()
+	var $user; // Set in correctLogin()
 
 	function __construct()
 	{
@@ -37,7 +37,9 @@ class Login extends Admin_Controller
 		// Check to See if Email/Password Combo Work
 		if( !empty($email) && !empty($password) && filter_var($email, FILTER_VALIDATE_EMAIL) )
 		{
-			$this->form_validation->set_rules('email','Email Address','callback_correct_login');
+			// Check to Make Sure the Username/Password Combo work
+			// & Make Sure the User is an Admin
+			$this->form_validation->set_rules('email','Email Address','callback_can_log_in');
 		}
 
 		// Form Validation and Login Validation Passed
@@ -51,23 +53,35 @@ class Login extends Admin_Controller
 		}
 	}
 
-	// Check for Correct Username and Password
-	public function correct_login()
+	// Make sure the user can Login
+	public function can_log_in()
 	{			
 		// Store User ID
 		$this->load->model('Authenticate_model');
-		$this->user_id = $this->Authenticate_model->login( $this->input->post('email'), $this->input->post('password') );
+		$this->user = $this->Authenticate_model->login( $this->input->post('email'), $this->input->post('password') );
 
-		if(!$this->user_id)
+		// Has the a correct username/password combo
+		if( empty( $this->user['id'] ) )
 		{
-			$this->form_validation->set_message('correct_login', 'You have either entered an incorrect username or password.');
+			$this->form_validation->set_message('can_log_in', 'You have either entered an incorrect username or password.');
 			return false;
 		}
+
+		// Check if the User Has the Right Permissions - Must have a user_type_id of 1 (admin)
+		elseif ( $this->user['user_type_id'] != 1 )
+		{
+			$this->form_validation->set_message('can_log_in', 'You do not have the correct permission to login.');
+			return false;
+		}
+
+		// Passed Login Validation
 		else
 		{
 			return true;
 		}
 	}
+
+	
 
 	// Log The User In
 	private function _login()
@@ -75,7 +89,8 @@ class Login extends Admin_Controller
 		// Store Session
 		$this->session->set_userdata( array(
 			'email' => $this->input->post('email'),
-			'user_id' => $this->user_id
+			'user_id' => $this->user['id'],
+			'user_type_id' => $this->user['user_type_id']
 		) );
 	}
 
