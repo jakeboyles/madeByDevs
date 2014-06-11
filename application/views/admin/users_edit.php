@@ -140,6 +140,7 @@
 
 									<button type="submit" class="btn btn-primary">Update User</button>
 
+									<?php echo form_hidden( 'original_email', $record['email'] ); ?>
 								<?php echo form_close(); ?>
 								<!-- END Form -->
 

@@ -83,7 +83,6 @@ class Users extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('gender', 'Gender', '');
@@ -93,15 +92,35 @@ class Users extends Admin_Controller
 		// Custom Validation Messages
 		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
 
+		// Only Run this Validation on Add User
 		if( $this->uri->segment(3) == 'add' )
 		{
+			// Email Validation
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+
+			// Password Validation
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'required|matches[password]');
 		}
-		elseif( $this->uri->segment(3) == 'edit' && ( $this->input->post('password') || $this->input->post('password_confirm') ) )
-		{
-			$this->form_validation->set_rules('password', 'Password', '');
-			$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'matches[password]');
+		// Only Run this Validation on Edit User
+		elseif( $this->uri->segment(3) == 'edit' )
+		{	
+			// Email Validation
+			if( $this->input->post( 'email' ) == $this->input->post( 'original_email' ) )
+			{
+				$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+			}
+			else
+			{
+				$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+			}
+
+			// Run Password Validation if Password Fields are Not Empty
+			if( $this->input->post('password') || $this->input->post('password_confirm') )
+			{
+				$this->form_validation->set_rules('password', 'Password', '');
+				$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'matches[password]');
+			}
 		}
 		
 		// Return True if Validation Passes
