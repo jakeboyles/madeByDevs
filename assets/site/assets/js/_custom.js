@@ -22,6 +22,8 @@ $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.schedule li a');
 	updateNewsChevrons('.footer-links li a');
+	updateNewsChevrons('.control');
+    centerElement('.control .fa');
 	$(".chosen-select").chosen();
 	$('input').iCheck({
     checkboxClass: 'icheckbox_square-blue',
