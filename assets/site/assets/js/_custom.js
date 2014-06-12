@@ -10,6 +10,14 @@ function updateNewsChevrons(callout) {
 	});
 	$('.full-width-nav').height($('body').height()+100);
 }
+function centerElement(wtc) {
+	$(wtc).each(function() {
+		var pw = $(this).parent().outerWidth(),
+		tw = $(this).outerWidth(),
+		offw = (pw-tw)/2;
+		$(this).css('left',offw);
+	});
+}
 $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.schedule li a');
@@ -67,6 +75,7 @@ $('.jcarousel')
         }
         $('.control').height(height);
         updateNewsChevrons('.control');
+        centerElement('.control .fa');
 
         element.jcarousel('items').css('width', width + 'px');
     })
