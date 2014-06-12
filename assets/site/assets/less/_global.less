@@ -2,7 +2,7 @@ html {
 	font-size: 1px;
 }
 body {
-	padding-top: 100px;
+	padding-top: 120px;
 	font-family: 'Open Sans';
 	.font-size(24);
 	color: @blue;
@@ -150,6 +150,80 @@ img {
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background: @blue-light;
+}
+.score-scroller {
+	.clearfix;
+	margin-bottom: 15px;
+	margin-bottom: 15rem;
+}
+.jcarousel-control-prev, .jcarousel-control-next {
+	float: left;
+	display: block;
+	background: @blue;
+	color: #fff;
+	.font-size(60);
+	//.padding(0,28);
+	width: 8%;
+	text-align: center;
+	position: relative;
+	.fa {
+		position: absolute;
+	}
+}
+.jcarousel-control-prev {
+	margin-right: 2%;
+}
+.jcarousel-control-next {
+	float: right;
+	margin-left: 2%;
+}
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 80%;
+    ul {
+	    width: 20000em;
+	    position: relative;
+
+	    /* Optional, required in this case since it's a <ul> element */
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+	    li {
+	    	float: left;
+	    	background: @blue-lighter;
+	    	color: #fff;
+	    	font-weight: bold;
+	    	.score-head {
+	    		.clearfix;
+				background:@blue-light;
+				.font-size(28);
+				.match {
+					float: left;
+					.padding(0,25);
+				}
+				.division {
+					float: right;
+					.padding(0,25);
+				}
+	    	}
+	    	.score-body {
+	    		font-weight: normal;
+	    		.font-size(24);
+	    		.padding(0,25);
+	    		.date-location {
+	    			float: left;
+	    		}
+	    		.final-score {
+	    			font-weight: bold;
+	    			.font-size(35);
+	    			color: @orange;
+	    			float: right;
+	    		}
+	    	}
+	    }
+	}
 }
 .container .row {
 	.contact-header {

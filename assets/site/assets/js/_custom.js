@@ -40,7 +40,39 @@ $(document).ready(function(){
 	  $("html").on('tap',function(){
 	    $('.click-here').show();
 	  });
+  $('.jcarousel').jcarousel({
+    wrap: 'circular'
+    });
+  $('.jcarousel-control-prev')
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+        $('.jcarousel-control-next')
+            .jcarouselControl({
+                target: '+=1'
+            });
+
 });
+$('.jcarousel')
+    .on('jcarousel:create jcarousel:reload', function() {
+        var element = $(this),
+			height = element.height(),
+            width = element.innerWidth();
+
+        if (width > 599) {
+            width = width / 2;
+        } else if (width > 300) {
+            width = width / 2;
+        }
+        $('.control').height(height);
+        updateNewsChevrons('.control');
+
+        element.jcarousel('items').css('width', width + 'px');
+    })
+    .jcarousel({
+         wrap: 'circular'
+    });
 $(document).on('click', '.schedule > li a', function(e) {
 	e.preventDefault();
 	if($(this).parent().hasClass('active')) {
