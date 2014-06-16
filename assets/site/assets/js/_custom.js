@@ -114,13 +114,17 @@ $(document)
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
         $(this).parent().next('.help-block').html(label);
 });
+centerElement('.control .fa');
 $(window).resize(function() {
         updateNewsChevrons('.newsLinks li');
         updateNewsChevrons('.schedule li a');
         updateNewsChevrons('.footer-links li a');
+        updateNewsChevrons('.control');
+		centerElement('.control .fa');
         if ($(window).width() < 1080) {
 		  }
 		 else {
 		    $('.full-width-nav').hide();
 		 }
     });
+$(window).trigger('resize');
