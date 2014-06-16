@@ -13,7 +13,7 @@ function updateNewsChevrons(callout) {
 function centerElement(wtc) {
 	$(wtc).each(function() {
 		var pw = $(this).parent().outerWidth(),
-		tw = $(this).outerWidth(),
+		tw = $(this).width(),
 		offw = (pw-tw)/2;
 		$(this).css('left',offw);
 	});
