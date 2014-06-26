@@ -66,9 +66,9 @@ $('.jcarousel')
 			height = element.height(),
             width = element.innerWidth();
 
-        if (width > 599) {
-            width = width / 2;
-        } else if (width > 300) {
+        if (width > 768) {
+            width = width / 4;
+        } else if (width > 450) {
             width = width / 2;
         }
         $('.control').height(height);
@@ -96,6 +96,7 @@ $(document).on('click', '.schedule > li a', function(e) {
 });
 $(document).on('click', '.navbar-toggle', function() {
 	$('.full-width-nav').slideToggle();
+	$(document).scrollTop(0);
 });
 $(document).on('click', '.closeMenu',function(e) {
 	e.preventDefault();
