@@ -3,9 +3,10 @@ class MY_Loader extends CI_Loader {
 
 	public function site_template($template_name, $vars = array(), $return = FALSE)
 	{
-		$content  = $this->view('_header', $vars, $return);
-		$content .= $this->view($template_name, $vars, $return);
-		$content .= $this->view('_footer', $vars, $return);
+		$content  = $this->view('site/_header', $vars, $return);
+		$content .= $this->view('site/' . $template_name, $vars, $return);
+		$content .= $this->view('site/_sidebar', $vars, $return);
+		$content .= $this->view('site/_footer', $vars, $return);
 
 		if ($return)
 		{

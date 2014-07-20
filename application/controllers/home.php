@@ -9,7 +9,11 @@ class Home extends Site_Controller
 
 	public function index()
 	{
-		
+		// Store Data to Pass to View
+		$data = array();
+
+		// Load View
+		$this->load->site_template( 'home', $data );
 	}
 
 }
