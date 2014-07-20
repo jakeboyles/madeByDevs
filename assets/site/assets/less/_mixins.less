@@ -1,0 +1,22 @@
+.font-size(@sizeValue) {
+  @pxValue: @sizeValue;
+  @remValue: (@sizeValue / 1);
+  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{remValue}rem";
+}
+.padding (@padding1;) {
+    padding: (@padding1 * 1px);
+    padding: ~"@{padding1}rem";
+}
+.padding (@padding1; @padding2;) {
+    padding: (@padding1 * 1px) (@padding2 * 1px);
+    padding: ~"@{padding1}rem" ~"@{padding2}rem";
+}
+.padding (@padding1; @padding2; @padding3;) {
+    padding: (@padding1 * 1px) (@padding2 * 1px) (@padding3 * 1px);
+    padding: ~"@{padding1}rem" ~"@{padding2}rem" ~"@{padding3}rem";
+}
+.padding (@padding1; @padding2; @padding3; @padding4;) {
+    padding: (@padding1 * 1px) (@padding2 * 1px) (@padding3 * 1px) (@padding4 * 1px);
+    padding: ~"@{padding1}rem" ~"@{padding2}rem" ~"@{padding3}rem" ~"@{padding4}rem";
+}
