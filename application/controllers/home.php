@@ -7,7 +7,7 @@ class Home extends Site_Controller
 		parent::__construct();
 	}
 
-	public function index()
+	public function index( $slug = FALSE )
 	{
 		// Store Data to Pass to View
 		$data = array();
