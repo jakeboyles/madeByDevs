@@ -39,24 +39,24 @@
 */
 
 $route['default_controller'] = "home";
-$route['404_override'] = '';
+$route['404_override'] = "pages";
 
 // Custom Routes - See if Controller Exists First
-$controller_dir = opendir( APPPATH."controllers" );
-while ( ($file = readdir($controller_dir) ) !== false) 
-{
-	if ( substr($file, -4) == ".php" ) 
-	{
-		$route[substr($file, 0, -4)."(.*)"] = substr($file, 0, -4)."$1";
+// $controller_dir = opendir( APPPATH."controllers" );
+// while ( ($file = readdir($controller_dir) ) !== false) 
+// {
+// 	if ( substr($file, -4) == ".php" ) 
+// 	{
+// 		$route[substr($file, 0, -4)."(.*)"] = substr($file, 0, -4)."$1";
 
-	} 
-	elseif ( substr($file, -5) == ".php/" ) 
-	{
-		$route[substr($file, 0, -5)."(.*)"] = substr($file, 0, -5)."$1";
-	}
-}
+// 	} 
+// 	elseif ( substr($file, -5) == ".php/" ) 
+// 	{
+// 		$route[substr($file, 0, -5)."(.*)"] = substr($file, 0, -5)."$1";
+// 	}
+// }
 // If controller doesn't exist, do a catch all and load the page
-$route['(:any)'] = 'page/index/$1';
+//$route['(:any)'] = 'page/index/$1';
 
 
 /* End of file routes.php */
