@@ -82,4 +82,11 @@ class Pages extends Site_Controller
 		$this->load->site_template( '404', $data );
 	}
 
+	// Load Sample/Boilerplate Page
+	// To Do: Remove this and make via CMS
+	public function sample()
+	{
+		$this->load->site_template( 'sample' );
+	}
+
 }
