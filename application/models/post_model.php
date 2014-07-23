@@ -94,20 +94,7 @@ class Post_model extends MY_Model
 		// If an ID Was Found in URL
 		if( $id )
 		{
-			// If this ID Belongs to Other Tables - Dont Delete It
-			// @ return: Return a string of error for ajax
-			if( 
-				$this->count_by( array( 'table' => 'sessions', 'where' => 'season_id = ' . $id ) ) > 0 
-				|| $this->count_by( array( 'table' => 'leagues', 'where' => 'current_season_id = ' . $id ) ) > 0
-			)
-			{
-				echo 'error';
-			}
-			// Else Delete It from Database
-			else
-			{
-				$this->Season_model->delete( $id );
-			}
+			$this->delete( $id );
 		}
 
 		return false;
