@@ -66,12 +66,17 @@ class Post_model extends MY_Model
 	{
 		if( $id && $post )
 		{
+			// Determine URL Slug
+			$slug = empty( $post['slug'] ) ? $post['title'] : $post['slug'];
+			$slug = str_replace(' ', '-', $slug); // Replaces all spaces with hyphens.
+			$slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug); // Removes special chars
+			$slug = strtolower( $slug ); // conver the string to all lower case
+
 			// Update Data
 			$data = array(
-				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'title' => empty( $post['title'] ) ? NULL : $post['title'],
+				'slug' => $slug,
+				'content' => empty( $post['content'] ) ? NULL : $post['content']
 			);
 
 			// Update Record in Database

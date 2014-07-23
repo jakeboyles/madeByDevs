@@ -76,8 +76,17 @@ class Pages extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('title', 'Page Title', 'required');
-		$this->form_validation->set_rules('slug', 'Page Slug', 'required|alpha_dash|is_unique[posts.slug]');
 		$this->form_validation->set_rules('content', 'Content', '');
+
+		// Slug Validation
+		if( $this->uri->segment(3) == 'edit' && ( $this->input->post( 'slug' ) == $this->input->post( 'original_slug' ) ) )
+		{
+			$this->form_validation->set_rules('slug', 'Page Slug', 'required|alpha_dash');
+		}
+		else
+		{
+			$this->form_validation->set_rules('slug', 'Page Slug', 'required|alpha_dash|is_unique[posts.slug]');
+		}
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
