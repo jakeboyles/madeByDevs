@@ -1,6 +1,14 @@
 <?php
 class Pages extends Site_Controller
 {
+	function __construct()
+	{
+		parent::__construct();
+
+		// Load Content Model
+		$this->load->model('Content_model');
+	}
+
 	// Figure Out How to Route the Content
 	public function index()
 	{
@@ -30,10 +38,30 @@ class Pages extends Site_Controller
 	{
 		// Get Page
 		$page_slug = $this->uri->segment(1);
+		$data['page'] = $this->Content_model->get_page( $page_slug );
 
-		// Load View
-		$data['page_title'] = 'Page Title Here';
-		$this->load->site_template( 'page', $data );
+		// Load Page If One was Found
+		if( $data['page'])
+		{
+			// Store Page Title
+			$data['page_title'] = $data['page']['title'];
+
+			// Load Page View
+			if( $data['page']['post_type'] == 'page' )
+			{
+				$this->load->site_template( 'page', $data );
+			}
+			// Load Post View 
+			elseif( $data['page']['post_type'] == 'post' )
+			{
+				$this->load->site_template( 'page', $data );
+			}
+		}
+		// Else Load 404 Page
+		else
+		{
+			$this->not_found();
+		}
 	}
 
 	// Category Archive Display

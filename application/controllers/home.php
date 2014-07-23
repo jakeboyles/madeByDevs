@@ -16,9 +16,4 @@ class Home extends Site_Controller
 		$this->load->site_template( 'home', $data );
 	}
 
-	public function test()
-	{
-		echo 'hello';
-	}
-
 }
