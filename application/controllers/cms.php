@@ -1,5 +1,5 @@
 <?php
-class Pages extends Site_Controller
+class Cms extends Site_Controller
 {
 	function __construct()
 	{

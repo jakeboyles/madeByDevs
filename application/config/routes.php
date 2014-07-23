@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "home";
-$route['404_override'] = "pages";
+$route['404_override'] = "cms";
 
 // Custom Routes - See if Controller Exists First
 // $controller_dir = opendir( APPPATH."controllers" );
