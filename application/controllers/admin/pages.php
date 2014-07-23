@@ -25,7 +25,7 @@ class Pages extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Post_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->Post_model->insert_record( $this->input->post(), 'page' ) )
 			{
 				redirect('admin/pages/edit/' . $insert_id);
 			}
@@ -75,10 +75,9 @@ class Pages extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('name', 'Season Name', 'required');
-		$this->form_validation->set_rules('year_start', 'Year Start', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('year_end', 'Year End', 'required|exact_length[4]|numeric');
-		$this->form_validation->set_rules('description', 'Description', '');
+		$this->form_validation->set_rules('title', 'Page Title', 'required');
+		$this->form_validation->set_rules('slug', 'Page Slug', 'required|alpha_dash|is_unique[posts.slug]');
+		$this->form_validation->set_rules('content', 'Content', '');
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

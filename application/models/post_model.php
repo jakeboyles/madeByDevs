@@ -33,17 +33,23 @@ class Post_model extends MY_Model
 	}
 
 	// Add Record
-	public function insert_record( $post = FALSE )
+	public function insert_record( $post = FALSE, $post_type = FALSE )
 	{
-		if( $post )
+		if( $post && $post_type )
 		{
+			// Determine URL Slug
+			$slug = empty( $post['slug'] ) ? $post['title'] : $post['slug'];
+			$slug = str_replace(' ', '-', $slug); // Replaces all spaces with hyphens.
+			$slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug); // Removes special chars
+			$slug = strtolower( $slug ); // conver the string to all lower case
+
 			// Insert Data
 			$data = array(
-				'league_id' => 1,
-				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'post_type' => $post_type,
+				'author_id' => $this->session->userdata('user_id'),
+				'title' => empty( $post['title'] ) ? NULL : $post['title'],
+				'slug' => $slug,
+				'content' => empty( $post['content'] ) ? NULL : $post['content']
 			);
 
 			// Insert to Database and Store Insert ID

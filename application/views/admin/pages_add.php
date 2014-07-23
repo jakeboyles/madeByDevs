@@ -44,9 +44,9 @@
 									</div>
 
 									<div class="form-group">
-										<?php echo form_label( 'Page Slug', 'title', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'Page Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
 										<span class="help"></span>
-										<?php echo form_input( array('name' => 'title', 'class' => 'form-control', 'id' => 'title', 'value' => set_value( 'title' ) ) ); ?>
+										<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug' ) ) ); ?>
 									</div>
 
 									<div class="form-group">
