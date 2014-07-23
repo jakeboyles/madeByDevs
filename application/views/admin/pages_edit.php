@@ -61,7 +61,7 @@
 									</div>
 
 									<div class="form-group">
-										<?php echo form_label( 'Page Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'Page URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. a page slug of "about" would produce gothamsoccerleague.com/about</span>
 										<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug', $record['slug'] ) ) ); ?>
 									</div>
