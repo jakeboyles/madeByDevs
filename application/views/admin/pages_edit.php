@@ -14,6 +14,7 @@
 						<h4>Edit Page</h4>
 						<div class="pull-right">
 							<a href="<?php echo base_url('admin/pages'); ?>" class="btn btn-primary">View Pages</a>
+							<a href="<?php echo base_url($record['slug']); ?>" target="_blank" class="btn btn-info">Preview</a>
 						</div>
 					</div>
 
