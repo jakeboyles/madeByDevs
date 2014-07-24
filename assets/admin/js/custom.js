@@ -313,7 +313,10 @@ $(document).ready(function(){
 	# Page/Post Functionality
 	############################################################################# */
 	$('textarea[name="content"]').redactor({
-		minHeight: 250
+		minHeight: 250,
+		fixed: true, 
+		toolbarFixedBox: true,
+		toolbarFixedTopOffset: 60
 	});
 
 });
