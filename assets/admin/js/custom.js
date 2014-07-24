@@ -326,10 +326,6 @@ $(document).ready(function(){
 			imageGetJson: '/admin/pages/get_images',
 			uploadFields: {
 				csrf_token: csrfToken
-			},
-			imageUploadCallback: function( image, json )
-			{
-				console.log( json );
 			}
 		});
 	}

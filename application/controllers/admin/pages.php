@@ -101,8 +101,8 @@ class Pages extends Admin_Controller
 	public function image_upload()
 	{
 		$config = array(
-			'upload_path' => './uploads/user_post_uploads/images/',
-			'upload_url' => base_url()  . './uploads/user_post_uploads/images/',
+			'upload_path' => './uploads/admin_uploads/images/',
+			'upload_url' => base_url()  . './uploads/admin_uploads/images/',
 			'allowed_types' => 'jpg|gif|png',
 			'overwrite' => false,
 			'max_size' => 512000,
@@ -128,7 +128,7 @@ class Pages extends Admin_Controller
 	public function get_images()
 	{
 		$images = array();
-		$files = glob( 'uploads/user_post_uploads/images/*.*' );
+		$files = glob( 'uploads/admin_uploads/images/*.*' );
 		foreach( $files as $file )
 		{
 			$images[] = array( 'thumb' => base_url() . '/' . $file, 'image' => base_url() . '/' . $file );

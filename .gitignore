@@ -16,4 +16,5 @@ assets/codekit-config.json
 assets/.sass-cache
 
 # Ignore Uploads Directory
-uploads/user_post_uploads/images/*
+uploads/admin_uploads/images/*
+uploads/user_uploads/images/*
