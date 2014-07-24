@@ -35,7 +35,8 @@
 					</a>
 					<ul class="sub-menu">
 						<li><a href="<?php echo base_url( 'admin/posts'); ?>">All Posts</a></li>
-						<li><a href="<?php echo base_url( 'admin/posts/add'); ?>">Add New</a></li>
+						<li><a href="<?php echo base_url( 'admin/posts/add'); ?>">Add New Post</a></li>
+						<li><a href="<?php echo base_url( 'admin/categories'); ?>">Categories</a></li>
 					</ul>
 				</li>
 				<!--

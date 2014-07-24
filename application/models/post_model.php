@@ -100,4 +100,20 @@ class Post_model extends MY_Model
 		return false;
 	}
 
+	// Get a List of Categories
+	public function get_categories()
+	{
+		$this->db->select( 'id, name, slug, created_at, created_by, modified_at, modified_by' );
+		$query = $this->db->get( 'terms' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+
+		return false;
+	}
+
 }
