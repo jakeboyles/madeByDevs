@@ -3,7 +3,7 @@
 	<div class="content">  
 
 		<div class="page-title">	
-			<h3>Posts</h3>		
+			<h3>Categories</h3>		
 		</div>
 
 		<div class="row">
@@ -11,9 +11,9 @@
 		 		<div class="grid simple">
 
 					<div class="grid-title">
-						<h4>Add Post</h4>
+						<h4>Add Category</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/posts'); ?>" class="btn btn-primary">View Posts</a>
+							<a href="<?php echo base_url('admin/categories'); ?>" class="btn btn-primary">View Categories</a>
 						</div>
 					</div>
 
@@ -24,7 +24,7 @@
 							<div class="col-md-8 col-sm-8 col-xs-8">
 
 								<!-- START Display Error Messages -->
-								<?php if(validation_errors() && $this->input->post()): ?>
+								<?php if( validation_errors() && $this->input->post() ): ?>
 								<div class="alert alert-error">
 									<h4>Form Submission Errors</h3>
 									<ul>
@@ -35,27 +35,21 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/posts/add/', array( 'id' => 'add-post-form') ); ?>
+								<?php echo form_open( 'admin/categories/add/', array( 'id' => 'add-category-form') ); ?>
 
 									<div class="form-group">
-										<?php echo form_label( 'Post Title*', 'title', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'Category Name*', 'name', array( 'class' => 'form-label' ) ); ?>
 										<span class="help"></span>
-										<?php echo form_input( array('name' => 'title', 'class' => 'form-control', 'id' => 'title', 'value' => set_value( 'title' ) ) ); ?>
+										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name' ) ) ); ?>
 									</div>
 
 									<div class="form-group">
-										<?php echo form_label( 'Post URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
-										<span class="help">e.g. a post slug of "about" would produce gothamsoccerleague.com/about</span>
+										<?php echo form_label( 'Category URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
+										<span class="help">e.g. a category slug of "news" would produce gothamsoccerleague.com/category/news</span>
 										<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug' ) ) ); ?>
 									</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Post Content', 'content', array( 'class' => 'form-label' ) ); ?>
-										<span class="help"></span>
-										<?php echo form_textarea( array('name' => 'content', 'class' => 'form-control', 'id' => 'content', 'value' => set_value( 'content' ) ) ); ?>
-									</div>
-
-									<button type="submit" class="btn btn-primary">Create Post</button>
+									<button type="submit" class="btn btn-primary">Create Category</button>
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->

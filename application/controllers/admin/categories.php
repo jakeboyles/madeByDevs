@@ -8,13 +8,13 @@ class Categories extends Admin_Controller
 		parent::__construct();
 
 		// Load Database Model to Be Used in Methods
-		$this->load->model( 'Post_model' );
+		$this->load->model( 'Term_model' );
 	}
 
 	// Display All Records View
 	public function index()
 	{
-		$data['records'] = $this->Post_model->get_categories();
+		$data['records'] = $this->Term_model->get_categories();
 		$this->load->admin_template( 'categories', $data );
 	}
 
@@ -25,14 +25,14 @@ class Categories extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Post_model->insert_record( $this->input->post(), 'post' ) )
+			if( $insert_id = $this->Term_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/posts/edit/' . $insert_id);
+				redirect('admin/categories/edit/' . $insert_id);
 			}
 		}
 
 		// Load Add Record Form View
-		$this->load->admin_template( 'posts_add' );
+		$this->load->admin_template( 'categories_add' );
 	}
 
 	// Edit Record View
@@ -41,17 +41,17 @@ class Categories extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
-			$this->Post_model->update_record( $id, $this->input->post() );
+			$this->Term_model->update_record( $id, $this->input->post() );
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
 		// Retrieve Record Data From Database
-		$data['record'] = $this->Post_model->get( $id );
+		$data['record'] = $this->Term_model->get( $id );
 
 		// Load Edit Record Form
-		$this->load->admin_template( 'posts_edit', $data );
+		$this->load->admin_template( 'categories_edit', $data );
 	}
 
 	// Delete a Record
@@ -60,7 +60,7 @@ class Categories extends Admin_Controller
 
 		if( $id )
 		{
-			$this->Post_model->delete_record( $id );
+			$this->Term_model->delete_record( $id );
 
 			return true;
 		}
@@ -75,17 +75,16 @@ class Categories extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('title', 'Post Title', 'required');
-		$this->form_validation->set_rules('content', 'Content', '');
+		$this->form_validation->set_rules('name', 'Category Name', 'required');
 
 		// Slug Validation
 		if( $this->uri->segment(3) == 'edit' && ( $this->input->post( 'slug' ) == $this->input->post( 'original_slug' ) ) )
 		{
-			$this->form_validation->set_rules('slug', 'Post Slug', 'required|alpha_dash');
+			$this->form_validation->set_rules('slug', 'Category Slug', 'required|alpha_dash');
 		}
 		else
 		{
-			$this->form_validation->set_rules('slug', 'Post Slug', 'required|alpha_dash|is_unique[posts.slug]');
+			$this->form_validation->set_rules('slug', 'Category Slug', 'required|alpha_dash|is_unique[terms.slug]');
 		}
 		
 		// Return True if Validation Passes

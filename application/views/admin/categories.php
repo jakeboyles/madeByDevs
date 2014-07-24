@@ -25,7 +25,6 @@
 									<th>id</th>
 									<th>Title</th>
 									<th>Slug</th>
-									<th>Author</th>
 									<th>Created</th>
 									<th>Modified</th>
 									<th><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></th>

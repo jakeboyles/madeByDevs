@@ -3,7 +3,7 @@
 	<div class="content">  
 
 		<div class="page-title">	
-			<h3>Posts</h3>		
+			<h3>Categories</h3>		
 		</div>
 
 		<div class="row">
@@ -11,10 +11,10 @@
 		 		<div class="grid simple">
 
 					<div class="grid-title">
-						<h4>Edit Post</h4>
+						<h4>Edit Category</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/posts'); ?>" class="btn btn-primary">View Posts</a>
-							<a href="<?php echo base_url($record['slug']); ?>" target="_blank" class="btn btn-info">Preview</a>
+							<a href="<?php echo base_url('admin/categories'); ?>" class="btn btn-primary">View Categories</a>
+							<a href="<?php echo base_url('category/' . $record['slug']); ?>" target="_blank" class="btn btn-info">Preview</a>
 						</div>
 					</div>
 
@@ -44,7 +44,7 @@
 								<!-- END Success Message -->
 								
 								<!-- START New Record Added Message -->
-								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/posts/add') ): ?>
+								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/categories/add') ): ?>
 								<div class="alert alert-success">
 									Record successfully added.
 								</div>
@@ -52,27 +52,21 @@
 								<!-- END New Record Added Message -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/posts/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
+								<?php echo form_open( 'admin/categories/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
 
 									<div class="form-group">
-										<?php echo form_label( 'Post Title*', 'title', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_label( 'Category Name*', 'name', array( 'class' => 'form-label' ) ); ?>
 										<span class="help"></span>
-										<?php echo form_input( array('name' => 'title', 'class' => 'form-control', 'id' => 'title', 'value' => set_value( 'title', $record['title'] ) ) ); ?>
+										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name', $record['name'] ) ) ); ?>
 									</div>
 
 									<div class="form-group">
-										<?php echo form_label( 'Post URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
-										<span class="help">e.g. a post slug of "about" would produce gothamsoccerleague.com/about</span>
+										<?php echo form_label( 'Category URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
+										<span class="help">e.g. a category slug of "news" would produce gothamsoccerleague.com/category/news</span>
 										<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug', $record['slug'] ) ) ); ?>
 									</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Post Content', 'content', array( 'class' => 'form-label' ) ); ?>
-										<span class="help"></span>
-										<?php echo form_textarea( array('name' => 'content', 'class' => 'form-control', 'id' => 'content', 'value' => set_value( 'content', $record['content'] ) ) ); ?>
-									</div>
-
-									<button type="submit" class="btn btn-primary">Update Post</button>
+									<button type="submit" class="btn btn-primary">Update Category</button>
 
 									<?php echo form_hidden( 'original_slug', $record['slug'] ); ?>
 								<?php echo form_close(); ?>

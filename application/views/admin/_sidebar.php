@@ -16,22 +16,22 @@
 			<!-- Content Management Menu -->
 			<p class="menu-title">Content Management</p>
 			<ul>
-				<li class="<?php echo $this->uri->segment(2) == 'games' ? 'active open' : ''; ?>">
+				<li class="<?php echo $this->uri->segment(2) == 'pages' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-pencil"></i>
 						<span class="title">Pages</span>
-						<span class="arrow<?php echo $this->uri->segment(2) == 'games' ? 'open' : ''; ?>"></span>
+						<span class="arrow<?php echo $this->uri->segment(2) == 'pages' ? 'open' : ''; ?>"></span>
 					</a>
 					<ul class="sub-menu">
 						<li><a href="<?php echo base_url( 'admin/pages'); ?>">All Pages</a></li>
 						<li><a href="<?php echo base_url( 'admin/pages/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
-				<li class="<?php echo $this->uri->segment(2) == 'posts' ? 'active open' : ''; ?>">
+				<li class="<?php echo $this->uri->segment(2) == 'posts' ||  $this->uri->segment(2) == 'categories' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-edit"></i>
 						<span class="title">Posts</span>
-						<span class="arrow <?php echo $this->uri->segment(2) == 'posts' ? 'open' : ''; ?>"></span>
+						<span class="arrow <?php echo $this->uri->segment(2) == 'posts' ||  $this->uri->segment(2) == 'categories' ? 'open' : ''; ?>"></span>
 					</a>
 					<ul class="sub-menu">
 						<li><a href="<?php echo base_url( 'admin/posts'); ?>">All Posts</a></li>
