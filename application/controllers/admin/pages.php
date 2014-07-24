@@ -97,4 +97,44 @@ class Pages extends Admin_Controller
 		return false;
 	}
 
+	// Image Upload for Redactor WYSIWYG
+	public function image_upload()
+	{
+		$config = array(
+			'upload_path' => './uploads/user_post_uploads/images/',
+			'upload_url' => base_url()  . './uploads/user_post_uploads/images/',
+			'allowed_types' => 'jpg|gif|png',
+			'overwrite' => false,
+			'max_size' => 512000,
+		);
+
+		$this->load->library('upload', $config);
+
+		if( $this->upload->do_upload('file') ) 
+		{
+			$data = $this->upload->data();
+			$array = array(
+				'filelink' => $config['upload_url'] . $data['file_name']
+			);
+			echo stripslashes( json_encode( $array ) );
+		} 
+		else 
+		{
+			echo json_encode( array( 'error' => $this->upload->display_errors( '', '' ) ) );
+		}
+	}
+
+	// Get a List of Previously Uploaded Images
+	public function get_images()
+	{
+		$images = array();
+		$files = glob( 'uploads/user_post_uploads/images/*.*' );
+		foreach( $files as $file )
+		{
+			$images[] = array( 'thumb' => base_url() . '/' . $file, 'image' => base_url() . '/' . $file );
+ 		}
+
+ 		echo json_encode( $images );
+	}
+
 }

@@ -312,12 +312,27 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Page/Post Functionality
 	############################################################################# */
-	$('textarea[name="content"]').redactor({
-		minHeight: 250,
-		fixed: true, 
-		toolbarFixedBox: true,
-		toolbarFixedTopOffset: 60
-	});
+	var redactorElement = $('textarea[name="content"]');
+	if( typeof redactorElement !== 'undefined' && redactorElement.length )
+	{
+		var csrfToken = redactorElement.parents('form').find('input[name="csrf_token"]').val();
+
+		redactorElement.redactor({
+			minHeight: 250,
+			fixed: true, 
+			toolbarFixedBox: true,
+			toolbarFixedTopOffset: 60,
+			imageUpload: '/admin/pages/image_upload',
+			imageGetJson: '/admin/pages/get_images',
+			uploadFields: {
+				csrf_token: csrfToken
+			},
+			imageUploadCallback: function( image, json )
+			{
+				console.log( json );
+			}
+		});
+	}
 
 });
 

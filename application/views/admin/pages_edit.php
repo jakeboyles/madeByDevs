@@ -52,7 +52,7 @@
 								<!-- END New Record Added Message -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/pages/edit/' . $record['id'], array( 'id' => 'edit-page-form') ); ?>
+								<?php echo form_open( 'admin/pages/edit/' . $record['id'], array( 'id' => 'edit-page-form' ) ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Page Title*', 'title', array( 'class' => 'form-label' ) ); ?>

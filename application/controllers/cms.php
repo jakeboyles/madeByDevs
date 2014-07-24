@@ -88,5 +88,4 @@ class Cms extends Site_Controller
 	{
 		$this->load->site_template( 'sample' );
 	}
-
 }
