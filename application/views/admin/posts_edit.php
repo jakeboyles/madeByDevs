@@ -7,11 +7,11 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 		 		<div class="grid simple">
 
 					<div class="grid-title">
-						<h4>Edit Post</h4>
+						<h4 class="pull-left">Edit Post</h4>
 						<div class="pull-right">
 							<a href="<?php echo base_url('admin/posts'); ?>" class="btn btn-primary">View Posts</a>
 							<a href="<?php echo base_url($record['slug']); ?>" target="_blank" class="btn btn-info">Preview</a>
@@ -85,7 +85,36 @@
 					</div><!-- end .grid-body -->
 
 				</div><!-- end .grid -->
-			</div><!-- end .col-md-12 -->
+			</div><!-- end .col-md-8 -->
+
+			<!-- Second Column -->
+			<div class="col-md-4">
+
+		 		<div class="grid simple">
+					<div class="grid-title">
+						<h4 class="pull-left">Assign Categories</h4>
+						<div class="pull-right">
+							<a href="<?php echo base_url('admin/categories'); ?>" class="btn btn-primary">Edit Categories</a>
+						</div>
+					</div>
+
+					<div class="grid-body">
+						<!-- 
+						<?php foreach( $divisions as $key => $val ): ?>
+							<div class="checkbox check-primary">
+								<?php $checked = !empty( $this->input->post( 'divisions' ) ) && in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE; ?>
+								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
+								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
+							</div>
+						<?php endforeach; ?>
+						-->
+					</div>
+				</div>
+				
+			</div><!-- end .col-md-4 -->
+
+
+
 		</div><!-- end .row -->
 
 	</div><!-- end .content -->
