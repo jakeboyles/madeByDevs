@@ -31,7 +31,7 @@ class Content_model extends MY_Model
 	}
 
 	// Get Posts By Category ID
-	public function get_posts_by_category_id( $category_id  )
+	public function get_posts_by_category_id( $category_id, $limit = FALSE )
 	{
 		if( $category_id )
 		{
@@ -43,6 +43,22 @@ class Content_model extends MY_Model
 			$this->db->join( 'posts p', 'p.id = pc.post_id', 'left outer' );
 			$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 			$this->db->where( array( 'pc.category_id' => $category_id, 'p.post_type' => 'post' ) );
+
+			// If a Limit is Set
+			if( $limit && is_array( $limit ) )
+			{
+				if( count( $limit ) == 1 )
+				{
+					$this->db->limit( $limit[0] );
+				}
+				elseif( count( $limit ) == 2 )
+				{
+					$this->db->limit( $limit[0], $limit[1] );
+				}
+				
+			}
+
+			// Store Query
 			$query = $this->db->get( 'post_categories pc' );
 
 			// If Rows were Found, Return Them
@@ -71,6 +87,20 @@ class Content_model extends MY_Model
 				$row = $query->row_array();
 				return $row;
 			}
+		}
+
+		return false;
+	}
+
+	// Get the Number Of Posts in a Category By Category ID
+	public function get_post_count( $category_id )
+	{
+		$this->db->where( 'category_id', $category_id );
+		$count = $this->db->count_all_results( 'post_categories' );
+
+		if( $count )
+		{
+			return $count;
 		}
 
 		return false;

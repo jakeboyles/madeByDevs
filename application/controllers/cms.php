@@ -17,7 +17,7 @@ class Cms extends Site_Controller
 		$first_segment = $this->uri->segment(1);
 
 		// Load Category Archive
-		if( $uri_segment_count == 2 && $first_segment == 'category' )
+		if( ( $uri_segment_count == 2 || ( $uri_segment_count == 3 && is_numeric( $this->uri->segment(3) ) ) ) && $first_segment == 'category' )
 		{
 			$this->category();
 		}
@@ -71,16 +71,37 @@ class Cms extends Site_Controller
 		$category_slug = $this->uri->segment(2);
 
 		// See If This Category Slug Exists
-		$data['category'] = $this->Content_model->get_category_by_slug( $category_slug );
+		$category = $this->Content_model->get_category_by_slug( $category_slug );
 
 		// If Category Was found Load Archive View
-		if( $data['category'] )
+		if( $category )
 		{
-			// Get A List of Posts For this Category
-			$data['posts'] = $this->Content_model->get_posts_by_category_id( $data['category']['id'] );
-			
-			// Load View
+			// Grab Post Count
+			$post_count = $this->Content_model->get_post_count( $category['id'] );
+
+			// Set Query Vars
+			$posts_per_page = 2;
+			$offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
+
+			// Create Pagination
+			$this->load->library('pagination');
+			$config['base_url'] = base_url( 'category/' . $category_slug );
+			$config['total_rows'] = $post_count;
+			$config['per_page'] = $posts_per_page; 
+			$this->pagination->initialize( $config );
+			$data['pagination_links'] = $this->pagination->create_links();
+
+			// Load Posts
+			$limit = array( $posts_per_page, $offset );
+			$data['posts'] = $this->Content_model->get_posts_by_category_id( $category['id'], $limit );
+
+			// Store Category
+			$data['category'] = $category;
+
+			// Store Page Title
 			$data['page_title'] = $data['category']['name'] . ' Archive';
+
+			// Load View
 			$this->load->site_template( 'archive', $data );
 		}
 		// Else Load 404 Page
