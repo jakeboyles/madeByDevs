@@ -42,6 +42,7 @@ class Content_model extends MY_Model
 			', FALSE);
 			$this->db->join( 'posts p', 'p.id = pc.post_id', 'left outer' );
 			$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+			$this->db->order_by( 'p.created_at', 'DESC' );
 			$this->db->where( array( 'pc.category_id' => $category_id, 'p.post_type' => 'post' ) );
 
 			// If a Limit is Set

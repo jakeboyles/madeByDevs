@@ -130,6 +130,11 @@ class Post_model extends MY_Model
 		// If an ID Was Found in URL
 		if( $id )
 		{
+			// Delete Relationships from the post_categories table First
+			$this->db->where( 'post_id', $id );
+			$this->db->delete( 'post_categories' );
+
+			// Delete Actual Post
 			$this->delete( $id );
 		}
 
