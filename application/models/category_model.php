@@ -90,6 +90,11 @@ class Category_model extends MY_Model
 		// If an ID Was Found in URL
 		if( $id )
 		{
+			// Delete Post Relationships to This Category
+			$this->db->where( 'category_id', $id );
+			$this->db->delete( 'post_categories' );
+
+			// Delete Category
 			$this->delete( $id );
 		}
 
