@@ -69,10 +69,25 @@ class Cms extends Site_Controller
 	{
 		// Get Category
 		$category_slug = $this->uri->segment(2);
-		
-		// Load View
-		$data['page_title'] = 'Category Title Here';
-		$this->load->site_template( 'archive', $data );
+
+		// See If This Category Slug Exists
+		$data['category'] = $this->Content_model->get_category_by_slug( $category_slug );
+
+		// If Category Was found Load Archive View
+		if( $data['category'] )
+		{
+			// Get A List of Posts For this Category
+			$data['posts'] = $this->Content_model->get_posts_by_category_id( $data['category']['id'] );
+			
+			// Load View
+			$data['page_title'] = $data['category']['name'] . ' Archive';
+			$this->load->site_template( 'archive', $data );
+		}
+		// Else Load 404 Page
+		else
+		{
+			$this->not_found();
+		}
 	}
 
 	// Load 404 Page

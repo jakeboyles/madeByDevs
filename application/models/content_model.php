@@ -29,4 +29,50 @@ class Content_model extends MY_Model
 
 		return false;
 	}
+
+	// Get Posts By Category ID
+	public function get_posts_by_category_id( $category_id  )
+	{
+		if( $category_id )
+		{
+			// Get a List of Posts For this Category
+			$this->db->select('
+				p.id, p.author_id, p.title, p.slug, p.content, p.created_at, p.created_by, p.modified_at, p.modified_by, 
+				CONCAT(u.first_name, " ", u.last_name) as author, u.email as author_email
+			', FALSE);
+			$this->db->join( 'posts p', 'p.id = pc.post_id', 'left outer' );
+			$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+			$this->db->where( array( 'pc.category_id' => $category_id, 'p.post_type' => 'post' ) );
+			$query = $this->db->get( 'post_categories pc' );
+
+			// If Rows were Found, Return Them
+			if($query->num_rows > 0)
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
+	// Get a Single Category By a Category Slug
+	public function get_category_by_slug( $category_slug )
+	{
+		if( $category_slug )
+		{
+			$this->db->select( 'c.id, c.name, c.slug, c.created_at, c.created_by, c.modified_at, c.modified_by' );
+			$this->db->where( 'slug', $category_slug );
+			$query = $this->db->get( 'categories c' ); 
+
+			// If A Record Is Found, Return It
+			if($query->num_rows > 0)
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+		}
+
+		return false;
+	}
 }
