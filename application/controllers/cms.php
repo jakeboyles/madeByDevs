@@ -87,7 +87,25 @@ class Cms extends Site_Controller
 			$this->load->library('pagination');
 			$config['base_url'] = base_url( 'category/' . $category_slug );
 			$config['total_rows'] = $post_count;
-			$config['per_page'] = $posts_per_page; 
+			$config['per_page'] = $posts_per_page;
+
+			$config['full_tag_open'] = '<div class="pagination"><ul>';
+			$config['full_tag_close'] = '</ul></div>';
+			$config['first_tag_open'] = '<li class="prev page">';
+			$config['first_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li class="next page">';
+			$config['last_tag_close'] = '</li>';
+			$config['next_link'] = '&gt;';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_link'] = '&lt;';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li class="active"><span>';
+			$config['cur_tag_close'] = '</span></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+
 			$this->pagination->initialize( $config );
 			$data['pagination_links'] = $this->pagination->create_links();
 

@@ -20,6 +20,12 @@
 
 		<?php endforeach; ?>
 
+		<?php if( !empty( $pagination_links ) ): ?>
+
+			<?php echo $pagination_links; ?>
+
+		<?php endif; ?>
+
 	<?php else: ?>
 
 		This archive does not currently have any posts.
