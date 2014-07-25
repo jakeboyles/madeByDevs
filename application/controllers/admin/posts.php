@@ -57,7 +57,7 @@ class Posts extends Admin_Controller
 		// Get a List of Categories
 		$data['categories'] = $this->Category_model->get_records();
 
-		// Get A List of Post Categories
+		// Get A List of Post Categories Assigned to This Post
 		$data['post_categories'] = $this->Post_model->get_post_categories( $id );
 
 		// Load Edit Record Form

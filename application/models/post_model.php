@@ -55,6 +55,22 @@ class Post_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
+			// Assign Categories to the Post
+			if( !empty( $post['categories'] ) )
+			{
+				foreach( $post['categories'] as $category_id )
+				{
+					$post_categories[] = array(
+						'post_id' => $insert_id,
+						'category_id' => $category_id,
+						'created_at' => $this->mysql_datetime(),
+						'created_by' => $this->session->userdata( 'user_id' )
+					);
+				}
+				$this->db->insert_batch( 'post_categories', $post_categories ); 
+			}
+
+			// Return Insert ID
 			return $insert_id;
 		}
 
@@ -86,7 +102,7 @@ class Post_model extends MY_Model
 			$this->db->where( 'post_id', $id );
 			$this->db->delete( 'post_categories' );
 
-			// Update with Existing Categories
+			// Assign Categories to the Post
 			if( !empty( $post['categories'] ) )
 			{
 				foreach( $post['categories'] as $category_id )
@@ -99,8 +115,9 @@ class Post_model extends MY_Model
 					);
 				}
 				$this->db->insert_batch( 'post_categories', $post_categories ); 
-			}			
+			}		
 
+			// Return True
 			return true;
 		}
 
