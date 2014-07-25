@@ -7,8 +7,9 @@ class Posts extends Admin_Controller
 		// Inherit Parent Classes Methods and Properties
 		parent::__construct();
 
-		// Load Database Model to Be Used in Methods
+		// Load Database Models to Be Used in Methods
 		$this->load->model( 'Post_model' );
+		$this->load->model('Category_model');
 	}
 
 	// Display All Records View
@@ -31,8 +32,11 @@ class Posts extends Admin_Controller
 			}
 		}
 
+		// Get a List of Categories
+		$data['categories'] = $this->Category_model->get_records();
+
 		// Load Add Record Form View
-		$this->load->admin_template( 'posts_add' );
+		$this->load->admin_template( 'posts_add', $data );
 	}
 
 	// Edit Record View
@@ -49,6 +53,12 @@ class Posts extends Admin_Controller
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Post_model->get( $id );
+
+		// Get a List of Categories
+		$data['categories'] = $this->Category_model->get_records();
+
+		// Get A List of Post Categories
+		$data['post_categories'] = $this->Post_model->get_post_categories( $id );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'posts_edit', $data );

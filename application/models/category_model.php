@@ -1,5 +1,5 @@
 <?php
-class Term_model extends MY_Model
+class Category_model extends MY_Model
 {
 	// Callbacks to MY_Model class to Run Before Record Inserts
 	public $before_create = array( 'created_at', 'created_by' );
@@ -8,13 +8,19 @@ class Term_model extends MY_Model
 	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( $post_type = false )
+	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
 		$this->db->select( 'id, name, slug, created_at, created_by, modified_at, modified_by' );
 
+		// Check for Where in Atts
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] );
+		}
+
 		// Run Query
-		$query = $this->db->get( 'terms t' );
+		$query = $this->db->get( 'categories c' );
 
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
@@ -85,22 +91,6 @@ class Term_model extends MY_Model
 		if( $id )
 		{
 			$this->delete( $id );
-		}
-
-		return false;
-	}
-
-	// Get a List of Categories
-	public function get_categories()
-	{
-		$this->db->select( 'id, name, slug, created_at, created_by, modified_at, modified_by' );
-		$query = $this->db->get( 'terms' );
-
-		// If Rows Were Found, Return Them
-		if($query->num_rows > 0)
-		{
-			$rows = $query->result_array();
-			return $rows;
 		}
 
 		return false;

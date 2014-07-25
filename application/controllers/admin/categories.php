@@ -8,13 +8,13 @@ class Categories extends Admin_Controller
 		parent::__construct();
 
 		// Load Database Model to Be Used in Methods
-		$this->load->model( 'Term_model' );
+		$this->load->model( 'Category_model' );
 	}
 
 	// Display All Records View
 	public function index()
 	{
-		$data['records'] = $this->Term_model->get_categories();
+		$data['records'] = $this->Category_model->get_records();
 		$this->load->admin_template( 'categories', $data );
 	}
 
@@ -25,7 +25,7 @@ class Categories extends Admin_Controller
 		if( $this->input->post() && $this->_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Term_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->Category_model->insert_record( $this->input->post() ) )
 			{
 				redirect('admin/categories/edit/' . $insert_id);
 			}
@@ -41,14 +41,14 @@ class Categories extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
-			$this->Term_model->update_record( $id, $this->input->post() );
+			$this->Category_model->update_record( $id, $this->input->post() );
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
 		// Retrieve Record Data From Database
-		$data['record'] = $this->Term_model->get( $id );
+		$data['record'] = $this->Category_model->get( $id );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'categories_edit', $data );
@@ -60,7 +60,7 @@ class Categories extends Admin_Controller
 
 		if( $id )
 		{
-			$this->Term_model->delete_record( $id );
+			$this->Category_model->delete_record( $id );
 
 			return true;
 		}
@@ -84,7 +84,7 @@ class Categories extends Admin_Controller
 		}
 		else
 		{
-			$this->form_validation->set_rules('slug', 'Category Slug', 'required|alpha_dash|is_unique[terms.slug]');
+			$this->form_validation->set_rules('slug', 'Category Slug', 'required|alpha_dash|is_unique[categories.slug]');
 		}
 		
 		// Return True if Validation Passes

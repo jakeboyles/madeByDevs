@@ -6,6 +6,8 @@
 			<h3>Posts</h3>		
 		</div>
 
+		<!-- START Form -->
+		<?php echo form_open( 'admin/posts/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
 		<div class="row">
 			<div class="col-md-8">
 		 		<div class="grid simple">
@@ -51,32 +53,25 @@
 								<?php endif; ?>
 								<!-- END New Record Added Message -->
 
-								<!-- START Form -->
-								<?php echo form_open( 'admin/posts/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
+								<div class="form-group">
+									<?php echo form_label( 'Post Title*', 'title', array( 'class' => 'form-label' ) ); ?>
+									<span class="help"></span>
+									<?php echo form_input( array('name' => 'title', 'class' => 'form-control', 'id' => 'title', 'value' => set_value( 'title', $record['title'] ) ) ); ?>
+								</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Post Title*', 'title', array( 'class' => 'form-label' ) ); ?>
-										<span class="help"></span>
-										<?php echo form_input( array('name' => 'title', 'class' => 'form-control', 'id' => 'title', 'value' => set_value( 'title', $record['title'] ) ) ); ?>
-									</div>
+								<div class="form-group">
+									<?php echo form_label( 'Post URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
+									<span class="help">e.g. a post slug of "about" would produce gothamsoccerleague.com/about</span>
+									<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug', $record['slug'] ) ) ); ?>
+								</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Post URL Slug*', 'slug', array( 'class' => 'form-label' ) ); ?>
-										<span class="help">e.g. a post slug of "about" would produce gothamsoccerleague.com/about</span>
-										<?php echo form_input( array('name' => 'slug', 'class' => 'form-control', 'id' => 'slug', 'value' => set_value( 'slug', $record['slug'] ) ) ); ?>
-									</div>
+								<div class="form-group">
+									<?php echo form_label( 'Post Content', 'content', array( 'class' => 'form-label' ) ); ?>
+									<span class="help"></span>
+									<?php echo form_textarea( array('name' => 'content', 'class' => 'form-control', 'id' => 'content', 'value' => set_value( 'content', $record['content'] ) ) ); ?>
+								</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Post Content', 'content', array( 'class' => 'form-label' ) ); ?>
-										<span class="help"></span>
-										<?php echo form_textarea( array('name' => 'content', 'class' => 'form-control', 'id' => 'content', 'value' => set_value( 'content', $record['content'] ) ) ); ?>
-									</div>
-
-									<button type="submit" class="btn btn-primary">Update Post</button>
-
-									<?php echo form_hidden( 'original_slug', $record['slug'] ); ?>
-								<?php echo form_close(); ?>
-								<!-- END Form -->
+								<button type="submit" class="btn btn-primary">Update Post</button>
 
 							</div>
 
@@ -92,30 +87,36 @@
 
 		 		<div class="grid simple">
 					<div class="grid-title">
-						<h4 class="pull-left">Assign Categories</h4>
+						<h4 class="pull-left">Post Categories</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/categories'); ?>" class="btn btn-primary">Edit Categories</a>
+							<a href="<?php echo base_url('admin/categories'); ?>" class="btn btn-primary">View Categories</a>
 						</div>
 					</div>
 
 					<div class="grid-body">
-						<!-- 
-						<?php foreach( $divisions as $key => $val ): ?>
+						<?php foreach( $categories as $category ): ?>
 							<div class="checkbox check-primary">
-								<?php $checked = !empty( $this->input->post( 'divisions' ) ) && in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE; ?>
-								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
-								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
+								<?php
+								// Determine if the Checkbox Should be Checked or Not
+								if( !empty( $this->input->post( 'categories' ) ) && in_array( $category['id'], $this->input->post( 'categories' ) ) )
+									$checked = TRUE;
+								elseif ( !empty( $post_categories ) && empty( $this->input->post() ) && array_key_exists( $category['id'], $post_categories ) )
+									$checked = TRUE;
+								else
+									$checked = FALSE;
+								?>
+								<?php echo form_checkbox( array( 'name' => 'categories[]', 'value' => $category['id'], 'id' => 'checkbox' . $category['id'], 'checked' => $checked ) ); ?>
+								<?php echo form_label( $category['name'], 'checkbox' . $category['id'], array( 'class' => 'form-label' ) ); ?>
 							</div>
 						<?php endforeach; ?>
-						-->
 					</div>
 				</div>
 				
 			</div><!-- end .col-md-4 -->
 
-
-
 		</div><!-- end .row -->
+		<?php echo form_hidden( 'original_slug', $record['slug'] ); ?>
+		<?php echo form_close(); ?>
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

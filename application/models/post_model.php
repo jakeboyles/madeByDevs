@@ -82,6 +82,25 @@ class Post_model extends MY_Model
 			// Update Record in Database
 			$this->update( $id, $data );
 
+			// Delete Previous Categories From this Post
+			$this->db->where( 'post_id', $id );
+			$this->db->delete( 'post_categories' );
+
+			// Update with Existing Categories
+			if( !empty( $post['categories'] ) )
+			{
+				foreach( $post['categories'] as $category_id )
+				{
+					$post_categories[] = array(
+						'post_id' => $id,
+						'category_id' => $category_id,
+						'created_at' => $this->mysql_datetime(),
+						'created_by' => $this->session->userdata( 'user_id' )
+					);
+				}
+				$this->db->insert_batch( 'post_categories', $post_categories ); 
+			}			
+
 			return true;
 		}
 
@@ -95,6 +114,30 @@ class Post_model extends MY_Model
 		if( $id )
 		{
 			$this->delete( $id );
+		}
+
+		return false;
+	}
+
+	// Get Categories By Post ID
+	public function get_post_categories( $post_id = FALSE )
+	{	
+		$this->db->select( 'c.id, c.name, c.slug, c.created_at, c.created_by, c.modified_at, c.modified_by' );
+		$this->db->join( 'categories c', 'c.id = pc.category_id', 'left outer' );
+		$this->db->where( 'post_id', $post_id );
+		$query = $this->db->get( 'post_categories pc' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+
+			$categories = array();
+			foreach( $rows as $row )
+			{
+				$categories[$row['id']] = $row;
+			}
+			return $categories;
 		}
 
 		return false;
