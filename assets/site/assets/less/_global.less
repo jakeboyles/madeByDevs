@@ -41,7 +41,7 @@ h2, h4 {
 h3, h5, h6, p {
 	.font-size(24);
 }
-.container .row a {
+a {
 	text-decoration: underline;
 }
 img {
@@ -138,6 +138,10 @@ img {
 	}
 	.navbar-nav>li>a {
 		.font-size(22);
+		text-decoration: none;
+		&:hover {
+			color: @white;
+		}
 	}
 	.navbar-toggle {
 		top: 31px;
@@ -723,7 +727,57 @@ footer {
 
 }
 
+/*######################################################################
+# Starting Jon’s Additions
+######################################################################*/
+
 // Search Field
-input.search {
-	background: @gray-light;
+.search-group {
+	input.search {
+		background: @gray-light;
+	}
+	button {
+		height: 55rem;
+		font-size: 17px !important;
+	}
+
+	@media (max-width: @screen-xs-max) {
+	  button {
+	  	font-size: 10px !important;
+	  }
+	}
 }
+
+// List Grey and White Alternating
+.list-grey-alternating {
+	list-style: none;
+	padding: 0;
+
+	li {
+		
+		a {
+			text-decoration: none;
+			display: block;
+			color: @gray;
+			padding: 45rem 52rem;
+
+			i {
+				float: right;
+				padding-top: 5px;
+			}
+		}
+
+		&:nth-child(odd) {
+			background: @gray-light;
+		}
+
+		&:hover {
+			background-color: @blue-royal;
+			a {
+				color: #fff;
+			}
+		}
+	}
+}
+
+

@@ -8,7 +8,7 @@ class Location_model extends MY_Model
 	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( $parent_id = FALSE )
+	public function get_records( $parent_id = FALSE, $atts = FALSE )
 	{
 		// Construct Query
 		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
@@ -21,6 +21,12 @@ class Location_model extends MY_Model
 		else
 		{
 			$this->db->where( 'parent_id', NULL );
+		}
+
+		// Check for Custom Where
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] );
 		}
 
 		// Run Query

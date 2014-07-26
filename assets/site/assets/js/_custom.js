@@ -126,3 +126,39 @@ $(window).trigger('resize');
 $(window).load(function(){
 	$(window).trigger('resize');
 });
+
+
+// Starting Jon's Additions
+$(document).ready(function(){
+	/*######################################################################
+	# Directions
+	######################################################################*/
+	// Location AJAX Selector
+	$('#search-locations-form').submit(function(e){
+		e.preventDefault();
+
+		// Set Vars
+		ajaxURL = $(this).attr('action');
+		search = $(this).find('#search-locations').val();
+		formData = $(this).serialize();
+		resultsContainer = $('.location-search-results');
+		dataContainer = resultsContainer.find('.data-return');
+
+		// If the Search Was Not Empty
+		if( search.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				type: 'POST',
+				data: formData,
+				success: function( response ) {
+					resultsContainer.removeClass('hide');
+					dataContainer.html( response );
+				}
+			});
+		}
+	});
+});
+// End Jon's Additions
+
+
