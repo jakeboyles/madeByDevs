@@ -35,8 +35,18 @@ class Location_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
-			$rows = $query->result_array();
-			return $rows;
+			// Return a Single Row
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			// Return All Rows
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
 		}
 
 		return false;

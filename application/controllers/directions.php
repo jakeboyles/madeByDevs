@@ -10,18 +10,17 @@ class Directions extends Site_Controller
 		$this->load->model('Location_model');
 	}
 
+	// Display the Location Search
 	public function index()
 	{
 		// Store Data to Pass to View
 		$data = array();
 
-		// Fetch a List of Locations
-		//
-
 		// Load View
 		$this->load->site_template( 'directions_search', $data );
 	}
 
+	// Find a List of Locations 
 	public function ajax_search_locations()
 	{
 		$search = $this->input->post('search');
@@ -44,6 +43,28 @@ class Directions extends Site_Controller
 		}
 
 		return false;
+	}
+
+	// View for Locations
+	public function location( $id = FALSE )
+	{
+		if( $id && is_numeric( $id ) )
+		{
+			// Get This Location Data
+			$atts = array( 'where' => 'id = ' . $id, 'single' => TRUE );
+			$location = $this->Location_model->get_records( FALSE, $atts );
+			echo '<pre>'; var_dump( $location ); echo '</pre>';
+
+			// If a Location Was Found
+			if( $location )
+			{
+				// Get Fields For this Location
+				$fields = $this->Location_model->get_records( $id );
+				echo '<pre>'; var_dump( $fields ); echo '</pre>';
+			}
+			
+		}
+
 	}
 
 }
