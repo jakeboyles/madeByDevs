@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 		<title><?php if( !empty( $page_title) ) echo $page_title . ' | '; ?>Gotham Soccer League</title>
 		<link href="<?php echo base_url('assets/site/assets/css/main.min.css'); ?>" rel="stylesheet">
-		<link href="<?php echo base_url('assets/site/assets/css/chosen.css'); ?>" rel="stylesheet">
 
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -37,7 +36,7 @@
 
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li><a href="<?php echo base_url(); ?>">Home</a></li>
 					<li><a href="<?php echo base_url('about'); ?>">About Us</a></li>
 					<li><a href="<?php echo base_url('divisions'); ?>">Divisions</a></li>
 					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
