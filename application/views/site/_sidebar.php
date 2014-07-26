@@ -1,7 +1,6 @@
 <div class="col-md-pull-8 col-md-4">
 	
 	<!-- BEGIN Latest News Widget -->
-	<h2>Latest News Widget</h2>
 	<h2 class="newsTitle">Latest News</h2>
 	<ul class="newsLinks">
 		<li><a href="#"><span>Three new teams enter Division 2</span><i class="fa fa-chevron-right"></i></a></li>
