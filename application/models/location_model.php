@@ -11,7 +11,7 @@ class Location_model extends MY_Model
 	public function get_records( $parent_id = FALSE, $atts = FALSE )
 	{
 		// Construct Query
-		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
+		$this->db->select( 'l.id, l.name, l.phone, l.website, l.street_address, l.street_address_2, l.city, l.state, l.postal, l.map_latitude, l.map_longitude, l.map_zoom, l.description, l.created_at, l.modified_at' );
 
 		// If Parent ID is Set, Fetch Locations By this Parent ID
 		if( $parent_id )

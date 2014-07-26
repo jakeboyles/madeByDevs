@@ -48,23 +48,25 @@ class Directions extends Site_Controller
 	// View for Locations
 	public function location( $id = FALSE )
 	{
+		$data = array();
+
 		if( $id && is_numeric( $id ) )
 		{
 			// Get This Location Data
 			$atts = array( 'where' => 'id = ' . $id, 'single' => TRUE );
-			$location = $this->Location_model->get_records( FALSE, $atts );
-			echo '<pre>'; var_dump( $location ); echo '</pre>';
+			$data['location'] = $this->Location_model->get_records( FALSE, $atts );
 
 			// If a Location Was Found
-			if( $location )
+			if( $data['location'] )
 			{
 				// Get Fields For this Location
-				$fields = $this->Location_model->get_records( $id );
-				echo '<pre>'; var_dump( $fields ); echo '</pre>';
+				$data['fields'] = $this->Location_model->get_records( $id );
 			}
-			
+
 		}
 
+		// Load Location View
+		$this->load->site_template( 'directions_location', $data );
 	}
 
 }
