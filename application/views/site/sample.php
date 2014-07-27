@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-push-4">
+<div id="content" class="col-md-8 col-md-push-4">
 
 	<!-- START Header cycler -->
 	<div id="carousel-head-show" class="carousel slide" data-ride="carousel">

@@ -1,10 +1,10 @@
 <div id="content" class="col-md-8 col-md-push-4">
 
-	<?php if( !empty( $location ) ): ?>
+	<?php if( !empty( $field ) ): ?>
 	<div class="location">
 
-		<!-- Location Name -->
-		<h1><?php echo $location['name']; ?></h1>
+		<!-- Field Name -->
+		<h1><a href="<?php echo base_url( 'directions/location/' . $location['id'] ); ?>"><?php echo $location['name']; ?></a> <i class="fa fa-angle-right"></i> <?php echo $field['name']; ?></h1>
 
 		<!-- Location Map -->
 		<div class="map">map goes here</div>
@@ -42,25 +42,11 @@
 		</div>
 		<?php endif; ?>
 
-		<!-- Location Fields -->
-		<?php if( !empty( $fields ) ): ?>
-		<div class="fields">
-			<h2>Fields</h2>
-			<ul class="list-grey-alternating">
-				<?php foreach( $fields as $field ): ?>
-				<li>
-					<a href="<?php echo base_url('directions/field/'. $field['id']); ?>"><?php echo $field['name']; ?> <i class="fa fa-chevron-right"></i></a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-		<?php endif; ?>
-
 	</div>
 	<?php else: ?>
 
-		<h1>Location Not Found</h1>
-		<p>It appears you have visited a location that does not exists. Please try our <a href="<?php echo base_url('directions'); ?>">directions page</a> to find the location/field you are looking for.</p>
+		<h1>Field Not Found</h1>
+		<p>It appears you have visited a field that does not exists. Please try our <a href="<?php echo base_url('directions'); ?>">directions page</a> to find the location/field you are looking for.</p>
 
 	<?php endif; ?>
 

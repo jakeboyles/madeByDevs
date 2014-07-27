@@ -7,51 +7,60 @@ body {
 	.font-size(24);
 	color: @blue;
 }
-h1 {
-	font-family: 'Roboto Slab';
-}
-h2, h3, h4, h5, h6 {
-	font-family: 'Open Sans';
-}
-h2 {
-	font-weight: 600;
-}
-h1, h3, h5 {
-	font-weight: 700;
-}
-h4, h6 {
-	font-weight: 400;
-}
-h1, h3 {
-	text-transform: uppercase;
-}
-h1, h3, h5, h6 {
-	color: @blue;
-}
-h2, h4 {
-	color: @gray;
-}
 
-h1 {
-	.font-size(40);
-}
-h2, h4 {
-	.font-size(30);
-}
-h3, h5, h6, p {
-	.font-size(24);
-}
-a {
-	text-decoration: underline;
-}
 img {
 	max-width: 100%;
 }
-.btn {
-	margin-bottom: 6px;
-	margin-bottom: 6rem;
-	.font-size(24);
+
+// Basic Content Styling
+#content {
+	h1 {
+		font-family: 'Roboto Slab';
+	}
+	h2, h3, h4, h5, h6 {
+		font-family: 'Open Sans';
+	}
+	h2 {
+		font-weight: 600;
+	}
+	h1, h3, h5 {
+		font-weight: 700;
+	}
+	h4, h6 {
+		font-weight: 400;
+	}
+	h1, h3 {
+		text-transform: uppercase;
+	}
+	h1, h3, h5, h6 {
+		color: @blue;
+	}
+	h2, h4 {
+		color: @gray;
+	}
+
+	h1 {
+		.font-size(40);
+	}
+	h2, h4 {
+		.font-size(30);
+	}
+	h3, h5, h6, p {
+		.font-size(24);
+	}
+	a {
+		//text-decoration: underline;
+	}
+
+	.btn {
+		margin-bottom: 6px;
+		margin-bottom: 6rem;
+		.font-size(24);
+	}
+
 }
+
+
 .navbar-inverse {
 	background: @gray-lighter url(../img/header-blue-sm.png)  0 32px repeat-x;
 }
@@ -254,51 +263,6 @@ img {
 		.padding(24,35);
 		margin-bottom: 6px;
 		margin-bottom: 6rem;
-	}
-	.newsLinks {
-		list-style: none;
-		margin-left: 0;
-		padding-left: 0;
-		li {
-			a {
-				display: block;
-				position: relative;
-				text-decoration: none;
-				background: @blue-royal;
-				color: #fff;
-				.font-size(24);
-				font-weight: bold;
-				font-family: 'Open Sans';
-				.padding(45,35);
-				margin-bottom: 9px;
-				margin-bottom: 9rem;
-				overflow: auto;
-				&:hover {
-					background: @blue;
-				}
-				i {
-					position: absolute;
-					right: 25px;
-				}
-				span {
-					width:85%;
-					display: block;
-					float: left;
-				}
-			}
-			&:last-child {
-				a {
-					background: @gray-light;
-					color: @gray;
-					text-align: center;
-					text-transform: uppercase;
-					&:hover {
-						background: @blue-royal;
-						color: #fff;
-					}
-				}
-			}
-		}
 	}
 	.dropdowns {
 		h3 {

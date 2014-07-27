@@ -146,6 +146,37 @@ class Location_model extends MY_Model
 		return false;
 	}
 
+	// Get a Single Location Field
+	public function get_field( $id = FALSE, $atts = FALSE )
+	{
+		if( $id )
+		{
+			// Construct Query
+			$this->db->select( 'l.id, l.parent_id, l.name, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
+
+			// Set Where
+			$this->db->where( 'id', $id );
+
+			// Check for Custom Where
+			if( !empty( $atts['where'] ) )
+			{
+				$this->db->where( $atts['where'] );
+			}
+
+			// Run Query
+			$query = $this->db->get( 'locations l' );
+
+			// If Rows Were Found, Return Them
+			if($query->num_rows > 0)
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+		}
+
+		return false;
+	}
+
 	// Insert a Field for this Location
 	public function insert_location_field( $post = FALSE )
 	{

@@ -45,7 +45,7 @@ class Directions extends Site_Controller
 		return false;
 	}
 
-	// View for Locations
+	// View for a Single Location
 	public function location( $id = FALSE )
 	{
 		$data = array();
@@ -67,6 +67,25 @@ class Directions extends Site_Controller
 
 		// Load Location View
 		$this->load->site_template( 'directions_location', $data );
+	}
+
+	// View for a Single Field
+	public function field( $id = FALSE )
+	{
+		$data = array();
+
+		if( $id && is_numeric( $id ) )
+		{
+			// Get This Field Data
+			$data['field'] = $this->Location_model->get_field( $id );
+
+			// Get The Parent Locations Data
+			$atts = array( 'where' => 'id = ' . $data['field']['parent_id'], 'single' => TRUE );
+			$data['location'] = $this->Location_model->get_records( FALSE, $atts );
+		}
+
+		// Load Location View
+		$this->load->site_template( 'directions_field', $data );
 	}
 
 }
