@@ -14,7 +14,7 @@ class Directions extends Site_Controller
 	public function index()
 	{
 		// Store Data to Pass to View
-		$data = array();
+		$data['locations'] = $this->Location_model->get_records();
 
 		// Load View
 		$this->load->site_template( 'directions_search', $data );
