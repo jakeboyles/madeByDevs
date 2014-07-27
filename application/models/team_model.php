@@ -7,7 +7,7 @@ class Team_model extends MY_Model
 	public $return_type = 'array';
 
 	// Get Records
-	public function get_records( )
+	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
 		$this->db->select('
@@ -17,6 +17,12 @@ class Team_model extends MY_Model
 		');
 		$this->db->join( 'users u', 'u.id = t.captain_user_id', 'left outer' );
 		$this->db->join( 'divisions d', 'd.id = t.division_id', 'left outer' );
+		$this->db->order_by( 't.name', 'ASC' );
+
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] );
+		}
 
 		// Run Query
 		$query = $this->db->get( 'teams t' );
@@ -24,8 +30,16 @@ class Team_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
-			$rows = $query->result_array();
-			return $rows;
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
 		}
 
 		return false;

@@ -1,6 +1,6 @@
 <?php $location_count = count( $locations ); ?>
 
-<p><?php echo $location_count; ?> <?php echo $location_count > 1 ? 'Results' : 'Result'; ?></p>
+<p><?php echo $location_count; ?> <?php echo $location_count == 1 ? 'Result' : 'Results'; ?></p>
 <ul class="list-grey-alternating">
 	<?php foreach( $locations as $location ): ?>
 	<li>

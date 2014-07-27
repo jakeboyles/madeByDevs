@@ -29,6 +29,9 @@ class Location_model extends MY_Model
 			$this->db->where( $atts['where'] );
 		}
 
+		// Order By Name ASC
+		$this->db->order_by( 'l.name', 'ASC' );
+
 		// Run Query
 		$query = $this->db->get( 'locations l' );
 

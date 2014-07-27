@@ -133,7 +133,7 @@ $(document).ready(function(){
 	/*######################################################################
 	# Directions
 	######################################################################*/
-	// Location AJAX Selector
+	// Location AJAX Search
 	$('#search-locations-form').submit(function(e){
 		e.preventDefault();
 
@@ -142,6 +142,34 @@ $(document).ready(function(){
 		search = $(this).find('#search-locations').val();
 		formData = $(this).serialize();
 		resultsContainer = $('.location-search-results');
+		dataContainer = resultsContainer.find('.data-return');
+
+		// If the Search Was Not Empty
+		if( search.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				type: 'POST',
+				data: formData,
+				success: function( response ) {
+					resultsContainer.removeClass('hide');
+					dataContainer.html( response );
+				}
+			});
+		}
+	});
+	/*######################################################################
+	# Teams
+	######################################################################*/
+	// Team AJAX Search
+	$('#search-teams-form').submit(function(e){
+		e.preventDefault();
+
+		// Set Vars
+		ajaxURL = $(this).attr('action');
+		search = $(this).find('#search-teams').val();
+		formData = $(this).serialize();
+		resultsContainer = $('.team-search-results');
 		dataContainer = resultsContainer.find('.data-return');
 
 		// If the Search Was Not Empty
