@@ -17,6 +17,7 @@ class Directions extends Site_Controller
 		$data['locations'] = $this->Location_model->get_records();
 
 		// Load View
+		$data['page_title'] = 'Locations';
 		$this->load->site_template( 'directions_search', $data );
 	}
 
@@ -65,6 +66,12 @@ class Directions extends Site_Controller
 
 		}
 
+		// Set Page Title
+		if( !empty( $data['location']['name'] ) )
+		{
+			$data['page_title'] = $data['location']['name'];
+		}
+
 		// Load Location View
 		$this->load->site_template( 'directions_location', $data );
 	}
@@ -82,6 +89,12 @@ class Directions extends Site_Controller
 			// Get The Parent Locations Data
 			$atts = array( 'where' => 'id = ' . $data['field']['parent_id'], 'single' => TRUE );
 			$data['location'] = $this->Location_model->get_records( FALSE, $atts );
+		}
+
+		// Set Page Title
+		if( !empty( $data['field']['name'] ) )
+		{
+			$data['page_title'] = $data['location']['name'] . ': ' . $data['field']['name'];
 		}
 
 		// Load Location View

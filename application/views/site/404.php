@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-push-4">
+<div id="content" class="col-md-8 col-md-push-4">
 	<h1>Page Not Found</h1>
 	<p>It appears you have found a page that does not exist. Perhaps one of the links below will help get you on your way.</p>
 
