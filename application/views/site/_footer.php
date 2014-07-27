@@ -26,14 +26,13 @@
 		<div id="main-footer">
 			<div class="container">
 				<div class="row">
-					<p>Gotham Soccer League | <a href="#">Privacy Policy</a></p>
+					<p>Gotham Soccer League | <a href="<?php echo base_url('privacy-policy'); ?>">Privacy Policy</a></p>
 				</div>
 			</div>
 		</div>
 
 		<!-- Footer JS Files -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script> -->
 		<script src="<?php echo base_url('assets/site/assets/js/scripts.min.js'); ?>"></script>
 		
 	</body>
