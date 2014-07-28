@@ -30,6 +30,39 @@ class Content_model extends MY_Model
 		return false;
 	}
 
+	// Get Posts
+	public function get_posts( $atts = FALSE )
+	{
+		$this->db->select('
+			p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, 
+			CONCAT(u.first_name, " ", u.last_name) as author, u.email as author_email
+		', FALSE);
+		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+		$this->db->order_by( 'p.created_at', 'DESC' );
+
+		// Set Where if Passed Through
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] );
+		}
+
+		// Set Limit if Passed Through
+		if( !empty( $atts['limit'] ) )
+		{
+			$this->db->limit( $atts['limit'] );
+		}
+
+		$query = $this->db->get( 'posts p' );
+
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+
+		return false;
+	}
+
 	// Get Posts By Category ID
 	public function get_posts_by_category_id( $category_id, $limit = FALSE )
 	{
