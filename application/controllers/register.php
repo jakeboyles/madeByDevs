@@ -1,5 +1,5 @@
 <?php
-class History extends Site_Controller
+class Register extends Site_Controller
 {
 	function __construct()
 	{
@@ -18,6 +18,6 @@ class History extends Site_Controller
 		// Load View
 		//$data['page_title'] = 'Divisions';
 		$data = array();
-		$this->load->site_template( 'history', $data );
+		$this->load->site_template( 'register', $data );
 	}
 }
