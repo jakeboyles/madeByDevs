@@ -21,7 +21,7 @@
 		<?php if( !empty( $schedule ) ): ?>
 		<div class="schedule">
 			<?php foreach( $schedule as $session_schedule ): ?>
-			<h2><?php echo $session_schedule['season_name'] . ' ' . $session_schedule['session_name']; ?> Schedule</h2>
+			<h2><?php echo $session_schedule['season_name'] . ': ' . $session_schedule['session_name']; ?> Schedule</h2>
 				<?php if( !empty( $session_schedule['games'] ) ): ?>
 				<ul class="list-grey-alternating">
 					<?php foreach( $session_schedule['games'] as $game ): ?>
