@@ -3,11 +3,8 @@ class Session_model extends MY_Model
 {
 	// Callbacks to MY_Model class to Run Before Record Inserts
 	public $before_create = array( 'created_at', 'created_by' );
-	//public $after_create = array( 'update_divisions' );
 	public $before_update = array( 'modified_by' );
-	//public $after_update = array( 'update_divisions' );
 	public $return_type = 'array';
-	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
 	public function get_records( )
@@ -197,4 +194,52 @@ class Session_model extends MY_Model
 		// Else Return False
 		return false;
 	}
+
+	// Fetch a List of Sessions in the Current Season
+	public function get_active_sessions( $current_season_id = FALSE )
+	{
+		if( $current_season_id )
+		{
+			$this->db->select( 's.season_id, s.name' );
+			$query = $this->db->get( 'sessions s' );
+
+			if( $query->num_rows > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
+	// Fetch a List of Active Sessions By Division ID
+	public function get_active_sessions_by_division( $current_season_id = FALSE, $division_id = FALSE )
+	{
+		if( $current_season_id && $division_id )
+		{
+			$this->db->select( 'sd.session_id' );
+			$this->db->join( 'sessions s', 's.id = sd.session_id', 'left outer' );
+			$this->db->join( 'seasons se', 'se.id = s.season_id', 'left outer' );
+			$this->db->where( array( 'sd.division_id' => $division_id, 'se.id' => $current_season_id ) );
+			$this->db->order_by( 's.created_at', 'ASC' );
+			$query = $this->db->get( 'session_divisions sd' );
+
+			if( $query->num_rows > 0 )
+			{
+				$rows = $query->result_array();
+
+				$session_ids = array();
+				foreach( $rows as $row )
+				{
+					$session_ids[] = $row['session_id'];
+				}
+
+				return $session_ids;
+			}
+		}
+
+		return false;		
+	}
+
 }

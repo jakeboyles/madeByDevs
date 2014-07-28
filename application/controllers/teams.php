@@ -8,6 +8,8 @@ class Teams extends Site_Controller
 
 		// Load Models Needed
 		$this->load->model('Team_model');
+		$this->load->model('League_model');
+		$this->load->model('Session_model');
 	}
 
 	// Display the Location Search
@@ -55,6 +57,29 @@ class Teams extends Site_Controller
 			// Get This Team Data
 			$atts = array( 'where' => 't.id = ' . $id, 'single' => TRUE );
 			$data['team'] = $this->Team_model->get_records( $atts );
+
+			if( $data['team'] )
+			{
+				// Get Current Season ID
+				$atts = array( 'where' => 'l.id = 1', 'single' => true );
+				$league = $this->League_model->get_records( $atts );
+
+				// Get Active Sessions By Division (For Team)
+				$data['active_sessions'] = $this->Session_model->get_active_sessions_by_division( $league['current_season_id'], $data['team']['division_id'] );
+
+				if( $data['active_sessions'] )
+				{
+					// Fetch Game Schedule for All Sessions in the Current Season for this Team
+					$data['schedule'] = $this->Team_model->get_current_schedule( $data['team']['id'], $data['active_sessions'] );
+
+					// Fetch Roster for All Sessions in the Current Season for this Team
+					//$data['roster'] = $this->Team_model->get_current_roster();
+				}
+
+				// Fetch Photos for this Team
+				//$data['photos'] = $this->Team_model->get_team_photos();
+
+			}
 		}
 
 		// Set Page Title
