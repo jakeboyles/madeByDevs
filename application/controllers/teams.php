@@ -78,7 +78,6 @@ class Teams extends Site_Controller
 
 				// Fetch Photos for this Team
 				//$data['photos'] = $this->Team_model->get_team_photos();
-
 			}
 		}
 

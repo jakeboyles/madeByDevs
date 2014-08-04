@@ -139,7 +139,7 @@ class Team_model extends MY_Model
 		return false;
 	}
 
-	// Fetch the Team Schedule for Each Session in the Active Season
+	// Fetch a Team Schedule for Each Session in the Active Season
 	public function get_current_schedule( $team_id = FALSE, $active_sessions = FALSE )
 	{
 		/*
@@ -196,7 +196,7 @@ class Team_model extends MY_Model
 		if ( $team_id && $active_sessions )
 		{
 			$this->db->select('
-				g.id, g.game_date_time, g.score_home, g.score_away, g.session_id,
+				g.id, g.game_date_time, g.score_home, g.score_away, g.session_id, g.team_home_id, g.team_away_id, 
 				thome.name as team_home,
 				taway.name as team_away,
 				l.id as location_id, l.name as location, lf.name as location_field
@@ -212,8 +212,37 @@ class Team_model extends MY_Model
 
 			if( $query->num_rows > 0 )
 			{
+				$games = array();
 				$rows = $query->result_array();
-				return $rows;
+				foreach( $rows as $row )
+				{
+					// Determine if Away or Home
+					$row['is_home_team'] = ( $row['team_home_id'] == $team_id ) ? TRUE : FALSE;
+
+					// Set Opponent Info
+					$row['opponent_team_name'] = $row['is_home_team'] ? $row['team_away'] : $row['team_home'];
+					$row['opponent_team_id'] = $row['is_home_team'] ? $row['team_away_id'] : $row['team_home_id'];
+					
+					// Determine Win or Loss
+					if( $row['score_home'] != 0 || $row['score_away'] != 0 )
+					{
+						if( $row['is_home_team'] )
+						{
+							$row['result'] = ( $row['score_home'] > $row['score_away'] ) ? 'Win' : 'Loss';
+						}
+						elseif( !$row['is_home_team'] )
+						{
+							$row['result'] = ( $row['score_home'] > $row['score_away'] ) ? 'Loss' : 'Win';
+						}
+					}
+					
+					// Restore Appended Array Data to $games array to be returned
+					$games[] = $row;
+				}
+
+				//echo '<pre>'; var_dump( $rows ); echo '</pre>'; exit();
+				//echo '<pre>'; var_dump( $games ); echo '</pre>'; exit();
+				return $games;
 			}
 		}
 
