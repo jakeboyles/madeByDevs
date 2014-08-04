@@ -10,7 +10,10 @@ class League_model extends MY_Model
 	public function get_records( $atts = FALSE )
 	{
 		// Determine the Active Season
-		$this->db->select( 'l.current_season_id, s.name, s.year_start, s.year_end, s.description' );
+		$this->db->select('
+			l.current_season_id, 
+			s.name as current_season_name, s.year_start as season_year_start, s.year_end as season_year_end, s.description as season_description
+		');
 		$this->db->join( 'seasons s', 's.id = l.current_season_id' );
 
 		// Set Custom Where Clause if Defined

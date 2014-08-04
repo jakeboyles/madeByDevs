@@ -142,6 +142,7 @@ class Team_model extends MY_Model
 	// Fetch the Team Schedule for Each Session in the Active Season
 	public function get_current_schedule( $team_id = FALSE, $active_sessions = FALSE )
 	{
+		/*
 		if( $team_id && $active_sessions )
 		{
 			// Loop Through to get a schedule for each session
@@ -176,19 +177,43 @@ class Team_model extends MY_Model
 					$row = $query->row_array();
 
 					// Apply Season Name to Schedule Array
-					$schedule[$row['session_name']]['season_name'] = $row['season_name'];
+					$schedule['season_name'] = $row['season_name'];
 
 					// Apply Session Name to Schedule Array
-					$schedule[$row['session_name']]['session_name'] = $row['session_name'];
+					$schedule['sessions'][] = $row['session_name'];
 
 					// Apply Games to the Schedule Array
-					$schedule[$row['session_name']]['games'] = $games;
+					$schedule['games'][$row['session_name']] = $games;
 				}
 			}
 
 			if ( !empty( $schedule ) )
 			{
 				return $schedule;
+			}
+		}
+		*/
+		if ( $team_id && $active_sessions )
+		{
+			$this->db->select('
+				g.id, g.game_date_time, g.score_home, g.score_away, g.session_id,
+				thome.name as team_home,
+				taway.name as team_away,
+				l.id as location_id, l.name as location, lf.name as location_field
+			');
+			$this->db->join( 'locations l', 'l.id = g.location_id', 'left outer' );
+			$this->db->join( 'locations lf', 'lf.id = g.location_field_id', 'left outer' );
+			$this->db->join( 'teams thome', 'thome.id = g.team_home_id' );
+			$this->db->join( 'teams taway', 'taway.id = g.team_away_id' );
+			$this->db->where( '(team_home_id = ' . $team_id . ' OR team_away_id = ' . $team_id . ')' );
+			$this->db->where_in( 'g.session_id', $active_sessions );
+			$this->db->order_by( 'g.game_date_time', 'ASC' );
+			$query = $this->db->get( 'games g' );
+
+			if( $query->num_rows > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
 			}
 		}
 

@@ -62,15 +62,15 @@ class Teams extends Site_Controller
 			{
 				// Get Current Season ID
 				$atts = array( 'where' => 'l.id = 1', 'single' => true );
-				$league = $this->League_model->get_records( $atts );
+				$data['league'] = $this->League_model->get_records( $atts );
 
 				// Get Active Sessions By Division (For Team)
-				$data['active_sessions'] = $this->Session_model->get_active_sessions_by_division( $league['current_season_id'], $data['team']['division_id'] );
+				$data['active_sessions'] = $this->Session_model->get_active_sessions_by_division( $data['league']['current_season_id'], $data['team']['division_id'] );
 
 				if( $data['active_sessions'] )
 				{
 					// Fetch Game Schedule for All Sessions in the Current Season for this Team
-					$data['schedule'] = $this->Team_model->get_current_schedule( $data['team']['id'], $data['active_sessions'] );
+					$data['games'] = $this->Team_model->get_current_schedule( $data['team']['id'], $data['active_sessions'] );
 
 					// Fetch Roster for All Sessions in the Current Season for this Team
 					//$data['roster'] = $this->Team_model->get_current_roster();

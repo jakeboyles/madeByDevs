@@ -18,20 +18,16 @@
 		<?php endif; ?>
 
 		<!-- Team Schedule -->
-		<?php if( !empty( $schedule ) ): ?>
+		<?php if( !empty( $games) ): ?>
 		<div class="schedule">
-			<?php foreach( $schedule as $session_schedule ): ?>
-			<h2><?php echo $session_schedule['season_name'] . ': ' . $session_schedule['session_name']; ?> Schedule</h2>
-				<?php if( !empty( $session_schedule['games'] ) ): ?>
-				<ul class="list-grey-alternating">
-					<?php foreach( $session_schedule['games'] as $game ): ?>
+			<h2><?php echo $league['current_season_name']; ?> Schedule</h2>
+			<ul class="list-grey-alternating">
+				<?php foreach( $games as $game ): ?>
 					<li>
 						<a href="#"><?php echo $game['team_home']; ?> vs <?php echo $game['team_away']; ?> <i class="fa fa-chevron-right"></i></a>
 					</li>
-					<?php endforeach; ?>
-				</ul>
-				<?php endif; ?>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</ul>
 		</div>
 		<?php endif; ?>
 
