@@ -7,11 +7,17 @@ class Division_model extends MY_Model
 	public $return_type = 'array';
 
 	// Get Records
-	public function get_records( )
+	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
 		$this->db->select( 'd.id, d.name, d.created_at, d.modified_at, dt.type as division_type' );
 		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
+
+		// Check for a Custom Where Query
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] );
+		}
 
 		// Run Query
 		$query = $this->db->get( 'divisions d' );

@@ -2,7 +2,7 @@
 
 	<h1>Find a Division</h1>
 
-	<?php echo form_open( 'teams/ajax_search_divisions', array( 'id' => 'search-divisions-form') ); ?>
+	<?php echo form_open( 'divisions/ajax_search_divisions', array( 'id' => 'search-divisions-form') ); ?>
 	<div class="input-group search-group">
 
 		<?php echo form_input( array(
@@ -19,7 +19,7 @@
 	</div>
 	<?php echo form_close(); ?>
 
-	<div class="team-search-results hide">
+	<div class="division-search-results hide">
 		<div class="spacer-20px"></div>
 		<div class="data-return"></div>
 		<hr>
@@ -30,7 +30,7 @@
 		<ul class="list-grey-alternating">
 		<?php foreach( $divisions as $division ): ?>
 			<li>
-				<a href="<?php echo base_url('divisions/'. $division['id']); ?>"><?php echo $division['name']; ?> <i class="fa fa-chevron-right"></i></a>
+				<a href="<?php echo base_url('divisions/history/'. $division['id']); ?>"><?php echo $division['name']; ?> <i class="fa fa-chevron-right"></i></a>
 			</li>
 		<?php endforeach; ?>
 		</ul>

@@ -186,6 +186,35 @@ $(document).ready(function(){
 			});
 		}
 	});
+	/*######################################################################
+	# Divisions
+	######################################################################*/
+	// Team AJAX Search
+	$('#search-divisions-form').submit(function(e){
+		e.preventDefault();
+
+		// Set Vars
+		ajaxURL = $(this).attr('action');
+		search = $(this).find('#search-divisions').val();
+		formData = $(this).serialize();
+		resultsContainer = $('.division-search-results');
+		dataContainer = resultsContainer.find('.data-return');
+
+		// If the Search Was Not Empty
+		if( search.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				type: 'POST',
+				data: formData,
+				success: function( response ) {
+					resultsContainer.removeClass('hide');
+					dataContainer.html( response );
+				}
+			});
+		}
+	});
+
 });
 // End Jon's Additions
 
