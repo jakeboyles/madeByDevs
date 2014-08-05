@@ -21,9 +21,9 @@
 		<?php if( !empty( $games) ): ?>
 
 			<!-- Team Schedule (Desktop) -->
-			<div class="team-schedule hidden-xs">
+			<div class="alternating-table-container hidden-xs">
 				<h3><?php echo $league['current_season_name']; ?> Schedule</h3>
-				<table class="table table-striped standings">
+				<table class="table table-striped stripe-pattern-one">
 					<thead>
 						<tr>
 							<th>Date</th>
@@ -59,8 +59,8 @@
 
 			<!-- Team Schedule (Mobile) -->
 			<div class="mobile-expand-list visible-xs">
-				<h3>Game Schedule</h3>
-				<ul class="schedule">
+				<h3><?php echo $league['current_season_name']; ?> Schedule</h3>
+				<ul class="content">
 					<?php foreach( $games as $game ): ?>
 					<li>
 						<a href="#"><?php echo date( 'M j Y - g:ia', strtotime( $game['game_date_time'] ) ); ?><i class="fa fa-chevron-right"></i></a>
@@ -95,9 +95,54 @@
 
 		<!-- Team Roster -->
 		<?php if( !empty( $roster ) ): ?>
-		<div class="roster">
 
-		</div>
+			<!-- Team Roster (Desktop) -->
+			<div class="alternating-table-container hidden-xs">
+				<h3><?php echo $league['current_season_name']; ?> Roster</h3>
+				<table class="table table-striped stripe-pattern-one">
+					<thead>
+						<tr>
+							<th>Player Name</th>
+							<th>Position</th>
+							<th>Number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $roster as $player ): ?>
+						<tr>
+							<td><?php echo $player['first_name'] . ' ' . $player['last_name']; ?></td>
+							<td><?php echo $player['position']; ?></td>
+							<td><?php echo $player['player_number']; ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Team Roster (Mobile) -->
+			<div class="mobile-expand-list visible-xs">
+				<h3><?php echo $league['current_season_name']; ?> Roster</h3>
+				<ul class="content">
+					<?php foreach( $roster as $player ): ?>
+					<li>
+						<a href="#"><?php echo $player['first_name'] . ' ' . $player['last_name']; ?><i class="fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<h5 class="title">Position</h5>
+								<h6 class="option">
+									<?php echo $player['position']; ?>
+								</h6>
+								<h5 class="title">Number</h5>
+								<h6 class="option">
+									<?php echo $player['player_number']; ?>
+								</h6>
+							</li>
+						</ul>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+
 		<?php endif; ?>
 
 		<!-- Team History -->

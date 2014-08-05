@@ -443,7 +443,7 @@ form {
 			margin-bottom: 0;
 		}
 	}
-	.standings {
+	.stripe-pattern-one {
 		border-collapse: collapse;
 		a {
 			color: @blue;
@@ -481,20 +481,20 @@ form {
 			}
 		}
 	}
-	.standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
+	.stripe-pattern-one.table-striped>tbody>tr:nth-child(even)>td, .stripe-pattern-one.table-striped>tbody>tr:nth-child(even)>th {
 		background: @blue-lighter;
 	}
 	&.alternate {
 		.team-header {
 			background-color: @gray;
 		}
-		.standings.table-striped>tbody>tr:nth-child(even)>td, .standings.table-striped>tbody>tr:nth-child(even)>th {
+		.stripe-pattern-one.table-striped>tbody>tr:nth-child(even)>td, .stripe-pattern-one.table-striped>tbody>tr:nth-child(even)>th {
 			background: @blue;
 		}
-		.standings.table-striped>tbody>tr:nth-child(odd)>td, .standings.table-striped>tbody>tr:nth-child(odd)>th {
+		.stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>td, .stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>th {
 			background: @gray;
 		}
-		.standings {
+		.stripe-pattern-one {
 			a {
 				color: @gray-light;
 				&:hover {
@@ -514,7 +514,7 @@ form {
 		}
 	}
 }
-.team-schedule .standings.table-striped>tbody>tr:nth-child(odd)>td, .team-schedule.standings.table-striped>tbody>tr:nth-child(odd)>th {
+.alternating-table-container .stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>td, .alternating-table-container.stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>th {
 	background: @gray-light;
 }
 
@@ -647,8 +647,8 @@ footer {
 				}
 			}
 		}
-		.team-schedule {
-			.standings {
+		.alternating-table-container {
+			.stripe-pattern-one {
 				tbody {
 					tr {
 						td {

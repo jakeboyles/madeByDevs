@@ -253,19 +253,19 @@ class Team_model extends MY_Model
 		if( $team_id )
 		{
 			$this->db->select('
-				tp.team_id, tp.user_id, tp.player_number,
+				tp.player_number,
 				u.first_name, u.last_name,
 				p.name as position, p.abbreviation as position_abbreviation
 			');
 			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
 			$this->db->join( 'positions p', 'p.id = tp.position_id', 'left outer' );
+			$this->db->where( 'tp.team_id', $team_id );
+			$this->db->order_by( 'u.last_name ASC, u.first_name ASC' );
 			$query = $this->db->get( 'team_players tp' );
-			//echo '<pre>'; var_dump( $this->db->last_query() ); echo '</pre>'; exit();
 
 			if( $query->num_rows() > 0 )
 			{
 				$rows = $query->result_array();
-				echo '<pre>'; var_dump( $rows ); echo '</pre>'; exit();
 				return $rows;
 			}
 		}
