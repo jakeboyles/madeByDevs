@@ -7,7 +7,55 @@
 		<h1><a href="<?php echo base_url( 'directions/location/' . $location['id'] ); ?>"><?php echo $location['name']; ?></a> <i class="fa fa-angle-right"></i> <?php echo $field['name']; ?></h1>
 
 		<!-- Location Map -->
-		<div class="map">map goes here</div>
+		<?php if( !empty( $field['map_latitude'] ) && !empty( $field['map_longitude'] ) && !empty( $field['map_zoom'] ) ): ?>
+			<?php 
+			$map_data = array( 
+				'latitude' => $field['map_latitude'], 
+				'longitude' => $field['map_longitude'], 
+				'zoom' => (int) $field['map_zoom']
+			);
+			$map_markers = array( array(
+				'latitude' => $field['map_latitude'], 
+				'longitude' => $field['map_longitude'], 
+				'zoom' => (int) $field['map_zoom']
+			) );
+			?>
+			<script type="text/javascript">
+			// Create a JavaScript Objects from PHP
+			<?php echo "var mapData = " . json_encode( $map_data) . ';'; ?>
+			<?php echo "var mapItems = " . json_encode($map_markers) . ';'; ?>
+
+			// Initialize Map
+			function initialize() {
+				
+				// Set Map Options
+				var mapOptions = {
+					center: new google.maps.LatLng( mapData.latitude, mapData.longitude ),
+					zoom: mapData.zoom,
+					mapTypeId: google.maps.MapTypeId.HYBRID,
+					scrollwheel: false
+				};
+				
+				// Set Map Var and Bind Options
+				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+				// Set Marker and i Variables
+				var marker, i;
+				
+				// Loop Through the Markers and Infoboxes then add Them to the Map
+				for ( i = 0; i < mapItems.length; i++ ) {
+					// Add Marker
+					marker = new google.maps.Marker({
+						position: new google.maps.LatLng(mapItems[i].latitude, mapItems[i].longitude),
+						map: map,
+						//icon: iconBase + 'map-marker-' + mapItems[i].icon  + '.png'
+					});
+				}
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+			</script>
+			<div id="map-canvas"></div>
+		<?php endif; ?>
 
 		<!-- Location Description -->
 		<?php if( !empty( $location['description'] ) ): ?>
