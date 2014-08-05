@@ -73,7 +73,7 @@ class Teams extends Site_Controller
 					$data['games'] = $this->Team_model->get_current_schedule( $data['team']['id'], $data['active_sessions'] );
 
 					// Fetch Roster for All Sessions in the Current Season for this Team
-					//$data['roster'] = $this->Team_model->get_current_roster();
+					$data['roster'] = $this->Team_model->get_team_roster( $data['team']['id'] );
 				}
 
 				// Fetch Photos for this Team

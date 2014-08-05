@@ -240,8 +240,6 @@ class Team_model extends MY_Model
 					$games[] = $row;
 				}
 
-				//echo '<pre>'; var_dump( $rows ); echo '</pre>'; exit();
-				//echo '<pre>'; var_dump( $games ); echo '</pre>'; exit();
 				return $games;
 			}
 		}
@@ -249,6 +247,30 @@ class Team_model extends MY_Model
 		return false;
 	}
 
-	
+	// Fetch the Team Roster
+	public function get_team_roster( $team_id = FALSE )
+	{
+		if( $team_id )
+		{
+			$this->db->select('
+				tp.team_id, tp.user_id, tp.player_number,
+				u.first_name, u.last_name,
+				p.name as position, p.abbreviation as position_abbreviation
+			');
+			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
+			$this->db->join( 'positions p', 'p.id = tp.position_id', 'left outer' );
+			$query = $this->db->get( 'team_players tp' );
+			//echo '<pre>'; var_dump( $this->db->last_query() ); echo '</pre>'; exit();
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
+				echo '<pre>'; var_dump( $rows ); echo '</pre>'; exit();
+				return $rows;
+			}
+		}
+
+		return false;
+	}	
 
 }
