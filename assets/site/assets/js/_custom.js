@@ -79,7 +79,7 @@ $('.jcarousel')
     .jcarousel({
          wrap: 'circular'
     });
-$(document).on('click', '.schedule > li a', function(e) {
+$(document).on('click', '.schedule > li > a', function(e) {
 	e.preventDefault();
 	if($(this).parent().hasClass('active')) {
 		$(this).parent().addClass('closing');

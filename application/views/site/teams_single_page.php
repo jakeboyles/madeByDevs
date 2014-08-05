@@ -19,41 +19,77 @@
 
 		<!-- Team Schedule -->
 		<?php if( !empty( $games) ): ?>
-		<div class="team-schedule hidden-xs">
-			<h3><?php echo $league['current_season_name']; ?> Schedule</h3>
-			<table class="table table-striped standings">
-				<thead>
-					<tr>
-						<th>Date</th>
-						<th>Field</th>
-						<th>Opponent</th>
-						<th>Result</th>
-					</tr>
-				</thead>
-				<tbody>
+
+			<!-- Team Schedule (Desktop) -->
+			<div class="team-schedule hidden-xs">
+				<h3><?php echo $league['current_season_name']; ?> Schedule</h3>
+				<table class="table table-striped standings">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Field</th>
+							<th>Opponent</th>
+							<th>Result</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $games as $game ): ?>
+						<tr>
+							<td><?php echo date( 'M j Y - g:ia', strtotime( $game['game_date_time'] ) ); ?>
+							<td>
+								<a href="<?php echo base_url( 'directions/location/' . $game['location_id'] ); ?>">
+									<?php echo $game['location']; ?>
+									<?php if( !empty( $game['location_field'] ) ) echo '(' . $game['location_field'] . ')'; ?>
+								</a>
+							</td>
+							<td>
+								<a href="<?php echo base_url('teams/page/' . $game['opponent_team_id']); ?>">
+									<?php echo $game['opponent_team_name']; ?>
+								</a>
+							</td>
+							<td>
+								<?php echo $game['score_home'] . '-' . $game['score_away']; ?>
+								<?php echo !empty( $game['result'] ) ? ' (' . $game['result'] . ')' : ''; ?>
+							</td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Team Schedule (Mobile) -->
+			<div class="mobile-expand-list visible-xs">
+				<h3>Game Schedule</h3>
+				<ul class="schedule">
 					<?php foreach( $games as $game ): ?>
-					<tr>
-						<td><?php echo date( 'M j Y - g:ia', strtotime( $game['game_date_time'] ) ); ?>
-						<td>
-							<a href="<?php echo base_url( 'directions/location/' . $game['location_id'] ); ?>">
-								<?php echo $game['location']; ?>
-								<?php if( !empty( $game['location_field'] ) ) echo '(' . $game['location_field'] . ')'; ?>
-							</a>
-						</td>
-						<td>
-							<a href="<?php echo base_url('teams/page/' . $game['opponent_team_id']); ?>">
-								<?php echo $game['opponent_team_name']; ?>
-							</a>
-						</td>
-						<td>
-							<?php echo $game['score_home'] . '-' . $game['score_away']; ?>
-							<?php echo !empty( $game['result'] ) ? ' (' . $game['result'] . ')' : ''; ?>
-						</td>
-					</tr>
+					<li>
+						<a href="#"><?php echo date( 'M j Y - g:ia', strtotime( $game['game_date_time'] ) ); ?><i class="fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<h5 class="title">Field</h5>
+								<h6 class="option">
+									<a href="<?php echo base_url( 'directions/location/' . $game['location_id'] ); ?>">
+										<?php echo $game['location']; ?>
+										<?php if( !empty( $game['location_field'] ) ) echo '(' . $game['location_field'] . ')'; ?>
+									</a>
+								</h6>
+								<h5 class="title">Opponent</h5>
+								<h6 class="option">
+									<a href="<?php echo base_url('teams/page/' . $game['opponent_team_id']); ?>">
+										<?php echo $game['opponent_team_name']; ?>
+									</a>
+								</h6>
+								<h5 class="title">Result</h5>
+								<h6 class="option">
+									<?php echo $game['score_home'] . '-' . $game['score_away']; ?>
+									<?php echo !empty( $game['result'] ) ? ' (' . $game['result'] . ')' : ''; ?>
+								</h6>
+							</li>
+						</ul>
+					</li>
 					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
+				</ul>
+			</div>
 
 		<?php endif; ?>
 
