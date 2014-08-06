@@ -271,6 +271,12 @@ class Team_model extends MY_Model
 		}
 
 		return false;
-	}	
+	}
+
+	// Fetch a List of Current Seasons Teams and their Stats
+	public function get_current_season_teams( $current_season_id )
+	{
+		
+	}
 
 }

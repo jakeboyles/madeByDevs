@@ -25,8 +25,16 @@ class Division_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
-			$rows = $query->result_array();
-			return $rows;
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
 		}
 
 		return false;

@@ -6,7 +6,9 @@ class Divisions extends Site_Controller
 		parent::__construct();
 
 		// Load Models Needed
+		$this->load->model('League_model');
 		$this->load->model('Division_model');
+		$this->load->model('Team_model');
 	}
 
 	// Display the Location Search
@@ -45,12 +47,21 @@ class Divisions extends Site_Controller
 	}
 
 	// Dispaly History of Division
-	public function history()
+	public function history( $division_id )
 	{
-		// Store Data to Pass to View
-		$data['divisions'] = $this->Division_model->get_records();
+		// Get Individual Division
+		$atts = array( 'where' => 'd.id = ' . $division_id, 'single' => true );
+		$data['division'] = $this->Division_model->get_records( $atts );
 
-		$data['page_title'] = 'Divisions';
+		// Get Current Season ID
+		$atts = array( 'where' => 'l.id = 1', 'single' => true );
+		$data['league'] = $this->League_model->get_records( $atts );
+
+		// Get Current Season's Teams and Stats
+		//$data['current_season_teams'] = $this->Team_model->get_current_season_teams();
+
+		// Load Division History View
+		$data['page_title'] = $data['division']['name'] . ' Division';
 		$this->load->site_template( 'divisions_history', $data );
 	}
 }
