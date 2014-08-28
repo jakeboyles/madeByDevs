@@ -184,7 +184,7 @@ class Location_model extends MY_Model
 	public function insert_location_field( $post = FALSE )
 	{
 		if( $post )
-				{
+		{
 			// Insert Data
 			$data = array(
 				'name' => $post['name'],

@@ -153,7 +153,7 @@ class User_model extends MY_Model
 		{
 			foreach($rows as $row) {
 
-				$user[$row['id']] = $row["first_name"]." ".$row['last_name'];
+				$user[$row['id']] = $row["first_name"]." ".$row['last_name']." - ".$row['birthday'];
 
 			}
 

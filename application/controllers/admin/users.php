@@ -87,7 +87,7 @@ class Users extends Admin_Controller
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('gender', 'Gender', '');
 		$this->form_validation->set_rules('postal', 'Postal Code', '');
-		$this->form_validation->set_rules('birthday', 'Birthday', '');
+		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
 
 		// Custom Validation Messages
 		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );

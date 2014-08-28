@@ -331,8 +331,3 @@ $(document).ready(function(){
 	}
 
 });
-
-
-
-
-
