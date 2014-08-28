@@ -66,6 +66,95 @@ class Teams extends Admin_Controller
 		$this->load->admin_template( 'teams_edit', $data );
 	}
 
+
+	// Add a Player
+	public function add_player( $parent_id = FALSE )
+	{
+		if( $this->input->post('add_player') && $this->_player_validation() )
+		{
+			// Insert Record Into Database
+			// Create JSON For DataTable View
+			$data = $this->User_model->insert_record( $this->input->post() );
+		}
+		else
+		{
+			$data = array(
+				'result' => 'error',
+				'errors' => validation_errors( '<li>','</li>' )
+			);
+		}
+
+		echo json_encode( $data );
+	}
+
+
+
+	// Player Validation
+	private function _player_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('name', 'Field Name', 'required');
+		$this->form_validation->set_rules('description', 'Field Description', '');
+		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
+		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
+		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'less_than[20]');
+
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+
+
+
+
+	// Edit a Team Roster
+	public function edit_roster( $id = FALSE )
+	{
+		// If Form is Submitted Validate Form Data and Updated Record in Database
+		if( $this->input->post('edit_field') && $id )
+		{
+			$data = array();
+
+			// If Validation Passed
+			if( $this->_player_validation() )
+			{
+				// Update Record in Database
+				// Create JSON For DataTable View
+				$data = $this->Location_model->update_location_field( $id, $this->input->post() );
+
+			}
+			// If Validation Failed Send Errors
+			else
+			{
+				$data = array(
+					'result' => 'error',
+					'errors' => validation_errors( '<li>','</li>' )
+				);
+			}
+
+			echo json_encode( $data );
+		}
+		else
+		{
+			// Retrieve Record Data From Database
+			$data['record'] = $this->Location_model->get( $id );
+
+			// Load Edit Record Form
+			$this->load->view('admin/parts/location_fields_edit_form', $data);
+		}
+	}
+
+
+
+
 	// Delete a Record
 	public function delete( $id = FALSE )
 	{

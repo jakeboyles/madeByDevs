@@ -167,6 +167,7 @@ class Locations extends Admin_Controller
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Field Name', 'required');
+		$this->form_validation->set_rules('description', 'Field Description', '');
 		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
 		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
 		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'less_than[20]');

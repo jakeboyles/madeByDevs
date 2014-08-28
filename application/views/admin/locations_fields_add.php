@@ -51,6 +51,13 @@
 
 					</div>
 
+					<div class="form-group ">
+							<?php echo form_label( 'Field Description', 'description', array( 'class' => 'form-label' ) ); ?>
+							<span class="help">e.g. Further details about the location or driving directions.</span>
+							<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description' ) ) ); ?>
+					</div>
+
+
 					<div class="well well-small">
 						<i class="fa fa-info-circle"></i> You can find the latitude and longitude via an address by using the <a href="http://itouchmap.com/latlong.html" target="_blank">iTouchMap.com Tool</a>.
 					</div>

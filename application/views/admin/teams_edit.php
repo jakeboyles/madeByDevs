@@ -92,5 +92,7 @@
 			</div><!-- end .col-md-12 -->
 		</div><!-- end .row -->
 
+		<?php $this->load->view('admin/teams_roster'); ?>
+
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

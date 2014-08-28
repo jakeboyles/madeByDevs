@@ -26,5 +26,11 @@
 
 </div>
 
+<div class="form-group ">
+		<?php echo form_label( 'Field Description', 'description', array( 'class' => 'form-label' ) ); ?>
+		<span class="help">e.g. Further details about the location or driving directions.</span>
+		<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
+</div>
+
 
 <?php echo form_hidden( 'created_at', $record['created_at'] ); ?>

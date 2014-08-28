@@ -191,7 +191,8 @@ class Location_model extends MY_Model
 				'parent_id' => $post['parent_id'],
 				'map_latitude' => empty( $post['map_latitude'] ) ? NULL : $post['map_latitude'],
 				'map_longitude' => empty( $post['map_longitude'] ) ? NULL : $post['map_longitude'],
-				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom']
+				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description'],
 			);
 
 			// Insert to Database and Store Insert ID
@@ -210,7 +211,8 @@ class Location_model extends MY_Model
 					date('m/d/Y', time() ), 
 					date('m/d/Y', time() ), 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $insert_id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $insert_id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $insert_id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $insert_id . '"><i class="fa fa-times"></i></a>'
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $insert_id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $insert_id . '"><i class="fa fa-times"></i></a>',
+					$post['description'],
 				)
 			);
 
@@ -232,6 +234,7 @@ class Location_model extends MY_Model
 				'map_latitude' => empty( $post['map_latitude'] ) ? NULL : $post['map_latitude'],
 				'map_longitude' => empty( $post['map_longitude'] ) ? NULL : $post['map_longitude'],
 				'map_zoom' => empty( $post['map_zoom'] ) ? NULL : $post['map_zoom'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description'],
 			);
 
 			// Update Record in Database
@@ -250,7 +253,8 @@ class Location_model extends MY_Model
 					date('m/d/Y', strtotime( $post['created_at'] ) ),
 					date('m/d/Y', time() ), 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/locations/edit_field/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>'
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/locations/delete/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+					$post['description'],
 				)
 			);
 			
