@@ -153,7 +153,14 @@ class User_model extends MY_Model
 		{
 			foreach($rows as $row) {
 
+				if(!empty($row['birthday'])) 
+				{
 				$user[$row['id']] = $row["first_name"]." ".$row['last_name']." - ".$row['birthday'];
+				}
+				else 
+				{
+				$user[$row['id']] = $row["first_name"]." ".$row['last_name'];	
+				}
 
 			}
 
