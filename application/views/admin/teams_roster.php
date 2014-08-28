@@ -5,7 +5,7 @@
 			<div class="grid-title">
 				<h4>Roster</h4>
 				<div class="pull-right">
-					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/teams/add_player' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
+					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
 				</div>
 			</div>
 
@@ -18,24 +18,23 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Position</th>
-							<th>Created</th>
-							<th>Modified</th>
+
 							<th><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php if ( !empty($fields) ): ?>
-							<?php foreach( $fields as $field ): ?>
-							<tr id="<?php echo $field['id']; ?>">
-								<td><?php echo $field['id']; ?></td>
-								<td><?php echo $field['first_name']; ?></td>
-								<td><?php echo $field['last_name']; ?></td>
-								<td><?php echo $field['position']; ?></td>
-								<td><?php echo date( 'm/d/Y', strtotime( $field['created_at'] ) ); ?></td>
-								<td><?php echo date( 'm/d/Y', strtotime( $field['modified_at'] ) ); ?></td>
+						<?php if ( !empty($roster) ): ?>
+
+							<?php foreach( $roster as $player ): 
+							?>
+							<tr id="<?php echo $player['id']; ?>">
+								<td><?php echo $player['id']; ?></td>
+								<td><?php echo $player['first_name']; ?></td>
+								<td><?php echo $player['last_name']; ?></td>
+								<td><?php echo $player['position']; ?></td>
 								<td>
-									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/teams/edit_roster/' . $field['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $field['id']; ?>"><i class="fa fa-edit"></i></a>
-									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/locations/delete/' . $field['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $field['name']; ?>" data-row-id="<?php echo $field['id']; ?>"><i class="fa fa-times"></i></a>
+									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/teams/edit_roster/' . $player['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a>
+									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/teams/delete_roster/' . $player['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name']; ?>" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-times"></i></a>
 								</td>
 							</tr>
 							<?php endforeach; ?>

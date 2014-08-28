@@ -7,7 +7,7 @@ class User_model extends MY_Model
 	public $return_type = 'array';
 
 	// Get Records
-	public function get_records( )
+	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
 		$this->db->select('
@@ -15,6 +15,12 @@ class User_model extends MY_Model
 			ut.type as user_type
 		');
 		$this->db->join( 'user_types ut', 'ut.id = u.user_type_id', 'left outer' );
+
+		// Look for Custom Where Query
+		if( !empty( $atts['where'] ) )
+		{
+			$this->db->where( $atts['where'] ); 
+		}
 
 		// Run Query
 		$query = $this->db->get( 'users u' );
@@ -108,6 +114,50 @@ class User_model extends MY_Model
 			{
 				$this->User_model->delete( $id );
 			}
+		}
+
+		return false;
+	}
+
+
+	public function add_player_roster( $post = FALSE )
+	{
+		if($post)
+		{
+			// Update Data
+			$data = array(
+				'user_id' => $post['players_id'],
+				'team_id' => $post['team_id'],
+				'position_id' => $post['position'],
+				'player_number' => $post['number'],
+			);
+
+			// Update Record in Database
+			$this->insert($data);
+
+			return true;
+		}
+
+		return false;
+	}
+
+
+	// Get Players
+	public function get_players( )
+	{
+		$rows = $this->get_records( array( 'where' => 'u.user_type_id = 3' ) );
+
+		$user = array();
+
+		if( $rows )
+		{
+			foreach($rows as $row) {
+
+				$user[$row['id']] = $row["first_name"]." ".$row['last_name'];
+
+			}
+
+			return $user;
 		}
 
 		return false;

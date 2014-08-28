@@ -247,6 +247,123 @@ class Team_model extends MY_Model
 		return false;
 	}
 
+
+
+
+	// Insert a user onto the roster
+	public function insert_roster_record( $post = FALSE )
+	{
+	
+		if($post)
+		{
+			// Update Data
+			$data = array(
+				'user_id' => $post['player_id'],
+				'team_id' => $post['team_id'],
+				'position_id' => $post['position'],
+				'player_number' => $post['number'], 
+			);
+
+			// Update Record in Database
+			$info = $this->db->insert('team_players', $data); 
+
+			$id = $this->db->insert_id();
+
+			$player = $this->getPlayerInfo($id);
+			$player= $player[0];
+
+			 // Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'insert_id' => $id,
+				'row' => array(
+					$id, 
+					$player['first_name'], 
+					$player['last_name'], 
+					$player['name'], 
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+				)
+			);
+
+			return $data_array;
+		}
+
+		return false;
+	}
+
+
+
+
+	// Update roster field
+	public function update_roster_field( $id = FALSE, $post = FALSE)
+	{
+	
+		if($post && $id)
+		{
+			// Update Data
+			$data = array(
+				'user_id' => $post['player_id'],
+				'team_id' => $post['parent_id'],
+				'position_id' => $post['position'],
+				'player_number' => $post['number'], 
+			);
+
+			// Update Record in Database
+			 $this->db->where('id', $id);
+			 $insert_id = $this->db->update('team_players', $data); 
+
+
+			 $player = $this->getPlayerInfo($id);
+			 $player= $player[0];
+
+			 // Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'insert_id' => $insert_id,
+				'row' => array(
+					$id, 
+					$player['first_name'], 
+					$player['last_name'], 
+					$player['name'], 
+					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['player_id'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+				)
+			);
+
+
+
+
+			 return $data_array;
+
+		}
+
+		return false;
+	}
+
+
+
+
+
+
+	// Delete a team member 
+	public function delete_roster( $id = FALSE )
+	{
+		// If an ID Was Found in URL
+		if( $id )
+		{
+			$this->db->where('id', $id);
+			$this->db->delete('team_players'); 
+
+		}
+
+		return false;
+	}
+
+
+
+
+
 	// Fetch the Team Roster
 	public function get_team_roster( $team_id = FALSE )
 	{
@@ -254,6 +371,7 @@ class Team_model extends MY_Model
 		{
 			$this->db->select('
 				tp.player_number,
+				tp.id,
 				u.first_name, u.last_name,
 				p.name as position, p.abbreviation as position_abbreviation
 			');
@@ -273,10 +391,73 @@ class Team_model extends MY_Model
 		return false;
 	}
 
+
+
+	// Get more player info
+	public function getPlayer( $team_id = FALSE )
+	{
+		if( $team_id )
+		{
+			$this->db->select('
+				tp.player_number,
+				tp.position_id,
+				tp.user_id,
+				tp.team_id,
+			');
+			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
+			$this->db->join( 'positions p', 'p.id = tp.position_id', 'left outer' );
+			$this->db->where( 'tp.id', $team_id );
+			$this->db->order_by( 'u.last_name ASC, u.first_name ASC' );
+			$query = $this->db->get( 'team_players tp' );
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
+
+	// Get More Player Info
+	public function getPlayerInfo( $team_id = FALSE )
+	{
+		if( $team_id )
+		{
+			$this->db->select('
+				tp.player_number,
+				tp.position_id,
+				tp.user_id,
+				tp.team_id,
+				u.first_name,
+				u.last_name,
+				p.name,
+			');
+			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
+			$this->db->join( 'positions p', 'p.id = tp.position_id', 'left outer' );
+			$this->db->where( 'tp.id', $team_id );
+			$this->db->order_by( 'u.last_name ASC, u.first_name ASC' );
+			$query = $this->db->get( 'team_players tp' );
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
+
 	// Fetch a List of Current Seasons Teams and their Stats
 	public function get_current_season_teams( $current_season_id )
 	{
 		
 	}
+
+
 
 }

@@ -23,11 +23,22 @@
 					</div>
 					<!-- END Display Error Messages -->
 
-					<div class="form-group">
-						<?php echo form_label( 'Player Name *', 'name', array( 'class' => 'form-label' ) ); ?>
-						<!-- <span class="help">e.g. </span> -->
-						<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name' ) ) ); ?>
-					</div>
+						<div class="form-group">
+							<?php echo form_label( 'Add Player', 'players', array( 'class' => 'form-label' ) ); ?>
+							<?php echo form_dropdown( 'player_id', array( '' => '') + $players, set_value('players'), 'class="pretty-select"' ); ?>
+						</div>
+
+						<div class="form-group">
+							<?php echo form_label( 'Position', 'positions', array( 'class' => 'form-label' ) ); ?>
+							<?php echo form_dropdown( 'position', array( '' => '') + $positions, set_value('positions'), 'class="pretty-select"' ); ?>
+						</div>
+
+
+						<div class="form-group">
+							<?php echo form_label( 'Number', 'number', array( 'class' => 'form-label' ) ); ?>
+							<span class="help">0-99</span>
+							<?php echo form_input( array('name' => 'number', 'class' => 'form-control', 'id' => 'number', 'value' => set_value( 'number' ) ) ); ?>
+						</div>
 
 
 				</div>
@@ -38,10 +49,11 @@
 					</div>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Add Field</button>
+					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Add Player</button>
 				</div>
 
-				<?php echo form_hidden( 'parent_id', $record['id'] ); ?>
+				<?php echo form_hidden( 'team_id', $record['id'] ); ?>
+
 				<?php echo form_hidden( 'add_field', TRUE ); ?>
 			<?php echo form_close(); ?>
 		</div><!-- /.modal-content -->

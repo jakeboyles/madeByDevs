@@ -9,6 +9,7 @@ class Teams extends Admin_Controller
 
 		// Load Database Model to Be Used in Methods
 		$this->load->model( 'Team_model' );
+		$this->load->model( 'User_model' );
 	}
 
 	// Display All Records View
@@ -35,7 +36,8 @@ class Teams extends Admin_Controller
 		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Create Data for Team Captain Dropdown
-		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'email' );
+		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+
 
 		// Load Add Record Form View
 		$this->load->admin_template( 'teams_add', $data );
@@ -57,7 +59,17 @@ class Teams extends Admin_Controller
 		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Create Data (Pull Users) for Team Captain Dropdown
-		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'email' );
+		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+
+		// Create Data for Roster Dropdown
+		//$data['players'] = $this->Team_model->dropdown( 'users', 'id', 'first_name','id ASC',array('user_type_id'=>3));
+		//var_dump($this->db->last_query());
+		$data['players'] = $this->User_model->get_players();
+
+		// Create Data for Position Dropdown
+		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
+
+		$data['roster'] = $this->Team_model->get_team_roster( $id );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Team_model->get( $id );
@@ -68,13 +80,13 @@ class Teams extends Admin_Controller
 
 
 	// Add a Player
-	public function add_player( $parent_id = FALSE )
+	public function add_player($parent_id = FALSE)
 	{
-		if( $this->input->post('add_player') && $this->_player_validation() )
+		if( $this->input->post() )
 		{
 			// Insert Record Into Database
 			// Create JSON For DataTable View
-			$data = $this->User_model->insert_record( $this->input->post() );
+			$data = $this->Team_model->insert_roster_record( $this->input->post() );
 		}
 		else
 		{
@@ -96,11 +108,9 @@ class Teams extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('name', 'Field Name', 'required');
-		$this->form_validation->set_rules('description', 'Field Description', '');
-		$this->form_validation->set_rules('map_latitude', 'Map Latitude', '');
-		$this->form_validation->set_rules('map_longitude', 'Map Longitude', '');
-		$this->form_validation->set_rules('map_zoom', 'Map Zoom', 'less_than[20]');
+		$this->form_validation->set_rules('player_id', 'Add Player', 'required');
+		$this->form_validation->set_rules('position', 'Position', 'required');
+		$this->form_validation->set_rules('parent_id', 'Team ID', 'required');
 
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
@@ -118,8 +128,27 @@ class Teams extends Admin_Controller
 	// Edit a Team Roster
 	public function edit_roster( $id = FALSE )
 	{
+
+		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+
+		// Create Data (Pull Users) for Team Captain Dropdown
+		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+
+		// Create Data for Roster Dropdown
+		$data['players'] = $this->User_model->get_players();
+
+		// Create Data for Position Dropdown
+		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
+
+		// Create roster data
+		$data['roster'] = $this->Team_model->get_team_roster( $id );
+
+		// Retrieve Record Data From Database
+		$data['record'] = $this->Team_model->get( $id );
+
+
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post('edit_field') && $id )
+		if( $this->input->post() )
 		{
 			$data = array();
 
@@ -128,7 +157,7 @@ class Teams extends Admin_Controller
 			{
 				// Update Record in Database
 				// Create JSON For DataTable View
-				$data = $this->Location_model->update_location_field( $id, $this->input->post() );
+				$data = $this->Team_model->update_roster_field( $id, $this->input->post() );
 
 			}
 			// If Validation Failed Send Errors
@@ -145,11 +174,26 @@ class Teams extends Admin_Controller
 		else
 		{
 			// Retrieve Record Data From Database
-			$data['record'] = $this->Location_model->get( $id );
+			$data['record'] = $this->Team_model->getPlayer( $id );
 
 			// Load Edit Record Form
-			$this->load->view('admin/parts/location_fields_edit_form', $data);
+			$this->load->view('admin/parts/teams_roster_edit_form', $data);
 		}
+	}
+
+
+	// Delete a Person From The Roster
+	public function delete_roster( $id = FALSE )
+	{
+
+		if( $id )
+		{
+			$this->Team_model->delete_roster( $id );
+
+			return true;
+		}
+
+		return false;
 	}
 
 
