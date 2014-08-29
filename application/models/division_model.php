@@ -111,4 +111,32 @@ class Division_model extends MY_Model
 		return false;
 	}
 
+
+	// Get Divisions in session
+	public function get_divisions( $id = FALSE )
+	{
+
+		$this->db->select( 'sd.division_id,d.name' );
+		$this->db->join( 'divisions d', 'd.id = sd.division_id', 'left outer' );
+		$this->db->where( 'session_id' , $id );
+		$query= $this->db->get('session_divisions sd');
+
+		$user = array();
+
+		$rows = $query->result_array();
+
+
+		if( $rows )
+		{
+			foreach($rows as $row) {
+				$user[$row['division_id']] = $row["name"];
+			}
+
+			return $user;
+
+		}
+
+		return false;
+	}
+
 }

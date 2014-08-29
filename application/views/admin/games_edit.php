@@ -74,7 +74,7 @@
 									<div class="form-group col-md-6 location-fields-dropdown">
 										<?php echo form_label( 'Field', 'location_field_id', array( 'class' => 'form-label' ) ); ?>
 										<!-- <span class="help">e.g. </span> -->
-										<?php echo form_dropdown( 'location_field_id', array( '' => '') + $locationfields, set_value( 'location_field_id', $record['location_field_id'] ), 'class="pretty-select"' ); ?>
+										<?php echo form_dropdown( 'location_field_id', array( '' => '') + $locationfields, set_value( 'location_field_id', $record['location_field_id'] ),  'class="pretty-select"' ); ?>
 									</div>
 
 								</div>

@@ -460,5 +460,31 @@ class Team_model extends MY_Model
 	}
 
 
+		// Get Divisions in session
+	public function get_team_by_division( $id = FALSE )
+	{
+
+		$this->db->select( 't.name,t.id' );
+		$this->db->where( 'division_id' , $id );
+		$query= $this->db->get('teams t');
+
+		$user = array();
+
+		$rows = $query->result_array();
+
+		if( $rows )
+		{
+			foreach($rows as $row) {
+				$user[$row['id']] = $row["name"];
+			}
+
+			return $user;
+
+		}
+
+		return false;
+	}
+
+
 
 }

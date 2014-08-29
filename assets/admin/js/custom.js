@@ -81,9 +81,17 @@ $(document).ready(function(){
 	/* ##############################################################################
 	# Generic Form JS
 	############################################################################# */
-	function loadSelect2()
+	function loadSelect2(value,id)
 	{
-		$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
+		if(!value)
+		{
+			$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
+		}
+		else 
+		{
+			$('select.pretty-select').select2({ placeholder: 'Select One', allowClear: true });
+			$('.division-dropdowns select.pretty-select').select2("val", value);
+		}
 	}
 	loadSelect2();
 
@@ -275,6 +283,7 @@ $(document).ready(function(){
 		
 	});
 
+
 	// Load Location Fields Based on Location Selection
 	$('body').on('change', '#game-locations-dropdown', function(e){
 		e.preventDefault();
@@ -363,5 +372,7 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+
 
 });

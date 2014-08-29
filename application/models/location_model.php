@@ -265,4 +265,32 @@ class Location_model extends MY_Model
 		return false;
 	}
 
+
+
+		// Get Divisions in session
+	public function get_location_fields( $id = FALSE )
+	{
+
+		$this->db->select( 'l.name,l.id' );
+		$this->db->where( 'parent_id' , $id );
+		$query= $this->db->get('locations l');
+
+		$user = array();
+
+		$rows = $query->result_array();
+
+
+		if( $rows )
+		{
+			foreach($rows as $row) {
+				$user[$row['id']] = $row["name"];
+			}
+
+			return $user;
+
+		}
+
+		return false;
+	}
+
 }

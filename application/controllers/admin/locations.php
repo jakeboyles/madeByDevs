@@ -53,6 +53,8 @@ class Locations extends Admin_Controller
 		// Get a List of Location Fields for this Location
 		$data['fields'] = $this->Location_model->get_records( $id );
 
+		$data['fields'] = $this->Location_model->get_records( $id );
+
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Location_model->get( $id );
 

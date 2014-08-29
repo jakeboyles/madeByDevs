@@ -12,6 +12,7 @@ class Games extends Admin_Controller
 		$this->load->model( 'Team_model' );
 		$this->load->model( 'Location_model' );
 		$this->load->model( 'Session_model' );
+		$this->load->model( 'Division_model' );
 
 	}
 
@@ -74,15 +75,16 @@ class Games extends Admin_Controller
 
 		$data['time']['hour'] = date("g:i A", strtotime($time[1]));
 
-		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+		// Still need to get the id thats in 
+		$data['divisions'] = $this->Division_model->get_divisions($data['record']['session_id']);
 
 		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NULL' );
 
-		$data['locationfields'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NOT NULL' );
+		$data['locationfields'] = $this->Location_model->get_location_fields($data['record']['location_id']);
 
 		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
 
-		$data['teams'] = $this->Team_model->dropdown( 'teams', 'id', 'name' );
+		$data['teams'] = $this->Team_model->get_team_by_division($data['record']['division_id']);
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'games_edit', $data );
