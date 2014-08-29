@@ -59,7 +59,7 @@ class Games extends Admin_Controller
 		if( $this->input->post() && $id )
 		{
 			$this->Game_model->update_record( $id, $this->input->post() );
-			redirect('admin/games');
+			redirect( 'admin/games' );
 
 		}
 
@@ -69,24 +69,29 @@ class Games extends Admin_Controller
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Game_model->get( $id );
 
+		// Get the game date and time and explode it from the space
 		$time = explode(" ", $data['record']['game_date_time']);
 
-		$data['time']['date'] = date("m-d-Y", strtotime($time[0]));
+		// Build out the date from our explode and format it correctly
+		$data['time']['date'] = date("m-d-Y", strtotime( $time[0] ));
 
-		$data['time']['hour'] = date("g:i A", strtotime($time[1]));
+		// Build out the time from our explode and format it correctly
+		$data['time']['hour'] = date("g:i A", strtotime( $time[1] ));
 
 		// Get devisions that are only in a session
-		$data['divisions'] = $this->Division_model->get_divisions($data['record']['session_id']);
+		$data['divisions'] = $this->Division_model->get_divisions( $data['record']['session_id'] );
 
+		// Get locations dropdown
 		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NULL' );
 
 		// Get Fields that fall under a certain location
-		$data['locationfields'] = $this->Location_model->get_location_fields($data['record']['location_id']);
+		$data['locationfields'] = $this->Location_model->get_location_fields( $data['record']['location_id'] );
 
+		// Get sessions dropdown
 		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
 
 		// Get only that teams that fall under a division
-		$data['teams'] = $this->Team_model->get_team_by_division($data['record']['division_id']);
+		$data['teams'] = $this->Team_model->get_team_by_division( $data['record']['division_id'] );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'games_edit', $data );

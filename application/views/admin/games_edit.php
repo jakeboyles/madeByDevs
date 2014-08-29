@@ -11,7 +11,7 @@
 		 		<div class="grid simple">
 
 					<div class="grid-title">
-						<h4>Add Game</h4>
+						<h4>Edit Game</h4>
 					</div>
 					<div class="grid-body">
 							
@@ -48,7 +48,7 @@
 								</div> 
 
 								<!-- This Loads in Via AJAX After a Division is Selected -->
-								<div class='teams-dropdowns'>
+								<div class='row teams-dropdowns'>
 									<div class="form-group col-md-6">
 										<?php echo form_label( 'Home Team*', 'team_home_id', array( 'class' => 'form-label' ) ); ?>
 										<i class="fa fa-question-circle pointer" data-toggle="popover" data-placement="bottom" data-content="Only showing teams that are found in the selected division."></i>
