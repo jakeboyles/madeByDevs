@@ -85,7 +85,6 @@
 						<li><a href="<?php echo base_url( 'admin/divisions/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
-				<!-- Not now! - managed via edit session
 				<li class="<?php echo $this->uri->segment(2) == 'games' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-bullseye"></i>
@@ -97,7 +96,6 @@
 						<li><a href="<?php echo base_url( 'admin/games/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
-				-->
 				<li class="<?php echo $this->uri->segment(2) == 'teams' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-users"></i>

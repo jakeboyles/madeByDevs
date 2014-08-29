@@ -56,17 +56,21 @@ class Game_model extends MY_Model
 		if( $post )
 		{
 			// Insert Data
+			$game_time = $this->mysql_datetime($post['game_date'].$post["game_time"]);
 			$data = array(
-				'league_id' => 1,
-				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'location_id'=>empty( $post['location_id'] ) ? NULL : $post['location_id'],
+				'location_field_id'=>empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'game_date_time'=>$game_time,
 			);
+
 
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
-
 			return $insert_id;
 		}
 
@@ -79,11 +83,16 @@ class Game_model extends MY_Model
 		if( $id && $post )
 		{
 			// Update Data
+			$game_time = $this->mysql_datetime($post['game_date'].$post["game_time"]);
 			$data = array(
-				'name' => $post['name'],
-				'year_start' => $post['year_start'],
-				'year_end' => $post['year_end'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'location_id'=>empty( $post['location_id'] ) ? NULL : $post['location_id'],
+				'location_field_id'=>empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'game_date_time'=>$game_time,
 			);
 
 			// Update Record in Database

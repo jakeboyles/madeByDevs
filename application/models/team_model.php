@@ -269,7 +269,8 @@ class Team_model extends MY_Model
 
 			$id = $this->db->insert_id();
 
-			$player = $this->getPlayerInfo($id);
+			$player = $this->get_player_igetnfo($id);
+
 			$player= $player[0];
 
 			 // Construct Data Array for JSON via AJAX
@@ -314,7 +315,7 @@ class Team_model extends MY_Model
 			 $insert_id = $this->db->update('team_players', $data); 
 
 
-			 $player = $this->getPlayerInfo($id);
+			 $player = $this->get_player_info($id);
 			 $player= $player[0];
 
 			 // Construct Data Array for JSON via AJAX
@@ -394,7 +395,7 @@ class Team_model extends MY_Model
 
 
 	// Get more player info
-	public function getPlayer( $team_id = FALSE )
+	public function get_player( $team_id = FALSE )
 	{
 		if( $team_id )
 		{
@@ -422,7 +423,7 @@ class Team_model extends MY_Model
 
 
 	// Get More Player Info
-	public function getPlayerInfo( $team_id = FALSE )
+	public function get_player_info( $team_id = FALSE )
 	{
 		if( $team_id )
 		{

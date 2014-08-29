@@ -309,6 +309,40 @@ $(document).ready(function(){
 	});
 
 
+	// Load Location Fields Based on Location Selection
+	$('body').on('change', '#game-sessions-dropdown', function(e){
+		e.preventDefault();
+
+		// Vars
+		var locationID = $(this).val()
+		var formContainer = $('.division-dropdowns');
+		var ajaxURL = $(this).data('ajax-url') + '/' + locationID;
+
+		// Display Location Fields Dropdown
+		if( locationID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+					loadSelect2();
+				}
+			});
+		}
+		// Remove Location Fields Dropdown
+		else
+		{
+			formContainer.addClass('hide');
+			formContainer.html('');
+		}
+		
+	});
+
+
 	/* ##############################################################################
 	# Page/Post Functionality
 	############################################################################# */

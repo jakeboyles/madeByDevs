@@ -94,4 +94,15 @@ class Divisions extends Admin_Controller
 		return false;
 	}
 
+
+		// AJAX Load Teams
+	public function get_divisions_by_sessions( $session_id = FALSE )
+	{
+		// Return a List of Usable Teams
+		$this->load->model( 'Session_model' );
+		$data['divisions'] = $this->Session_model->get_divisions_by_session( $session_id );
+		// Load Teams Form View
+		$this->load->view( 'admin/parts/divisions_dropdown', $data );
+	}
+
 }

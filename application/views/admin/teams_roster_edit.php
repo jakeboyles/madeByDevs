@@ -26,10 +26,6 @@
 					<!-- This will load in via AJAX from application/views/admin/parts/location_fields_edit_form.php -->
 					<div class="form-fields"></div>
 
-					<div class="well well-small">
-						<i class="fa fa-info-circle"></i> You can find the latitude and longitude via an address by using the <a href="http://itouchmap.com/latlong.html" target="_blank">iTouchMap.com Tool</a>.
-					</div>
-
 				</div>
 
 				<div class="modal-footer">

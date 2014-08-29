@@ -9,6 +9,10 @@ class Games extends Admin_Controller
 
 		// Load Database Model to Be Used in Methods
 		$this->load->model( 'Game_model' );
+		$this->load->model( 'Team_model' );
+		$this->load->model( 'Location_model' );
+		$this->load->model( 'Session_model' );
+
 	}
 
 	// Display All Records View
@@ -18,7 +22,8 @@ class Games extends Admin_Controller
 		$this->load->admin_template( 'games', $data );
 	}
 
-	// Add New Record View
+
+
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
@@ -27,21 +32,34 @@ class Games extends Admin_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Game_model->insert_record( $this->input->post() ) )
 			{
-				redirect('admin/games/edit/' . $insert_id);
+				redirect('admin/games');
 			}
 		}
 
+		// // Create Data for Divisions Dropdown
+		$data['related_divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+
+		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NULL' );
+
+		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
+
+
+		// // Create Data for Team Captain Dropdown
+		// $data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+
 		// Load Add Record Form View
-		$this->load->admin_template( 'games_add' );
+		$this->load->admin_template( 'games_add', $data );
 	}
 
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() && $this->_validation() && $id )
+		if( $this->input->post() )
 		{
 			$this->Game_model->update_record( $id, $this->input->post() );
+			redirect('admin/games');
+
 		}
 
 		// Load User Agent Library for Referrer Add Record Message
@@ -49,6 +67,22 @@ class Games extends Admin_Controller
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Game_model->get( $id );
+
+		$time = explode(" ", $data['record']['game_date_time']);
+
+		$data['time']['date'] = date("m-d-Y", strtotime($time[0]));
+
+		$data['time']['hour'] = date("g:i A", strtotime($time[1]));
+
+		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+
+		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NULL' );
+
+		$data['locationfields'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NOT NULL' );
+
+		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
+
+		$data['teams'] = $this->Team_model->dropdown( 'teams', 'id', 'name' );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'games_edit', $data );

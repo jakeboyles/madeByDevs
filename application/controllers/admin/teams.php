@@ -174,7 +174,7 @@ class Teams extends Admin_Controller
 		else
 		{
 			// Retrieve Record Data From Database
-			$data['record'] = $this->Team_model->getPlayer( $id );
+			$data['record'] = $this->Team_model->get_player( $id );
 
 			// Load Edit Record Form
 			$this->load->view('admin/parts/teams_roster_edit_form', $data);

@@ -242,4 +242,35 @@ class Session_model extends MY_Model
 		return false;		
 	}
 
+
+	public function get_divisions_by_session( $session_id = FALSE )
+	{
+		$divisions_by_session = array();
+		if( $session_id )
+		{
+			$this->db->select( 'sd.session_id, sd.division_id, d.name' );
+			$this->db->join( 'sessions s', 's.id = sd.session_id', 'left outer' );
+			$this->db->join( 'seasons se', 'se.id = s.season_id', 'left outer' );
+			$this->db->join( 'divisions d', 'd.id = sd.division_id', 'left outer' );
+			$this->db->where( array( 'sd.session_id' => $session_id) );
+			$this->db->order_by( 's.created_at', 'ASC' );
+			$query = $this->db->get( 'session_divisions sd' );
+
+			if( $query->num_rows > 0 )
+			{
+				$rows = $query->result_array();
+
+				$session_ids = array();
+				foreach( $rows as $row )
+				{
+					$divisons_by_session[$row['division_id']] = $row['name'];
+				}
+
+				return $divisons_by_session;
+			}
+		}
+
+		return false;
+	}
+
 }

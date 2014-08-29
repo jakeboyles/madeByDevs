@@ -55,14 +55,13 @@
 				</table>
 
 			</div><!-- end .grid-body -->
-
 		</div><!-- end .grid -->
 	</div><!-- end .col-md-12 -->
-</div><!-- end .row -->
+</div><!-- end .row --> 
 
 <!-- Load in Add Record Modal -->
 <?php $this->load->view('admin/sessions_game_add_ajax'); ?>
 
 <!-- Load in Edit Record Modal -->
-<?php $this->load->view('admin/sessions_game_edit_ajax'); ?>
+<?php $this->load->view('admin/sessions_game_edit_ajax'); ?> 
 
