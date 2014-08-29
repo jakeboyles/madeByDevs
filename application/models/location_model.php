@@ -275,21 +275,21 @@ class Location_model extends MY_Model
 		$this->db->where( 'parent_id' , $id );
 		$query= $this->db->get('locations l');
 
-		$user = array();
+		$fields = array();
 
 		$rows = $query->result_array();
 
 
 		if( $rows )
 		{
-			foreach($rows as $row) {
-				$user[$row['id']] = $row["name"];
+			foreach($rows as $row) 
+			{
+				$fields[$row['id']] = $row["name"];
 			}
 
-			return $user;
+			return $fields;
 
 		}
-
 		return false;
 	}
 

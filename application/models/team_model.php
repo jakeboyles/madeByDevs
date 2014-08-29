@@ -468,17 +468,18 @@ class Team_model extends MY_Model
 		$this->db->where( 'division_id' , $id );
 		$query= $this->db->get('teams t');
 
-		$user = array();
+		$teams = array();
 
 		$rows = $query->result_array();
 
 		if( $rows )
 		{
-			foreach($rows as $row) {
-				$user[$row['id']] = $row["name"];
+			foreach($rows as $row) 
+			{
+				$teams[$row['id']] = $row["name"];
 			}
 
-			return $user;
+			return $teams;
 
 		}
 

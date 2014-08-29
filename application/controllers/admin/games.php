@@ -75,15 +75,17 @@ class Games extends Admin_Controller
 
 		$data['time']['hour'] = date("g:i A", strtotime($time[1]));
 
-		// Still need to get the id thats in 
+		// Get devisions that are only in a session
 		$data['divisions'] = $this->Division_model->get_divisions($data['record']['session_id']);
 
 		$data['locations'] = $this->Location_model->dropdown( 'locations', 'id', 'name', null, 'parent_id IS NULL' );
 
+		// Get Fields that fall under a certain location
 		$data['locationfields'] = $this->Location_model->get_location_fields($data['record']['location_id']);
 
 		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
 
+		// Get only that teams that fall under a division
 		$data['teams'] = $this->Team_model->get_team_by_division($data['record']['division_id']);
 
 		// Load Edit Record Form

@@ -121,18 +121,19 @@ class Division_model extends MY_Model
 		$this->db->where( 'session_id' , $id );
 		$query= $this->db->get('session_divisions sd');
 
-		$user = array();
+		$divisions = array();
 
 		$rows = $query->result_array();
 
 
 		if( $rows )
 		{
-			foreach($rows as $row) {
-				$user[$row['division_id']] = $row["name"];
+			foreach($rows as $row) 
+			{
+				$divisions[$row['division_id']] = $row["name"];
 			}
 
-			return $user;
+			return $divisions;
 
 		}
 
