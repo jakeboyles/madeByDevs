@@ -269,7 +269,7 @@ class Team_model extends MY_Model
 
 			$id = $this->db->insert_id();
 
-			$player = $this->get_player_igetnfo($id);
+			$player = $this->get_player_info($id);
 
 			$player= $player[0];
 
@@ -283,7 +283,7 @@ class Team_model extends MY_Model
 					$player['last_name'], 
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
 				)
 			);
 
@@ -328,7 +328,7 @@ class Team_model extends MY_Model
 					$player['last_name'], 
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $post['player_id'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
 				)
 			);
 

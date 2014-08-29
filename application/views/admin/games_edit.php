@@ -31,7 +31,7 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/games/edit/', array( 'id' => 'edit-team-form') ); ?>
+								<?php echo form_open( 'admin/games/edit/'.$record['id'], array( 'id' => 'edit-team-form') ); ?>
 
 								<div class="form-group">
 									<?php echo form_label( 'Session*', 'session_id', array( 'class' => 'form-label' ) ); ?>

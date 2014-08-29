@@ -54,8 +54,8 @@ class Games extends Admin_Controller
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
-		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() )
+
+		if( $this->input->post() && $id )
 		{
 			$this->Game_model->update_record( $id, $this->input->post() );
 			redirect('admin/games');
