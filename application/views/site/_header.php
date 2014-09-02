@@ -75,7 +75,7 @@
 								$date = explode(' ' ,$game['game_date_time']);
 								?>
 								<div class="row">
-								<div class="col-xs-8 date-location"><?php echo $date[0];?><br/><?php echo $game['location'];?></div>
+								<div class="col-xs-8 date-location"><span class="date"><?php echo $date[0];?></span><br/><span class="location"><?php echo $game['location'];?></span></div>
 								<div class="col-xs-4 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
 								</div>
 							</div>
