@@ -273,4 +273,88 @@ class Session_model extends MY_Model
 		return false;
 	}
 
+
+
+	// Get Records
+	public function get_records_checkboxs( )
+	{
+		// Construct Query
+		$this->db->select( 's.id, s.name' );
+		$this->db->join( 'seasons', 'seasons.id = s.season_id', 'left outer' );
+
+		// Run Query
+		$query = $this->db->get( 'sessions s' );
+
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$sessions = array();
+
+			$rows = $query->result_array();
+			
+			foreach($rows as $row)
+			{
+				$sessions[$row['id']] = $row['name'];
+			}
+
+			return $sessions;
+		}
+
+		return false;
+	}
+
+
+	public function get_related_sessions( $id = FALSE )
+	{
+		$this->db->select( 'session_id, division_id ' );
+		$this->db->where( array('division_id' => $id) );
+		$query = $this->db->get( 'session_divisions sd' );
+
+		if( $query->num_rows > 0 )
+		{
+			$rows = $query->result_array();
+
+			$checked_ids = array();
+			foreach( $rows as $row )
+			{
+				$checked_ids[$row['session_id']] = $row['division_id'];
+			}
+
+			return $checked_ids;
+		}
+
+		return false;	
+	}
+
+
+		// Assign Divisions to an Individual Session
+	public function update_sessions( $id = FALSE )
+	{
+		if( $id )
+		{
+			// Remove Old Session/Division Relationships
+			$this->db->where( 'division_id', $id );
+			$this->db->delete( 'session_divisions' );
+
+			// Add Current Session/Division Relationships
+			if( !empty( $this->input->post('divisions') ) )
+			{	
+				foreach( $this->input->post('divisions') as $session )
+				{
+					$data = array(  
+						'session_id' => $session,
+						'division_id' => $id,
+					);
+
+					$this->insert( $data, FALSE, 'session_divisions' );
+				}
+			}
+
+			return true;
+		}
+
+		return false;	
+	}
+
 }

@@ -9,6 +9,7 @@ class Divisions extends Admin_Controller
 
 		// Load Database Model to Be Used in Methods
 		$this->load->model( 'Division_model' );
+		$this->load->model( 'Session_model' );
 	}
 
 	// Display All Records View
@@ -32,6 +33,8 @@ class Divisions extends Admin_Controller
 			}
 		}
 
+		$data['sessions'] = $this->Session_model->get_records_checkboxs();
+
 		// Get a List of Division Types for Dropdown
 		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
 
@@ -53,6 +56,10 @@ class Divisions extends Admin_Controller
 
 		// Get a List of Division Types for Dropdown
 		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+
+		$data['sessions'] = $this->Session_model->get_records_checkboxs();
+
+		$data['related_sessions'] = $this->Session_model->get_related_sessions($id);
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Division_model->get( $id );
@@ -95,7 +102,7 @@ class Divisions extends Admin_Controller
 	}
 
 
-		// AJAX Load Teams
+	// AJAX Load Teams
 	public function get_divisions_by_sessions( $session_id = FALSE )
 	{
 		// Return a List of Usable Teams
@@ -103,6 +110,38 @@ class Divisions extends Admin_Controller
 		$data['divisions'] = $this->Session_model->get_divisions_by_session( $session_id );
 		// Load Teams Form View
 		$this->load->view( 'admin/parts/divisions_dropdown', $data );
+	}
+
+
+
+	// For updating sessions related to a division
+	public function assign_session( $division_id = FALSE )
+	{
+
+		// Load User Agent Library for Referrer Add Record Message
+		$this->load->library('user_agent');
+
+		// Return a List of Usable Teams
+		$this->load->model( 'Session_model' );
+
+		// Update selected sessions to this division
+		$data['divisions'] = $this->Session_model->update_sessions( $division_id );
+
+		$this->load->library('user_agent');
+
+		// Get a List of Division Types for Dropdown
+		$data['division_types'] = $this->Division_model->dropdown( 'division_types', 'id', 'type' );
+
+		$data['sessions'] = $this->Session_model->get_records_checkboxs();
+
+		$data['related_sessions'] = $this->Session_model->get_related_sessions($division_id);
+
+		// Retrieve Record Data From Database
+		$data['record'] = $this->Division_model->get( $division_id );
+
+		// Load Edit Record Form
+		$this->load->admin_template( 'divisions_edit', $data );
+
 	}
 
 }

@@ -18,6 +18,8 @@
 					</div>
 
 					<div class="grid-body">
+
+						<?php echo form_open( 'admin/divisions/add', array( 'id' => 'add-division-form') ); ?>
 							
 						<div class="row">
 
@@ -35,7 +37,6 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/divisions/add', array( 'id' => 'add-division-form') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Division Name', 'name', array( 'class' => 'form-label' ) ); ?>
@@ -51,12 +52,42 @@
 
 									<button type="submit" class="btn btn-primary">Create Division</button>
 
-								<?php echo form_close(); ?>
 								<!-- END Form -->
 
 							</div>
 
+							<!-- Second Column -->
+				            <div class="col-md-4">
+						 		<div class="grid simple">
+									<div class="grid-title">
+										<h4 class="pull-left">Assign Sessions</h4>
+										<div class="pull-right">
+											<a href="<?php echo base_url('admin/sessions'); ?>" class="btn btn-primary">View Sessions</a>
+										</div>
+									</div>
+
+									<div class="grid-body">
+
+										<?php
+										//echo '<pre>'; var_dump( $divisions ); echo '</pre>';
+										//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
+										?>
+
+											<?php foreach( $sessions as $key => $val ): ?>
+												<div class="checkbox check-primary">
+													<?php $checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
+													<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
+													<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
+												</div>
+											<?php endforeach; ?>
+
+									</div>
+								</div> 
+							</div><!-- end .col-md-4 -->
+
 						</div>
+
+						<?php echo form_close(); ?>
 
 					</div><!-- end .grid-body -->
 

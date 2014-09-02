@@ -54,6 +54,19 @@ class Division_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
+			if(!empty($post['divisions']))
+			{
+				foreach($post['divisions'] as $key=>$value) 
+				{
+					$data2 = array(
+						'session_id' => $value,
+						'division_id' => $insert_id,
+					);
+
+					$insert_id2 = $this->insert( $data2, FALSE, 'session_divisions' );
+				}
+			}
+
 			return $insert_id;
 		}
 
