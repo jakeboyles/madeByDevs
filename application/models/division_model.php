@@ -82,7 +82,8 @@ class Division_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
 
 			// Update Record in Database
