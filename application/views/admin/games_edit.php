@@ -13,6 +13,7 @@
 					<div class="grid-title">
 						<h4>Edit Game</h4>
 					</div>
+					
 					<div class="grid-body">
 							
 						<div class="row">

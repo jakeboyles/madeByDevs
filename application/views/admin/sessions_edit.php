@@ -9,7 +9,7 @@
 		<!-- START Form -->
 		<?php echo form_open( 'admin/sessions/edit/' . $record['id'], array( 'id' => 'edit-session-form') ); ?>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 		 		<div class="grid simple">
 
 					<div class="grid-title">
@@ -76,7 +76,7 @@
 			</div><!-- end .col-md-8 -->
 
 			<!-- Second Column -->
-			<div class="col-md-4">
+            <!-- <div class="col-md-4">
 		 		<div class="grid simple">
 					<div class="grid-title">
 						<h4 class="pull-left">Assign Divisions</h4>
@@ -102,8 +102,8 @@
 
 						<button type="submit" class="btn btn-primary">Update Divisions</button>
 					</div>
-				</div>
-			</div><!-- end .col-md-4 -->
+				</div> 
+			</div>--><!-- end .col-md-4 -->
 
 		</div><!-- end .row -->
 		<?php echo form_hidden( 'edit_session', TRUE ); ?>
@@ -111,7 +111,7 @@
 		<!-- END Form -->
 
 		<!-- Games -->
-		<?php $this->load->view('admin/sessions_games'); ?>
+		<!-- <?php $this->load->view('admin/sessions_games'); ?> -->
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

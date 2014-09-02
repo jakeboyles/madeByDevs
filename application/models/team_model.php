@@ -474,6 +474,7 @@ class Team_model extends MY_Model
 
 		if( $rows )
 		{
+			
 			foreach($rows as $row) 
 			{
 				$teams[$row['id']] = $row["name"];

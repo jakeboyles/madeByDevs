@@ -7,7 +7,6 @@
 
 				
 				<div class="pull-right">
-					<!-- Only Show Add Game Button if Divisions Have Been Assigned to this Session -->
 					<?php if( !empty($related_divisions) ): ?>
 						<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/games/add_ajax/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Schedule Game</a>
 					<?php else: ?>
