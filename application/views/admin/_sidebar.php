@@ -39,19 +39,33 @@
 						<li><a href="<?php echo base_url( 'admin/categories'); ?>">Categories</a></li>
 					</ul>
 				</li>
-				<!--
-				<li class="">
-					<a href="#">
+				
+				<!-- <li class="">
+					<a href="<?php echo base_url( 'admin/settings'); ?>">
 						<i class="fa fa-cog"></i>
 						<span class="title">Theme Settings</span>
 					</a>
-				</li>
-				-->
+				</li> -->
+				
 			</ul>
 
 			<!-- League Management Menu -->
 			<p class="menu-title">League Management</p>
 			<ul>
+
+				<li class="<?php echo $this->uri->segment(2) == 'league' ? 'active open' : ''; ?>">
+					<a href="javascript:;">
+						<i class="fa fa-home"></i>
+						<span class="title">League</span>
+						<span class="arrow <?php echo $this->uri->segment(2) == 'leagues' ? '' : ''; ?>"></span>
+					</a>
+					<ul class="sub-menu">
+						<li><a href="<?php echo base_url( 'admin/leagues'); ?>">All Leagues</a></li>
+						<!-- <li><a href="<?php echo base_url( 'admin/seasons/add'); ?>">Add New</a></li> -->
+					</ul>
+				</li>
+
+
 				<li class="<?php echo $this->uri->segment(2) == 'seasons' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-calendar"></i>

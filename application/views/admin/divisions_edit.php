@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 		 		<div class="grid simple">
 
 					<div class="grid-title">
@@ -65,6 +65,11 @@
 										<?php echo form_dropdown( 'division_type', array( '' => '') + $division_types, set_value( 'division_type', $record['division_type_id'] ), 'class="pretty-select"' ); ?>
 									</div>
 
+									<div class="form-group">
+										<?php echo form_label( 'Division Description', 'division_description', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
+									</div>
+
 									<button type="submit" class="btn btn-primary">Update Division</button>
 
 								<?php echo form_close(); ?>
@@ -72,45 +77,45 @@
 
 							</div>
 
-
-							<!-- Second Column -->
-				            <div class="col-md-4">
-						 		<div class="grid simple">
-									<div class="grid-title">
-										<h4 class="pull-left">Assign Sessions</h4>
-										<div class="pull-right">
-											<a href="<?php echo base_url('admin/sessions'); ?>" class="btn btn-primary">View Sessions</a>
-										</div>
-									</div>
-
-									<div class="grid-body">
-
-										<?php
-										//echo '<pre>'; var_dump( $divisions ); echo '</pre>';
-										//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
-										?>
-
-										<?php echo form_open( 'admin/divisions/assign_session/' . $record['id'], array( 'id' => 'add-session-to-division-form') ); ?>
-											<?php foreach( $sessions as $key => $val ): ?>
-												<div class="checkbox check-primary">
-													<?php $checked = ( !empty( $related_sessions ) && array_key_exists( $key, $related_sessions ) ) ? TRUE : FALSE; ?>
-													<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
-													<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
-												</div>
-											<?php endforeach; ?>
-										<button type="submit" class="btn btn-primary">Update Sessions</button>
-										<?php echo form_close(); ?>
-
-									</div>
-								</div> 
-							</div><!-- end .col-md-4 -->
-
 						</div>
 
 					</div><!-- end .grid-body -->
 
 				</div><!-- end .grid -->
 			</div><!-- end .col-md-12 -->
+
+			<!-- Second Column -->
+            <div class="col-md-4">
+		 		<div class="grid simple">
+					<div class="grid-title">
+						<h4 class="pull-left">Assign Sessions</h4>
+						<div class="pull-right">
+							<a href="<?php echo base_url('admin/sessions'); ?>" class="btn btn-primary">View Sessions</a>
+						</div>
+					</div>
+
+					<div class="grid-body">
+
+						<?php
+						//echo '<pre>'; var_dump( $divisions ); echo '</pre>';
+						//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
+						?>
+
+						<?php echo form_open( 'admin/divisions/assign_session/' . $record['id'], array( 'id' => 'add-session-to-division-form') ); ?>
+							<?php foreach( $sessions as $key => $val ): ?>
+								<div class="checkbox check-primary">
+									<?php $checked = ( !empty( $related_sessions ) && array_key_exists( $key, $related_sessions ) ) ? TRUE : FALSE; ?>
+									<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
+									<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
+								</div>
+							<?php endforeach; ?>
+						<button type="submit" class="btn btn-primary">Update Sessions</button>
+						<?php echo form_close(); ?>
+
+					</div>
+				</div> 
+			</div><!-- end .col-md-4 -->
+				
 		</div><!-- end .row -->
 
 	</div><!-- end .content -->

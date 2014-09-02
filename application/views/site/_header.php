@@ -62,76 +62,29 @@
 				<a href="#" class="control jcarousel-control-prev"><i class="fa fa-angle-left"></i></a>
 				<div class="jcarousel">
 					<ul>
+						<?php foreach($games as $game)
+						{
+						?>
 						<li>
 							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D1</div>
+								<div class="match"><?php echo $game['home_team'];?> v <?php echo $game['away_team'];?></div>
+								<div class="division"><?php echo $game['division'];?></div>
 							</div>
 							<div class="score-body">
-								<div class="date-location">04/10/13<br/>Randals Island</div>
-								<div class="final-score">4-5 Final</div>
+								<?php 
+								$date = explode(' ' ,$game['game_date_time']);
+								?>
+								<div class="row">
+								<div class="col-xs-8 date-location"><?php echo $date[0];?><br/><?php echo $game['location'];?></div>
+								<div class="col-xs-4 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
+								</div>
 							</div>
 						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D2</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">04/10/13<br/>Randals Island</div>
-								<div class="final-score">3-2 Final</div>
-							</div>
-						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D6</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">04/10/13<br/>Randals Island</div>
-								<div class="final-score">2-1 Final</div>
-							</div>
-						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">dAR v PVC</div>
-								<div class="division">D15</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">04/10/14<br/>Randals Island</div>
-								<div class="final-score">5-8 Final</div>
-							</div>
-						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D1</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">06/10/13<br/>Randals Island</div>
-								<div class="final-score">2-6 Final</div>
-							</div>
-						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D6</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">10/10/13<br/>Randals Island</div>
-								<div class="final-score">5-6 Final</div>
-							</div>
-						</li>
-						<li>
-							<div class="score-head">
-								<div class="match">BR v EFC</div>
-								<div class="division">D12</div>
-							</div>
-							<div class="score-body">
-								<div class="date-location">04/10/13<br/>Randals Island</div>
-								<div class="final-score">5-6 Final</div>
-							</div>
-						</li>
+
+						<?php
+						}
+						?>
+						
 					</ul>
 				</div>
 				<a href="#" class="control jcarousel-control-next"><i class="fa fa-angle-right"></i></a>

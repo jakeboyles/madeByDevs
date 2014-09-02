@@ -10,7 +10,7 @@ class Division_model extends MY_Model
 	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
-		$this->db->select( 'd.id, d.name, d.created_at, d.modified_at, dt.type as division_type' );
+		$this->db->select( 'd.id, d.name,d.description, d.created_at, d.modified_at, dt.type as division_type' );
 		$this->db->join( 'division_types dt', 'dt.id = d.division_type_id', 'left outer' );
 
 		// Check for a Custom Where Query
@@ -48,7 +48,8 @@ class Division_model extends MY_Model
 			// Insert Data
 			$data = array(
 				'name' => $post['name'],
-				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type']
+				'division_type_id' => empty( $post['division_type'] ) ? NULL : $post['division_type'],
+				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
 
 			// Insert to Database and Store Insert ID

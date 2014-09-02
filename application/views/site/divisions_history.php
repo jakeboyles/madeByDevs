@@ -1,6 +1,6 @@
 <div id="content" class="col-md-8 col-md-push-4">
-
 	<h1><?php echo $division['name']; ?></h1>
+	<p><?php echo $division['description']; ?></p>
 
 	<!-- Desktop Current Season Standings -->
 	<div class="team-standings">
@@ -77,74 +77,7 @@
 		</table>
 	</div>
 
-	<h2>Previous Seasons</h2>
-
-	<!-- Previous Season Stats (Desktop) -->
-	<div class="alternating-table-container hidden-xs">
-		<h3>Spring 2014 Season</h3>
-		<table class="table table-striped stripe-pattern-one">
-			<thead>
-				<tr>
-					<th>Team</th>
-					<th>GP</th>
-					<th>WR</th>
-					<th>NLR</th>
-					<th>EPG</th>
-					<th>TP</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><a href="#">Empire FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>12</td>
-					<td>17</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Hudson FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>6</td>
-					<td>16</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Bean's Rejects</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>2</td>
-					<td>13</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Grampus HD</a></td>
-					<td>8</td>
-					<td>-1</td>
-					<td>11</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Brooklyn Red Star</a></td>
-					<td>8</td>
-					<td>5</td>
-					<td>10</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">OTPHJ FC</a></td>
-					<td>8</td>
-					<td>-3</td>
-					<td>6</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	
 
 	<!-- Team Roster (Mobile) -->
 	<div class="mobile-expand-list visible-xs">
@@ -170,71 +103,6 @@
 		</ul>
 	</div>
 
-	<!-- Previous Season Stats (Desktop) -->
-	<div class="alternating-table-container hidden-xs">
-		<h3>Winter 2013 - 2014 Season</h3>
-		<table class="table table-striped stripe-pattern-one">
-			<thead>
-				<tr>
-					<th>Team</th>
-					<th>GP</th>
-					<th>WR</th>
-					<th>NLR</th>
-					<th>EPG</th>
-					<th>TP</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><a href="#">Empire FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>12</td>
-					<td>17</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Hudson FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>6</td>
-					<td>16</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Bean's Rejects</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>2</td>
-					<td>13</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Grampus HD</a></td>
-					<td>8</td>
-					<td>-1</td>
-					<td>11</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Brooklyn Red Star</a></td>
-					<td>8</td>
-					<td>5</td>
-					<td>10</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">OTPHJ FC</a></td>
-					<td>8</td>
-					<td>-3</td>
-					<td>6</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+
 
 </div>

@@ -234,4 +234,45 @@ class Game_model extends MY_Model
 		return false;
 	}
 
+
+	// Get 10 Records
+	public function get_slider_games()
+	{
+		// Construct Query
+		$this->db->select( '
+			g.id, g.session_id, g.division_id, g.location_id, g.game_date_time, g.team_home_id, g.team_away_id, g.score_home, g.score_away, g.created_at, g.modified_at,
+			l.name as location,
+			d.name as division,
+			t.name as home_team,
+			t2.name as away_team
+		' );
+		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
+		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
+		$this->db->join( 'locations l', 'l.id = g.location_id', 'left outer' );
+		$this->db->join( 'divisions d', 'd.id = g.division_id', 'left outer' );
+		$this->db->order_by('id', 'desc'); 
+		$this->db->limit(10);
+		$this->db->where('score_home IS NOT NULL');
+
+		// Run Query
+		$query = $this->db->get( 'games g' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $args['limit'] ) && $args['limit'] == 1 )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
 }

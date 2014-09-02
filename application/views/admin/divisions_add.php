@@ -50,6 +50,12 @@
 										<?php echo form_dropdown( 'division_type', array( '' => '') + $division_types, set_value('division_type'), 'class="pretty-select"' ); ?>
 									</div>
 
+									<div class="form-group">
+										<?php echo form_label( 'Division Description', 'division_description', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description' ) ) ); ?>
+									</div>
+
+
 									<button type="submit" class="btn btn-primary">Create Division</button>
 
 								<!-- END Form -->
