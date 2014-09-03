@@ -279,8 +279,8 @@ class Team_model extends MY_Model
 				'insert_id' => $id,
 				'row' => array(
 					$id, 
-					$player['first_name'], 
-					$player['last_name'], 
+					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['first_name'].'</a>', 
+					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['last_name'].'</a>', 
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
 					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
@@ -324,8 +324,8 @@ class Team_model extends MY_Model
 				'insert_id' => $insert_id,
 				'row' => array(
 					$id, 
-					$player['first_name'], 
-					$player['last_name'], 
+					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['first_name'].'</a>', 
+					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['last_name'].'</a>',
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
 					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
@@ -373,7 +373,7 @@ class Team_model extends MY_Model
 			$this->db->select('
 				tp.player_number,
 				tp.id,
-				u.first_name, u.last_name,
+				u.first_name,u.id as user_id, u.last_name,
 				p.name as position, p.abbreviation as position_abbreviation
 			');
 			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
@@ -434,6 +434,7 @@ class Team_model extends MY_Model
 				tp.team_id,
 				u.first_name,
 				u.last_name,
+				u.id as user_id,
 				p.name,
 			');
 			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );

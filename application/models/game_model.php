@@ -252,7 +252,7 @@ class Game_model extends MY_Model
 		$this->db->join( 'divisions d', 'd.id = g.division_id', 'left outer' );
 		$this->db->order_by('id', 'desc'); 
 		$this->db->limit(10);
-		$this->db->where('score_home IS NOT NULL');
+		$this->db->where('score_home IS NOT NULL && score_away IS NOT NULL');
 
 		// Run Query
 		$query = $this->db->get( 'games g' );
