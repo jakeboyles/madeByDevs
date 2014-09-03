@@ -55,7 +55,7 @@ class Cms extends Site_Controller
 			// Load Post View 
 			elseif( $data['page']['post_type'] == 'post' )
 			{
-				$this->load->site_template( 'page', $data );
+				$this->load->site_template( 'post', $data );
 			}
 		}
 		// Else Load 404 Page

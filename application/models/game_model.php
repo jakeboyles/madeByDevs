@@ -260,16 +260,8 @@ class Game_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
-			if( !empty( $args['limit'] ) && $args['limit'] == 1 )
-			{
-				$row = $query->row_array();
-				return $row;
-			}
-			else
-			{
-				$rows = $query->result_array();
-				return $rows;
-			}
+			$rows = $query->result_array();
+			return $rows;
 		}
 
 		return false;

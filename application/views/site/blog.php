@@ -6,7 +6,7 @@
 	<?php foreach( $blogs as $blog ): ?>
 	<div class="col-xs-12 blog_post">
 		<h2><a href="<?php echo base_url( $blog['slug'] ); ?>"><?php echo $blog['title']; ?></a></h2>
-		<p><?php echo $blog['content'];?></p>
+		<p><?php echo nl2br($blog['content']);?></p>
 		<a class="btn btn-primary" href="<?php echo base_url( $blog['slug'] ); ?>">Read More</a>
 	</div>
 	<?php endforeach; ?>
