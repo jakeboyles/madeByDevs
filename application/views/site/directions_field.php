@@ -54,11 +54,10 @@
 			}
 			google.maps.event.addDomListener(window, 'load', initialize);
 			</script>
+			<!-- If not mobile show the interactive google map -->
 			<div class="hidden-xs" id="map-canvas"></div>
+			<!-- If mobile show the static google map -->
 			<div class="visible-xs" id="map-overlay">
-				<?php 
-					$url_map = urlencode($location['street_address']);
-				?>
 				<a target="_blank" href="https://www.google.com/maps/place/<?php echo $location['map_latitude']; ?>,<?php echo $location['map_longitude'];?>">Click To Get Directions</a> 
 				<img src="http://maps.googleapis.com/maps/api/staticmap?center=<?php echo $location['map_latitude']; ?>,<?php echo $location['map_longitude'];?>&zoom=16&size=768x320&maptype=roadmap&markers=color:blue%7Clabel:S%<?php echo $location['map_latitude']; ?>,<?php echo $location['map_longitude']; ?>" class="map_image">
 			</div>

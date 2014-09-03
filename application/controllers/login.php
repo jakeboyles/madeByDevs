@@ -51,7 +51,7 @@ class Login extends Site_Controller
 			$this->_login();
 			
 			// Redirect User
-			redirect('admin');
+			redirect('/');
 		}
 	}
 

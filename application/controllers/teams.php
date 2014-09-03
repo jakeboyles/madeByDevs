@@ -64,6 +64,8 @@ class Teams extends Site_Controller
 				$atts = array( 'where' => 'l.id = 1', 'single' => true );
 				$data['league'] = $this->League_model->get_records( $atts );
 
+				$data['logo'] = $this->Team_model->get_logo( $id );
+
 				// Get Active Sessions By Division (For Team)
 				$data['active_sessions'] = $this->Session_model->get_active_sessions_by_division( $data['league']['current_season_id'], $data['team']['division_id'] );
 

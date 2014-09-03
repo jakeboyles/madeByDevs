@@ -25,6 +25,16 @@ class Teams extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Add Record to Database
 		if( $this->input->post() && $this->_validation() )
 		{
+
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+
+			$this->load->library('upload', $config);
+
+
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Team_model->insert_record( $this->input->post() ) )
 			{
@@ -232,6 +242,54 @@ class Teams extends Admin_Controller
 		}
 		
 		return false;
+	}
+
+
+
+	// Add New Logo
+	public function add_logo($id = FALSE)
+	{
+
+			// If Form is Submitted Validate Form Data and Add Record to Database
+			if( $this->input->post() && $this->_validation() )
+			{
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+
+			$this->load->library('upload', $config);
+
+			// The field name for the file upload would be logo
+			if ( ! $this->upload->do_upload('logo'))
+			{
+				return false;
+
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+
+				$data = array(
+					'filename' => $image['upload_data']['file_name'],
+					'mime_type' => $image['upload_data']['file_type']
+				);
+
+				$image = $this->db->insert('media',$data);
+
+				$image = $this->db->insert_id();
+
+				$data2 = array(
+					'team_logo' => $image;
+				);
+
+				$this->db->where('id',$id);
+
+				$this->db->update('teams',$data2); 
+
+			}
+		}
 	}
 
 }

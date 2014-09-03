@@ -18,7 +18,6 @@
 					</div>
 
 					<div class="grid-body">
-							
 						<div class="row">
 
 							<div class="col-md-8 col-sm-8 col-xs-8">
@@ -51,7 +50,7 @@
 								<!-- END New Record Added Message -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-form') ); ?>
+								<?php echo form_open_multipart( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-form') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Team Name*', 'name', array( 'class' => 'form-label' ) ); ?>

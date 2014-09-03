@@ -46,7 +46,7 @@ class Team_model extends MY_Model
 	}
 
 	// Add Record
-	public function insert_record( $post = FALSE )
+	public function insert_record( $post = FALSE, $image = FALSE )
 	{
 		if( $post )
 		{
@@ -54,7 +54,8 @@ class Team_model extends MY_Model
 			$data = array(
 				'status' => 'active',
 				'name' => $post['name'],
-				'division_id' => $post['division_id'],
+				'team_logo' => empty( $logo ) ? NULL : $logo,
+				'division_id' => empty( $post['division_id'] ) ? NULL : $post['division_id'],
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
@@ -69,14 +70,15 @@ class Team_model extends MY_Model
 	}
 
 	// Edit Record
-	public function update_record( $id = FALSE, $post = FALSE )
+	public function update_record( $id = FALSE, $post = FALSE, $logo = FALSE )
 	{
 		if( $id && $post )
 		{
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'division_id' => $post['division_id'],
+				'division_id' =>  empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'team_logo' =>  empty( $logo ) ? NULL : $logo,
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description']
 			);
@@ -489,5 +491,22 @@ class Team_model extends MY_Model
 	}
 
 
+	// Get Logo For Team
+	public function get_logo( $id = FALSE )
+	{
+		$this->db->select('t.team_logo, m.filename');
+		$this->db->where('t.id = ' . $id);
+		$this->db->join( 'media m', 'm.id = t.team_logo', 'left outer' );
+		$query= $this->db->get('teams t');
+
+		if( $query->num_rows() > 0 )
+		{
+			$rows = $query->result_array();
+			return $rows[0];
+		}
+		else {
+			return false;
+		}
+	}
 
 }

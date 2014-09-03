@@ -3,7 +3,26 @@
 	<?php if( !empty( $team ) ): ?>
 	<div class="team">
 
-		<h1><?php echo $team['name']; ?></h1>
+		<h1 class="pull-left"><?php echo $team['name']; ?></h1>
+
+		<div class="main_photo">
+			<img src="http://placehold.it/768x400&text=Main+Group+Photo" />
+			<div class="team_logo">
+				<img class="pull-left" src='<?php echo base_url('uploads')."/".$logo['filename'] ?>'>
+			</div>
+		</div>
+		<div class="row sub-photos">
+			<div class="col-xs-4">
+				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+			</div>
+			<div class="col-xs-4">
+				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+			</div>
+			<div class="col-xs-4">
+				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+			</div>
+		</div>
+		<br>
 
 		<!-- Team Photos Section -->
 		<?php if( !empty( $photos ) ): ?>

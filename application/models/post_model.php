@@ -178,6 +178,7 @@ class Post_model extends MY_Model
 
 		$this->db->limit($limit, $start);
         $this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		$this->db->order_by("id","desc");
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 
 		if( $post_type )

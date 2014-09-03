@@ -35,7 +35,7 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/teams/add/', array( 'id' => 'add-team-form') ); ?>
+								<?php echo form_open_multipart( 'admin/teams/add/', array( 'id' => 'add-team-form') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Team Name*', 'name', array( 'class' => 'form-label' ) ); ?>
