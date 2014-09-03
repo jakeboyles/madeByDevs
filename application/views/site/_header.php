@@ -46,6 +46,7 @@
 						<li><a href="<?php echo base_url('directions'); ?>">Directions</a></li>
 						<li><a href="<?php echo base_url('rules'); ?>">Rules</a></li>
 						<li><a href="<?php echo base_url('teams'); ?>">Team Pages</a></li>
+						<li><a href="<?php echo base_url('cms/blog'); ?>">News</a></li>
 						<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 						<li><a href="<?php echo base_url('register'); ?>" class="signup">Sign Up</a></li>
 					</ul>
@@ -74,15 +75,15 @@
 						?>
 						<li>
 							<div class="score-head">
-								<div class="match"><?php echo $game['home_team'];?> v <?php echo $game['away_team'];?></div>
-								<div class="division"><?php echo $game['division'];?></div>
+								<div class="match col-xs-12"><?php echo $game['home_team'];?> v <?php echo $game['away_team'];?></div>
+								<div class="division col-xs-12 text-right"><?php echo $game['division'];?></div>
 							</div>
 							<div class="score-body">
 								<?php 
-								$date = explode(' ' ,$game['game_date_time']);
+								$date = Date('m/d/y', strtotime($game['game_date_time']))
 								?>
 								<div class="row">
-								<div class="col-xs-8 date-location"><span class="date"><?php echo $date[0];?></span><br/><span class="location"><?php echo $game['location'];?></span></div>
+								<div class="col-xs-8 date-location"><span class="date"><?php echo $date;?></span><br/><span class="location"><?php echo $game['location'];?></span></div>
 								<div class="col-xs-4 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
 								</div>
 							</div>

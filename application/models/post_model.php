@@ -165,4 +165,37 @@ class Post_model extends MY_Model
 		return false;
 	}
 
+	public function record_count($post_type) {
+		if( $post_type )
+		{
+			$this->db->where( 'post_type', $post_type );
+		}
+        return $this->db->count_all_results("posts p");
+    }
+
+
+	public function fetch_posts($limit, $start, $post_type) {
+
+		$this->db->limit($limit, $start);
+        $this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+
+		if( $post_type )
+		{
+			$this->db->where( 'post_type', $post_type );
+		}
+
+		// Run Query
+		$query = $this->db->get( 'posts p' );
+
+ 
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+
+		return false;
+	}
 }

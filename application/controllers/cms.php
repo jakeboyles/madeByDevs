@@ -7,6 +7,7 @@ class Cms extends Site_Controller
 
 		// Load Content Model
 		$this->load->model('Content_model');
+		$this->load->model('Post_model');
 	}
 
 	// Figure Out How to Route the Content
@@ -128,6 +129,37 @@ class Cms extends Site_Controller
 			$this->not_found();
 		}
 	}
+
+	// Load Blog Page
+	public function blog()
+	{
+		$data['page_title'] = 'Blog';
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$this->load->library('pagination');
+
+		//Set base url for the blog 
+		$config['base_url'] =  base_url() . '/cms/blog';
+
+		// Get total number of posts
+		$config['total_rows'] =  $this->Post_model->record_count('post');
+
+		// How many show per page?
+		$config['per_page'] = 3;
+
+		// Get all posts in pagination style (Number per page, page number, type of content)
+		$data['blogs'] = $this->Post_model->fetch_posts($config["per_page"], $page,'post');
+
+		$this->pagination->initialize($config);
+
+		// Build the pagination links
+		$data["links"] = $this->pagination->create_links();
+
+		$this->load->site_template( 'Blog', $data );
+	}
+
+
 
 	// Load 404 Page
 	public function not_found()

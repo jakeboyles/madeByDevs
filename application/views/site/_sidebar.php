@@ -13,7 +13,7 @@ $latest_posts = $ci->Content_model->get_posts( $atts );
 		<?php foreach( $latest_posts as $item ): ?>
 		<li><a href="<?php echo base_url( $item['slug'] ); ?>"><span><?php echo $item['title']; ?></span><i class="fa fa-chevron-right"></i></a></li>
 		<?php endforeach; ?>
-		<li><a href="#">View All News</a></li>
+		<li><a href="<?php echo base_url('cms/blog'); ?>">View All News</a></li>
 	</ul>
 	<!-- END Latest News Widget -->
 
