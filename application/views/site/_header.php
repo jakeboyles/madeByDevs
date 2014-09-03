@@ -61,6 +61,13 @@
 			<div class="score-scroller">
 				<a href="#" class="control jcarousel-control-prev"><i class="fa fa-angle-left"></i></a>
 				<div class="jcarousel">
+
+					<?php
+					$ci =&get_instance();
+					$ci->load->model( 'Game_model' );
+					$games= $ci->Game_model->get_slider_games();
+					?>
+
 					<ul>
 						<?php foreach($games as $game)
 						{
