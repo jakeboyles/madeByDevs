@@ -155,7 +155,7 @@ class Location_model extends MY_Model
 		if( $id )
 		{
 			// Construct Query
-			$this->db->select( 'l.id, l.parent_id, l.name, l.map_latitude, l.map_longitude, l.map_zoom, l.created_at, l.modified_at' );
+			$this->db->select( 'l.id, l.parent_id, l.name, l.map_latitude, l.map_longitude, l.description, l.map_zoom, l.created_at, l.modified_at' );
 
 			// Set Where
 			$this->db->where( 'id', $id );
@@ -271,7 +271,7 @@ class Location_model extends MY_Model
 	public function get_location_fields( $id = FALSE )
 	{
 
-		$this->db->select( 'l.name,l.id' );
+		$this->db->select( 'l.name,l.id,l.description' );
 		$this->db->where( 'parent_id' , $id );
 		$query= $this->db->get('locations l');
 

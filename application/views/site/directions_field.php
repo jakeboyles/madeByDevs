@@ -64,10 +64,10 @@
 		<?php endif; ?>
 
 		<!-- Location Description -->
-		<?php if( !empty( $location['description'] ) ): ?>
+		<?php if( !empty( $field['description'] ) ): ?>
 		<div class="description">
 			<h2>Directions</h2>
-			<?php echo nl2br( $location['description'] ); ?>
+			<?php echo nl2br( $field['description'] ); ?>
 		</div>
 		<?php endif; ?>
 
