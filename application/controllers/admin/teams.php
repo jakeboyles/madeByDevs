@@ -92,7 +92,7 @@ class Teams extends Admin_Controller
 	// Add a Player
 	public function add_player($parent_id = FALSE)
 	{
-		if( $this->input->post() )
+		if( $this->input->post()  && $this->_player_validation() )
 		{
 			// Insert Record Into Database
 			// Create JSON For DataTable View
@@ -120,7 +120,7 @@ class Teams extends Admin_Controller
 		// Validation Rules
 		$this->form_validation->set_rules('player_id', 'Add Player', 'required');
 		$this->form_validation->set_rules('position', 'Position', 'required');
-		$this->form_validation->set_rules('parent_id', 'Team ID', 'required');
+		$this->form_validation->set_rules('number', 'Number', 'required|min_length[1]|max_length[3]|');
 
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
