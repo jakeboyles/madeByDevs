@@ -12,6 +12,9 @@
 
 					<div class="grid-title">
 						<h4>Add Game</h4>
+						<div class="pull-right">
+							<a href="<?php echo base_url('admin/games'); ?>" class="btn btn-primary">View Games</a>
+						</div>
 					</div>
 
 					<div class="grid-body">
