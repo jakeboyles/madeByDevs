@@ -297,6 +297,48 @@ class Team_model extends MY_Model
 
 
 
+		// Insert a user onto the roster
+	public function insert_roster_record_frontend( $post = FALSE )
+	{
+	
+		if($post)
+		{
+			// Update Data
+			$data = array(
+				'user_id' => $post['player_id'],
+				'team_id' => $post['team_id'],
+				'position_id' => $post['position'],
+				'player_number' => $post['number'], 
+			);
+
+			// Update Record in Database
+			$info = $this->db->insert('team_players', $data); 
+
+			$id = $this->db->insert_id();
+
+			$player = $this->get_player_info($id);
+
+			$player= $player[0];
+
+			 // Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'insert_id' => $id,
+				'row' => array(
+					'<td style="border-top: medium none;">'.$player['first_name']." ".$player['last_name'].'</td>',
+					'<td style="border-top: medium none;">'.$player['name'].'</td>',
+					'<td style="border-top: medium none;">'.$player['player_number'].'</td>',
+				)
+			);
+
+			return $data_array;
+		}
+
+		return false;
+	}
+
+
+
 
 	// Update roster field
 	public function update_roster_field( $id = FALSE, $post = FALSE)

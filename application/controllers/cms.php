@@ -146,7 +146,7 @@ class Cms extends Site_Controller
 		$config['total_rows'] =  $this->Post_model->record_count('post');
 
 		// How many show per page?
-		$config['per_page'] = 3;
+		$config['per_page'] = 5;
 
 		// Get all posts in pagination style (Number per page, page number, type of content)
 		$data['blogs'] = $this->Post_model->fetch_posts($config["per_page"], $page,'post');

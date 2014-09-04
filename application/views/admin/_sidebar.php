@@ -99,17 +99,6 @@
 						<li><a href="<?php echo base_url( 'admin/divisions/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
-				<li class="<?php echo $this->uri->segment(2) == 'games' ? 'active open' : ''; ?>">
-					<a href="javascript:;">
-						<i class="fa fa-bullseye"></i>
-						<span class="title">Games</span>
-						<span class="arrow <?php echo $this->uri->segment(2) == 'games' ? 'open' : ''; ?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li><a href="<?php echo base_url( 'admin/games'); ?>">All Games</a></li>
-						<li><a href="<?php echo base_url( 'admin/games/add'); ?>">Add New</a></li>
-					</ul>
-				</li>
 				<li class="<?php echo $this->uri->segment(2) == 'teams' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-users"></i>
@@ -130,6 +119,17 @@
 					<ul class="sub-menu">
 						<li><a href="<?php echo base_url( 'admin/locations'); ?>">All Locations</a></li>
 						<li><a href="<?php echo base_url( 'admin/locations/add'); ?>">Add New</a></li>
+					</ul>
+				</li>
+				<li class="<?php echo $this->uri->segment(2) == 'games' ? 'active open' : ''; ?>">
+					<a href="javascript:;">
+						<i class="fa fa-bullseye"></i>
+						<span class="title">Games</span>
+						<span class="arrow <?php echo $this->uri->segment(2) == 'games' ? 'open' : ''; ?>"></span>
+					</a>
+					<ul class="sub-menu">
+						<li><a href="<?php echo base_url( 'admin/games'); ?>">All Games</a></li>
+						<li><a href="<?php echo base_url( 'admin/games/add'); ?>">Add New</a></li>
 					</ul>
 				</li>
 			</ul>

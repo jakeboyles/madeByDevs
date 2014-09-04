@@ -215,7 +215,45 @@ $(document).ready(function(){
 		}
 	});
 
+
+	// Add/Edit Modal Form
+	$('#ajax-add-record-form, #ajax-edit-record-form').on('submit', function(e){
+		// Prevent Default Function
+		e.preventDefault();
+
+		// Set Vars
+		var thisForm = $(this);
+		var modal = $(this).parents('.modal');
+		var formErrorContainer = $(modal).find('.ajax-form-errors');
+		var formErrorList = $(modal).find('.ajax-form-errors ul');
+		var ajaxURL = $("#ajaxButton").data('ajax-url');
+
+		// AJAX Request to Add Record
+		$.ajax({
+			url: ajaxURL,
+			type: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(response) {
+
+				// Error
+				if( response.result === 'error' )
+				{
+					formErrorList.html( response.errors );
+					formErrorContainer.removeClass('hide');
+				}
+				// Success
+				else
+				{
+					modal.modal('toggle');
+					$('table tbody').append('<tr>'+response.row+'</tr>');
+				}
+
+			}
+		});
+
+	});
+
 });
 // End Jon's Additions
-
 

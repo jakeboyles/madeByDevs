@@ -9,6 +9,7 @@ class Teams extends Site_Controller
 		// Load Models Needed
 		$this->load->model('Team_model');
 		$this->load->model('League_model');
+		$this->load->model('User_model');
 		$this->load->model('Session_model');
 	}
 
@@ -34,6 +35,12 @@ class Teams extends Site_Controller
 		$data['logo'] = $this->Team_model->get_logo( $id );
 
 		$data['roster'] = $this->Team_model->get_team_roster( $id );
+
+		//var_dump($this->db->last_query());
+		$data['players'] = $this->User_model->get_players();
+
+		// Create Data for Position Dropdown
+		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
 
 		$atts = array( 'where' => 'l.id = 1', 'single' => true );
 		$data['league'] = $this->League_model->get_records( $atts );
@@ -160,6 +167,72 @@ class Teams extends Site_Controller
 
 			}
 		}
+	}
+
+	private function _user_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+
+		// Custom Validation Messages
+		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
+
+		// Email Validation
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+
+		// Password Validation
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'required|matches[password]');
+
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+
+	// Add New Logo
+	public function add_player($id = FALSE)
+	{
+
+		if( $this->input->post() && $this->_user_validation() )
+		{
+			// Insert Record Into Database
+			// Create JSON For DataTable View
+			$data = $this->User_model->insert_record( $this->input->post() );
+
+			$post = $this->input->post();
+
+			$post = array(
+				'player_id' => $data,
+				'team_id' => $id,
+				'position' => $post['position'],
+				'number' => $post['number'], 
+			);
+
+			$data = $this->Team_model->insert_roster_record_frontend( $post );
+
+		}
+		else
+		{
+			$data = array(
+				'result' => 'error',
+				'errors' => validation_errors( '<li>','</li>' )
+			);
+		}
+
+		echo json_encode( $data );
+		
 	}
 
 }

@@ -1,14 +1,14 @@
 <div id="content" class="team_edit col-md-8 col-md-push-4">
 	<div class="row">
 		<h1 class='pull-left'>Manage Team - <?php echo $record['name']; ?></h1>
-
 		<a class="pull-right view_page btn btn-primary" href="/teams/page/<?php echo $record['id']?>" class='btn btn-primary'>View Page</a>
+	</div>
 
+	<div class="row">
 		<ul class="col-xs-12 nav nav-tabs" role="tablist">
 		  <li class="active"><a href="#photos" role="tab" data-toggle="tab">Photos</a></li>
 		  <li><a href="#roster" role="tab" data-toggle="tab">Roster</a></li>
 		</ul>
-
 	</div>
 
 
@@ -58,11 +58,14 @@
 
 	<div class="tab-pane fade in" id="roster">
 
-					<a href="#" class="btn btn-primary" data-ajax-url="<?php echo base_url('admin/teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
 
+		<?php if(!empty($roster)): ?>
 		<!-- Team Roster (Desktop) -->
 			<div class="alternating-table-container hidden-xs">
-				<h3><?php echo $league['current_season_name']; ?> Roster</h3>
+				<div class="row">
+					<h3 class="pull-left"><?php echo $league['current_season_name']; ?> Roster</h3>
+					<a  class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
+				</div>
 				<table class="table table-striped stripe-pattern-one">
 					<thead>
 						<tr>
@@ -85,6 +88,7 @@
 
 			<!-- Team Roster (Mobile) -->
 			<div class="mobile-expand-list visible-xs">
+				<a class="btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
 				<h3><?php echo $league['current_season_name']; ?> Roster</h3>
 				<ul class="content">
 					<?php foreach( $roster as $player ): ?>
@@ -106,10 +110,15 @@
 					<?php endforeach; ?>
 				</ul>
 			</div>
+		<?php endif; ?>
 	
 	</div>
 
 </div>
 
 </div>
+
+<!-- Load in Add Record Modal -->
+<?php $this->load->view('site/teams_roster_add'); ?>
+
 
