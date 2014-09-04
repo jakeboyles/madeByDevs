@@ -156,7 +156,7 @@ class Cms extends Site_Controller
 		// Build the pagination links
 		$data["links"] = $this->pagination->create_links();
 
-		$this->load->site_template( 'Blog', $data );
+		$this->load->site_template( 'blog', $data );
 	}
 
 
