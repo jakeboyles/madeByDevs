@@ -29,12 +29,12 @@
 							?>
 							<tr id="<?php echo $player['id']; ?>">
 								<td><?php echo $player['id']; ?></td>
-								<td><a href="/admin/users/edit/<?php echo $player['user_id']; ?>"><?php echo $player['first_name']; ?></a></td>
-								<td><a href="/admin/users/edit/<?php echo $player['user_id']; ?>"><?php echo $player['last_name']; ?></a></td>
+								<td><a href="<?php echo base_url('admin/users/edit/' . $player['user_id']); ?>"><?php echo $player['first_name']; ?></a></td>
+								<td><a href="<?php echo base_url('admin/users/edit/' . $player['user_id']); ?>"><?php echo $player['last_name']; ?></a></td>
 								<td><?php echo $player['position']; ?></td>
 								<td>
 									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/teams/edit_roster/' . $player['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a>
-									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/teams/delete_roster/' . $player['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name']; ?>" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-times"></i></a>
+									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/teams/delete_roster/' . $player['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name'] . " " . $player['last_name']; ?>" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-times"></i></a>
 								</td>
 							</tr>
 							<?php endforeach; ?>

@@ -285,7 +285,7 @@ class Team_model extends MY_Model
 					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['last_name'].'</a>', 
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . " " . $player['last_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
 				)
 			);
 
@@ -330,7 +330,7 @@ class Team_model extends MY_Model
 					'<a href="/admin/users/edit/'.$player['user_id'].'">'.$player['last_name'].'</a>',
 					$player['name'], 
 					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/teams/edit_roster/' . $id) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $id . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
+					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/teams/delete_roster/' . $id ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $player['first_name'] . " ". $player['last_name'] . '" data-row-id="' . $id . '"><i class="fa fa-times"></i></a>',
 				)
 			);
 

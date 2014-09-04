@@ -16,12 +16,14 @@ class Game_model extends MY_Model
 			l.name as location,
 			d.name as division,
 			t.name as home_team,
-			t2.name as away_team
+			t2.name as away_team,
+			s.name as session_name
 		' );
 		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
 		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
 		$this->db->join( 'locations l', 'l.id = g.location_id', 'left outer' );
 		$this->db->join( 'divisions d', 'd.id = g.division_id', 'left outer' );
+		$this->db->join( 'sessions s', 's.id = g.session_id', 'left outer' );
 
 		// Load Games Based off of The Where Statement
 		if( !empty( $args['where'] ) )

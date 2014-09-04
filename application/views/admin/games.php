@@ -27,6 +27,7 @@
 									<th>Home Team</th>
 									<th>Away Team</th>
 									<th>Location</th>
+									<th>Session</th>
 									<th>Game Time</th>
 									<th><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></th>
 								</tr>
@@ -40,10 +41,11 @@
 										<td><?php echo $game['home_team']; ?></td>
 										<td><?php echo $game['away_team']; ?></td>
 										<td><?php echo $game['location']; ?></td>
-										<td><?php echo $game['game_date_time']; ?></td>
+										<td><a href="<?php echo base_url('admin/sessions/edit/'.$game['session_id']); ?>"><?php echo $game['session_name']; ?></a></td>
+										<td><?php echo date('m/d/y h:m', strtotime( $game['game_date_time'] ) ); ?></td>
 										<td>
 											<a href="<?php echo base_url('admin/games/edit/' . $game['id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
-											<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/games/delete/' . $game['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $game['id']; ?>" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-times"></i></a>
+											<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/games/delete/' . $game['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $game['home_team'] . " vs " . $game['away_team']; ?>" data-row-id="<?php echo $game['id']; ?>"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
 									<?php endforeach; ?>
