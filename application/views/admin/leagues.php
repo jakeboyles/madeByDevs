@@ -37,7 +37,6 @@
 										<td><a href="<?php echo base_url('admin/seasons/edit/' . $record['current_season_id']); ?>"><?php echo $record['current_season_name']; ?></a></td>
 										<td>
 											<a href="<?php echo base_url('admin/leagues/edit/' . $record['current_season_id']); ?>" class="btn active btn-primary"><i class="fa fa-edit"></i></a>
-											<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('admin/leagues/delete/' . $record['current_season_id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $record['current_season_name']; ?>" data-row-id="<?php echo $record['current_season_id']; ?>"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
 									<?php endforeach; ?>

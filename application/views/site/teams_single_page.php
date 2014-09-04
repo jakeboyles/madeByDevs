@@ -7,9 +7,11 @@
 
 		<div class="main_photo">
 			<img src="http://placehold.it/768x400&text=Main+Group+Photo" />
+			<?php if(!empty($logo['filename'])): ?>
 			<div class="team_logo">
 				<img class="pull-left" src='<?php echo base_url('uploads')."/".$logo['filename'] ?>'>
 			</div>
+			<?php endif; ?>
 		</div>
 		<div class="row sub-photos">
 			<div class="col-xs-4">

@@ -50,6 +50,18 @@
 						</div>
 					</div>
 
+
+					<div class="form-group">
+						<?php echo form_label( 'Type of User', 'user_type_id', array( 'class' => 'form-label' ) ); ?>
+						<div class="radio radio-success">
+							<?php echo form_radio( array( 'name' => 'user_type_id', 'id' => '3', 'value' => 'Team Captain', 'checked' => ( set_value('user_type_id') == 'Team Captain' ) ? TRUE : FALSE ) ); ?>
+							<label for="team captain">Team Captain</label>
+							<?php echo form_radio( array( 'name' => 'user_type_id', 'id' => '2', 'value' => 'Referee', 'checked' => ( set_value('user_type_id') == 'Referee' ) ? TRUE : FALSE ) ); ?>
+							<label for="referee">Referee</label>
+						</div>
+					</div>
+
+
 					<div class="form-group">
 						<?php echo form_label( 'Email Address', 'email', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_input( array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'value' => set_value('email') ) ); ?>

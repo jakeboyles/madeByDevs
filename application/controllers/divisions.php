@@ -14,6 +14,7 @@ class Divisions extends Site_Controller
 	// Display the Location Search
 	public function index()
 	{
+
 		// Store Data to Pass to View
 		$data['divisions'] = $this->Division_model->get_records();
 

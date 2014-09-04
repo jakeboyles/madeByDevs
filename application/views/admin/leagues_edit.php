@@ -13,7 +13,7 @@
 					<div class="grid-title">
 						<h4>Edit League</h4>
 						<div class="pull-right">
-							<a href="<?php echo base_url('admin/seasons'); ?>" class="btn btn-primary">View Leagues</a>
+							<a href="<?php echo base_url('admin/leagues'); ?>" class="btn btn-primary">View Leagues</a>
 						</div>
 					</div>
 

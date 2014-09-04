@@ -19,5 +19,9 @@ class History extends Site_Controller
 		//$data['page_title'] = 'Divisions';
 		$data = array();
 		$this->load->site_template( 'history', $data );
+
+		$this->user_is_logged_in();
+
+		
 	}
 }
