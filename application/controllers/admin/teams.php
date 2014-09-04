@@ -281,7 +281,7 @@ class Teams extends Admin_Controller
 				$image = $this->db->insert_id();
 
 				$data2 = array(
-					'team_logo' => $image;
+					'team_logo' => $image,
 				);
 
 				$this->db->where('id',$id);

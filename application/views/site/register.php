@@ -42,13 +42,12 @@
 
 					<div class="form-group">
 						<?php echo form_label( 'Gender', 'gender', array( 'class' => 'form-label' ) ); ?>
-						<?php 
-							$options = array(
-								'm' => 'Male',
-								'f' => 'Female'
-							);
-						?>
-						<?php echo form_dropdown('shirts', $options, ''); ?>
+						<div class="radio radio-success">
+							<?php echo form_radio( array( 'name' => 'gender', 'id' => 'male', 'value' => 'Male', 'checked' => ( set_value('gender') == 'Male' ) ? TRUE : FALSE ) ); ?>
+							<label for="male">Male</label>
+							<?php echo form_radio( array( 'name' => 'gender', 'id' => 'female', 'value' => 'Female', 'checked' => ( set_value('gender') == 'Female' ) ? TRUE : FALSE ) ); ?>
+							<label for="female">Female</label>
+						</div>
 					</div>
 
 					<div class="form-group">
