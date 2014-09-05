@@ -101,8 +101,8 @@ class Team_model extends MY_Model
 			// If this ID Belongs to Other Tables - Dont Delete It
 			// @ return: Return a string of error for ajax
 			if( 
-				$this->count_by( array( 'table' => 'sessions', 'where' => 'season_id = ' . $id ) ) > 0 
-				|| $this->count_by( array( 'table' => 'leagues', 'where' => 'current_season_id = ' . $id ) ) > 0
+				$this->count_by( array( 'table' => 'team_players', 'where' => 'team_id = ' . $id ) ) > 0 
+				|| $this->count_by( array( 'table' => 'session_teams', 'where' => 'team_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';
@@ -110,7 +110,7 @@ class Team_model extends MY_Model
 			// Else Delete It from Database
 			else
 			{
-				$this->Season_model->delete( $id );
+				$this->delete( $id );
 			}
 		}
 
@@ -339,6 +339,57 @@ class Team_model extends MY_Model
 
 
 
+	// Insert a user onto the roster
+	public function update_roster_record_frontend( $id = FALSE , $post = FALSE )
+	{
+	
+		if($post)
+		{
+			// Update Data
+			$data = array(
+				'position_id' => $post['position'],
+				'player_number' => $post['number'], 
+			);
+
+			$this->db->where('user_id', $id);
+
+			// Update Record in Database
+			$info = $this->db->update('team_players', $data);
+
+
+			$this->db->select('tp.id');
+			$this->db->where('user_id', $id);
+			$query = $this->db->get( 'team_players tp' );
+
+			if($query->num_rows > 0)
+			{
+					$row = $query->row_array();
+			}
+
+			$player = $this->get_player_info($row['id']);
+
+			$player= $player[0];
+
+			 // Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				'insert_id' => $id,
+				'row' => array(
+					'<td style="border-top: medium none;">'.$player['first_name']." ".$player['last_name'].'</td>',
+					'<td style="border-top: medium none;">'.$player['name'].'</td>',
+					'<td style="border-top: medium none;">'.$player['player_number'].'</td>',
+					'<td><a href="#" class="editModal btn active btn-primary" data-ajax-url="'.base_url("teams/edit_player/" . $player["user_id"]).'" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="'.$row['id'].'"><i class="fa fa-edit"></i></a><a href="#" class="btn active btn-danger" data-ajax-url="'.base_url("teams/delete_player/" . $row['id']).'" data-toggle="modal" data-target="#delete-modal" data-label="'.$player["first_name"] . " " . $player["last_name"].'" data-row-id="'.$row['id'].'"><i class="fa fa-times"></i></a></td>',
+				)
+			);
+
+			return $data_array;
+		}
+
+		return false;
+	}
+
+
+
 
 	// Update roster field
 	public function update_roster_field( $id = FALSE, $post = FALSE)
@@ -357,7 +408,6 @@ class Team_model extends MY_Model
 			// Update Record in Database
 			 $this->db->where('id', $id);
 			 $insert_id = $this->db->update('team_players', $data); 
-
 
 			 $player = $this->get_player_info($id);
 			 $player= $player[0];
@@ -498,6 +548,38 @@ class Team_model extends MY_Model
 	}
 
 
+
+		public function get_player_info_by_user_id( $user_id = FALSE )
+	{
+		if( $user_id )
+		{
+			$this->db->select('
+				tp.player_number,
+				tp.position_id,
+				tp.user_id,
+				tp.team_id,
+				u.first_name,
+				u.last_name,
+				u.id as user_id,
+				p.name,
+			');
+			$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
+			$this->db->join( 'positions p', 'p.id = tp.position_id', 'left outer' );
+			$this->db->where( 'tp.user_id', $user_id );
+			$this->db->order_by( 'u.last_name ASC, u.first_name ASC' );
+			$query = $this->db->get( 'team_players tp' );
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
+	}
+
+
 	// Fetch a List of Current Seasons Teams and their Stats
 	public function get_current_season_teams( $current_season_id )
 	{
@@ -523,6 +605,41 @@ class Team_model extends MY_Model
 			foreach($rows as $row) 
 			{
 				$teams[$row['id']] = $row["name"];
+			}
+
+			return $teams;
+
+		}
+
+		return false;
+	}
+
+
+	// Get Divisions in session
+	public function get_captains()
+	{
+
+		$this->db->select( 'u.first_name,u.last_name,u.birthday,u.id' );
+		$query= $this->db->get('users u');
+
+		$teams = array();
+
+		$rows = $query->result_array();
+
+		if( $rows )
+		{
+			
+			foreach($rows as $row) 
+			{
+				if(!empty($row['birthday'])) 
+				{
+					$birthdate = ' ('.date('m/d/y',strtotime($row['birthday'])).')';
+				}
+				else 
+				{
+					$birthdate = NULL;
+				}
+				$teams[$row['id']] = $row["first_name"].' '.$row['last_name'] . $birthdate;
 			}
 
 			return $teams;

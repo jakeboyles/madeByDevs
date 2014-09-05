@@ -7,7 +7,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<br>
-					<h4 id="myModalLabel" class="semi-bold">Adding a New Player For Jake</h4>
+					<h4 id="myModalLabel" class="semi-bold">Adding a New Player For <?php echo $record['name']; ?></h4>
 					<br>
 				</div>
 

@@ -16,6 +16,7 @@
 <div class="tab-content">
 
 	<div class="tab-pane fade in active" id="photos">
+		<br>
 		<?php echo form_open_multipart( 'teams/add_logo/'.$record['id'], array( 'id' => 'add-location-form') ); ?>
 
 			<div class="row">
@@ -63,15 +64,18 @@
 		<!-- Team Roster (Desktop) -->
 			<div class="alternating-table-container hidden-xs">
 				<div class="row">
-					<h3 class="pull-left"><?php echo $league['current_season_name']; ?> Roster</h3>
-					<a  class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
+					<h3 class="col-md-6"><?php echo $league['current_season_name']; ?> Roster</h3>
+					<div class="col-md-6">
+						<a class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
+					</div>
 				</div>
-				<table class="table table-striped stripe-pattern-one">
+				<table class="col-xs-12 table table-striped stripe-pattern-one">
 					<thead>
 						<tr>
 							<th>Player Name</th>
 							<th>Position</th>
 							<th>Number</th>
+							<th>Manage</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,6 +84,10 @@
 							<td><?php echo $player['first_name'] . ' ' . $player['last_name']; ?></td>
 							<td><?php echo $player['position']; ?></td>
 							<td><?php echo $player['player_number']; ?></td>
+							<td>
+								<a href="#" class="editModal btn active btn-primary" data-ajax-url="<?php echo base_url('teams/edit_player/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a>
+								<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('teams/delete_player/' . $player['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name'] . " " . $player['last_name']; ?>" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-times"></i></a>
+							</td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -120,5 +128,7 @@
 
 <!-- Load in Add Record Modal -->
 <?php $this->load->view('site/teams_roster_add'); ?>
+
+<?php $this->load->view('site/teams_roster_edit'); ?>
 
 

@@ -9,7 +9,7 @@
 		<!-- START Form -->
 		<?php echo form_open( 'admin/sessions/add/', array( 'id' => 'add-session-form') ); ?>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 		 		<div class="grid simple">
 
 					<div class="grid-title">
@@ -23,7 +23,7 @@
 							
 						<div class="row">
 
-							<div class="col-md-8 col-sm-8 col-xs-8">
+							<div class="col-md-12 col-sm-12 col-xs-12">
 
 								<!-- START Display Error Messages -->
 								<?php if( validation_errors() && $this->input->post() ): ?>
@@ -58,28 +58,6 @@
 
 				</div><!-- end .grid -->
 			</div><!-- end .col-md-8 -->
-
-			<!-- Second Column -->
-			<div class="col-md-4">
-		 		<div class="grid simple">
-					<div class="grid-title">
-						<h4 class="pull-left">Assign Divisions</h4>
-						<div class="pull-right">
-							<a href="<?php echo base_url('admin/divisions'); ?>" class="btn btn-primary">Edit Divisions</a>
-						</div>
-					</div>
-
-					<div class="grid-body">
-						<?php foreach( $divisions as $key => $val ): ?>
-							<div class="checkbox check-primary">
-								<?php $checked = !empty( $this->input->post( 'divisions' ) ) && in_array( $key, $this->input->post( 'divisions' ) ) ? TRUE : FALSE; ?>
-								<?php echo form_checkbox( array( 'name' => 'divisions[]', 'value' => $key, 'id' => 'checkbox' . $key, 'checked' => $checked ) ); ?>
-								<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
-							</div>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</div><!-- end .col-md-4 -->
 
 		</div><!-- end .row -->
 		<?php echo form_close(); ?>

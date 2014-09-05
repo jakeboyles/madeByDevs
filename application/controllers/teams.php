@@ -121,7 +121,7 @@ class Teams extends Site_Controller
 	}
 
 
-		// Add New Logo
+	// Add New Logo
 	public function add_logo($id = FALSE)
 	{
 
@@ -139,8 +139,7 @@ class Teams extends Site_Controller
 			// The field name for the file upload would be logo
 			if ( ! $this->upload->do_upload('logo'))
 			{
-				return false;
-
+				return $this->upload->display_errors('<p>', '</p>');
 			}
 			else
 			{
@@ -169,6 +168,46 @@ class Teams extends Site_Controller
 		}
 	}
 
+
+	// Add New Image
+	public function add_image()
+	{
+
+			// If Form is Submitted Validate Form Data and Add Record to Database
+			if( $this->input->post() )
+			{
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+
+			$this->load->library('upload', $config);
+
+			// The field name for the file upload would be logo
+			if ( ! $this->upload->do_upload('logo'))
+			{
+				return $this->upload->display_errors('<p>', '</p>');
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+
+				$data = array(
+					'filename' => $image['upload_data']['file_name'],
+					'mime_type' => $image['upload_data']['file_type']
+				);
+
+				$image = $this->db->insert('media',$data);
+
+				$image = $this->db->insert_id();
+
+				return $image;
+
+			}
+		}
+	}
+
 	private function _user_validation()
 	{
 		// Load Validation Library
@@ -179,6 +218,7 @@ class Teams extends Site_Controller
 		$this->form_validation->set_rules('first_name', 'First Name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+		$this->form_validation->set_rules('number', 'Number', 'required|min_length[1]|max_length[3]|');
 
 		// Custom Validation Messages
 		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
@@ -233,6 +273,75 @@ class Teams extends Site_Controller
 
 		echo json_encode( $data );
 		
+	}
+
+	public function edit_player( $id = FALSE ) 
+	{
+
+		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+
+		// Create Data (Pull Users) for Team Captain Dropdown
+		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+
+		// Create Data for Roster Dropdown
+		$data['players'] = $this->User_model->get_players();
+
+		// Create Data for Position Dropdown
+		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
+
+		// Create roster data
+		$data['roster'] = $this->Team_model->get_team_roster( $id );
+
+		// Retrieve Record Data From Database
+		$data['record'] = $this->Team_model->get( $id );
+
+
+		// If Form is Submitted Validate Form Data and Updated Record in Database
+		if( $this->input->post() )
+		{
+			$data = array();
+
+			// If Validation Passed
+			if( 2==2)
+			{
+				// Update Record in Database
+				// Create JSON For DataTable View
+				$data = $this->User_model->update_record($id, $this->input->post() );
+
+				$post = $this->input->post();
+
+				$post2 = array(
+					'position' => $post['position'],
+					'number' => $post['number'], 
+				);
+
+				$data = $this->Team_model->update_roster_record_frontend($id, $post );
+
+			}
+			// If Validation Failed Send Errors
+			else
+			{
+				$data = array(
+					'result' => 'error',
+					'errors' => validation_errors( '<li>','</li>' )
+				);
+			}
+
+			echo json_encode( $data );
+		}
+		else
+		{
+			// Retrieve Record Data From Database
+			$data['record'] = $this->User_model->get( $id );
+
+			$data['player_info'] = $this->Team_model->get_player_info_by_user_id( $id );
+
+
+			// Load Edit Record Form
+			$this->load->view('site/ajax-parts/team-edit-ajax', $data);
+		}
+
+
 	}
 
 }

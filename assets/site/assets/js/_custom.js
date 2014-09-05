@@ -29,6 +29,12 @@ $(document).ready(function(){
     radioClass: 'iradio_square-blue',
     increaseArea: '20%' // optional
   });
+
+	$('body').on('click', '[data-toggle="modal"]', function() {
+		$( $(this).data('target') ).data('trigger', $(this) );
+	});
+
+
 	$('.full-width-nav .navigation').html($('.navbar-collapse').html());
 	$('.stripe-pattern-one tbody tr').first().children('td').css('border-top', 'none');
 	  $(".flexible-container").click(function(event){
@@ -225,8 +231,9 @@ $(document).ready(function(){
 		var thisForm = $(this);
 		var modal = $(this).parents('.modal');
 		var formErrorContainer = $(modal).find('.ajax-form-errors');
+		var modalTrigger = modal.data('trigger');
 		var formErrorList = $(modal).find('.ajax-form-errors ul');
-		var ajaxURL = $("#ajaxButton").data('ajax-url');
+		var ajaxURL = modalTrigger.data('ajax-url');
 
 		// AJAX Request to Add Record
 		$.ajax({
@@ -252,6 +259,28 @@ $(document).ready(function(){
 			}
 		});
 
+	});
+
+
+	// Edit Modal: Update Field Values on Modal Open
+	$('.editModal').click(function() {
+		// Find The Element that Triggered This Modal
+		// Vars
+		var ajaxURL = $(this).data('ajax-url');
+		var formFieldsContainer = $('#edit-modal').find('.form-fields');
+
+		// Load in Edit Fields
+		$.ajax({
+			url: ajaxURL,
+			success: function( response ) {
+				formFieldsContainer.html( response );
+
+				// Re-Initialize jQuery Plugins on Dynamic Content
+				//loadSelect2();
+				//$('.date-mask').mask("99/99/9999");
+				//$('.timepicker-default').timepicker();
+			}
+		});
 	});
 
 });

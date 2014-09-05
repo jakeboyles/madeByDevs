@@ -52,7 +52,7 @@
 									<div class="form-group">
 										<?php echo form_label( 'Team Captain', 'captain_user_id', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. This allows a non admin user help manage this team.</span>
-										<?php echo form_dropdown( 'captain_user_id', array( '' => '') + $users, set_value( 'captain_user_id' ), 'class="pretty-select"' ); ?>
+										<?php echo form_dropdown( 'captain_user_id', array( '' => '') + $captains, set_value( 'captain_user_id' ), 'class="pretty-select"' ); ?>
 									</div>
 
 									<div class="form-group">

@@ -87,6 +87,7 @@ class Posts extends Admin_Controller
 		// Validation Rules
 		$this->form_validation->set_rules('title', 'Post Title', 'required');
 		$this->form_validation->set_rules('content', 'Content', '');
+		$this->form_validation->set_rules('post_date', 'Post Date', '');
 
 		// Slug Validation
 		if( $this->uri->segment(3) == 'edit' && ( $this->input->post( 'slug' ) == $this->input->post( 'original_slug' ) ) )

@@ -48,6 +48,7 @@ class Post_model extends MY_Model
 				'post_type' => $post_type,
 				'author_id' => $this->session->userdata('user_id'),
 				'title' => empty( $post['title'] ) ? NULL : $post['title'],
+				'post_date' => empty( $post['post_date'] ) ? NULL : $post['post_date'],
 				'slug' => $slug,
 				'content' => empty( $post['content'] ) ? NULL : $post['content']
 			);
@@ -92,7 +93,8 @@ class Post_model extends MY_Model
 			$data = array(
 				'title' => empty( $post['title'] ) ? NULL : $post['title'],
 				'slug' => $slug,
-				'content' => empty( $post['content'] ) ? NULL : $post['content']
+				'content' => empty( $post['content'] ) ? NULL : $post['content'],
+				'post_date' => empty( $post['post_date'] ) ? NULL : $post['post_date']
 			);
 
 			// Update Record in Database

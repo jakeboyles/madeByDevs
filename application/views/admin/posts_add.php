@@ -50,6 +50,12 @@
 								</div>
 
 								<div class="form-group">
+									<?php echo form_label( 'Post Date', 'slug', array( 'class' => 'form-label' ) ); ?>
+									<span class="help">e.g. Date that post will go live</span>
+									<?php echo form_input( array('name' => 'post_date', 'class' => 'form-control date input-append', 'id' => 'post_date', 'value' => set_value( 'post_date' ) ) ); ?>
+								</div>
+
+								<div class="form-group">
 									<?php echo form_label( 'Post Content', 'content', array( 'class' => 'form-label' ) ); ?>
 									<span class="help"></span>
 									<?php echo form_textarea( array('name' => 'content', 'class' => 'form-control', 'id' => 'content', 'value' => set_value( 'content' ) ) ); ?>

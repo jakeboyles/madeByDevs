@@ -16,6 +16,7 @@ $(document).ready(function(){
 	// Timepicker Styling
 	$('.timepicker-default').timepicker();
 
+
 	// For Bootstrap's .modal()
 	// Add a Listener to set Trigger Element to Modal .data() to be used in the Modal
 	$('body').on('click', '[data-toggle="modal"]', function() {

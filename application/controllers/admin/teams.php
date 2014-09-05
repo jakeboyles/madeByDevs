@@ -46,7 +46,7 @@ class Teams extends Admin_Controller
 		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Create Data for Team Captain Dropdown
-		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+		$data['captains'] = $this->Team_model->get_captains();
 
 
 		// Load Add Record Form View
@@ -69,7 +69,7 @@ class Teams extends Admin_Controller
 		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
 		// Create Data (Pull Users) for Team Captain Dropdown
-		$data['users'] = $this->Team_model->dropdown( 'users', 'id', 'first_name' );
+		$data['captains'] = $this->Team_model->get_captains();
 
 		// Create Data for Roster Dropdown
 		//$data['players'] = $this->Team_model->dropdown( 'users', 'id', 'first_name','id ASC',array('user_type_id'=>3));

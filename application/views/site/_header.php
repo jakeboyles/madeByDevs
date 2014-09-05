@@ -69,6 +69,7 @@
 					$games= $ci->Game_model->get_slider_games();
 					?>
 
+					<?php if(!empty($games)): ?>
 					<ul>
 						<?php foreach($games as $game)
 						{
@@ -91,9 +92,9 @@
 
 						<?php
 						}
-						?>
-						
+						?>	
 					</ul>
+				<?php endif; ?>
 				</div>
 				<a href="#" class="control jcarousel-control-next"><i class="fa fa-angle-right"></i></a>
 			</div>
