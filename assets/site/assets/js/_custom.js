@@ -290,6 +290,54 @@ $(document).ready(function(){
 		});
 	});
 
+
+	/* ##############################################################################
+	# Delete Modal
+	############################################################################# */
+	// Delete Modal: Update Modal Content
+	$('#delete-modal').on('show.bs.modal', function() {
+		// Find The Element that Triggered This Modal
+		var trigger = $(this).data('trigger');
+
+		// Update HTML on Modal
+		var htmlLabel = $(this).find('.data-row-label');
+		htmlLabel.text( trigger.data('label') );
+		$('#delete-modal .alert-error').addClass('hide');
+	});
+
+	// Delete Modal: Delete Button Functionality ( what actually deletes the row )
+	$('[data-action="delete-row"]').on('click', function(e){
+		e.preventDefault();
+
+		// Set Vars
+		var modal = $(this).parents('.modal');
+		var modalTrigger = modal.data('trigger');
+		var rowID = modalTrigger.data('row-id');
+		var ajaxURL = modalTrigger.data('ajax-url');
+		var id = modalTrigger.parent().parent().attr('class');
+
+		// Remove Record from DB or Display Error Message
+		$.ajax({
+			url: ajaxURL,
+			success: function(response) {
+
+				// Don't Delete and Throw Error Message
+				if( response === 'error' ){
+					$('#delete-modal .alert-error').removeClass('hide');
+				}
+				// Delete and Remove Row From DB and Table
+				else
+				{
+					// Close Delete Modal
+					$('#delete-modal').modal('hide');
+					$('table tbody').find('.'+id).html("");
+				}
+				
+			}
+		});
+		
+	});
+
 });
 // End Jon's Additions
 

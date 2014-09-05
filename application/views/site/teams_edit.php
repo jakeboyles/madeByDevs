@@ -86,7 +86,7 @@
 							<td><?php echo $player['player_number']; ?></td>
 							<td>
 								<a href="#" class="editModal btn active btn-primary" data-ajax-url="<?php echo base_url('teams/edit_player/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a>
-								<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('teams/delete_player/' . $player['id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name'] . " " . $player['last_name']; ?>" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-times"></i></a>
+								<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('teams/delete_player/' . $player['user_id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name'] . " " . $player['last_name']; ?>" data-row-id="<?php echo $player['user_id']; ?>"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
@@ -111,6 +111,11 @@
 								<h5 class="title">Number</h5>
 								<h6 class="option">
 									<?php echo $player['player_number']; ?>
+								</h6>
+								<h5 class="title">Manage</h5>
+								<h6 class="option">
+									<a href="#" class="editModal btn active btn-primary" data-ajax-url="<?php echo base_url('teams/edit_player/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a>
+									<a href="#" class="btn active btn-danger" data-ajax-url="<?php echo base_url('teams/delete_player/' . $player['user_id']); ?>" data-toggle="modal" data-target="#delete-modal" data-label="<?php echo $player['first_name'] . " " . $player['last_name']; ?>" data-row-id="<?php echo $player['user_id']; ?>"><i class="fa fa-times"></i></a>
 								</h6>
 							</li>
 						</ul>

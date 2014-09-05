@@ -241,6 +241,36 @@ class Teams extends Site_Controller
 	}
 
 
+	private function _user_validation_edit()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+		$this->form_validation->set_rules('number', 'Number', 'required|min_length[1]|max_length[3]|');
+
+		// Custom Validation Messages
+		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
+
+		// Password Validation
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'required|matches[password]');
+
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+
 	// Add New Logo
 	public function add_player($id = FALSE)
 	{
@@ -302,7 +332,7 @@ class Teams extends Site_Controller
 			$data = array();
 
 			// If Validation Passed
-			if( 2==2)
+			if( $this->_user_validation_edit() )
 			{
 				// Update Record in Database
 				// Create JSON For DataTable View
@@ -310,7 +340,7 @@ class Teams extends Site_Controller
 
 				$post = $this->input->post();
 
-				$post2 = array(
+				$post = array(
 					'position' => $post['position'],
 					'number' => $post['number'], 
 				);
@@ -343,5 +373,17 @@ class Teams extends Site_Controller
 
 
 	}
+
+
+
+	public function delete_player( $id = FALSE ) 
+	{
+
+			$data = array();
+
+			$data = $this->Team_model->delete_roster_record_frontend($id);
+
+			echo json_encode( $data );
+		}
 
 }

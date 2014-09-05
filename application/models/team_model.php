@@ -392,6 +392,35 @@ class Team_model extends MY_Model
 
 
 
+		// Insert a user onto the roster
+	public function delete_roster_record_frontend( $id = FALSE )
+	{
+	
+		if($id)
+		{
+			// Update Data
+			$data = array(
+				'user_id' => $id,
+			);
+
+			$this->db->where('user_id', $id);
+
+			// Update Record in Database
+			$info = $this->db->delete('team_players', $data);
+
+			 // Construct Data Array for JSON via AJAX
+			$data_array = array(
+				'result' => 'success',
+				);
+
+			return $data_array;
+		}
+
+		return false;
+	}
+
+
+
 
 	// Update roster field
 	public function update_roster_field( $id = FALSE, $post = FALSE)

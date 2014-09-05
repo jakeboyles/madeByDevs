@@ -68,7 +68,7 @@
 								<div class="form-group">
 									<?php echo form_label( 'Post Date', 'slug', array( 'class' => 'form-label' ) ); ?>
 									<span class="help">e.g. Date that post will go live</span>
-									<?php echo form_input( array('name' => 'post_date', 'class' => 'date input-append form-control', 'id' => 'post_date', 'value' => set_value( 'post_date', $record['post_date']) ) ); ?>
+									<?php echo form_input( array('name' => 'post_date', 'class' => 'date input-append form-control', 'id' => 'post_date', 'value' => set_value( 'post_date', date('m/d/Y',strtotime($record['post_date']) ) ) ) ); ?>
 								</div>
 
 								<div class="form-group">
