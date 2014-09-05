@@ -100,6 +100,7 @@
 					</div>
 
 					<div class="grid-body">
+						<?php if(!empty($categories)): ?>
 						<?php foreach( $categories as $category ): ?>
 							<div class="checkbox check-primary">
 								<?php
@@ -115,6 +116,7 @@
 								<?php echo form_label( $category['name'], 'checkbox' . $category['id'], array( 'class' => 'form-label' ) ); ?>
 							</div>
 						<?php endforeach; ?>
+						<?php endif; ?>
 					</div>
 				</div>
 				
