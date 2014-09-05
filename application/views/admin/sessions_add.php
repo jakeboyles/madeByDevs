@@ -48,7 +48,7 @@
 									<?php echo form_dropdown( 'season_id', array( '' => '') + $seasons, set_value( 'season_id' ), 'class="pretty-select"' ); ?>
 								</div>
 
-								<button type="submit" class="btn btn-primary">Update Session</button>
+								<button type="submit" class="btn btn-primary">Add Session</button>
 
 							</div>
 

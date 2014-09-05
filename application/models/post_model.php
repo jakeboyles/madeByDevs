@@ -48,7 +48,7 @@ class Post_model extends MY_Model
 				'post_type' => $post_type,
 				'author_id' => $this->session->userdata('user_id'),
 				'title' => empty( $post['title'] ) ? NULL : $post['title'],
-				'post_date' => empty( $post['post_date'] ) ? NULL : $post['post_date'],
+				'post_date' => empty( $post['post_date'] ) ? $this->mysql_datetime() : $this->mysql_datetime($post['post_date']),
 				'slug' => $slug,
 				'content' => empty( $post['content'] ) ? NULL : $post['content']
 			);
@@ -94,7 +94,7 @@ class Post_model extends MY_Model
 				'title' => empty( $post['title'] ) ? NULL : $post['title'],
 				'slug' => $slug,
 				'content' => empty( $post['content'] ) ? NULL : $post['content'],
-				'post_date' => empty( $post['post_date'] ) ? NULL : $post['post_date']
+				'post_date' => empty( $post['post_date'] ) ? $this->mysql_datetime() : $this->mysql_datetime($post['post_date']),
 			);
 
 			// Update Record in Database
@@ -171,6 +171,7 @@ class Post_model extends MY_Model
 		if( $post_type )
 		{
 			$this->db->where( 'post_type', $post_type );
+			$this->db->where('post_date <=',date("Y-m-d H:i:s",strtotime("0 day")));
 		}
         return $this->db->count_all_results("posts p");
     }
@@ -180,8 +181,9 @@ class Post_model extends MY_Model
 
 		$this->db->limit($limit, $start);
         $this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
-		$this->db->order_by("id","desc");
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+		$this->db->order_by( 'p.post_date', 'DESC' );
+		$this->db->where('post_date <=',date("Y-m-d H:i:s",strtotime("0 day")));
 
 		if( $post_type )
 		{

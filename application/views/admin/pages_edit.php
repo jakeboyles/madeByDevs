@@ -22,7 +22,7 @@
 							
 						<div class="row">
 
-							<div class="col-md-8 col-sm-8 col-xs-8">
+							<div class="col-md-12 col-sm-12 col-xs-12">
 
 								<!-- START Display Error Messages -->
 								<?php if( validation_errors() && $this->input->post() ): ?>

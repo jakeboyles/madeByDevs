@@ -80,7 +80,7 @@
 					</thead>
 					<tbody>
 						<?php foreach( $roster as $player ): ?>
-						<tr>
+						<tr class="<?php echo $player['id'];?>">
 							<td><?php echo $player['first_name'] . ' ' . $player['last_name']; ?></td>
 							<td><?php echo $player['position']; ?></td>
 							<td><?php echo $player['player_number']; ?></td>

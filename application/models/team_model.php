@@ -103,6 +103,8 @@ class Team_model extends MY_Model
 			if( 
 				$this->count_by( array( 'table' => 'team_players', 'where' => 'team_id = ' . $id ) ) > 0 
 				|| $this->count_by( array( 'table' => 'session_teams', 'where' => 'team_id = ' . $id ) ) > 0
+				|| $this->count_by( array( 'table' => 'games', 'where' => 'team_home_id = ' . $id ) ) > 0
+				|| $this->count_by( array( 'table' => 'games', 'where' => 'team_away_id = ' . $id ) ) > 0
 			)
 			{
 				echo 'error';

@@ -231,9 +231,11 @@ $(document).ready(function(){
 		var thisForm = $(this);
 		var modal = $(this).parents('.modal');
 		var formErrorContainer = $(modal).find('.ajax-form-errors');
+		var isEdit = $(modal).attr('id');
 		var modalTrigger = modal.data('trigger');
 		var formErrorList = $(modal).find('.ajax-form-errors ul');
 		var ajaxURL = modalTrigger.data('ajax-url');
+		var id = modalTrigger.parent().parent().attr('class');
 
 		// AJAX Request to Add Record
 		$.ajax({
@@ -252,8 +254,13 @@ $(document).ready(function(){
 				// Success
 				else
 				{
-					modal.modal('toggle');
-					$('table tbody').append('<tr>'+response.row+'</tr>');
+					if(isEdit==='edit-modal') {
+						modal.modal('toggle');
+						$('table tbody').find('.'+id).html(response.row);
+					} else {
+						modal.modal('toggle');
+						$('table tbody').append('<tr>'+response.row+'</tr>');
+					}
 				}
 
 			}
