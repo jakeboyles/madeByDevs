@@ -63,6 +63,19 @@ class Team_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
+			if(!empty($post['captain_user_id']))
+			{
+
+				$captain = array(
+				'player_id' => $post['captain_user_id'],
+				'team_id' => $insert_id,
+				'position' => '1',
+				'number' => '000', 
+				);
+
+				$this->insert_roster_record( $captain );
+			}
+
 			return $insert_id;
 		}
 
