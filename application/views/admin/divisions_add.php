@@ -86,6 +86,8 @@
 						//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
 						?>
 
+						<?php if(!empty($sessions)): ?>
+
 							<?php foreach( $sessions as $key => $val ): ?>
 								<div class="checkbox check-primary">
 									<?php $checked = ( !empty( $related_divisions ) && array_key_exists( $key, $related_divisions ) ) ? TRUE : FALSE; ?>
@@ -93,6 +95,8 @@
 									<?php echo form_label( $val, 'checkbox' . $key, array( 'class' => 'form-label' ) ); ?>
 								</div>
 							<?php endforeach; ?>
+
+						<?php endif; ?>
 
 					</div>
 				</div> 

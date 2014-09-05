@@ -101,6 +101,8 @@
 						//echo '<pre>'; var_dump( $related_divisions ); echo '</pre>';
 						?>
 
+						<?php if(!empty($sessions)): ?>
+
 						<?php echo form_open( 'admin/divisions/assign_session/' . $record['id'], array( 'id' => 'add-session-to-division-form') ); ?>
 							<?php foreach( $sessions as $key => $val ): ?>
 								<div class="checkbox check-primary">
@@ -111,6 +113,8 @@
 							<?php endforeach; ?>
 						<button type="submit" class="btn btn-primary">Update Sessions</button>
 						<?php echo form_close(); ?>
+
+						<?php endif; ?>
 
 					</div>
 				</div> 
