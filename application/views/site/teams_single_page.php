@@ -114,6 +114,13 @@
 
 		<?php endif; ?>
 
+
+		<?php if(!empty($team['additional_info'])): ?>
+		<h3>Additonal Information</h3>
+		<p><?php echo $team['additional_info']; ?></p>
+
+		<?php endif; ?>
+
 		<!-- Team Roster -->
 		<?php if( !empty( $roster ) ): ?>
 

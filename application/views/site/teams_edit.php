@@ -36,17 +36,17 @@
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo', 'photo1', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photo1', 'class' => 'form-control', 'id' => 'photo1', 'value' => set_value( 'photo1' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo1', 'value' => set_value( 'photo1' ) ) ); ?>
 			</div>
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo 2', 'photo2', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photo2', 'class' => 'form-control', 'id' => 'photo2', 'value' => set_value( 'photo2' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo2', 'value' => set_value( 'photo2' ) ) ); ?>
 			</div>
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo 3', 'photo3', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photo3', 'class' => 'form-control', 'id' => 'photo3', 'value' => set_value( 'photo3' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo3', 'value' => set_value( 'photo3' ) ) ); ?>
 			</div>
 
 			<br>
@@ -59,15 +59,16 @@
 
 	<div class="tab-pane fade in" id="roster">
 
+		<h3 class="col-md-6"><?php echo $league['current_season_name']; ?> Roster</h3>
+		<div class="col-md-6">
+			<a class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
+		</div>
+
 
 		<?php if(!empty($roster)): ?>
 		<!-- Team Roster (Desktop) -->
 			<div class="alternating-table-container hidden-xs">
 				<div class="row">
-					<h3 class="col-md-6"><?php echo $league['current_season_name']; ?> Roster</h3>
-					<div class="col-md-6">
-						<a class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
-					</div>
 				</div>
 				<table class="col-xs-12 table table-striped stripe-pattern-one">
 					<thead>
@@ -96,8 +97,6 @@
 
 			<!-- Team Roster (Mobile) -->
 			<div class="mobile-expand-list visible-xs">
-				<a class="btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
-				<h3><?php echo $league['current_season_name']; ?> Roster</h3>
 				<ul class="content">
 					<?php foreach( $roster as $player ): ?>
 					<li>
@@ -123,6 +122,47 @@
 					<?php endforeach; ?>
 				</ul>
 			</div>
+		<?php else: ?>
+
+		<div class="alternating-table-container hidden-xs">
+				<div class="row">
+				</div>
+				<table class="col-xs-12 table table-striped stripe-pattern-one">
+					<thead>
+						<tr>
+							<th>Player Name</th>
+							<th>Position</th>
+							<th>Number</th>
+							<th>Manage</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Team Roster (Mobile) -->
+			<div class="mobile-expand-list visible-xs">
+				<ul class="content">
+					<li>
+						<a href="#"><i class="fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<h5 class="title">Position</h5>
+								<h6 class="option">
+								</h6>
+								<h5 class="title">Number</h5>
+								<h6 class="option">
+								</h6>
+								<h5 class="title">Manage</h5>
+								<h6 class="option">
+								</h6>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
 		<?php endif; ?>
 	
 	</div>

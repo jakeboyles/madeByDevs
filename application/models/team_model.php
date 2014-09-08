@@ -11,7 +11,7 @@ class Team_model extends MY_Model
 	{
 		// Construct Query
 		$this->db->select('
-			t.id, t.captain_user_id, t.name, t.description, t.team_logo, t.status, t.created_at, t.modified_at, u.first_name, u.last_name, 
+			t.id, t.captain_user_id, t.name,t.additional_info, t.description, t.team_logo, t.status, t.created_at, t.modified_at, u.first_name, u.last_name, 
 			u.id as user_id, u.email, 
 			d.id as division_id, d.name as division
 		');
@@ -57,7 +57,8 @@ class Team_model extends MY_Model
 				'team_logo' => empty( $logo ) ? NULL : $logo,
 				'division_id' => empty( $post['division_id'] ) ? NULL : $post['division_id'],
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'description' => empty( $post['description'] ) ? NULL : $post['description'],
+				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info']
 			);
 
 			// Insert to Database and Store Insert ID
@@ -93,7 +94,8 @@ class Team_model extends MY_Model
 				'division_id' =>  empty( $post['division_id'] ) ? NULL : $post['division_id'],
 				'team_logo' =>  empty( $logo ) ? NULL : $logo,
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
-				'description' => empty( $post['description'] ) ? NULL : $post['description']
+				'description' => empty( $post['description'] ) ? NULL : $post['description'],
+				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info']
 			);
 
 			// Update Record in Database
@@ -343,6 +345,8 @@ class Team_model extends MY_Model
 					'<td style="border-top: medium none;">'.$player['first_name']." ".$player['last_name'].'</td>',
 					'<td style="border-top: medium none;">'.$player['name'].'</td>',
 					'<td style="border-top: medium none;">'.$player['player_number'].'</td>',
+					'<td><a href="#" class="editModal btn active btn-primary" data-ajax-url="'.base_url("teams/edit_player/" . $post['player_id']).'" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="'.$post['player_id'].'"><i class="fa fa-edit"></i></a><a href="#" class="btn active btn-danger" data-ajax-url="'.base_url("teams/delete_player/" . $post['player_id']).'" data-toggle="modal" data-target="#delete-modal" data-label="'.$player["first_name"] . " " . $player["last_name"].'" data-row-id="'.$post['player_id'].'"><i class="fa fa-times"></i></a></td>',
+
 				)
 			);
 

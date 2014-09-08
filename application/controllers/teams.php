@@ -162,6 +162,8 @@ class Teams extends Site_Controller
 
 				$this->db->update('teams',$data2); 
 
+				$this->add_image($id);
+
 				redirect('teams/edit/'.$id);
 
 			}
@@ -170,7 +172,7 @@ class Teams extends Site_Controller
 
 
 	// Add New Image
-	public function add_image()
+	public function add_image( $id = FALSE )
 	{
 
 			// If Form is Submitted Validate Form Data and Add Record to Database
@@ -183,6 +185,8 @@ class Teams extends Site_Controller
 			$config['max_height']  = '768';
 
 			$this->load->library('upload', $config);
+
+			$
 
 			// The field name for the file upload would be logo
 			if ( ! $this->upload->do_upload('logo'))
