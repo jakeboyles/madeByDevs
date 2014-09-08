@@ -14,31 +14,7 @@
 
 				<div class="modal-body">
 
-					<!-- START Display Error Messages -->
-					<div class="alert alert-error hide ajax-form-errors">
-						<h4>Form Submission Errors</h4>
-						<ul>
-						<?php echo validation_errors('<li>','</li>'); ?>
-						</ul>
-					</div>
-					<!-- END Display Error Messages -->
 
-				<!-- 		<div class="form-group">
-							<?php echo form_label( 'Add Player', 'players', array( 'class' => 'form-label' ) ); ?>
-							<?php echo form_dropdown( 'player_id', array( '' => '') + $players, set_value('players'), 'class="pretty-select"' ); ?>
-						</div> -->
-
-						<div class="form-group">
-							<?php echo form_label( 'Position', 'positions', array( 'class' => 'form-label' ) ); ?>
-							<?php echo form_dropdown( 'position', array( '' => '') + $positions, set_value('positions'), 'class="pretty-select"' ); ?>
-						</div>
-
-
-						<div class="form-group">
-							<?php echo form_label( 'Number', 'number', array( 'class' => 'form-label' ) ); ?>
-							<span class="help">0-999</span>
-							<?php echo form_input( array('name' => 'number', 'class' => 'form-control', 'id' => 'number', 'value' => set_value( 'number' ) ) ); ?>
-						</div>
 
 
 				</div>
@@ -54,7 +30,7 @@
 
 				<?php echo form_hidden( 'team_id', $record['id'] ); ?>
 				<?php echo form_hidden( 'add_field', TRUE ); ?>
-				
+
 			<?php echo form_close(); ?>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
