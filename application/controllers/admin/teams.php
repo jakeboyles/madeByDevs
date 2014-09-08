@@ -85,7 +85,7 @@ class Teams extends Admin_Controller
 		$data['record'] = $this->Team_model->get( $id );
 
 		// Load Edit Record Form
-		$this->load->admin_template( 'teams_edit', $data );
+		$this->load->admin_template( 'teams_add', $data );
 	}
 
 
