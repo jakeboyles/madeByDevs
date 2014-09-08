@@ -26,6 +26,13 @@
 
 
 
+						<div class="form-group">
+							<?php echo form_label( 'Number', 'number', array( 'class' => 'form-label' ) ); ?>
+							<span class="help">0-999</span>
+							<?php echo form_input( array('name' => 'number', 'class' => 'form-control', 'id' => 'number', 'value' => set_value( 'number' ) ) ); ?>
+						</div>
+
+
 				</div>
 
 				<div class="modal-footer">
