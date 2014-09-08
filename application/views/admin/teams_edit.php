@@ -70,17 +70,15 @@
 										<?php echo form_dropdown( 'captain_user_id', array( '' => '') + $captains, set_value( 'captain_user_id', $record['captain_user_id'] ), 'class="pretty-select"' ); ?>
 									</div>
 
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<?php echo form_label( 'Team Description', 'description', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
 									</div>
 
 									<div class="form-group">
 										<?php echo form_label( 'Additional Information', 'additional_information', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_textarea( array('name' => 'additional_info', 'class' => 'form-control', 'id' => 'additional_information', 'value' => set_value( 'additional_information' , $record['additional_info'] ) ) ); ?>
-									</div>
+									</div> -->
 
 									<button type="submit" class="btn btn-primary">Edit Team</button>
 
