@@ -4,6 +4,36 @@
 		<a class="pull-right view_page btn btn-primary" href="/teams/page/<?php echo $record['id']?>" class='btn btn-primary'>View Page</a>
 	</div>
 
+	<?php if(validation_errors() && $this->input->post()): ?>
+	<div class="alert alert-error">
+		<h4>Form Submission Errors</h3>
+		<ul>
+		<?php echo validation_errors('<li>','</li>'); ?>
+		</ul>
+	</div>
+	<?php endif; ?>
+	<!-- END Display Error Messages -->
+
+	<!-- START Success Message -->
+	<?php if( !validation_errors() && $this->input->post() && !$errors['errors'] ): ?>
+	<div class="alert alert-success">
+		This record has been updated.
+	</div>
+	<?php endif; ?>
+	<!-- END Success Message -->
+
+	<?php if($errors['errors']): ?>
+	<div class="alert alert-error">
+		<h4>Form Submission Errors</h3>
+		<ul>
+		<?php echo $errors['errors']; ?>
+		</ul>
+	</div>
+	<?php endif; ?>
+
+
+
+
 	<div class="row">
 		<ul class="col-xs-12 nav nav-tabs" role="tablist">
 		  <li class="active"><a href="#photos" role="tab" data-toggle="tab">Photos</a></li>
@@ -36,17 +66,17 @@
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo', 'photo1', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo1', 'value' => set_value( 'photo1' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photo_one', 'class' => 'form-control', 'id' => 'photo1', 'value' => set_value( 'photo1' ) ) ); ?>
 			</div>
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo 2', 'photo2', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo2', 'value' => set_value( 'photo2' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photo_two', 'class' => 'form-control', 'id' => 'photo2', 'value' => set_value( 'photo2' ) ) ); ?>
 			</div>
 
 			<div class="form-group">
 					<?php echo form_label( 'Team Photo 3', 'photo3', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_upload( array('name' => 'photos[]', 'class' => 'form-control', 'id' => 'photo3', 'value' => set_value( 'photo3' ) ) ); ?>
+					<?php echo form_upload( array('name' => 'photo_three', 'class' => 'form-control', 'id' => 'photo3', 'value' => set_value( 'photo3' ) ) ); ?>
 			</div>
 
 			<br>

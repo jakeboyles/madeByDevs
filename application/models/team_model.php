@@ -66,7 +66,6 @@ class Team_model extends MY_Model
 
 			if(!empty($post['captain_user_id']))
 			{
-
 				$captain = array(
 				'player_id' => $post['captain_user_id'],
 				'team_id' => $insert_id,
@@ -714,6 +713,124 @@ class Team_model extends MY_Model
 		else {
 			return false;
 		}
+	}
+
+
+	public function add_logo ($id = FALSE, $post = FALSE )
+	{
+
+		if($post && $_FILES['logo']['error'] == '0')
+		{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+
+			// The field name for the file upload would be logo
+			if ( ! $this->upload->do_upload('logo'))
+			{
+				return $this->upload->display_errors();
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+
+				$data = array(
+					'filename' => $image['upload_data']['file_name'],
+					'mime_type' => $image['upload_data']['file_type']
+				);
+
+				$image = $this->db->insert('media',$data);
+
+				$image = $this->db->insert_id();
+
+				$data2 = array(
+					'team_logo' => $image,
+				);
+
+				$this->db->where('id',$id);
+
+				$this->db->update('teams',$data2); 
+
+			}		
+		}
+
+		foreach($_FILES as $key => $photo) 
+		{
+			if($key!='logo' && $photo['error'] == '0' ){
+				$image = $this->_add_image($id,$post,$key);
+				if(!empty($image))
+				{
+					return $image;
+				}
+			}
+		}
+
+
+	}
+
+
+	private function _add_image($id, $post, $name)
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '5048';
+
+		$this->load->library('upload', $config);
+
+			// The field name for the file upload would be logo
+			if ( ! $this->upload->do_upload($name))
+			{
+				return $this->upload->display_errors('<li>', '</li>');
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+
+				$data = array(
+					'filename' => $image['upload_data']['file_name'],
+					'mime_type' => $image['upload_data']['file_type']
+				);
+
+				$image = $this->db->insert('media',$data);
+
+				$image = $this->db->insert_id();
+
+				$data2 = array(
+					'media_id' => $image,
+					'item_id' => $id,
+				);
+
+				$inserted_data = $this->db->insert('media_relationships',$data2); 
+
+			}
+	}
+
+	public function get_photos($id = FALSE)
+	{
+		if( $id )
+		{
+			$this->db->select('
+				mr.media_id,
+				mr.item_id,
+				m.filename
+			');
+			$this->db->join( 'media m', 'm.id = mr.media_id', 'left outer' );
+			$this->db->where( 'mr.item_id', $id );
+			$this->db->order_by( 'm.id', 'desc' );
+			$query = $this->db->get( 'media_relationships mr' );
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+
+		return false;
 	}
 
 }

@@ -26,7 +26,7 @@ class Teams extends Site_Controller
 
 
 	// Display the Location Search
-	public function edit( $id = FALSE )
+	public function edit( $id = FALSE, $errors = FALSE )
 	{
 		$this->user_is_captain();
 
@@ -35,6 +35,11 @@ class Teams extends Site_Controller
 		$data['logo'] = $this->Team_model->get_logo( $id );
 
 		$data['roster'] = $this->Team_model->get_team_roster( $id );
+
+		if(!empty($errors))
+		{
+			$data['errors'] = $errors;
+		}
 
 		//var_dump($this->db->last_query());
 		$data['players'] = $this->User_model->get_players();
@@ -93,6 +98,8 @@ class Teams extends Site_Controller
 
 				$data['logo'] = $this->Team_model->get_logo( $id );
 
+				$data['photos'] = $this->Team_model->get_photos( $id );
+
 				// Get Active Sessions By Division (For Team)
 				$data['active_sessions'] = $this->Session_model->get_active_sessions_by_division( $data['league']['current_season_id'], $data['team']['division_id'] );
 
@@ -125,90 +132,25 @@ class Teams extends Site_Controller
 	public function add_logo($id = FALSE)
 	{
 
-			// If Form is Submitted Validate Form Data and Add Record to Database
-			if( $this->input->post() )
-			{
-			$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '100';
-			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
+		// If Form is Submitted Validate Form Data and Add Record to Database
+		if( $this->input->post() )
+		{
 
-			$this->load->library('upload', $config);
+		$insert_id = $this->Team_model->add_logo( $id , $this->input->post() );
 
-			// The field name for the file upload would be logo
-			if ( ! $this->upload->do_upload('logo'))
-			{
-				return $this->upload->display_errors('<p>', '</p>');
-			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
+		$data['errors'] = $insert_id;
 
-				$data = array(
-					'filename' => $image['upload_data']['file_name'],
-					'mime_type' => $image['upload_data']['file_type']
-				);
+		if(!empty($insert_id))
+		{
+			$data['errors'] = $insert_id;
+		}
+			
+		$this->edit($id, $data);
 
-				$image = $this->db->insert('media',$data);
-
-				$image = $this->db->insert_id();
-
-				$data2 = array(
-					'team_logo' => $image,
-				);
-
-				$this->db->where('id',$id);
-
-				$this->db->update('teams',$data2); 
-
-				$this->add_image($id);
-
-				redirect('teams/edit/'.$id);
-
-			}
 		}
 	}
 
 
-	// Add New Image
-	public function add_image( $id = FALSE )
-	{
-
-			// If Form is Submitted Validate Form Data and Add Record to Database
-			if( $this->input->post() )
-			{
-			$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '100';
-			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
-
-			$this->load->library('upload', $config);
-
-			// The field name for the file upload would be logo
-			if ( ! $this->upload->do_upload('logo'))
-			{
-				return $this->upload->display_errors('<p>', '</p>');
-			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
-
-				$data = array(
-					'filename' => $image['upload_data']['file_name'],
-					'mime_type' => $image['upload_data']['file_type']
-				);
-
-				$image = $this->db->insert('media',$data);
-
-				$image = $this->db->insert_id();
-
-				return $image;
-
-			}
-		}
-	}
 
 	private function _user_validation()
 	{

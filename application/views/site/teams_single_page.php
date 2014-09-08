@@ -5,26 +5,35 @@
 
 		<h1 class="pull-left"><?php echo $team['name']; ?></h1>
 
-		<div class="main_photo">
-			<img src="http://placehold.it/768x400&text=Main+Group+Photo" />
-			<?php if(!empty($logo['filename'])): ?>
-			<div class="team_logo">
-				<img class="pull-left" src='<?php echo base_url('uploads')."/".$logo['filename'] ?>'>
+		<?php if(!empty($photos[0])):?>
+			<div class="main_photo">
+				<img src="<?php echo base_url('uploads')."/".$photos[0]['filename'] ?>" />
+				<?php if(!empty($logo['filename'])): ?>
+				<div class="team_logo">
+					<img class="pull-left" src='<?php echo base_url('uploads')."/".$logo['filename'] ?>'>
+				</div>
+				<?php endif; ?>
 			</div>
-			<?php endif; ?>
-		</div>
+		<?php endif; ?>
 		<div class="row sub-photos">
+			<?php if(!empty($photos[1])):?>
 			<div class="col-xs-4">
-				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+				<img src="<?php echo base_url('uploads')."/".$photos[1]['filename'] ?>" />
 			</div>
+			<? endif; ?>
+			<?php if(!empty($photos[2])):?>
 			<div class="col-xs-4">
-				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+				<img src="<?php echo base_url('uploads')."/".$photos[2]['filename'] ?>" />
 			</div>
+			<? endif; ?>
+			<?php if(!empty($photos[3])):?>
 			<div class="col-xs-4">
-				<img src="http://placehold.it/300x300&text=Sub+Group+Photo" />
+				<img src="<?php echo base_url('uploads')."/".$photos[3]['filename'] ?>" />
 			</div>
+			<? endif; ?>
 		</div>
 		<br>
+
 
 		<!-- Team Photos Section -->
 		<?php if( !empty( $photos ) ): ?>
