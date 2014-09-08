@@ -14,6 +14,15 @@
 
 				<div class="modal-body">
 
+					<!-- START Display Error Messages -->
+					<div class="alert alert-error hide ajax-form-errors">
+						<h4>Form Submission Errors</h4>
+						<ul>
+						<?php echo validation_errors('<li>','</li>'); ?>
+						</ul>
+					</div>
+					<!-- END Display Error Messages -->
+
 
 
 
