@@ -59,7 +59,7 @@
 
 	<div class="tab-pane fade in" id="roster">
 
-		<h3 class="col-md-6"><?php echo $league['current_season_name']; ?> Roster</h3>
+		<h3 class="col-md-6"><?php if(!empty($league['current_season_name'])): echo $league['current_season_name']; endif; ?> Roster</h3>
 		<div class="col-md-6">
 			<a class="pull-right btn btn-primary" href="#" id="ajaxButton" class="btn btn-primary" data-ajax-url="<?php echo base_url('teams/add_player/' . $record['id']); ?>" data-toggle="modal" data-target="#add-modal" data-label="" data-row-id="<?php echo $record['id']; ?>">Add Player</a>
 		</div>
