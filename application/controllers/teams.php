@@ -186,8 +186,6 @@ class Teams extends Site_Controller
 
 			$this->load->library('upload', $config);
 
-			$
-
 			// The field name for the file upload would be logo
 			if ( ! $this->upload->do_upload('logo'))
 			{
