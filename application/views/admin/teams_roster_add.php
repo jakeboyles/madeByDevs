@@ -22,8 +22,11 @@
 						</ul>
 					</div>
 					<!-- END Display Error Messages -->
-
-
+					<?=json_encode($players); ?>
+						<!-- <div class="form-group">
+							<?php echo form_label( 'Add Player', 'players', array( 'class' => 'form-label' ) ); ?>
+							<?php echo form_dropdown( 'player_id', array( '' => '') + $players, set_value('players'), 'class="pretty-select"' ); ?>
+						</div> -->
 
 						<div class="form-group">
 							<?php echo form_label( 'Position', 'positions', array( 'class' => 'form-label' ) ); ?>
