@@ -22,11 +22,15 @@
 						</ul>
 					</div>
 					<!-- END Display Error Messages -->
-					<?=json_encode($players); ?>
-						<!-- <div class="form-group">
+
+						<div class="form-group">
 							<?php echo form_label( 'Add Player', 'players', array( 'class' => 'form-label' ) ); ?>
+							<?php if(!empty($players)): ?>
 							<?php echo form_dropdown( 'player_id', array( '' => '') + $players, set_value('players'), 'class="pretty-select"' ); ?>
-						</div> -->
+							<?php else: ?>
+							<P>There Are Currently No Players In The Database</p>
+							<?php endif; ?>
+						</div>
 
 						<div class="form-group">
 							<?php echo form_label( 'Position', 'positions', array( 'class' => 'form-label' ) ); ?>
@@ -54,7 +58,6 @@
 
 				<?php echo form_hidden( 'team_id', $record['id'] ); ?>
 				<?php echo form_hidden( 'add_field', TRUE ); ?>
-
 			<?php echo form_close(); ?>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
