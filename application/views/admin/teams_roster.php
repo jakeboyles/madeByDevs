@@ -48,8 +48,3 @@
 	</div><!-- end .col-md-12 -->
 </div><!-- end .row -->
 
-<!-- Load in Add Record Modal -->
-<?php $this->load->view('admin/teams_roster_add'); ?>
-
-<!-- Load in Edit Record Modal -->
-<?php $this->load->view('admin/teams_roster_edit'); ?>
