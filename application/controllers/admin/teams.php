@@ -56,33 +56,33 @@ class Teams extends Admin_Controller
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{
-		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() && $this->_validation() && $id )
-		{
-			$this->Team_model->update_record( $id, $this->input->post() );
-		}
+		// // If Form is Submitted Validate Form Data and Updated Record in Database
+		// if( $this->input->post() && $this->_validation() && $id )
+		// {
+		// 	$this->Team_model->update_record( $id, $this->input->post() );
+		// }
 
-		// Load User Agent Library for Referrer Add Record Message
-		$this->load->library('user_agent');
+		// // Load User Agent Library for Referrer Add Record Message
+		// $this->load->library('user_agent');
 
-		// Create Data for Divisions Dropdown
-		$data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
+		// // Create Data for Divisions Dropdown
+		// $data['divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
-		// Create Data (Pull Users) for Team Captain Dropdown
-		$data['captains'] = $this->Team_model->get_captains();
+		// // Create Data (Pull Users) for Team Captain Dropdown
+		// $data['captains'] = $this->Team_model->get_captains();
 
-		// Create Data for Roster Dropdown
-		//$data['players'] = $this->Team_model->dropdown( 'users', 'id', 'first_name','id ASC',array('user_type_id'=>3));
-		//var_dump($this->db->last_query());
-		$data['players'] = $this->User_model->get_players();
+		// // Create Data for Roster Dropdown
+		// //$data['players'] = $this->Team_model->dropdown( 'users', 'id', 'first_name','id ASC',array('user_type_id'=>3));
+		// //var_dump($this->db->last_query());
+		// $data['players'] = $this->User_model->get_players();
 
-		// Create Data for Position Dropdown
-		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
+		// // Create Data for Position Dropdown
+		// $data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
 
-		$data['roster'] = $this->Team_model->get_team_roster( $id );
+		// $data['roster'] = $this->Team_model->get_team_roster( $id );
 
-		// Retrieve Record Data From Database
-		$data['record'] = $this->Team_model->get( $id );
+		// // Retrieve Record Data From Database
+		// $data['record'] = $this->Team_model->get( $id );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'teams_edit', $data );
