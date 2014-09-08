@@ -25,6 +25,11 @@
 
 
 
+						<div class="form-group">
+							<?php echo form_label( 'Position', 'positions', array( 'class' => 'form-label' ) ); ?>
+							<?php echo form_dropdown( 'position', array( '' => '') + $positions, set_value('positions'), 'class="pretty-select"' ); ?>
+						</div>
+
 
 						<div class="form-group">
 							<?php echo form_label( 'Number', 'number', array( 'class' => 'form-label' ) ); ?>
