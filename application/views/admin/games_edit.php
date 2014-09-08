@@ -68,6 +68,25 @@
 									</div>
 								</div>
 
+
+								<div class='row teams-dropdowns'>
+									<div class="form-group col-md-6">
+										<?php echo form_label( 'Home Score', 'home_score', array( 'class' => 'form-label' ) ); ?>
+										<!-- <i class="fa fa-question-circle pointer" data-toggle="popover" data-placement="bottom" data-content="Only showing teams that are found in the selected division."></i> -->
+										<!-- <span class="help">e.g. </span> -->
+										<?php echo form_input( array('name' => 'score_home', 'class' => 'form-control', 'id' => 'home_score', 'value' => set_value( 'game_date', $record['score_home'] ) ) ); ?>
+									</div>
+
+									<div class="form-group col-md-6">
+										<?php echo form_label( 'Away Score', 'score_away', array( 'class' => 'form-label' ) ); ?>
+										<!-- <i class="fa fa-question-circle pointer" data-toggle="popover" data-placement="bottom" data-content="Only showing teams that are found in the selected division."></i> -->
+										<!-- <span class="help">e.g. </span> -->
+										<?php echo form_input( array('name' => 'score_away', 'class' => 'form-control', 'id' => 'score_away', 'value' => set_value( 'score_away', $record['score_away'] ) ) ); ?>
+									</div>
+								</div>
+
+
+
 								<div class="row">
 									<div class="form-group col-md-6">
 										<?php echo form_label( 'Location*', 'location_id', array( 'class' => 'form-label' ) ); ?>

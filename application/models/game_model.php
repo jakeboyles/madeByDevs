@@ -68,6 +68,8 @@ class Game_model extends MY_Model
 				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
 				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
 				'game_date_time'=>$game_time,
+				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
+				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
 			);
 
 
@@ -95,6 +97,8 @@ class Game_model extends MY_Model
 				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
 				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
 				'game_date_time'=>$game_time,
+				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
+				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
 			);
 
 			// Update Record in Database
