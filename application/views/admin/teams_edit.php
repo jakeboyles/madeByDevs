@@ -52,9 +52,8 @@
 								<!-- START Form -->
 								<?php echo form_open_multipart( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-form') ); ?>
 
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<?php echo form_label( 'Team Name*', 'name', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name', $record['name'] ) ) ); ?>
 									</div>
 
@@ -80,7 +79,7 @@
 										<?php echo form_textarea( array('name' => 'additional_info', 'class' => 'form-control', 'id' => 'additional_information', 'value' => set_value( 'additional_information' , $record['additional_info'] ) ) ); ?>
 									</div>
 
-									<button type="submit" class="btn btn-primary">Edit Team</button>
+									<button type="submit" class="btn btn-primary">Edit Team</button> -->
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->
@@ -95,7 +94,7 @@
 			</div><!-- end .col-md-12 -->
 		</div><!-- end .row -->
 
-		<!--<?php $this->load->view('admin/teams_roster'); ?> -->
+		<?php $this->load->view('admin/teams_roster'); ?>
 
 	</div><!-- end .content -->
 </div><!-- end .page-content -->
