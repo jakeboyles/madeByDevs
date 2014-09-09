@@ -241,6 +241,33 @@ class Game_model extends MY_Model
 	}
 
 
+	public function get_games_dropdown()
+	{
+		$this->db->select( 'g.team_home_id,g.team_away_id,t.name as home_team,t2.name as away_team,g.id,g.game_date_time' );
+		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
+		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
+		$query= $this->db->get('games g');
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+
+		if( $rows )
+		{
+			foreach($rows as $row) 
+			{
+				$time = date('m/d/y h:m a', strtotime($row['game_date_time']));
+				$fields[$row['id']] = $row["home_team"]." vs ".$row['away_team'].' ('.$time.')';
+			}
+
+			return $fields;
+
+		}
+		return false;
+	}
+
+
 	// Get 10 Records
 	public function get_slider_games()
 	{
@@ -270,6 +297,34 @@ class Game_model extends MY_Model
 			return $rows;
 		}
 
+		return false;
+	}
+
+	public function get_by_date( $id = FALSE ) 
+	{
+		$time = date('Y-d-m',strtotime($id));
+		$this->db->select( 'g.team_home_id,g.team_away_id,t.name as home_team,t2.name as away_team,g.id,g.game_date_time' );
+		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
+		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
+		$this->db->like('game_date_time',$time,'after');
+		$query= $this->db->get('games g');
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+
+		if( $rows )
+		{
+			foreach($rows as $row) 
+			{
+				$time = date('h:m a', strtotime($row['game_date_time']));
+				$fields[$row['id']] = $row["home_team"]." vs ".$row['away_team'].' ('.$time.')';
+			}
+
+			return $fields;
+
+		}
 		return false;
 	}
 

@@ -132,4 +132,30 @@ class Users extends Site_Controller
 		return false;
 	}
 
+	// Add New Record View
+	public function add_game_record()
+	{
+		// If Form is Submitted Validate Form Data and Add Record to Database
+		if( $this->input->post() )
+		{
+			// If Successfully Inserted to DB, Redirect to Edit
+			if( $insert_id = $this->User_model->add_game_record( $this->input->post() ) )
+			{
+				redirect('cms/official');
+			}
+		}
+	}
+
+	public function add_player_record( $id = FALSE ) 
+	{
+		if( $this->input->post() )
+		{
+			$this->User_model->add_game_record_ajax($this->input->post(), $id);
+		}
+		else
+		{
+			return $this->input->post();
+		}
+	}
+
 }

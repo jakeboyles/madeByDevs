@@ -22,7 +22,7 @@
 	<?php endif; ?>
 	<!-- END Success Message -->
 
-	<?php if($errors['errors']): ?>
+	<?php if(!empty($errors['errors'])): ?>
 	<div class="alert alert-error">
 		<h4>Form Submission Errors</h3>
 		<ul>

@@ -243,4 +243,12 @@ class Games extends Admin_Controller
 		return false;
 	}
 
+
+	public function get_games_by_date( $id=FALSE ) 
+	{
+		$data['games'] = $this->Game_model->get_by_date( $id );
+
+		$this->load->view('site/ajax-parts/games-dropdown', $data);
+	}
+
 }

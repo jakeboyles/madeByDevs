@@ -132,4 +132,12 @@ class Users extends Admin_Controller
 		return false;
 	}
 
+
+	public function get_by_team( $id ) 
+	{
+		$data['players'] = $this->User_model->get_by_team( $id );
+
+		$this->load->view('site/ajax-parts/users-dropdown', $data);
+	}
+
 }

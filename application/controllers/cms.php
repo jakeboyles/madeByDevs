@@ -8,6 +8,8 @@ class Cms extends Site_Controller
 		// Load Content Model
 		$this->load->model('Content_model');
 		$this->load->model('Post_model');
+		$this->load->model('Game_model');
+		$this->load->model('Team_model');
 	}
 
 	// Figure Out How to Route the Content
@@ -157,6 +159,21 @@ class Cms extends Site_Controller
 		$data["links"] = $this->pagination->create_links();
 
 		$this->load->site_template( 'blog', $data );
+	}
+
+
+	// Load Blog Page
+	public function official()
+	{
+		$this->user_is_ref();
+		
+		$data['page_title'] = 'Official Dashboard';
+
+		$data['games'] = $this->Game_model->get_games_dropdown();
+
+		$data['teams'] = $this->Team_model->dropdown( 'teams', 'id', 'name', 'name ASC' );
+
+		$this->load->site_template( 'official', $data );
 	}
 
 

@@ -344,8 +344,7 @@ class Team_model extends MY_Model
 					'<td style="border-top: medium none;">'.$player['first_name']." ".$player['last_name'].'</td>',
 					'<td style="border-top: medium none;">'.$player['name'].'</td>',
 					'<td style="border-top: medium none;">'.$player['player_number'].'</td>',
-					'<td><a href="#" class="editModal btn active btn-primary" data-ajax-url="'.base_url("teams/edit_player/" . $post['player_id']).'" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="'.$post['player_id'].'"><i class="fa fa-edit"></i></a><a href="#" class="btn active btn-danger" data-ajax-url="'.base_url("teams/delete_player/" . $post['player_id']).'" data-toggle="modal" data-target="#delete-modal" data-label="'.$player["first_name"] . " " . $player["last_name"].'" data-row-id="'.$post['player_id'].'"><i class="fa fa-times"></i></a></td>',
-
+					'<td><a href="#" class="editModal btn active btn-primary" data-ajax-url="'.base_url("teams/edit_player/" . $player["user_id"]).'" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="'.$id.'"><i class="fa fa-edit"></i></a><a href="#" class="btn active btn-danger" data-ajax-url="'.base_url("teams/delete_player/" . $id).'" data-toggle="modal" data-target="#delete-modal" data-label="'.$player["first_name"] . " " . $player["last_name"].'" data-row-id="'.$id.'"><i class="fa fa-times"></i></a></td>',
 				)
 			);
 
@@ -667,6 +666,9 @@ class Team_model extends MY_Model
 	{
 
 		$this->db->select( 'u.first_name,u.last_name,u.birthday,u.id' );
+		$where = "user_type_id='4' OR user_type_id='3'";
+		$this->db->where('u.user_type_id','4');
+		$this->db->or_where('u.user_type_id','3');
 		$query= $this->db->get('users u');
 
 		$teams = array();
@@ -830,6 +832,33 @@ class Team_model extends MY_Model
 			}
 		}
 
+		return false;
+	}
+
+
+	public function get_by_game($id = FALSE) 
+	{
+		$this->db->select('
+			t.name as home_team,
+			t.id as home_team_id,
+			t2.name as away_team,
+			t2.id as away_team_id,
+		');
+		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
+		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
+		$this->db->where('g.id',$id);
+		$query = $this->db->get( 'games g' );
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+		if( $query->num_rows() > 0 )
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+		
 		return false;
 	}
 

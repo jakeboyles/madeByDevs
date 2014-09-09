@@ -170,4 +170,81 @@ class User_model extends MY_Model
 		return false;
 	}
 
+
+	public function get_by_team( $id = FALSE ) 
+	{
+
+		$this->db->select('
+			u.id,
+			u.first_name,
+			u.last_name,
+			u.birthday
+		');
+		$this->db->join( 'users u', 'u.id = tp.user_id', 'left outer' );
+		$this->db->where('tp.team_id',$id);
+		$query = $this->db->get( 'team_players tp' );
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+		if( $rows )
+		{
+			foreach($rows as $row) 
+			{
+				$fields[$row['id']] = $row['first_name']." ".$row['last_name'].' ('.$row['birthday'].')';
+			}
+
+			return $fields;
+
+		}
+		return false;
+	}
+
+
+	public function add_game_record( $post=FALSE )
+	{
+		if( $post )
+		{
+			// Insert Data
+			$data = array(
+				'score_home' => empty( $post['score_home'] ) ? '0' : $post['score_home'],
+				'score_away' => empty( $post['score_away'] ) ? '0' : $post['score_away'],
+			);
+
+			// Insert to Database and Store Insert ID
+			$this->db->where('id',$post['game_id']);
+			$this->db->update('games',$data );
+
+			return true;
+		}
+
+		return false;
+	}
+
+
+
+	public function add_game_record_ajax( $post=FALSE, $id=FALSE )
+	{
+		if( $post )
+		{
+
+			// Insert Data
+			$data = array(
+				'game_id' => empty( $post['gameID'] ) ? NULL : $post['gameID'],
+				'team_id' => empty( $post['teamID'] ) ? NULL : $post['teamID'],
+				'user_id' => empty( $id ) ? NULL : $id,
+				'yellow_cards' => empty( $post['yellows'] ) ? '0' : $post['yellows'],
+				'red_cards' => empty( $post['reds'] ) ? '0' : $post['reds'],
+				'goals_scored' => empty( $post['score'] ) ? '0' : $post['score'],
+			);
+
+			// Insert to Database and Store Insert ID
+			$this->db->insert('game_players_soccer',$data );
+
+			echo "Success";
+		}
+
+	}
+
 }

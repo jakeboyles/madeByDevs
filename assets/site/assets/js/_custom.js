@@ -30,6 +30,12 @@ $(document).ready(function(){
     increaseArea: '20%' // optional
   });
 
+	$('.input-append.date').datepicker({
+		autoclose: true,
+		todayHighlight: true,
+		//beforeShow: function() { $('#datepicker').css("z-index", 9999); }
+	});
+
 	$('body').on('click', '[data-toggle="modal"]', function() {
 		$( $(this).data('target') ).data('trigger', $(this) );
 	});
@@ -291,6 +297,24 @@ $(document).ready(function(){
 	});
 
 
+
+	$('#add-modal, #edit-modal').on('hide.bs.modal', function() {
+		// Set Vars
+		var formErrorContainer = $(this).find('.ajax-form-errors');
+		var thisForm = $(this).find('form');
+		var thisFormSelects = $(this).find('form select');
+
+		// Reset Form on Modal Close
+		if( $(this).is('#add-modal') )
+		{
+			thisForm.trigger( 'reset' );
+		}
+
+		// Hide Errors on Modal Close
+		formErrorContainer.addClass('hide');
+	});
+
+
 	/* ##############################################################################
 	# Delete Modal
 	############################################################################# */
@@ -335,6 +359,146 @@ $(document).ready(function(){
 				
 			}
 		});
+		
+	});
+
+	// Load Location Fields Based on Location Selection
+	$('body').on('change', '#game-select-dropdown', function(e){
+		e.preventDefault();
+
+		$('.teams-dropdowns').show();
+
+		// Vars
+		var locationID = $(this).val();
+		var formContainer = $('.teams-dropdowns');
+		var ajaxURL = $(this).data('ajax-url') + '/' + locationID;
+
+		// Display Location Fields Dropdown
+		if( locationID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+				}
+			});
+		}
+		// Remove Location Fields Dropdown
+		else
+		{
+			formContainer.addClass('hide');
+			formContainer.html('');
+		}
+		
+	});
+
+
+	$('body').on('change', '#team_select_dropdown', function(e){
+		e.preventDefault();
+
+		// Vars
+		var locationID = $(this).val();
+		var formContainer = $('.users-dropdowns');
+		var ajaxURL = $(this).data('ajax-url') + '/' + locationID;
+
+		// Display Location Fields Dropdown
+		if( locationID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+				}
+			});
+		}
+		// Remove Location Fields Dropdown
+		else
+		{
+			formContainer.addClass('hide');
+			formContainer.html('');
+		}
+		
+	});
+
+
+	$('body').on('click', '.update_game_info', function(e){
+		e.preventDefault();
+
+		var row = $(this).parent().parent();
+		var yellows = $(row).find("#yellows").val();
+		var reds = $(row).find("#reds").val();
+		var score = $(row).find("#score").val();
+		var teamID = $(row).parent().find("#team_id").val();
+		var csrfName = $(row).find("#csrf").attr('name');
+		var csrfVal = $(row).parent().find("#csrf").val();
+		var gameID = $("#game-select-dropdown").val();
+		alert(teamID);
+		var ajaxURL = $(this).data("ajax-url");
+		var data = {
+			yellows:yellows,
+			reds:reds,
+			score:score,
+			gameID:gameID,
+			teamID:teamID,
+			csrf_token:csrfVal
+		};
+
+		$.ajax({
+				url: ajaxURL,
+				data:data,
+				type:'POST',
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+				}
+		});
+
+
+	});
+
+
+	$('body').on('change', '#date-selector-dropdown', function(e){
+		e.preventDefault();
+		$('.teams-dropdowns').hide();
+
+		// Vars
+		var locationID = $(this).val();
+		locationID = locationID.replace('/', '-');
+		locationID = locationID.replace('/', '-');
+		var formContainer = $('.users-dropdowns');
+		var ajaxURL = $(this).data('ajax-url') + '/' + locationID;
+
+		// Display Location Fields Dropdown
+		if( locationID.length )
+		{
+			$.ajax({
+				url: ajaxURL,
+				success: function( response ) {
+					// Load Results to Dom
+					formContainer.html( response );
+					formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+				}
+			});
+		}
+		// Remove Location Fields Dropdown
+		else
+		{
+			formContainer.addClass('hide');
+			formContainer.html('');
+		}
 		
 	});
 

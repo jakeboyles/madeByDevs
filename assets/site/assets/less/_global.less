@@ -641,6 +641,8 @@ footer {
 	.navbar-inverse {
 		background: @gray-lighter url(../img/header-blue.png)  0 65px repeat-x;
 	}
+
+
 	#content {
 		.team-standings {
 			.team-header {
@@ -691,6 +693,10 @@ footer {
 }
 
 
+@media(min-width: 500px) 
+{
+}
+
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) { }
 
@@ -725,6 +731,16 @@ footer {
 	  	font-size: 10px !important;
 	  }
 	}
+}
+
+@media (max-width: 400px) {
+	#add-team-form th, #add-team-form td {
+		padding:0px !important;
+	}
+}
+
+.datepicker {
+    z-index: 9999;
 }
 
 // List Grey and White Alternating
@@ -865,6 +881,11 @@ input[type="file"] {
 	}
 }
 
+#roster .editModal {
+    float: left;
+    margin-right: 5px;
+}
+
 
 .team_edit {
 
@@ -887,6 +908,17 @@ input[type="file"] {
 	}
 
 }
+
+#add-team-form {
+	padding:0 !important;
+	table {
+		input {
+			width:3em;
+		}
+	}
+}
+
+
 
 .radio {
 	label {

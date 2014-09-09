@@ -5,7 +5,7 @@ $atts = array( 'limit' => 3, 'where' => 'p.post_type = \'post\'' );
 $latest_posts = $ci->Content_model->get_posts( $atts );
 ?>
 
-<div class="col-md-pull-8 col-md-4">
+<div class="col-md-pull-8 col-xs-12 col-md-4">
 
 	<!-- BEGIN Latest News Widget -->
 	<?php if(!empty($latest_posts)): ?>
