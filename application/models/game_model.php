@@ -283,9 +283,10 @@ class Game_model extends MY_Model
 		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
 		$this->db->join( 'locations l', 'l.id = g.location_id', 'left outer' );
 		$this->db->join( 'divisions d', 'd.id = g.division_id', 'left outer' );
-		$this->db->order_by('id', 'desc'); 
+		$this->db->order_by('game_date_time', 'desc'); 
 		$this->db->limit(10);
 		$this->db->where('score_home IS NOT NULL && score_away IS NOT NULL');
+		$this->db->where('score_home != 0 OR score_away !=0');
 
 		// Run Query
 		$query = $this->db->get( 'games g' );

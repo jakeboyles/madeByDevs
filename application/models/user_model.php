@@ -130,6 +130,7 @@ class User_model extends MY_Model
 				'team_id' => $post['team_id'],
 				'position_id' => $post['position'],
 				'player_number' => $post['number'],
+				'created_by' => empty( $this->session->userdata('user_id') ) ? '0' : $this->session->userdata('user_id'),
 			);
 
 			// Update Record in Database
@@ -237,6 +238,7 @@ class User_model extends MY_Model
 				'yellow_cards' => empty( $post['yellows'] ) ? '0' : $post['yellows'],
 				'red_cards' => empty( $post['reds'] ) ? '0' : $post['reds'],
 				'goals_scored' => empty( $post['score'] ) ? '0' : $post['score'],
+				'created_by' => empty( $this->session->userdata('user_id') ) ? '0' : $this->session->userdata('user_id'),
 			);
 
 			// Insert to Database and Store Insert ID
@@ -260,6 +262,7 @@ class User_model extends MY_Model
 				'yellow_cards' => empty( $post['yellows'] ) ? '0' : $post['yellows'],
 				'red_cards' => empty( $post['reds'] ) ? '0' : $post['reds'],
 				'goals_scored' => empty( $post['score'] ) ? '0' : $post['score'],
+				'modified_by' => empty( $this->session->userdata('user_id') ) ? '0' : $this->session->userdata('user_id'),
 			);
 
 			// Insert to Database and Store Insert ID

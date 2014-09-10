@@ -511,11 +511,13 @@ $(document).ready(function(){
 						}
 
 						$(row).addClass('shadow-success');
+						$(row).addClass('animated rubberBand');
 
 						setInterval(function () {
 							$(row).removeClass('shadow-success');
 							$(row).addClass('shadow-remove');
 							$(row).removeClass('shadow-remove');
+							$(row).removeClass('animated rubberBand');
 						}, 2000);
 						
 						// Re-Initialize jQuery Plugins on Dynamic Content
