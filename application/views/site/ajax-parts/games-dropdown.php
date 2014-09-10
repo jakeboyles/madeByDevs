@@ -7,6 +7,8 @@
 
 <?php else: ?>
 
-<p>There were no games on this date.</p>
+<div class="alert alert-error">
+<P>There Are No Games On This Date</p>
+</div>
 
 <?php endif; ?>

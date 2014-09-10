@@ -132,6 +132,27 @@ class Users extends Site_Controller
 		return false;
 	}
 
+
+	// Run Validation on Create / Edit Forms
+	private function _info_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('yellows', 'Yellow Cards', 'numeric');
+		$this->form_validation->set_rules('reds', 'Red Cards', 'numeric');
+		$this->form_validation->set_rules('score', 'Score', 'numeric');
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
 	// Add New Record View
 	public function add_game_record()
 	{
@@ -148,9 +169,22 @@ class Users extends Site_Controller
 
 	public function add_player_record( $id = FALSE ) 
 	{
-		if( $this->input->post() )
+		if( $this->input->post() && $this->_info_validation() )
 		{
 			$this->User_model->add_game_record_ajax($this->input->post(), $id);
+		}
+		else
+		{
+			return $this->input->post();
+		}
+	}
+
+	public function edit_player_record( $id = FALSE ) 
+	{
+		if( $this->input->post() && $this->_info_validation() )
+		{
+			$post = $this->input->post();
+			$this->User_model->edit_game_record_ajax($this->input->post(), $id, $post['game_player_id']);
 		}
 		else
 		{

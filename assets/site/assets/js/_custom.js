@@ -19,6 +19,39 @@ function centerElement(wtc) {
 		$(this).css('left',offw);
 	});
 }
+function date_selector_dropdown() {
+	$('.teams-dropdowns').hide();
+
+	var selector = $("#date-selector-dropdown");
+
+	// Vars
+	var locationID = $(selector).val();
+	locationID = locationID.replace('/', '-');
+	locationID = locationID.replace('/', '-');
+	var formContainer = $('.users-dropdowns');
+	var ajaxURL = $(selector).data('ajax-url') + '/' + locationID;
+
+	// Display Location Fields Dropdown
+	if( locationID.length )
+	{
+		$.ajax({
+			url: ajaxURL,
+			success: function( response ) {
+				// Load Results to Dom
+				formContainer.html( response );
+				formContainer.removeClass( 'hide' );
+				
+				// Re-Initialize jQuery Plugins on Dynamic Content
+			}
+		});
+	}
+	// Remove Location Fields Dropdown
+	else
+	{
+		formContainer.addClass('hide');
+		formContainer.html('');
+	}
+}
 $(document).ready(function(){
 	updateNewsChevrons('.newsLinks li');
 	updateNewsChevrons('.mobile-expand-list .content li a');
@@ -29,6 +62,8 @@ $(document).ready(function(){
     radioClass: 'iradio_square-blue',
     increaseArea: '20%' // optional
   });
+
+    // date_selector_dropdown();
 
 	$('.input-append.date').datepicker({
 		autoclose: true,
@@ -146,6 +181,8 @@ $(document).ready(function(){
 	# Directions
 	######################################################################*/
 	// Location AJAX Search
+
+
 	$('#search-locations-form').submit(function(e){
 		e.preventDefault();
 
@@ -397,6 +434,7 @@ $(document).ready(function(){
 	});
 
 
+	// Ajax for team select dropdown
 	$('body').on('change', '#team_select_dropdown', function(e){
 		e.preventDefault();
 
@@ -429,6 +467,8 @@ $(document).ready(function(){
 	});
 
 
+
+	// Ajax for saving player info from official dashboard
 	$('body').on('click', '.update_game_info', function(e){
 		e.preventDefault();
 
@@ -436,11 +476,11 @@ $(document).ready(function(){
 		var yellows = $(row).find("#yellows").val();
 		var reds = $(row).find("#reds").val();
 		var score = $(row).find("#score").val();
-		var teamID = $(row).parent().find("#team_id").val();
+		var teamID = $(row).find("#team_id").val();
 		var csrfName = $(row).find("#csrf").attr('name');
-		var csrfVal = $(row).parent().find("#csrf").val();
+		var csrfVal = $(row).find("#csrf").val();
+		var game_player = $(row).find("#game_player_id").val();
 		var gameID = $("#game-select-dropdown").val();
-		alert(teamID);
 		var ajaxURL = $(this).data("ajax-url");
 		var data = {
 			yellows:yellows,
@@ -448,21 +488,50 @@ $(document).ready(function(){
 			score:score,
 			gameID:gameID,
 			teamID:teamID,
+			game_player_id: game_player,
 			csrf_token:csrfVal
 		};
 
-		$.ajax({
-				url: ajaxURL,
-				data:data,
-				type:'POST',
-				success: function( response ) {
-					// Load Results to Dom
-					formContainer.html( response );
-					formContainer.removeClass( 'hide' );
-					
-					// Re-Initialize jQuery Plugins on Dynamic Content
-				}
-		});
+
+		if(!isNaN(parseInt(yellows,10)) && !isNaN(parseInt(reds,10)) && !isNaN(parseInt(score,10))) {
+
+			var newURL = ajaxURL.replace("add", "edit");
+			$(this).data('ajax-url',newURL);
+
+			$.ajax({
+					url: ajaxURL,
+					data:data,
+					type:'POST',
+					success: function( response ) {
+						// Load Results to Dom
+						var game_player_id = $(row).find("#game_player_id").val();
+
+						if(game_player_id===""){
+							$(row).find("#game_player_id").val(response);
+						}
+
+						$(row).addClass('shadow-success');
+
+						setInterval(function () {
+							$(row).removeClass('shadow-success');
+							$(row).addClass('shadow-remove');
+							$(row).removeClass('shadow-remove');
+						}, 2000);
+						
+						// Re-Initialize jQuery Plugins on Dynamic Content
+					}
+			});
+
+		}
+		else {
+			$(row).addClass('shadow-failure');
+
+			 setInterval(function () {
+			 $(row).removeClass('shadow-failure');
+			 $(row).addClass('shadow-remove');
+			 $(row).removeClass('shadow-remove');
+			 }, 2000);
+		}
 
 
 	});
@@ -500,6 +569,12 @@ $(document).ready(function(){
 			formContainer.html('');
 		}
 		
+	});
+
+
+	// Allow links to open lightbox
+	$(".viewMorePhotos").on("click",function(){
+		$(".main_photo a").trigger("click");
 	});
 
 });

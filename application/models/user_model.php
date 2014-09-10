@@ -240,7 +240,31 @@ class User_model extends MY_Model
 			);
 
 			// Insert to Database and Store Insert ID
-			$this->db->insert('game_players_soccer',$data );
+			$insert_id = $this->db->insert('game_players_soccer',$data );
+
+			echo $this->db->insert_id();
+		}
+
+	}
+
+	public function edit_game_record_ajax( $post=FALSE, $id=FALSE, $game_player_id=FALSE )
+	{
+		if( $post )
+		{
+
+			// Insert Data
+			$data = array(
+				'game_id' => empty( $post['gameID'] ) ? NULL : $post['gameID'],
+				'team_id' => empty( $post['teamID'] ) ? NULL : $post['teamID'],
+				'user_id' => empty( $id ) ? NULL : $id,
+				'yellow_cards' => empty( $post['yellows'] ) ? '0' : $post['yellows'],
+				'red_cards' => empty( $post['reds'] ) ? '0' : $post['reds'],
+				'goals_scored' => empty( $post['score'] ) ? '0' : $post['score'],
+			);
+
+			// Insert to Database and Store Insert ID
+			$this->db->where('id',$game_player_id);
+			$this->db->update('game_players_soccer',$data );
 
 			echo "Success";
 		}

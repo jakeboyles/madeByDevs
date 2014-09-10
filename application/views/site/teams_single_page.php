@@ -7,7 +7,7 @@
 
 		<?php if(!empty($photos[0])):?>
 			<div class="main_photo">
-				<img src="<?php echo base_url('uploads')."/".$photos[0]['filename'] ?>" />
+				<a href="<?php echo base_url('uploads')."/".$photos[0]['filename'] ?>" data-lightbox="team"><img src="<?php echo base_url('uploads')."/".$photos[0]['filename'] ?>" /></a>
 				<?php if(!empty($logo['filename'])): ?>
 				<div class="team_logo">
 					<img class="pull-left" src='<?php echo base_url('uploads')."/".$logo['filename'] ?>'>
@@ -18,17 +18,17 @@
 		<div class="row sub-photos">
 			<?php if(!empty($photos[1])):?>
 			<div class="col-xs-4">
-				<img src="<?php echo base_url('uploads')."/".$photos[1]['filename'] ?>" />
+				<a href="<?php echo base_url('uploads')."/".$photos[1]['filename'] ?>" data-lightbox="team" ><img src="<?php echo base_url('uploads')."/".$photos[1]['filename'] ?>" /></a>
 			</div>
 			<? endif; ?>
 			<?php if(!empty($photos[2])):?>
 			<div class="col-xs-4">
-				<img src="<?php echo base_url('uploads')."/".$photos[2]['filename'] ?>" />
+				<a href="<?php echo base_url('uploads')."/".$photos[2]['filename'] ?>" data-lightbox="team"><img src="<?php echo base_url('uploads')."/".$photos[2]['filename'] ?>" /></a>
 			</div>
 			<? endif; ?>
 			<?php if(!empty($photos[3])):?>
 			<div class="col-xs-4">
-				<img src="<?php echo base_url('uploads')."/".$photos[3]['filename'] ?>" />
+				<a href="#" class="viewMorePhotos">View More Photos</a>
 			</div>
 			<? endif; ?>
 		</div>
@@ -123,13 +123,6 @@
 
 		<?php endif; ?>
 
-
-		<?php if(!empty($team['additional_info'])): ?>
-		<h3>Additonal Information</h3>
-		<p><?php echo $team['additional_info']; ?></p>
-
-		<?php endif; ?>
-
 		<!-- Team Roster -->
 		<?php if( !empty( $roster ) ): ?>
 
@@ -186,6 +179,12 @@
 		<!-- To Do: Display team history. Not currently in scope -->
 
 
+	<?php if(!empty($team['additional_info'])): ?>
+		<h3>Additonal Information</h3>
+		<p><?php echo $team['additional_info']; ?></p>
+	<?php endif; ?>
+
+
 	</div>
 	<?php else: ?>
 
@@ -193,5 +192,21 @@
 		<p>It appears you have visited a team page that does not exists. Please try our <a href="<?php echo base_url('teams'); ?>">team search page</a> to find the team you are looking for.</p>
 	
 	<?php endif; ?>
+
+	<div class="hidden_images_lightbox">
+		<?php 
+		$counter = 0;
+		if(!empty($photos)):
+			foreach($photos as $photo): 
+				if($counter>2 && $counter<15):
+		?>
+					<a class="hidden" href="<?php echo base_url('uploads')."/".$photo['filename'] ?>" data-lightbox="team" ><img src="<?php echo base_url('uploads')."/".$photo['filename'] ?>" /></a>
+		<?php 
+				endif;
+				$counter++;
+			endforeach; 
+		endif;
+		?>
+	</div>
 
 </div>

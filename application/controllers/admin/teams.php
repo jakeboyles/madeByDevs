@@ -297,8 +297,8 @@ class Teams extends Admin_Controller
 	{
 			$data['teams'] = $this->Team_model->get_by_game( $id );
 			$data['teams'] = $data['teams'][0];
-			$data['home_team'] = $this->Team_model->get_team_roster($data['teams']['home_team_id']);
-			$data['away_team'] = $this->Team_model->get_team_roster($data['teams']['away_team_id']);
+			$data['home_team'] = $this->Team_model->get_team_roster($data['teams']['home_team_id'], $id);
+			$data['away_team'] = $this->Team_model->get_team_roster($data['teams']['away_team_id'], $id);
 			$data['record'] = $this->Game_model->get($id);
 
 			$this->load->view('site/ajax-parts/teams-dropdown', $data);

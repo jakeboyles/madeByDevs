@@ -5,7 +5,7 @@
 
 	<div class="form-group">
 		<?php echo form_label( 'Date *', 'date', array( 'class' => 'form-label' ) ); ?>
-		<?php echo form_input( array('name' => 'date', 'data-ajax-url' => base_url('admin/games/get_games_by_date'),  'class' => 'form-control date input-append', 'id' => 'date-selector-dropdown', 'value' => set_value( 'dates' )  ) ); ?>
+		<?php echo form_input( array('name' => 'date', 'data-ajax-url' => base_url('admin/games/get_games_by_date'),  'class' => 'form-control date input-append', 'id' => 'date-selector-dropdown', 'value' => set_value( 'dates', date('m/d/Y',time()) )  ) ); ?>
 	</div>
 
 	<div class='games-dropdown'></div>

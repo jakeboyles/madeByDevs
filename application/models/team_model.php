@@ -506,7 +506,7 @@ class Team_model extends MY_Model
 
 
 	// Fetch the Team Roster
-	public function get_team_roster( $team_id = FALSE )
+	public function get_team_roster( $team_id = FALSE, $id = FALSE )
 	{
 		if( $team_id )
 		{
@@ -525,11 +525,59 @@ class Team_model extends MY_Model
 			if( $query->num_rows() > 0 )
 			{
 				$rows = $query->result_array();
+
+				if(!$id) 
+				{
+					return $rows;
+				}
+			}
+
+			$players = array();
+
+			if($id)
+			{
+				foreach( $rows as $row )
+				{
+					// Determine if Away or Home
+					$row['game_info'] = $this->_get_game_info($row['id'],$id);
+					// Restore Appended Array Data to $games array to be returned
+					$players[] = $row;
+				}
+
+				return $players;
+			}
+
+
+		}
+
+		return false;
+	}
+
+
+	private function _get_game_info($player = FALSE, $game = FALSE)
+	{
+		if( $player )
+		{
+			$this->db->select('
+				gp.id,
+				gp.yellow_cards,
+				gp.red_cards,
+				gp.goals_scored
+			');
+			$this->db->where( 'gp.user_id', $player );
+			$this->db->where( 'gp.game_id', $game );
+			$this->db->order_by('gp.id DESC' );
+			$query = $this->db->get( 'game_players_soccer gp' );
+
+			if( $query->num_rows() > 0 )
+			{
+				$rows = $query->result_array();
 				return $rows;
 			}
 		}
 
 		return false;
+
 	}
 
 
