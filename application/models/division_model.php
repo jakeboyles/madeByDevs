@@ -155,4 +155,198 @@ class Division_model extends MY_Model
 		return false;
 	}
 
+
+	// Get all teams in a division
+	public function get_teams_by_division($division = FALSE)
+	{
+		$this->db->select( 't.id, t.name' );
+		$this->db->where( 't.division_id' , $division['id'] );
+		$query = $this->db->get('teams t');
+
+		$rows2 = $query->result_array();
+
+		return $rows2;
+	}
+
+
+	// Get all games played by a team when they were in a division
+	public function get_win_loss_by_team($team = FALSE, $division_id = FALSE)
+	{
+		$this->db->select('
+			gt.win, 
+			gt.loss,
+			gt.tie,
+			');
+		$this->db->where( 'gt.team_id' , $team['id'] );
+
+		if(!empty($division_id)) {
+			$this->db->where('gt.division_id',$division_id);
+		}
+
+		$query = $this->db->get('game_teams gt');
+
+		$games = $query->result_array();
+
+		return $games;
+	}
+
+	// Get the best teams from each division
+	public function get_division_leaders()
+	{
+		$this->db->select('d.id,d.name');
+		$query = $this->db->get('divisions d');
+
+
+		$divisions = $query->result_array();
+
+		$divisions_total = array();
+
+		if( $divisions )
+		{
+			foreach($divisions as $division) 
+			{
+				$highest_win = NULL;
+				$highest_team = NULL;
+				$team_id = NULL;
+				$totalWins = NULL;
+				$totalTies = NULL;
+				$totalGames = NULL;
+
+				$teams = $this->get_teams_by_division($division);
+
+				if( $teams )
+				{
+					foreach( $teams as $team ) 
+					{
+						
+						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id']);
+
+						if( $teams_win_loss )
+						{
+
+							$games = 0;
+							$wins = 0;
+							$ties = 0;
+
+							foreach( $teams_win_loss as $game ) 
+							{
+								$games++;
+
+								if($game['win']=='1'){
+									$wins++;
+								}
+
+								if($game['tie']=='1'){
+									$ties++;
+								}
+								
+							}
+
+							$winloss = $wins / $games;
+
+							if( $winloss > $highest_win )
+							{
+								$highest_win = $winloss;
+								$highest_team = $team['name'];
+								$team_id = $team['id'];
+								$totalWins = $wins;
+								$totalTies = $ties;
+								$totalGames = $games;
+							}
+
+						}
+
+					}
+
+				}
+
+				$stat['name'] = $division['name'];
+				$stat['division_id'] = $division['id'];
+				$stat['highest_win']=$highest_win;
+				$stat['highest_team'] = $highest_team;
+				$stat['games_played'] = $totalGames;
+				$stat['games_won'] = $totalWins;
+				$stat['games_tied'] = $totalTies;
+				$stat['team_id'] = $team_id;
+
+				$divisions_total[] = $stat;
+
+			}
+
+			return $divisions_total;
+		}
+	}
+
+
+
+	// Get the best teams from each division
+	public function get_team_stats($division_id = FALSE)
+	{
+		$this->db->select('d.id,d.name');
+		$this->db->where('d.id',$division_id);
+		$query = $this->db->get('divisions d');
+		
+
+		$divisions = $query->result_array();
+
+		if( $divisions )
+		{
+			foreach($divisions as $division) 
+			{
+
+				$teams = $this->get_teams_by_division($division);
+
+				$teams_total = array();
+
+				if( $teams )
+				{
+					foreach( $teams as $team ) 
+					{
+						$winloss = 0;
+						$games = 0;
+						$wins = 0;
+						$ties = 0;
+
+						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id']);
+
+						if( $teams_win_loss )
+						{
+
+							foreach( $teams_win_loss as $game ) 
+							{
+								$games++;
+
+								if($game['win']=='1'){
+									$wins++;
+								}
+
+								if($game['tie']=='1'){
+									$ties++;
+								}
+								
+							}
+
+							$winloss = $wins / $games;
+
+		
+						}
+
+						$stat['win_loss']=$winloss;
+						$stat['id']=$team['id'];
+						$stat['team_name']=$team['name'];
+						$stat['games_played'] = $games;
+						$stat['games_won'] = $wins;
+						$stat['games_tied'] = $ties;
+
+						$teams_total[] = $stat;
+
+					}
+
+				}
+
+			}
+
+			return $teams_total;
+		}
+	}
 }

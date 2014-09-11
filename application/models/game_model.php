@@ -71,10 +71,64 @@ class Game_model extends MY_Model
 				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
 				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
 			);
-
-
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
+
+			$data2 = array(
+				'game_id'=>$insert_id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+			);
+
+			if($data['score_home']>$data['score_away'])
+			{
+				$data2['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data2['tie']=1;
+			} 
+			else
+			{
+				$data2['loss']=1;
+			}
+
+			$this->db->insert('game_teams',$data2);
+
+
+			$data3 = array(
+				'game_id'=>$insert_id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+			);
+
+			if($data['score_away']>$data['score_home'])
+			{
+				$data3['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data3['tie']=1;
+			} 
+			else
+			{
+				$data3['loss']=1;
+			}
+
+			$this->db->insert('game_teams',$data3);
+
+
+
 			return $insert_id;
 		}
 
@@ -103,6 +157,66 @@ class Game_model extends MY_Model
 
 			// Update Record in Database
 			$this->update( $id, $data );
+
+			$data2 = array(
+				'game_id'=>$id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+			);
+
+			if($data['score_home']>$data['score_away'])
+			{
+				$data2['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data2['tie']=1;
+			} 
+			else
+			{
+				$data2['loss']=1;
+			}
+
+			$this->db->where('game_id',$id);
+			$this->db->where('team_id',$post['team_home_id']);
+			$this->db->update('game_teams',$data2);
+
+
+			$data3 = array(
+				'game_id'=>$id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+			);
+
+			if($data['score_away']>$data['score_home'])
+			{
+				$data3['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data3['tie']=1;
+			} 
+			else
+			{
+				$data3['loss']=1;
+			}
+
+			$this->db->where('game_id',$id);
+			$this->db->where('team_id',$post['team_away_id']);
+			$this->db->update('game_teams',$data3);
+
+
+
 
 			return true;
 		}

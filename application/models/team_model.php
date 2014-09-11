@@ -910,4 +910,66 @@ class Team_model extends MY_Model
 		return false;
 	}
 
+
+	public function get_history($id = FALSE) 
+	{
+		$this->db->select('
+			t.name as opponent,
+			g.score_home,
+			g.score_away,
+			gt.win,
+			gt.opponent_id,
+			gt.loss,
+			gt.tie,
+			g.game_date_time,
+		');
+		$this->db->join( 'teams t', 't.id = gt.opponent_id', 'left outer' );
+		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
+		$this->db->where('gt.team_id',$id);
+		$query = $this->db->get( 'game_teams gt' );
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+		if( $query->num_rows() > 0 )
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+		
+		return false;
+	}
+
+	public function get_head_to_head($team_id = FALSE, $opponent_id = FALSE) 
+	{
+		$this->db->select('
+			t.name as opponent,
+			g.score_home,
+			g.score_away,
+			gt.win,
+			gt.opponent_id,
+			gt.loss,
+			gt.tie,
+			g.game_date_time,
+		');
+		$this->db->join( 'teams t', 't.id = gt.opponent_id', 'left outer' );
+		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
+		$this->db->where('gt.team_id',$team_id);
+		$this->db->where('gt.opponent_id',$opponent_id);
+		$query = $this->db->get( 'game_teams gt' );
+
+		$fields = array();
+
+		$rows = $query->result_array();
+
+		if( $query->num_rows() > 0 )
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+		
+		return false;
+	}
+
 }

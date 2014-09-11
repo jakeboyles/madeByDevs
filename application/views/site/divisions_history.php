@@ -5,8 +5,8 @@
 	<!-- Desktop Current Season Standings -->
 	<div class="team-standings">
 		<div class="team-header">
-			<h3 class="team-name-primary"><?php echo $league['current_season_name']; ?></h3>
-			<h3 class="team-name-secondary">Leaderboard</h3>
+			<h3 class="team-name-primary"><?php echo $division['name']; ?></h3>
+			<h3 class="team-name-secondary">History</h3>
 			<!-- <h5 class="team-date">fall 2012</h5> -->
 		</div>
 
@@ -25,54 +25,33 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><a href="#">Empire FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>12</td>
-					<td>17</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Hudson FC</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>6</td>
-					<td>16</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Bean's Rejects</a></td>
-					<td>8</td>
-					<td>8</td>
-					<td>2</td>
-					<td>13</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Grampus HD</a></td>
-					<td>8</td>
-					<td>-1</td>
-					<td>11</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">Brooklyn Red Star</a></td>
-					<td>8</td>
-					<td>5</td>
-					<td>10</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><a href="#">OTPHJ FC</a></td>
-					<td>8</td>
-					<td>-3</td>
-					<td>6</td>
-					<td>8</td>
-					<td>8</td>
-				</tr>
+				<?php foreach($history as $team): 
+				$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
+
+				if($team['games_played']!='0') 
+				{
+					$epg = ($team['games_won']*3+$team['games_tied'])/$team['games_played'];
+				} 
+				else 
+				{
+					$epg = 0;
+				}
+
+				?>
+					<tr>
+						<td><a href="<?php echo base_url('teams/history').'/'.$team['id'] ;?>"><?php echo $team['team_name']; ?></a></td>
+						<td><?php echo $team['games_played']; ?></td>
+						<td><?php echo $formatter->format($team['win_loss']); ?></td>
+						<?php if($team['games_played']!="0"):?>
+							<td><?php echo $formatter->format(($team['games_won']+$team['games_tied']) / $team['games_played']) ;?></td>
+							<?php else: ?>
+							<td>0%</td>
+						<?php endif; ?>
+						<td><?php echo $epg; ?></td>
+						<td><?php echo $team['games_played']*$epg;?></td>
+					</tr>
+				<?php endforeach; ?>
+				
 			</tbody>
 		</table>
 	</div>

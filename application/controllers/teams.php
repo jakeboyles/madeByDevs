@@ -128,6 +128,54 @@ class Teams extends Site_Controller
 	}
 
 
+	// Display Individual Team Page
+	public function history( $id = FALSE )
+	{
+		$data = array();
+
+		if( $id && is_numeric( $id ) )
+		{
+			$data['history'] = $this->Team_model->get_history( $id );
+			$data['main_team'] = $this->Team_model->get( $id );
+		}
+
+		// Set Page Title
+		if( !empty( $data['team']['name'] ) )
+		{
+			$data['page_title'] = $data['team']['name'];
+		}
+
+		// Load Location View
+		$this->load->site_template( 'teams_history', $data );
+	}
+
+
+		// Display Individual Team Page
+	public function head_to_head( $id = FALSE )
+	{
+		$data = array();
+
+		if( $id )
+		{
+			$ids = explode("-", $id);
+			$team_id = $ids[0];
+			$opponent_id = $ids[1];
+			$data['history'] = $this->Team_model->get_head_to_head( $team_id,$opponent_id );
+			$data['main_team'] = $this->Team_model->get( $team_id );
+			$data['away_team'] = $this->Team_model->get( $opponent_id );
+		}
+
+		// Set Page Title
+		if( !empty( $data['team']['name'] ) )
+		{
+			$data['page_title'] = $data['team']['name'];
+		}
+
+		// Load Location View
+		$this->load->site_template( 'teams_head_to_head', $data );
+	}
+
+
 	// Add New Logo
 	public function add_logo($id = FALSE)
 	{
