@@ -170,17 +170,24 @@ class Division_model extends MY_Model
 
 
 	// Get all games played by a team when they were in a division
-	public function get_win_loss_by_team($team = FALSE, $division_id = FALSE)
+	public function get_win_loss_by_team($team = FALSE, $division_id = FALSE, $seasonID = FALSE)
 	{
 		$this->db->select('
 			gt.win, 
 			gt.loss,
 			gt.tie,
+			g.division_id,
+			g.season_id,
 			');
 		$this->db->where( 'gt.team_id' , $team['id'] );
+		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 
 		if(!empty($division_id)) {
-			$this->db->where('gt.division_id',$division_id);
+			$this->db->where('g.division_id',$division_id);
+		}
+
+		if(!empty($seasonID)) {
+			$this->db->where('g.season_id',$seasonID);
 		}
 
 		$query = $this->db->get('game_teams gt');
@@ -280,8 +287,19 @@ class Division_model extends MY_Model
 
 
 	// Get the best teams from each division
-	public function get_team_stats($division_id = FALSE)
+	public function get_team_stats($division_id = FALSE, $season_id = FALSE)
 	{
+
+		if(!empty($season_id))
+		{
+			$this->db->select('l.current_season_id');
+			$query = $this->db->get('leagues l');
+
+			$games = $query->result_array();
+
+			$current_season_id = $games[0]['current_season_id'];
+
+		}
 		$this->db->select('d.id,d.name');
 		$this->db->where('d.id',$division_id);
 		$query = $this->db->get('divisions d');
@@ -307,7 +325,7 @@ class Division_model extends MY_Model
 						$wins = 0;
 						$ties = 0;
 
-						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id']);
+						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
 
 						if( $teams_win_loss )
 						{
@@ -346,6 +364,9 @@ class Division_model extends MY_Model
 
 			}
 
+			usort($teams_total, function($a, $b) {
+			    return $a['win_loss'] - $b['win_loss'];
+			});
 			return $teams_total;
 		}
 	}

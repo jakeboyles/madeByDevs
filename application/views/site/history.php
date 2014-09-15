@@ -29,7 +29,7 @@
 						<tr>
 							<?php
 								$games_won = $division['games_won'];
-								$epg = ($games_won*3+$division['games_tied'])/$division['games_played'];
+								$epg = ( $games_won * 3 + $division['games_tied'] ) / $division['games_played'];
 								$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 							?>
 							<td><a href="<?php echo base_url('divisions').'/history/'.$division['division_id'] ;?>"><?php echo $division['name']; ?></a></td>
@@ -57,7 +57,7 @@
 			<?php if(!empty($division['highest_team'])): ?>
 			<?php
 				$games_won = $division['games_won'];
-				$epg = ($games_won*3+$division['games_tied'])/$division['games_played'];
+				$epg = ( $games_won * 3 + $division['games_tied'] ) / $division['games_played'];
 				$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 			?>
 			<li class="visible-xs">

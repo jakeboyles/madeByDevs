@@ -528,6 +528,10 @@ form {
 	background: @gray-light;
 }
 
+.alternating-table-container .stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>td, .alternating-table-container.stripe-pattern-one.table-striped>tbody>tr:nth-child(odd)>th {
+	background: @gray-light;
+}
+
 footer {
 	background: @blue;
 	padding-top: 50px;
@@ -972,6 +976,12 @@ transition: all 0.9s ease;
 .viewMorePhotos:hover{
 	color:darken(#fff,10);
 	text-decoration:none;
+}
+
+.roster-table {
+	a {
+		color:darken(@gray,20);
+	}
 }
 
 

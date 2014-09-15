@@ -674,9 +674,42 @@ class Team_model extends MY_Model
 	}
 
 
-	// Fetch a List of Current Seasons Teams and their Stats
-	public function get_current_season_teams( $current_season_id )
+	// Fetch a List of Current Seasons Teams
+	public function get_current_season_teams( $current_season_id = FALSE , $division_id = FALSE )
 	{
+
+		$this->db->select('h.name as home_name,h.id as home_id, a.name as away_name, a.id as away_id');
+		$this->db->where( 'g.season_id' , $current_season_id );
+		$this->db->where( 'g.division_id' , $division_id );
+		$this->db->join( 'teams h', 'h.id = g.team_home_id', 'left outer' );
+		$this->db->join( 'teams a', 'a.id = g.team_away_id', 'left outer' );
+
+		$query = $this->db->get( 'games g' );
+		$rows = $query->result_array();
+		$teams = array();
+
+		$teams['ids'] = array();
+		$teams['names'] = array();
+
+		if( $rows )
+		{
+			
+			foreach($rows as $row) 
+			{
+				if(!in_array($row['home_id'], $teams['ids'])) {
+					array_push($teams['ids'],$row['home_id']);
+					array_push($teams['names'],$row['home_name']);
+				}
+
+				if(!in_array($row['away_id'], $teams['ids'])) {
+					array_push($teams['ids'],$row['away_id']);
+					array_push($teams['names'],$row['away_name']);
+				}
+			}
+
+			return $teams;
+
+		}
 		
 	}
 
@@ -935,10 +968,9 @@ class Team_model extends MY_Model
 		if( $query->num_rows() > 0 )
 		{
 			$rows = $query->result_array();
-			return $rows;
 		}
-		
-		return false;
+
+		return $rows;;
 	}
 
 	public function get_head_to_head($team_id = FALSE, $opponent_id = FALSE) 

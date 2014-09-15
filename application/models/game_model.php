@@ -57,6 +57,15 @@ class Game_model extends MY_Model
 	{
 		if( $post )
 		{
+
+			$this->db->select('season_id');
+			$this->db->where('id', $post['session_id']);
+			$query = $this->db->get('sessions');
+
+			$rows = $query->result_array();
+			$season_id = $rows[0]['season_id'];
+
+
 			// Insert Data
 			$game_time = $this->mysql_datetime($post['game_date'].$post["game_time"]);
 			$data = array(
@@ -70,6 +79,7 @@ class Game_model extends MY_Model
 				'game_date_time'=>$game_time,
 				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
 				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
+				'season_id'=>empty( $season_id ) ? '0' : $season_id,
 			);
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
@@ -80,8 +90,6 @@ class Game_model extends MY_Model
 				'loss'=> 0,
 				'tie'=> 0,
 				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
-				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
-				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
 				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
 			);
 
@@ -107,8 +115,6 @@ class Game_model extends MY_Model
 				'loss'=> 0,
 				'tie'=> 0,
 				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
-				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
-				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
 				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
 			);
 
@@ -140,6 +146,13 @@ class Game_model extends MY_Model
 	{
 		if( $id && $post )
 		{
+			$this->db->select('season_id');
+			$this->db->where('id', $post['session_id']);
+			$query = $this->db->get('sessions');
+
+			$rows = $query->result_array();
+			$season_id = $rows[0]['season_id'];
+
 			// Update Data
 			$game_time = $this->mysql_datetime($post['game_date'].$post["game_time"]);
 			$data = array(
@@ -153,6 +166,7 @@ class Game_model extends MY_Model
 				'game_date_time'=>$game_time,
 				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
 				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
+				'season_id'=>empty( $season_id ) ? '0' : $season_id,
 			);
 
 			// Update Record in Database
@@ -164,8 +178,6 @@ class Game_model extends MY_Model
 				'loss'=> 0,
 				'tie'=> 0,
 				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
-				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
-				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
 				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
 			);
 
@@ -193,8 +205,6 @@ class Game_model extends MY_Model
 				'loss'=> 0,
 				'tie'=> 0,
 				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
-				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
-				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
 				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
 			);
 
