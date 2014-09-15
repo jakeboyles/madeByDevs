@@ -10,6 +10,7 @@ class Divisions extends Admin_Controller
 		// Load Database Model to Be Used in Methods
 		$this->load->model( 'Division_model' );
 		$this->load->model( 'Session_model' );
+		$this->load->model( 'Team_model' );
 	}
 
 	// Display All Records View
@@ -64,6 +65,10 @@ class Divisions extends Admin_Controller
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Division_model->get( $id );
 
+		$data['all_sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
+
+		$data['teams'] = $this->Team_model->get_team_by_division($id);
+
 		// Load Edit Record Form
 		$this->load->admin_template( 'divisions_edit', $data );
 	}
@@ -102,6 +107,26 @@ class Divisions extends Admin_Controller
 	}
 
 
+		// Run Validation on Create / Edit Forms
+	private function _champion_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('session_id', 'Session ID', 'required');
+		$this->form_validation->set_rules('team', 'Team ID', 'required');
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+
 	// AJAX Load Teams
 	public function get_divisions_by_sessions( $session_id = FALSE )
 	{
@@ -120,6 +145,8 @@ class Divisions extends Admin_Controller
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
+
+		$this->load->helper('url');
 
 		// Return a List of Usable Teams
 		$this->load->model( 'Session_model' );
@@ -141,6 +168,20 @@ class Divisions extends Admin_Controller
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'divisions_edit', $data );
+
+	}
+
+
+	public function add_champion( $division_id = FALSE )
+	{
+
+		// If Form is Submitted Validate Form Data and Updated Record in Database
+		if( $this->input->post() )
+		{
+			$add_Champ = $this->Division_model->add_champion( $division_id, $this->input->post() );
+
+			redirect('/admin/divisions/edit/'. $division_id, 'refresh');
+		}
 
 	}
 

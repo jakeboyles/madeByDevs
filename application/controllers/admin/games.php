@@ -56,7 +56,7 @@ class Games extends Admin_Controller
 	public function edit( $id = FALSE )
 	{
 
-		if( $this->input->post() && $id )
+		if( $this->input->post() && $id && $this->_validation() )
 		{
 			$this->Game_model->update_record( $id, $this->input->post() );
 			redirect( 'admin/games' );

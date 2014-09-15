@@ -10,6 +10,11 @@ $(document).ready(function(){
 		//beforeShow: function() { $('#datepicker').css("z-index", 9999); }
 	});
 
+	if($('.alert ul').children().length > 0) {
+		console.log("TEST");
+		$('body').change();
+	}
+
 	// Date Mask
 	$('.date-mask').mask("99/99/9999");
 
@@ -373,7 +378,6 @@ $(document).ready(function(){
 			}
 		});
 	}
-
 
 
 });

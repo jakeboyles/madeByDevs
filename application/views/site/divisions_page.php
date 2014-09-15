@@ -16,9 +16,9 @@
 					<th>Team</th>
 					<th>GP</th>
 					<th>WR</th>
-					<th>NLR</th>
-					<th>EPG</th>
-					<th>TP</th>
+					<th class="hidden-xs">NLR</th>
+					<th class="hidden-xs">EPG</th>
+					<th class="hidden-xs">TP</th>
 				</tr>
 				<tr>
 					<th colspan="6"><div class="dashed">&nbsp;</div></th>
@@ -45,16 +45,16 @@
 				$epg = ($team['games_won']*3+$team['games_tied'])/$team['games_played'];
 				?>
 					<tr>
-						<td><a href="<?php echo base_url('teams/history').'/'.$team['id'] ;?>"><?php echo $team['team_name']; ?></a></td>
+						<td><a href="<?php echo base_url('teams/page').'/'.$team['id'] ;?>"><?php echo $team['team_name']; ?></a></td>
 						<td><?php echo $team['games_played']; ?></td>
 						<td><?php echo $formatter->format($team['win_loss']); ?></td>
 						<?php if($team['games_played']!="0"):?>
-							<td><?php echo $formatter->format(($team['games_won']+$team['games_tied']) / $team['games_played']) ;?></td>
+							<td class="hidden-xs"><?php echo $formatter->format(($team['games_won']+$team['games_tied']) / $team['games_played']) ;?></td>
 							<?php else: ?>
-							<td>0%</td>
+							<td class="hidden-xs">0%</td>
 						<?php endif; ?>
-						<td><?php echo $epg; ?></td>
-						<td><?php echo $team['games_played']*$epg;?></td>
+						<td class="hidden-xs"><?php echo $epg; ?></td>
+						<td class="hidden-xs"><?php echo $team['games_played']*$epg;?></td>
 					</tr>
 				<?php endif; ?>
 				<?php endforeach; ?>
@@ -80,6 +80,26 @@
 			<?php endfor; ?>
 		</tbody>
 	</table>
+</div>
+<h2>Past Champions</h2>
+
+<div class="row">
+<?php foreach($champions as $champion): ?>
+<?php if(!empty($champion['name'])): ?>
+	<div class="team-standings team-champions col-md-12 col-xs-12">
+		<div class="team-header">
+			<h3 class="team-name-primary"><?php echo $division['name']; ?></h3>
+			<h3 class="team-name-secondary"><?php echo $champion['session_name']; ?> Champions</h3>
+			<!-- <h5 class="team-date">fall 2012</h5> -->
+		</div>
+
+		<div class="team-title"><h4><a href="<?php echo base_url('teams/page').'/'.$champion['id']; ?>"><?php echo $champion['name']; ?></a></h4></div>
+		<?php if(!empty($champion['filename'])): ?>
+			<img src="<?php echo base_url("/uploads")."/".$champion['filename']; ?>" />
+		<?php endif; ?>
+	</div>
+<?php endif; ?>
+<?php endforeach; ?>
 </div>
 
 

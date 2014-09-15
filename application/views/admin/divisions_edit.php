@@ -122,5 +122,50 @@
 				
 		</div><!-- end .row -->
 
+
+				<div class="row">
+				<div class="col-md-8">
+		 		<div class="grid simple">
+
+					<div class="grid-title">
+						<h4>Add Champion</h4>
+					</div>
+
+					<div class="grid-body">
+							
+						<div class="row">
+
+							<div class="col-md-12 col-sm-12 col-xs-12">
+
+								<?php echo form_open_multipart( 'admin/divisions/add_champion/'.$record['id'], array( 'id' => 'add-division-form') ); ?>
+
+									<div class="form-group">
+										<?php echo form_label( 'Session *', 'name', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_dropdown( 'session_id', array( '' => '') + $all_sessions, set_value( 'session_id' ), 'class="pretty-select"' ); ?>
+									</div>
+
+									<div class="form-group">
+										<?php echo form_label( 'Team *', 'name', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_dropdown( 'team', array( '' => '') + $teams, set_value( 'team' ), 'class="pretty-select"' ); ?>
+									</div>
+
+									<div class="form-group">
+										<?php echo form_label( 'Picture', 'name', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_upload( array('name' => 'upload', 'class' => 'form-control', 'id' => 'name', 'value' => set_value('upload') ) ); ?>
+									</div>
+
+									<button type="submit" class="btn btn-primary">New Champion</button>
+
+								<?php echo form_close(); ?>
+
+							</div>
+
+						</div>
+
+					</div><!-- end .grid-body -->
+					</div>
+				</div><!-- end .grid -->
+			</div><!-- end .col-md-12 -->
+
 	</div><!-- end .content -->
 </div><!-- end .page-content -->

@@ -82,6 +82,8 @@ class Divisions extends Site_Controller
 
 		$data['season'] = $this->Season_model->get($data['league']['current_season_id']);
 
+		$data['champions'] = $this->Division_model->get_champions($division_id);
+
 		$data['current_season_teams'] = $this->Team_model->get_current_season_teams($data['league']['current_season_id'],$division_id);
 
 		$data['leaders'] = $this->Division_model->get_team_stats( $division_id, $data['league']['current_season_id'] );

@@ -1,4 +1,4 @@
-<div class="page-content"> 
+<div class="page-content game-edit"> 
 
 	<div class="content">  
 

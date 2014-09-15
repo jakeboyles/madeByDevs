@@ -686,6 +686,7 @@ class Team_model extends MY_Model
 
 		$query = $this->db->get( 'games g' );
 		$rows = $query->result_array();
+		
 		$teams = array();
 
 		$teams['ids'] = array();
@@ -710,6 +711,8 @@ class Team_model extends MY_Model
 			return $teams;
 
 		}
+
+		return false;
 		
 	}
 

@@ -25,7 +25,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($history as $team): 
+				<?php 
+				function compareOrder($a, $b)
+				{
+				  return $a['win_loss'] < $b['win_loss'];
+				}
+
+				usort($history, 'compareOrder');
+				foreach($history as $team): 
 				$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 
 				if($team['games_played']!='0') 

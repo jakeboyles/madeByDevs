@@ -286,6 +286,103 @@ class Division_model extends MY_Model
 
 
 
+	public function add_champion($division_id = FALSE , $post = FALSE)
+	{
+		if(!empty($division_id) && !empty($post))
+		{
+
+			if($_FILES['upload']['error']=='0'):
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '5048';
+
+			$this->load->library('upload', $config);
+
+			// The field name for the file upload would be logo
+			if ( ! $this->upload->do_upload('upload'))
+			{
+				return $this->upload->display_errors('<li>', '</li>');
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+
+				$data = array(
+					'filename' => $image['upload_data']['file_name'],
+					'mime_type' => $image['upload_data']['file_type']
+				);
+
+				$image = $this->db->insert('media',$data);
+
+				$image = $this->db->insert_id();
+			}
+
+			// Insert Data
+			$data = array(
+				'winner_id' => empty( $post['team'] ) ? NULL : $post['team'],
+				'winner_picture_id' => empty( $image ) ? NULL : $image,
+			);
+
+			else:
+			// Insert Data
+			$data = array(
+				'winner_id' => empty( $post['team'] ) ? NULL : $post['team'],
+			);
+
+			endif;
+
+
+			$this->db->where("session_id", $post['session_id']);
+			$this->db->where("division_id",$division_id);
+			$insert_id = $this->db->update('session_divisions', $data );
+
+			if(!empty($insert_id)){
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+	}
+
+
+
+	public function get_champions($division_id = FALSE)
+	{
+		if(!empty($division_id))
+		{
+
+			$this->db->select('t.name,m.filename,t.id,s.name as session_name,t.id');
+			$this->db->where("sd.division_id",$division_id);
+			$this->db->join( 'teams t', 't.id = sd.winner_id', 'left outer' );
+			$this->db->join( 'media m', 'm.id = sd.winner_picture_id', 'left outer' );
+			$this->db->join( 'sessions s', 's.id = sd.session_id', 'left outer' );
+
+			// Run Query
+			$query = $this->db->get( 'session_divisions sd' );
+
+			// If Rows Were Found, Return Them
+			if($query->num_rows > 0)
+			{
+				if( !empty( $atts['single'] ) )
+				{
+					$row = $query->row_array();
+					return $row;
+				}
+				else
+				{
+					$rows = $query->result_array();
+					return $rows;
+				}
+			}
+
+			return false;
+			}
+	}
+
+
+
 	// Get the best teams from each division
 	public function get_team_stats($division_id = FALSE, $season_id = FALSE)
 	{
@@ -370,4 +467,5 @@ class Division_model extends MY_Model
 			return $teams_total;
 		}
 	}
+
 }
