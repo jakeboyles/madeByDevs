@@ -27,10 +27,8 @@
 				<tr>
 					<th>Team</th>
 					<th>GP</th>
-					<th>WR</th>
-					<th class="hidden-xs">NLR</th>
-					<th class="hidden-xs">EPG</th>
-					<th class="hidden-xs">TP</th>
+					<th>GD</th>
+					<th class="hidden-xs">Points</th>
 				</tr>
 				<tr>
 					<th colspan="6"><div class="dashed">&nbsp;</div></th>
@@ -50,23 +48,17 @@
 
 				foreach($leaders as $team):
 
-				if($team['games_played']!='moo'):
+				if($team['games_played']!='0'):
 
 				$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 
-				$epg = ($team['games_won']*3+$team['games_tied'])/$team['games_played'];
+				$points = ($team['games_won']*3)+($team['games_tied']*1);
 				?>
 					<tr>
 						<td><a href="<?php echo base_url('teams/page').'/'.$team['id'] ;?>"><?php echo $team['team_name']; ?></a></td>
 						<td><?php echo $team['games_played']; ?></td>
-						<td><?php echo $formatter->format($team['win_loss']); ?></td>
-						<?php if($team['games_played']!="0"):?>
-							<td class="hidden-xs"><?php echo $formatter->format(($team['games_won']+$team['games_tied']) / $team['games_played']) ;?></td>
-							<?php else: ?>
-							<td class="hidden-xs">0%</td>
-						<?php endif; ?>
-						<td class="hidden-xs"><?php echo $epg; ?></td>
-						<td class="hidden-xs"><?php echo $team['games_played']*$epg;?></td>
+						<td><?php echo $team['points']-$team['points_against']; ?></td>
+						<td><?php echo $points; ?></td>
 					</tr>
 				<?php endif; ?>
 				<?php endforeach; ?>

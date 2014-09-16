@@ -325,9 +325,12 @@ class Division_model extends MY_Model
 						$games = 0;
 						$wins = 0;
 						$ties = 0;
-						$points = 
 
 						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
+
+						$points = $this->get_points_for_team($team);
+
+						$points_against = $this->get_points_for_opponent($team);
 
 						if( $teams_win_loss )
 						{
@@ -357,6 +360,8 @@ class Division_model extends MY_Model
 						$stat['games_played'] = $games;
 						$stat['games_won'] = $wins;
 						$stat['games_tied'] = $ties;
+						$stat['points'] = $points;
+						$stat['points_against'] = $points_against;
 
 						$teams_total[] = $stat;
 
@@ -371,6 +376,105 @@ class Division_model extends MY_Model
 			});
 			return $teams_total;
 		}
+	}
+
+
+	public function get_points_for_team( $id= FALSE )
+	{
+		$this->db->select('SUM(g.score_home) as total');
+		$this->db->where('g.team_home_id',$id['id']);
+
+		$query = $this->db->get( 'games g' );
+
+		$points = 0;
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				die($row);
+			}
+			else
+			{
+				$rows = $query->result_array();
+				 $points = $rows[0]['total'];
+			}
+		}
+
+		$this->db->select('SUM(g.score_away) as total');
+		$this->db->where('g.team_away_id',$id['id']);
+
+		$query = $this->db->get( 'games g' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+			}
+			else
+			{
+				$rows = $query->result_array();
+				$more = $rows[0]['total'];
+				$points += $more;
+			}
+		}
+
+		return $points;
+
+	}
+
+
+
+	public function get_points_for_opponent( $id= FALSE )
+	{
+		$this->db->select('SUM(g.score_away) as total');
+		$this->db->where('g.team_home_id',$id['id']);
+
+		$query = $this->db->get( 'games g' );
+
+		$points = 0;
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				die($row);
+			}
+			else
+			{
+				$rows = $query->result_array();
+				 $points = $rows[0]['total'];
+			}
+		}
+
+		$this->db->select('SUM(g.score_home) as total');
+		$this->db->where('g.team_away_id',$id['id']);
+
+		$query = $this->db->get( 'games g' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+			}
+			else
+			{
+				$rows = $query->result_array();
+				$more = $rows[0]['total'];
+				$points += $more;
+			}
+		}
+
+		return $points;
+
 	}
 
 
