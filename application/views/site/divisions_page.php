@@ -1,14 +1,26 @@
-<div id="content" class="col-md-8 col-md-push-4">
-	<h1><?php echo $division['name']; ?></h1>
-	<p><?php echo $division['description']; ?></p>
-
+<div id="content" class="division col-md-8 col-md-push-4">
 	<!-- Desktop Current Season Standings -->
 	<div class="team-standings">
 		<div class="team-header">
-			<h3 class="team-name-primary"><?php echo $division['name']; ?></h3>
-			<h3 class="team-name-secondary"><?php echo $season['name'];?> Team Results</h3>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3 class="team-name-primary"><?php echo $division['name']; ?> <span class="pull-right"><?php echo $season['year_end']; ?></span></h3>
+					<h3 class="team-name-secondary"><?php echo $season['name'];?> Team Results</h3>
+				</div>
+			</div>
 			<!-- <h5 class="team-date">fall 2012</h5> -->
 		</div>
+
+		<?php if(!empty($current_season)): ?>
+		<div class="headline-image">
+			<img src="<?php echo base_url("uploads/").'/'.$current_season['headline_image'] ;?>">
+			<?php if(!empty($current_season['headline'])): ?>
+				<div class="headline-text">
+					<span><?php echo $current_season['headline']; ?></span>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
 
 		<table class="table table-striped stripe-pattern-one">
 			<thead>
@@ -64,7 +76,7 @@
 		</table>
 	</div>
 
-<h2><?php echo $season['name']; ?> Teams</h2>
+<!-- <h2><?php echo $season['name']; ?> Teams</h2>
 <div class='alternating-table-container'>
 	<table class="roster-table table table-striped stripe-pattern-one standings">
 		<thead>
@@ -80,27 +92,33 @@
 			<?php endfor; ?>
 		</tbody>
 	</table>
-</div>
-<h2>Past Champions</h2>
+</div> -->
 
+<?php if(!empty($historical_season)): ?>
+<h2>Past Champions</h2>
 <div class="row">
-<?php foreach($champions as $champion): ?>
+<?php foreach($historical_season as $champion): ?>
 <?php if(!empty($champion['name'])): ?>
 	<div class="team-standings team-champions col-md-12 col-xs-12">
 		<div class="team-header">
-			<h3 class="team-name-primary"><?php echo $division['name']; ?></h3>
-			<h3 class="team-name-secondary"><?php echo $champion['session_name']; ?> Champions</h3>
+			<h3 class="team-name-primary"><?php echo $division['name']; ?> <span class="pull-right"><?php echo $champion['year_end']; ?> </h3>
+			<h3 class="team-name-secondary"><?php echo $champion['season']; ?> Champions</h3>
 			<!-- <h5 class="team-date">fall 2012</h5> -->
 		</div>
 
 		<div class="team-title"><h4><a href="<?php echo base_url('teams/page').'/'.$champion['id']; ?>"><?php echo $champion['name']; ?></a></h4></div>
-		<?php if(!empty($champion['filename'])): ?>
-			<img src="<?php echo base_url("/uploads")."/".$champion['filename']; ?>" />
+		<?php if(!empty($champion['picture'])): ?>
+			<img src="<?php echo base_url("/uploads")."/".$champion['picture']; ?>" />
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
 <?php endforeach; ?>
 </div>
+<?php endif; ?>
+
+
+<h2><?php echo $division['name']; ?></h2>
+<p><?php echo $division['description']; ?></p>
 
 
 

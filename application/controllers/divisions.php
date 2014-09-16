@@ -80,9 +80,11 @@ class Divisions extends Site_Controller
 		$atts = array( 'where' => 'l.id = 1', 'single' => true );
 		$data['league'] = $this->League_model->get_records( $atts );
 
-		$data['season'] = $this->Season_model->get($data['league']['current_season_id']);
+		$data['current_season'] = $this->Division_model->get_current_season_data( $data['league']['current_season_id'], $division_id );
 
-		$data['champions'] = $this->Division_model->get_champions($division_id);
+		$data['historical_season'] = $this->Division_model->get_historical_season_data( $data['league']['current_season_id'], $division_id );
+
+		$data['season'] = $this->Season_model->get($data['league']['current_season_id']);
 
 		$data['current_season_teams'] = $this->Team_model->get_current_season_teams($data['league']['current_season_id'],$division_id);
 

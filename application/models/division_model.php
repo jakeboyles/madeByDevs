@@ -286,102 +286,6 @@ class Division_model extends MY_Model
 
 
 
-	public function add_champion($division_id = FALSE , $post = FALSE)
-	{
-		if(!empty($division_id) && !empty($post))
-		{
-
-			if($_FILES['upload']['error']=='0'):
-			$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5048';
-
-			$this->load->library('upload', $config);
-
-			// The field name for the file upload would be logo
-			if ( ! $this->upload->do_upload('upload'))
-			{
-				return $this->upload->display_errors('<li>', '</li>');
-			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
-
-				$data = array(
-					'filename' => $image['upload_data']['file_name'],
-					'mime_type' => $image['upload_data']['file_type']
-				);
-
-				$image = $this->db->insert('media',$data);
-
-				$image = $this->db->insert_id();
-			}
-
-			// Insert Data
-			$data = array(
-				'winner_id' => empty( $post['team'] ) ? NULL : $post['team'],
-				'winner_picture_id' => empty( $image ) ? NULL : $image,
-			);
-
-			else:
-			// Insert Data
-			$data = array(
-				'winner_id' => empty( $post['team'] ) ? NULL : $post['team'],
-			);
-
-			endif;
-
-
-			$this->db->where("session_id", $post['session_id']);
-			$this->db->where("division_id",$division_id);
-			$insert_id = $this->db->update('session_divisions', $data );
-
-			if(!empty($insert_id)){
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
-		}
-	}
-
-
-
-	public function get_champions($division_id = FALSE)
-	{
-		if(!empty($division_id))
-		{
-
-			$this->db->select('t.name,m.filename,t.id,s.name as session_name,t.id');
-			$this->db->where("sd.division_id",$division_id);
-			$this->db->join( 'teams t', 't.id = sd.winner_id', 'left outer' );
-			$this->db->join( 'media m', 'm.id = sd.winner_picture_id', 'left outer' );
-			$this->db->join( 'sessions s', 's.id = sd.session_id', 'left outer' );
-
-			// Run Query
-			$query = $this->db->get( 'session_divisions sd' );
-
-			// If Rows Were Found, Return Them
-			if($query->num_rows > 0)
-			{
-				if( !empty( $atts['single'] ) )
-				{
-					$row = $query->row_array();
-					return $row;
-				}
-				else
-				{
-					$rows = $query->result_array();
-					return $rows;
-				}
-			}
-
-			return false;
-			}
-	}
-
-
 
 	// Get the best teams from each division
 	public function get_team_stats($division_id = FALSE, $season_id = FALSE)
@@ -421,6 +325,7 @@ class Division_model extends MY_Model
 						$games = 0;
 						$wins = 0;
 						$ties = 0;
+						$points = 
 
 						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
 
@@ -465,6 +370,184 @@ class Division_model extends MY_Model
 			    return $a['win_loss'] - $b['win_loss'];
 			});
 			return $teams_total;
+		}
+	}
+
+
+	public function add_champion($division_id = FALSE , $post = FALSE)
+	{
+		if(!empty($division_id) && !empty($post))
+		{
+
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '5048';
+
+			$this->load->library('upload', $config);
+
+			if($_FILES['upload']['error']=='0'){
+
+				if($_FILES['upload'])
+				// The field name for the file upload would be logo
+				if ( ! $this->upload->do_upload('upload'))
+				{
+					return $this->upload->display_errors('<li>', '</li>');
+				}
+				else
+				{
+					$image = array('upload_data' => $this->upload->data());
+
+					$data = array(
+						'filename' => $image['upload_data']['file_name'],
+						'mime_type' => $image['upload_data']['file_type']
+					);
+
+					$image = $this->db->insert('media',$data);
+
+					$image = $this->db->insert_id();
+				}
+
+			}
+
+			if($_FILES['headline_image']['error']=='0'){
+
+				if ( ! $this->upload->do_upload('headline_image'))
+				{
+					return $this->upload->display_errors('<li>', '</li>');
+				}
+				else
+				{
+					$headline_image = array('upload_data' => $this->upload->data());
+
+					$data = array(
+						'filename' => $headline_image['upload_data']['file_name'],
+						'mime_type' => $headline_image['upload_data']['file_type']
+					);
+
+					$headline_image = $this->db->insert('media',$data);
+
+					$headline_image = $this->db->insert_id();
+				}
+
+			}
+
+
+		
+
+			if($post['updating'] == "false")
+			{
+			// Insert Data
+			$data = array(
+				'media_id' => empty( $image ) ? NULL : $image,
+				'division_id' => empty( $division_id ) ? NULL : $division_id,
+				'season_id' => empty($post['season_id']) ? NULL : $post['season_id'],
+				'headline' => empty($post['headline']) ? NULL : $post['headline'],
+				'team_id' => empty($post['winner_id']) ? NULL : $post['winner_id'],
+				'headline_image' => empty($headline_image) ? NULL : $headline_image,
+			);
+
+			$insert_id = $this->db->insert('division_champions', $data );
+			}
+			else
+			{
+			$data = array(
+				'media_id' => empty( $image ) ? $post['media_id'] : $image,
+				'division_id' => empty( $division_id ) ? NULL : $division_id,
+				'season_id' => empty($post['season_id']) ? NULL : $post['season_id'],
+				'headline' => empty($post['headline']) ? NULL : $post['headline'],
+				'team_id' => empty($post['winner_id']) ? NULL : $post['winner_id'],
+				'headline_image' => empty($headline_image) ? $post['headline_id'] : $headline_image,
+			);
+
+			$this->db->where('season_id',$post['season_id']);
+			$this->db->where('division_id',$division_id);
+			$insert_id = $this->db->update('division_champions', $data );	
+			}
+
+			if(!empty($insert_id)){
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+	}
+
+
+
+
+
+	public function get_season_champion($divisionID = FALSE, $seasonID = False)
+	{
+
+		$this->db->select('dc.season_id, dc.team_id, dc.division_id,dc.media_id,dc.headline_image as headline_id, hl.filename as headline_image, m.filename as picture, dc.headline');
+		$this->db->join( 'media hl', 'hl.id = dc.headline_image', 'left outer' );
+		$this->db->join( 'media m', 'm.id = dc.media_id', 'left outer' );
+		$this->db->where('dc.season_id',$seasonID);
+		$this->db->where('dc.division_id',$divisionID);
+
+		$query = $this->db->get( 'division_champions dc' );
+
+		$info = $query->result_array();
+
+		return $info;
+	}
+
+	public function get_current_season_data($season_id = FALSE, $division_id = FALSE)
+	{
+		$this->db->select('dc.season_id, dc.team_id,s.year_end, dc.division_id,dc.media_id,dc.headline_image as headline_id, hl.filename as headline_image, m.filename as picture, dc.headline');
+		$this->db->join( 'media hl', 'hl.id = dc.headline_image', 'left outer' );
+		$this->db->join( 'media m', 'm.id = dc.media_id', 'left outer' );
+		$this->db->join( 'seasons s', 's.id = dc.season_id', 'left outer' );
+		$this->db->where('dc.season_id',$season_id);
+		$this->db->where('dc.division_id',$division_id);
+
+		$atts['single'] = 'true';
+
+		$query = $this->db->get( 'division_champions dc' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+		}
+	}
+
+		public function get_historical_season_data($season_id = FALSE, $division_id = FALSE)
+	{
+		$this->db->select('dc.season_id,t.id, dc.team_id,s.year_end, dc.division_id,dc.media_id,dc.headline_image as headline_id, hl.filename as headline_image, m.filename as picture, dc.headline, t.name, s.name as season');
+		$this->db->join( 'media hl', 'hl.id = dc.headline_image', 'left outer' );
+		$this->db->join( 'media m', 'm.id = dc.media_id', 'left outer' );
+		$this->db->join( 'teams t', 't.id = dc.team_id', 'left outer' );
+		$this->db->join( 'seasons s', 's.id = dc.season_id', 'left outer' );
+		$this->db->where('dc.season_id !=',$season_id);
+		$this->db->where('dc.division_id',$division_id);
+
+		$query = $this->db->get( 'division_champions dc' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
 		}
 	}
 

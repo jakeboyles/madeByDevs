@@ -11,6 +11,7 @@ class Divisions extends Admin_Controller
 		$this->load->model( 'Division_model' );
 		$this->load->model( 'Session_model' );
 		$this->load->model( 'Team_model' );
+		$this->load->model( 'Location_model' );
 	}
 
 	// Display All Records View
@@ -65,7 +66,7 @@ class Divisions extends Admin_Controller
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Division_model->get( $id );
 
-		$data['all_sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
+		$data['seasons'] = $this->Session_model->get_seasons();
 
 		$data['teams'] = $this->Team_model->get_team_by_division($id);
 
@@ -163,6 +164,10 @@ class Divisions extends Admin_Controller
 
 		$data['related_sessions'] = $this->Session_model->get_related_sessions($division_id);
 
+		$data['all_sessions'] = $this->Session_model->get_related_sessions_dropdown($division_id);
+
+		$data['teams'] = $this->Team_model->get_team_by_division($division_id);
+
 		// Retrieve Record Data From Database
 		$data['record'] = $this->Division_model->get( $division_id );
 
@@ -172,17 +177,73 @@ class Divisions extends Admin_Controller
 	}
 
 
-	public function add_champion( $division_id = FALSE )
+	// public function add_champion( $division_id = FALSE )
+	// {
+
+	// 	// If Form is Submitted Validate Form Data and Updated Record in Database
+	// 	if( $this->input->post() )
+	// 	{
+	// 		$add_Champ = $this->Division_model->add_champion( $division_id, $this->input->post() );
+
+	// 		redirect('/admin/divisions/edit/'. $division_id, 'refresh');
+	// 	}
+
+	// }
+
+		// Edit a Location Field
+	public function add_champion( $id = FALSE )
 	{
 
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() )
+		if( $this->input->post() && $id )
 		{
-			$add_Champ = $this->Division_model->add_champion( $division_id, $this->input->post() );
+			$data = array();
 
-			redirect('/admin/divisions/edit/'. $division_id, 'refresh');
+			// If Validation Passed
+			if( 2==2 )
+			{
+				// Update Record in Database
+				// Create JSON For DataTable View
+				$data = $this->Division_model->add_champion( $id, $this->input->post() );
+
+				redirect('/admin/divisions/edit/'. $id, 'refresh');
+
+			}
+			// If Validation Failed Send Errors
+			else
+			{
+				$data = array(
+					'result' => 'error',
+					'errors' => validation_errors( '<li>','</li>' )
+				);
+			}
+
 		}
+		else
+		{
 
+			$ids = explode("-", $id);
+
+			$id = $ids[0];
+			$season_id = $ids[1];
+
+			// Retrieve Record Data From Database
+			$data['record'] = $this->Location_model->get( $id );
+
+			// Retrieve Record Data From Database
+			$data['record'] = $this->Division_model->get( $id );
+
+			$data['season'] = $season_id;
+
+			$data['editing'] = $this->Division_model->get_season_champion( $id, $season_id );
+
+			$data['seasons'] = $this->Session_model->get_seasons_dropdown($id);
+
+			$data['teams'] = $this->Team_model->get_team_by_division($id);
+
+			// Load Edit Record Form
+			$this->load->view('admin/parts/divisions_champ', $data);
+		}
 	}
 
 }

@@ -3555,6 +3555,7 @@ form legend,
 .form-control {
   border: 1px solid #E5E9EC;
   font-size: 13px;
+  padding:0px 12px;
 }
 .form-row input,
 .form-row select,
@@ -7478,4 +7479,9 @@ input[type="checkbox"] {
 #Parks.grid .titles p {
   font-weight: 300;
   text-indent: -2px;
+}
+
+.division-edit-picture {
+  max-width:100px;
+  margin-bottom:20px;
 }

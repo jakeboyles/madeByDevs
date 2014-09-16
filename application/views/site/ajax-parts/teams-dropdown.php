@@ -89,7 +89,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php if(!empty($home_team)): ?>
+				<?php if(!empty($away_team)): ?>
 					<?php foreach( $away_team as $player ): ?>
 						<?php if(!empty($player['game_info'])): ?>
 							<tr data-id="<?php echo $player['id']?>">

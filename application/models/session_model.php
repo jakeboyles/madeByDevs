@@ -328,6 +328,42 @@ class Session_model extends MY_Model
 	}
 
 
+	public function get_seasons( )
+	{
+		$this->db->select( 's.name,s.year_start,s.year_end, s.id' );
+		$query = $this->db->get( 'seasons s' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+
+	}
+
+		public function get_seasons_dropdown( )
+	{
+		$this->db->select( 's.name,s.year_start,s.year_end, s.id' );
+		$query = $this->db->get( 'seasons s' );
+		$seasons = array();
+		
+		if( $query->num_rows > 0 )
+		{
+			$rows = $query->result_array();
+
+			$checked_ids = array();
+			foreach( $rows as $row )
+			{
+				$seasons[$row['id']] = $row['name'];
+			}
+
+			return $seasons;
+		}
+
+	}
+
+
 		// Assign Divisions to an Individual Session
 	public function update_sessions( $id = FALSE )
 	{
