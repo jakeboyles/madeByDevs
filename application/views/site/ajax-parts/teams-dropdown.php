@@ -97,7 +97,7 @@
 								<td><?php echo form_input( array('name' => 'yellows', 'class' => 'form-control', 'id' => 'yellows', 'value' =>  set_value( 'yellows', $player['game_info'][0]['yellow_cards'] ) ) ); ?></td>
 								<td><?php echo form_input( array('name' => 'reds', 'class' => 'form-control', 'id' => 'reds', 'value' => set_value('yellows', $player['game_info'][0]['red_cards'] ) ) ); ?></td>
 								<td><?php echo form_input( array('name' => 'scores', 'class' => 'form-control', 'id' => 'score', 'value' => set_value('yellows', $player['game_info'][0]['goals_scored'] ) ) ); ?></td>
-								<td><a href="#" class="update_game_info btn active btn-primary" data-ajax-url="<?php echo base_url('users/edit_player_record/' . $player['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a></td>
+								<td><a href="#" class="update_game_info btn active btn-primary" data-ajax-url="<?php echo base_url('users/edit_player_record/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a></td>
 								<input id="csrf" type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
 								<input id="team_id" type="hidden" name="team_id" value="<?php echo $teams['home_team_id']; ?>" />
 								<input id="game_player_id" type="hidden" name="game_player_id" value="<?php echo $player['game_info'][0]['id'] ?>" />
@@ -108,10 +108,10 @@
 								<td><?php echo form_input( array('name' => 'yellows', 'class' => 'form-control', 'id' => 'yellows', 'value' => '0' ) ); ?></td>
 								<td><?php echo form_input( array('name' => 'reds', 'class' => 'form-control', 'id' => 'reds', 'value' => '0' ) ); ?></td>
 								<td><?php echo form_input( array('name' => 'scores', 'class' => 'form-control', 'id' => 'score', 'value' => '0' ) ); ?></td>
-								<td><a href="#" class="update_game_info btn active btn-primary" data-ajax-url="<?php echo base_url('users/add_player_record/' . $player['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a></td>
+								<td><a href="#" class="update_game_info btn active btn-primary" data-ajax-url="<?php echo base_url('users/add_player_record/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a></td>
 								<input id="csrf" type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
 								<input id="team_id" type="hidden" name="team_id" value="<?php echo $teams['home_team_id']; ?>" />
-								<input id="game_player_id" type="hidden" name="game_player_id" value="<?php echo $player['game_info'][0]['id'] ?>" />
+								<?php echo json_encode($player); ?>
 							</tr>
 						<?php endif; ?>
 					<?php endforeach; ?>

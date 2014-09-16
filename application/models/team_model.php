@@ -541,7 +541,7 @@ class Team_model extends MY_Model
 					foreach( $rows as $row )
 					{
 						// Determine if Away or Home
-						$row['game_info'] = $this->_get_game_info($row['id'],$id);
+						$row['game_info'] = $this->_get_game_info($row['user_id'],$id);
 						// Restore Appended Array Data to $games array to be returned
 						$players[] = $row;
 					}
