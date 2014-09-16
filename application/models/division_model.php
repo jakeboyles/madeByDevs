@@ -525,13 +525,16 @@ class Division_model extends MY_Model
 
 		public function get_historical_season_data($season_id = FALSE, $division_id = FALSE)
 	{
+
 		$this->db->select('dc.season_id,t.id, dc.team_id,s.year_end, dc.division_id,dc.media_id,dc.headline_image as headline_id, hl.filename as headline_image, m.filename as picture, dc.headline, t.name, s.name as season');
 		$this->db->join( 'media hl', 'hl.id = dc.headline_image', 'left outer' );
 		$this->db->join( 'media m', 'm.id = dc.media_id', 'left outer' );
 		$this->db->join( 'teams t', 't.id = dc.team_id', 'left outer' );
 		$this->db->join( 'seasons s', 's.id = dc.season_id', 'left outer' );
-		$this->db->where('dc.season_id !=',$season_id);
+		$this->db->where('dc.season_id',$season_id);
 		$this->db->where('dc.division_id',$division_id);
+
+		$atts['single'] = 'true';
 
 		$query = $this->db->get( 'division_champions dc' );
 

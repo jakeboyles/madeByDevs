@@ -40,7 +40,7 @@ class Leagues extends Admin_Controller
 	public function edit( $id = FALSE )
 	{
 		// If Form is Submitted Validate Form Data and Updated Record in Database
-		if( $this->input->post() && $this->_validation() && $id )
+		if( $this->input->post() && $this->_validation( $this->input->post() ) && $id )
 		{
 			$this->League_model->update_record( $id, $this->input->post() );
 		}
@@ -73,14 +73,15 @@ class Leagues extends Admin_Controller
 	}
 
 	// Run Validation on Create / Edit Forms
-	private function _validation()
+	private function _validation($post = FALSE)
 	{
 		// Load Validation Library
 		$this->load->library('form_validation');
 		
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Season Name', 'required');
-		$this->form_validation->set_rules('current_season_id', 'Current Season', 'required');;
+		$this->form_validation->set_rules('current_season_id', 'Current Season', 'required');
+		$this->form_validation->set_rules('previous_season_id', 'Previous Season', 'does_not_match[current_season_id]');;
 
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
@@ -90,5 +91,6 @@ class Leagues extends Admin_Controller
 		
 		return false;
 	}
+
 
 }

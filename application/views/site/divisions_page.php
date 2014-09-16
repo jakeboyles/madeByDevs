@@ -97,22 +97,20 @@
 <?php if(!empty($historical_season)): ?>
 <h2>Past Champions</h2>
 <div class="row">
-<?php foreach($historical_season as $champion): ?>
-<?php if(!empty($champion['name'])): ?>
+<?php if(!empty($historical_season['name'])): ?>
 	<div class="team-standings team-champions col-md-12 col-xs-12">
 		<div class="team-header">
-			<h3 class="team-name-primary"><?php echo $division['name']; ?> <span class="pull-right"><?php echo $champion['year_end']; ?> </h3>
-			<h3 class="team-name-secondary"><?php echo $champion['season']; ?> Champions</h3>
+			<h3 class="team-name-primary"><?php echo $division['name']; ?> <span class="pull-right"><?php echo $historical_season['year_end']; ?> </h3>
+			<h3 class="team-name-secondary"><?php echo $historical_season['season']; ?> Champions</h3>
 			<!-- <h5 class="team-date">fall 2012</h5> -->
 		</div>
 
-		<div class="team-title"><h4><a href="<?php echo base_url('teams/page').'/'.$champion['id']; ?>"><?php echo $champion['name']; ?></a></h4></div>
-		<?php if(!empty($champion['picture'])): ?>
-			<img src="<?php echo base_url("/uploads")."/".$champion['picture']; ?>" />
+		<div class="team-title"><h4><a href="<?php echo base_url('teams/page').'/'.$historical_season['id']; ?>"><?php echo $historical_season['name']; ?></a></h4></div>
+		<?php if(!empty($historical_season['picture'])): ?>
+			<img src="<?php echo base_url("/uploads")."/".$historical_season['picture']; ?>" />
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-<?php endforeach; ?>
 </div>
 <?php endif; ?>
 

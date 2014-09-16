@@ -64,6 +64,11 @@
 										<?php echo form_dropdown( 'current_season_id', array( '' => '') + $seasons, set_value('current_season_id',$record['current_season_id']), 'class="pretty-select"' ); ?>
 									</div>
 
+									<div class="form-group">
+										<?php echo form_label( 'Active Season', 'current_season_id', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_dropdown( 'previous_season_id', array( '' => '') + $seasons, set_value('previous_season_id',$record['previous_season_id']), 'class="pretty-select"' ); ?>
+									</div>
+
 									<button type="submit" class="btn btn-primary">Update League</button>
 
 								<?php echo form_close(); ?>

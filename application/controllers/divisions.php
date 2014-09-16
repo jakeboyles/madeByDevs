@@ -82,7 +82,7 @@ class Divisions extends Site_Controller
 
 		$data['current_season'] = $this->Division_model->get_current_season_data( $data['league']['current_season_id'], $division_id );
 
-		$data['historical_season'] = $this->Division_model->get_historical_season_data( $data['league']['current_season_id'], $division_id );
+		$data['historical_season'] = $this->Division_model->get_historical_season_data( $data['league']['previous_season_id'], $division_id );
 
 		$data['season'] = $this->Season_model->get($data['league']['current_season_id']);
 

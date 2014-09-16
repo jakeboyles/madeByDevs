@@ -12,7 +12,7 @@ class League_model extends MY_Model
 		// Determine the Active Season
 		$this->db->select('
 			l.current_season_id, l.id, l.name,
-			s.name as current_season_name, s.year_start as season_year_start, s.year_end as season_year_end, s.description as season_description
+			s.name as current_season_name,l.previous_season_id, s.year_start as season_year_start, s.year_end as season_year_end, s.description as season_description
 		');
 		$this->db->join( 'seasons s', 's.id = l.current_season_id' );
 
@@ -51,7 +51,8 @@ class League_model extends MY_Model
 			// Update Data
 			$data = array(
 				'name' => $post['name'],
-				'current_season_id' => empty( $post['current_season_id'] ) ? NULL : $post['current_season_id']
+				'current_season_id' => empty( $post['current_season_id'] ) ? NULL : $post['current_season_id'],
+				'previous_season_id' => empty( $post['previous_season_id'] ) ? NULL : $post['previous_season_id']
 			);
 
 			// Update Record in Database
