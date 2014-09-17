@@ -19,8 +19,6 @@ class History extends Site_Controller
 		$data['page_title'] = 'Divisions';
 		$data['division_leaders'] = $this->Division_model->get_division_leaders();
 		$this->load->site_template( 'history', $data );
-		$this->user_is_logged_in();
-
 		
 	}
 }

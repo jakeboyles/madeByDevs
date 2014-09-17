@@ -47,6 +47,7 @@ module.exports = function(grunt) {
             'assets/js/plugins/bootstrap/tab.js',
             'assets/js/plugins/bootstrap/affix.js',
             'assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
+            'assets/js/plugins/__jquery.tablesorter/jquery.tablesorter.min.js',
             'assets/js/plugins/*.js',
             'assets/js/_*.js'
           ]

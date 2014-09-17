@@ -63,6 +63,8 @@ $(document).ready(function(){
     increaseArea: '20%' // optional
   });
 
+	$(".table").tablesorter();
+
     // date_selector_dropdown();
 
 	$('.input-append.date').datepicker({

@@ -11,7 +11,7 @@
 			<!-- <h5 class="team-date">fall 2012</h5> -->
 		</div>
 
-		<table class="table table-striped stripe-pattern-one">
+		<table class="table sortable-table table-striped stripe-pattern-one">
 			<thead>
 				<tr>
 					<th>Opponent</th>
