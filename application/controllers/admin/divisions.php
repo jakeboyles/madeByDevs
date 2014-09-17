@@ -199,25 +199,18 @@ class Divisions extends Admin_Controller
 		{
 			$data = array();
 
-			// If Validation Passed
-			if( 2==2 )
-			{
-				// Update Record in Database
-				// Create JSON For DataTable View
-				$data = $this->Division_model->add_champion( $id, $this->input->post() );
+			// Update Record in Database
+			// Create JSON For DataTable View
+			$errors = $this->Division_model->add_champion( $id, $this->input->post() );
 
+			if($errors!="TRUE")
+			{
+				echo $errors;
+			}
+			else 
+			{
 				redirect('/admin/divisions/edit/'. $id, 'refresh');
-
 			}
-			// If Validation Failed Send Errors
-			else
-			{
-				$data = array(
-					'result' => 'error',
-					'errors' => validation_errors( '<li>','</li>' )
-				);
-			}
-
 		}
 		else
 		{

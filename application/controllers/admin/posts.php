@@ -25,10 +25,19 @@ class Posts extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Add Record to Database
 		if( $this->input->post() && $this->_validation() )
 		{
+
+
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->Post_model->insert_record( $this->input->post(), 'post' ) )
+			if( $errors = $this->Post_model->insert_record( $this->input->post(), 'post' ) )
 			{
-				redirect('admin/posts/edit/' . $insert_id);
+				if($errors!==TRUE)
+				{
+					$data['errors'] = $errors;
+				}
+				else 
+				{
+					redirect('admin/posts/edit/' . $insert_id);
+				}
 			}
 		}
 
@@ -45,7 +54,12 @@ class Posts extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Updated Record in Database
 		if( $this->input->post() && $this->_validation() && $id )
 		{
-			$this->Post_model->update_record( $id, $this->input->post() );
+			$errors = $this->Post_model->update_record( $id, $this->input->post() );
+
+			if($errors!==TRUE)
+			{
+				$data['errors'] = $errors;
+			}
 		}
 
 		// Load User Agent Library for Referrer Add Record Message

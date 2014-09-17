@@ -27,6 +27,17 @@
 							<div class="col-md-12 col-sm-12 col-xs-12">
 
 								<!-- START Display Error Messages -->
+								<?php if( !empty($errors) ): ?>
+								<div class="alert alert-error">
+									<h4>Form Submission Errors</h3>
+									<ul>
+									<?php echo $errors; ?>
+									</ul>
+								</div>
+								<?php endif; ?>
+
+
+								<!-- START Display Error Messages -->
 								<?php if( validation_errors() && $this->input->post() ): ?>
 								<div class="alert alert-error">
 									<h4>Form Submission Errors</h3>
@@ -38,7 +49,7 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Success Message -->
-								<?php if( !validation_errors() && $this->input->post() ): ?>
+								<?php if( !validation_errors() && $this->input->post() && empty($errors) ): ?>
 								<div class="alert alert-success">
 									This record has been updated.
 								</div>

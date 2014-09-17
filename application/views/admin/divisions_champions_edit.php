@@ -15,6 +15,16 @@
 				<div class="modal-body">
 
 					<!-- START Display Error Messages -->
+					<?php if( !empty($errors) ): ?>
+					<div class="alert alert-error">
+						<h4>Form Submission Errors</h3>
+						<ul>
+						<?php echo $errors; ?>
+						</ul>
+					</div>
+					<?php endif; ?>
+
+					<!-- START Display Error Messages -->
 					<div class="alert alert-error hide ajax-form-errors">
 						<h4>Form Submission Errors</h3>
 						<ul>
