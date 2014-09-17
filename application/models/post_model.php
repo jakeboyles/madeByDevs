@@ -11,7 +11,7 @@ class Post_model extends MY_Model
 	public function get_records( $post_type = false )
 	{
 		// Construct Query
-		$this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		$this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content,p.featured_image, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 
 		if( $post_type )
@@ -37,6 +37,55 @@ class Post_model extends MY_Model
 	{
 		if( $post && $post_type )
 		{
+
+			if($_FILES['featured_image']['error'] == '0')
+			{
+				$config['upload_path'] = './uploads/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '100';
+				$config['max_width']  = '1024';
+				$config['max_height']  = '768';
+
+				$this->load->library('upload', $config);
+
+
+					// The field name for the file upload would be logo
+					if ( ! $this->upload->do_upload('featured_image'))
+					{
+						return $this->upload->display_errors();
+					}
+					else
+					{
+						$imagefile = array('upload_data' => $this->upload->data());
+
+						$data = array(
+							'filename' => $imagefile['upload_data']['file_name'],
+							'mime_type' => $imagefile['upload_data']['file_type']
+						);
+
+						$image = $this->db->insert('media',$data);
+
+						$image = $this->db->insert_id();
+
+						$config2['image_library'] = 'GD2';
+						$config2['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+						$config2['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
+						$config2['maintain_ratio'] = TRUE;
+						$config2['width'] = 800;
+						$config2['height'] = 350;
+						$config2['create_thumb'] = false;
+
+						$this->load->library('image_lib', $config2);
+
+						if ( ! $this->image_lib->fit())
+						{
+						    echo $this->image_lib->display_errors();
+						}
+
+
+					}		
+			}
+
 			// Determine URL Slug
 			$slug = empty( $post['slug'] ) ? $post['title'] : $post['slug'];
 			$slug = str_replace(' ', '-', $slug); // Replaces all spaces with hyphens.
@@ -50,7 +99,8 @@ class Post_model extends MY_Model
 				'title' => empty( $post['title'] ) ? NULL : $post['title'],
 				'post_date' => empty( $post['post_date'] ) ? $this->mysql_datetime() : $this->mysql_datetime($post['post_date']),
 				'slug' => $slug,
-				'content' => empty( $post['content'] ) ? NULL : $post['content']
+				'content' => empty( $post['content'] ) ? NULL : $post['content'],
+				'featured_image' => empty( $image ) ? NULL : $image,
 			);
 
 			// Insert to Database and Store Insert ID
@@ -83,11 +133,69 @@ class Post_model extends MY_Model
 	{
 		if( $id && $post )
 		{
+
+			if($_FILES['featured_image']['error'] == '0')
+			{
+				$config['upload_path'] = './uploads/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '100';
+				$config['max_width']  = '1024';
+				$config['max_height']  = '768';
+
+				$this->load->library('upload', $config);
+
+					// The field name for the file upload would be logo
+					if ( ! $this->upload->do_upload('featured_image'))
+					{
+						return $this->upload->display_errors();
+					}
+					else
+					{
+						$imagefile = array('upload_data' => $this->upload->data());
+
+						$data = array(
+							'filename' => $imagefile['upload_data']['file_name'],
+							'mime_type' => $imagefile['upload_data']['file_type']
+						);
+
+						$image = $this->db->insert('media',$data);
+
+						$image = $this->db->insert_id();
+
+
+						$config2['image_library'] = 'GD2';
+						$config2['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+						$config2['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
+						$config2['maintain_ratio'] = TRUE;
+						$config2['width'] = 800;
+						$config2['height'] = 350;
+						$config2['create_thumb'] = false;
+
+						$this->load->library('image_lib', $config2);
+
+						if ( ! $this->image_lib->fit())
+						{
+						    echo $this->image_lib->display_errors();
+						}
+
+
+						//die($config2['source_image']);
+
+					}		
+			}
+
 			// Determine URL Slug
 			$slug = empty( $post['slug'] ) ? $post['title'] : $post['slug'];
 			$slug = str_replace(' ', '-', $slug); // Replaces all spaces with hyphens.
 			$slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug); // Removes special chars
 			$slug = strtolower( $slug ); // conver the string to all lower case
+
+			$oldImage = NULL;
+
+			if(!empty($post['featured_image_edit']))
+			{
+				$oldImage = $post['featured_image_edit'];
+			}
 
 			// Update Data
 			$data = array(
@@ -95,6 +203,7 @@ class Post_model extends MY_Model
 				'slug' => $slug,
 				'content' => empty( $post['content'] ) ? NULL : $post['content'],
 				'post_date' => empty( $post['post_date'] ) ? $this->mysql_datetime() : $this->mysql_datetime($post['post_date']),
+				'featured_image' => empty( $image ) ? $oldImage : $image,
 			);
 
 			// Update Record in Database
@@ -177,13 +286,17 @@ class Post_model extends MY_Model
     }
 
 
-	public function fetch_posts($limit, $start, $post_type) {
+	public function fetch_posts($limit = FALSE, $start = FALSE, $post_type = FALSE) {
 
-		$this->db->limit($limit, $start);
-        $this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		//$this->db->limit($limit, $start);
+        $this->db->select( 'p.id, p.post_type,pc.category_id, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+		$this->db->join( 'post_categories pc', 'pc.post_id = p.id', 'left outer' );
 		$this->db->order_by( 'p.post_date', 'DESC' );
 		$this->db->where('post_date <=',date("Y-m-d H:i:s",strtotime("0 day")));
+		$names = array(10,9);
+		$this->db->where('category_id', NULL);
+		$this->db->or_where_not_in('category_id', $names);
 
 		if( $post_type )
 		{
@@ -192,6 +305,30 @@ class Post_model extends MY_Model
 
 		// Run Query
 		$query = $this->db->get( 'posts p' );
+
+ 
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			$rows = $query->result_array();
+			return $rows;
+		}
+
+		return false;
+	}
+
+
+	public function fetch_posts_by_category($limit, $category) {
+
+		$this->db->limit($limit);
+        $this->db->select( 'p.id, p.post_type, p.author_id, p.title,m.filename, p.content,p.featured_image, p.slug, p.created_at, p.modified_at' );
+		$this->db->join( 'posts p', 'p.id = pc.post_id', 'left outer' );
+		$this->db->join( 'media m', 'm.id = p.featured_image', 'left outer' );
+		$this->db->where('pc.category_id', $category);
+		$this->db->order_by( 'id', 'DESC' );
+
+		// Run Query
+		$query = $this->db->get( 'post_categories pc' );
 
  
 		// If Rows Were Found, Return Them

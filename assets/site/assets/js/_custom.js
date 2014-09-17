@@ -63,7 +63,7 @@ $(document).ready(function(){
     increaseArea: '20%' // optional
   });
 
-	$(".table").tablesorter();
+	$(".sortable-table").tablesorter();
 
     // date_selector_dropdown();
 

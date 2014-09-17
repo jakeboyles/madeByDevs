@@ -1,8 +1,8 @@
 <?php
 $ci =&get_instance();
-$ci->load->model( 'Content_model' );
-$atts = array( 'limit' => 3, 'where' => 'p.post_type = \'post\'' );
-$latest_posts = $ci->Content_model->get_posts( $atts );
+$ci->load->model( 'Post_model' );
+$latest_posts = $ci->Post_model->fetch_posts('3');
+
 ?>
 
 <div class="col-md-pull-8 col-xs-12 col-md-4">

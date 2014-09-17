@@ -7,7 +7,7 @@
 		</div>
 
 		<!-- START Form -->
-		<?php echo form_open( 'admin/posts/add/', array( 'id' => 'add-post-form') ); ?>
+		<?php echo form_open_multipart( 'admin/posts/add/', array( 'id' => 'add-post-form') ); ?>
 		<div class="row">
 			<div class="col-md-8">
 		 		<div class="grid simple">
@@ -99,6 +99,19 @@
 							</div>
 						<?php endforeach; ?>
 						<?php endif; ?>
+					</div>
+				</div>
+
+
+				<div class="grid simple">
+					<div class="grid-title">
+						<h4 class="pull-left">Featured Image</h4>
+					</div>
+
+					<div class="grid-body">
+						<div class="form-group">
+							<?php echo form_upload( array('name' => 'featured_image', 'class' => 'form-control', 'id' => 'featured_image', 'value' => set_value( 'featured_image' ) ) ); ?>
+						</div>
 					</div>
 				</div>
 				

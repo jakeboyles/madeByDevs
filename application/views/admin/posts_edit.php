@@ -7,7 +7,7 @@
 		</div>
 
 		<!-- START Form -->
-		<?php echo form_open( 'admin/posts/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
+		<?php echo form_open_multipart( 'admin/posts/edit/' . $record['id'], array( 'id' => 'edit-post-form' ) ); ?>
 		<div class="row">
 			<div class="col-md-8">
 		 		<div class="grid simple">
@@ -119,11 +119,24 @@
 						<?php endif; ?>
 					</div>
 				</div>
+
+				<div class="grid simple">
+					<div class="grid-title">
+						<h4 class="pull-left">Featured Image</h4>
+					</div>
+
+					<div class="grid-body">
+						<div class="form-group">
+							<?php echo form_upload( array('name' => 'featured_image', 'class' => 'form-control', 'id' => 'featured_image', 'value' => set_value( 'featured_image' ) ) ); ?>
+						</div>
+					</div>
+				</div>
 				
 			</div><!-- end .col-md-4 -->
 
 		</div><!-- end .row -->
 		<?php echo form_hidden( 'original_slug', $record['slug'] ); ?>
+		<?php echo form_hidden( 'featured_image_edit', $record['featured_image'] ); ?>
 		<?php echo form_close(); ?>
 
 	</div><!-- end .content -->

@@ -198,7 +198,7 @@ class Division_model extends MY_Model
 	}
 
 	// Get the best teams from each division
-	public function get_division_leaders()
+	public function get_division_leaders($season_id = FALSE)
 	{
 		$this->db->select('d.id,d.name');
 		$query = $this->db->get('divisions d');
@@ -218,6 +218,8 @@ class Division_model extends MY_Model
 				$totalWins = NULL;
 				$totalTies = NULL;
 				$totalGames = NULL;
+				$points = NULL;
+				$points_against = NULL;
 
 				$teams = $this->get_teams_by_division($division);
 
@@ -225,8 +227,16 @@ class Division_model extends MY_Model
 				{
 					foreach( $teams as $team ) 
 					{
-						
-						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id']);
+
+		
+						if(!empty($season_id))
+						{
+							$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
+						}
+						else 
+						{
+							$teams_win_loss = $this->get_win_loss_by_team($team, $division['id']);
+						}
 
 						if( $teams_win_loss )
 						{
@@ -259,6 +269,13 @@ class Division_model extends MY_Model
 								$totalWins = $wins;
 								$totalTies = $ties;
 								$totalGames = $games;
+
+								if(!empty($season_id))
+								{
+								$points = $this->get_points_for_team($team, $season_id);
+								$points_against = $this->get_points_for_opponent($team, $season_id);
+								}
+
 							}
 
 						}
@@ -275,6 +292,8 @@ class Division_model extends MY_Model
 				$stat['games_won'] = $totalWins;
 				$stat['games_tied'] = $totalTies;
 				$stat['team_id'] = $team_id;
+				$stat['points'] = $points;
+				$stat['points_against'] = $points_against;
 
 				$divisions_total[] = $stat;
 
@@ -328,10 +347,16 @@ class Division_model extends MY_Model
 
 						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
 
-						$points = $this->get_points_for_team($team);
+						if(!empty($season_id)) {
 
-						$points_against = $this->get_points_for_opponent($team);
-
+							$points = $this->get_points_for_team($team,$current_season_id);
+							$points_against = $this->get_points_for_opponent($team,$current_season_id);
+						}
+						else 
+						{
+							$points = $this->get_points_for_team($team);
+							$points_against = $this->get_points_for_opponent($team);
+						}
 						if( $teams_win_loss )
 						{
 
@@ -379,10 +404,15 @@ class Division_model extends MY_Model
 	}
 
 
-	public function get_points_for_team( $id= FALSE )
+	public function get_points_for_team( $id = FALSE, $season_id = FALSE )
 	{
 		$this->db->select('SUM(g.score_home) as total');
 		$this->db->where('g.team_home_id',$id['id']);
+
+		if($season_id)
+		{
+			$this->db->where('g.season_id',$season_id);
+		}
 
 		$query = $this->db->get( 'games g' );
 
@@ -405,6 +435,11 @@ class Division_model extends MY_Model
 
 		$this->db->select('SUM(g.score_away) as total');
 		$this->db->where('g.team_away_id',$id['id']);
+
+		if($season_id)
+		{
+			$this->db->where('g.season_id',$season_id);
+		}
 
 		$query = $this->db->get( 'games g' );
 
@@ -429,10 +464,15 @@ class Division_model extends MY_Model
 
 
 
-	public function get_points_for_opponent( $id= FALSE )
+	public function get_points_for_opponent( $id= FALSE, $season_id = FALSE )
 	{
 		$this->db->select('SUM(g.score_away) as total');
 		$this->db->where('g.team_home_id',$id['id']);
+
+		if($season_id)
+		{
+			$this->db->where('g.season_id',$season_id);
+		}
 
 		$query = $this->db->get( 'games g' );
 
@@ -455,6 +495,11 @@ class Division_model extends MY_Model
 
 		$this->db->select('SUM(g.score_home) as total');
 		$this->db->where('g.team_away_id',$id['id']);
+
+		if($season_id)
+		{
+			$this->db->where('g.season_id',$season_id);
+		}
 
 		$query = $this->db->get( 'games g' );
 

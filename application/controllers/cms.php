@@ -144,14 +144,15 @@ class Cms extends Site_Controller
 		//Set base url for the blog 
 		$config['base_url'] =  base_url() . '/cms/blog';
 
-		// Get total number of posts
-		$config['total_rows'] =  $this->Post_model->record_count('post');
-
+		
 		// How many show per page?
 		$config['per_page'] = 5;
 
 		// Get all posts in pagination style (Number per page, page number, type of content)
 		$data['blogs'] = $this->Post_model->fetch_posts($config["per_page"], $page,'post');
+
+		$config['total_rows'] = count($data['blogs']);
+
 
 		$this->pagination->initialize($config);
 
