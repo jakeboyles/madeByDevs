@@ -1,7 +1,10 @@
 <?php
 $ci =&get_instance();
 $ci->load->model( 'Post_model' );
+$ci->load->model( 'League_model' );
 $latest_posts = $ci->Post_model->fetch_posts('3');
+
+$weather = $ci->League_model->get_weather('45056');
 
 ?>
 
@@ -19,9 +22,28 @@ $latest_posts = $ci->Post_model->fetch_posts('3');
 		</ul>
 	<?php endif; ?>
 	<!-- END Latest News Widget -->
-
 	<!-- Ad Widget -->
-	<img src="http://placehold.it/750x350&text=Weather+Ad" /><br/></br/>
+	<?php if(!empty($weather['current_observation'])): ?>
+	<div class="weather">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Current Weather</h3>
+				<span class="date"><?php echo date('m/d h:m', $weather['current_observation']['observation_epoch']); ?></span>
+			</div>
+		<div class="col-md-5">
+			<span class='city'><?php echo $weather['current_observation']['display_location']['full']; ?></span>
+			<span class='condition'><?php echo $weather['current_observation']['weather']; ?></span>
+		</div>
+		<div class="col-md-3">
+			<img src='<?php echo $weather['current_observation']['icon_url']; ?>' >
+		</div>
+		<div class="col-md-4">
+			<span class='temp'><?php echo $weather['current_observation']['temp_f']; ?> F</span>
+			<span class='wind'><?php echo $weather['current_observation']['wind_mph']; ?> MPH</span>
+		</div>
+		</div>
+	</div>
+	<?php endif; ?>
 
 	<!-- Ad Widget -->
 	<img src="http://placehold.it/750x450/ff69b4/ffffff&text=Display+Ad" />

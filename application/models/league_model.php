@@ -1,3 +1,4 @@
+
 <?php
 class League_model extends MY_Model
 {
@@ -11,7 +12,7 @@ class League_model extends MY_Model
 	{
 		// Determine the Active Season
 		$this->db->select('
-			l.current_season_id, l.id, l.name,
+			l.current_season_id, l.id,l.weather_zipcode, l.name,
 			s.name as current_season_name,l.previous_season_id, s.year_start as season_year_start, s.year_end as season_year_end, s.description as season_description
 		');
 		$this->db->join( 'seasons s', 's.id = l.current_season_id' );
@@ -52,7 +53,8 @@ class League_model extends MY_Model
 			$data = array(
 				'name' => $post['name'],
 				'current_season_id' => empty( $post['current_season_id'] ) ? NULL : $post['current_season_id'],
-				'previous_season_id' => empty( $post['previous_season_id'] ) ? NULL : $post['previous_season_id']
+				'previous_season_id' => empty( $post['previous_season_id'] ) ? NULL : $post['previous_season_id'],
+				'weather_zipcode' => empty( $post['weather'] ) ? NULL : $post['weather']
 			);
 
 			// Update Record in Database
@@ -62,6 +64,32 @@ class League_model extends MY_Model
 		}
 
 		return false;
+	}
+
+
+	public function get_weather( $zipcode = FALSE )
+	{
+
+		$zip = $this->get_records();
+		$zipcode = $zip[0]['weather_zipcode'];
+
+		$url = 'http://api.wunderground.com/api/b7cad9535c67ac03/conditions/q/'.$zipcode.'.json';
+
+		$ch = curl_init();
+		// Disable SSL verification
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// Will return the response, if false it print the response
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Set the url
+		curl_setopt($ch, CURLOPT_URL,$url);
+		// Execute
+		$result=curl_exec($ch);
+		// Closing
+		curl_close($ch);
+
+		$result = json_decode($result,true);
+		// Will dump a beauty json :3
+		return $result;
 	}
 
 

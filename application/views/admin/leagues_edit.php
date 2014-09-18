@@ -69,6 +69,11 @@
 										<?php echo form_dropdown( 'previous_season_id', array( '' => '') + $seasons, set_value('previous_season_id',$record['previous_season_id']), 'class="pretty-select"' ); ?>
 									</div>
 
+									<div class="form-group">
+										<?php echo form_label( 'Zipcode*', 'name', array( 'class' => 'form-label' ) ); ?>
+										<?php echo form_input( array('name' => 'weather', 'class' => 'form-control', 'id' => 'weather', 'value' => set_value( 'weather', $record['weather_zipcode'] ) ) ); ?>
+									</div>
+
 									<button type="submit" class="btn btn-primary">Update League</button>
 
 								<?php echo form_close(); ?>
