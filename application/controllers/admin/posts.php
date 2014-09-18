@@ -25,18 +25,16 @@ class Posts extends Admin_Controller
 		// If Form is Submitted Validate Form Data and Add Record to Database
 		if( $this->input->post() && $this->_validation() )
 		{
-
-
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $errors = $this->Post_model->insert_record( $this->input->post(), 'post' ) )
 			{
-				if($errors!==TRUE)
+				if(!empty($errors['errors']))
 				{
-					$data['errors'] = $errors;
+					$data['errors'] = $errors['errors'];
 				}
 				else 
 				{
-					redirect('admin/posts/edit/' . $insert_id);
+					redirect('admin/posts/edit/' . $errors);
 				}
 			}
 		}

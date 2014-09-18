@@ -86,11 +86,14 @@ class Post_model extends MY_Model
 
 				$this->load->library('upload', $config);
 
+				$error = array();
+
 
 					// The field name for the file upload would be logo
 					if ( ! $this->upload->do_upload('featured_image'))
 					{
-						return $this->upload->display_errors();
+						$error['errors'] = $this->upload->display_errors();
+						return $error;
 					}
 					else
 					{
@@ -160,7 +163,7 @@ class Post_model extends MY_Model
 			}
 
 			// Return Insert ID
-			return true;
+			return $insert_id;
 		}
 
 		return false;
