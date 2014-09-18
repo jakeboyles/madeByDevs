@@ -4,6 +4,7 @@
 	<div id="carousel-head-show" class="carousel slide" data-ride="carousel">
 	  <ol class="carousel-indicators hidden-xs">
 	  	<?php $i = 0; ?>
+	  	<?php if(!empty($sliders)): ?>
 	  	<?php foreach($sliders as $slider): ?>
 	  		<?php if($i==0) { ?>
 			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>" class="active"></li>
@@ -13,11 +14,13 @@
 			}
 			$i++; ?>
 		<?php endforeach; ?>
+		<?php endif; ?>
 	  </ol>
 	  <div class="carousel-inner">
 
 	  	<?php 
 	  	$counter = 0;
+	  	if(!empty($sliders)):
 	  	foreach($sliders as $slider): 
 	  	if($counter==0):
 	  	?>
@@ -39,7 +42,9 @@
 		<?php endif; ?>
 		<?php 
 		$counter++;
-		endforeach; ?>
+		endforeach; 
+		endif;
+		?>
 	  </div>
 	  <a class="left carousel-control" href="#carousel-head-show" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left"></span>
@@ -55,13 +60,14 @@
 				<h3 class="team-name-secondary">Leaderboard</h3>
 				<h5 class="team-date"><?php echo $league[0]['current_season_name']; ?></h5>
 			</div>
-
+			<?php if(!empty($headlines[0]['filename'])): ?>
 			<div class="division_headline">
 			<img src="<?php echo base_url('uploads').'/slider-'.$headlines[0]['filename']; ?>" />
 				<div class="content">
 					<p><?php echo $headlines[0]['title']; ?>
 				</div>
 			</div>
+			<?php endif; ?>
 			<table class="sortable-table table table-striped stripe-pattern-one">
 			<thead>
 				<tr>
