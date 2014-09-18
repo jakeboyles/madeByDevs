@@ -31,14 +31,14 @@ $weather = $ci->League_model->get_weather('45056');
 				<span class="date"><?php echo date('m/d h:m a', $weather['current_observation']['observation_epoch']); ?></span>
 			</div>
 		<div class="col-xs-12 col-md-5">
-			<span class='city'><?php echo $weather['current_observation']['display_location']['full']; ?></span><br>
+			<span class='city'><?php echo $weather['current_observation']['display_location']['full']; ?></span>
 			<span class='condition'><?php echo $weather['current_observation']['weather']; ?></span>
 		</div>
 		<div class="col-xs-12 col-md-3">
 			<img src='http://icons.wxug.com/i/c/k/<?php echo $weather['current_observation']['icon']; ?>.gif' >
 		</div>
 		<div class="col-xs-12 col-md-4">
-			<span class='temp'><?php echo $weather['current_observation']['temp_f']; ?> F&deg;</span><br>
+			<span class='temp'><?php echo $weather['current_observation']['temp_f']; ?> F&deg;</span>
 			<span class='wind'><?php echo $weather['current_observation']['wind_mph']; ?> MPH /</span>
 			<span class='direction'><?php echo $weather['current_observation']['wind_dir']; ?></span>
 		</div>
