@@ -25,6 +25,7 @@
 									<th>id</th>
 									<th>Title</th>
 									<th>Slug</th>
+									<th>Category</th>
 									<th>Author</th>
 									<th>Created</th>
 									<th>Modified</th>
@@ -38,6 +39,7 @@
 										<td><?php echo $record['id']; ?></td>
 										<td><a href="<?php echo base_url('admin/posts/edit/' . $record['id']); ?>"><?php echo $record['title']; ?></a></td>
 										<td><?php echo $record['slug']; ?></td>
+										<td><?php echo $record['category']; ?></td>
 										<td><?php echo $record['author_first_name'] . ' ' . $record['author_last_name']; ?></td>
 										<td><?php echo date( 'm/d/Y', strtotime( $record['created_at'] ) ); ?></td>
 										<td><?php echo date( 'm/d/Y', strtotime( $record['modified_at'] ) ); ?></td>
