@@ -723,7 +723,6 @@ class Team_model extends MY_Model
 		// Get Divisions in session
 	public function get_team_by_division( $id = FALSE )
 	{
-
 		$this->db->select( 't.name,t.id' );
 		$this->db->where( 'division_id' , $id );
 		$query= $this->db->get('teams t');
@@ -861,42 +860,6 @@ class Team_model extends MY_Model
 
 	}
 
-
-	private function _add_image($id, $post, $name)
-	{
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '5048';
-
-		$this->load->library('upload', $config);
-
-			// The field name for the file upload would be logo
-			if ( ! $this->upload->do_upload($name))
-			{
-				return $this->upload->display_errors('<li>', '</li>');
-			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
-
-				$data = array(
-					'filename' => $image['upload_data']['file_name'],
-					'mime_type' => $image['upload_data']['file_type']
-				);
-
-				$image = $this->db->insert('media',$data);
-
-				$image = $this->db->insert_id();
-
-				$data2 = array(
-					'media_id' => $image,
-					'item_id' => $id,
-				);
-
-				$inserted_data = $this->db->insert('media_relationships',$data2); 
-
-			}
-	}
 
 	public function get_photos($id = FALSE)
 	{

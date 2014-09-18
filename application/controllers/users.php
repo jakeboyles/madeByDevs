@@ -153,11 +153,31 @@ class Users extends Site_Controller
 		return false;
 	}
 
+
+	// Run Validation on Create / Edit Forms
+	private function _game_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('score_home', 'Score Home', 'required | numeric');
+		$this->form_validation->set_rules('score_away', 'Score Away', 'required | numeric');
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
 	// Add New Record View
 	public function add_game_record()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post() )
+		if( $this->input->post() && $this->_game_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->User_model->add_game_record( $this->input->post() ) )

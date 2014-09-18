@@ -7485,3 +7485,8 @@ input[type="checkbox"] {
   max-width:100px;
   margin-bottom:20px;
 }
+
+.edit-featured-image {
+  max-width:230px;
+  margin-top:10px;
+}

@@ -221,10 +221,26 @@ img {
 				.match {
 					float: left;
 					.padding(0,25);
+
+					a{
+						color:#fff;
+					}
+
+					a:hover {
+						text-decoration:none;
+					}
 				}
 				.division {
 					float: right;
 					.padding(0,25);
+
+					a{
+						color:#fff;
+					}
+
+					a:hover {
+						text-decoration:none;
+					}
 				}
 	    	}
 	    	.score-body {
@@ -243,7 +259,7 @@ img {
 	    			font-weight: bold;
 	    			.font-size(33);
 	    			padding-top:4px;
-	    			color: #102A4D; // @orange
+	    			color: @blue;
 	    			float: right;
 	    			line-height:1.1em;
 	    		}
@@ -741,6 +757,12 @@ footer {
 	#add-team-form th, #add-team-form td {
 		padding:8px 4px !important;
 	}
+
+	.item {
+		.content {
+			height:50% !important;
+		}
+	}
 }
 
 .datepicker {
@@ -1101,9 +1123,12 @@ transition: all 0.9s ease;
 		background-color:rgba(0,0,0,.4);
 		padding-left:20px;
 		color:#fff;
+		height:35%;
 
 		h3 {
 			color:#fff !important;
+			margin-bottom:10px;
+			margin-top:20px;
 		}
 	}
 }
@@ -1111,6 +1136,11 @@ transition: all 0.9s ease;
 #carousel-head-show {
 	margin-top:30px;
 	margin-bottom:50px;
+}
+
+.carousel-indicators {
+	bottom:-10px !important;
+	left:6%;
 }
 
 .division_headline {

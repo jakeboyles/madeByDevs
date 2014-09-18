@@ -111,7 +111,6 @@
 								<td><a href="#" class="update_game_info btn active btn-primary" data-ajax-url="<?php echo base_url('users/add_player_record/' . $player['user_id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $player['id']; ?>"><i class="fa fa-edit"></i></a></td>
 								<input id="csrf" type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
 								<input id="team_id" type="hidden" name="team_id" value="<?php echo $teams['home_team_id']; ?>" />
-								<?php echo json_encode($player); ?>
 							</tr>
 						<?php endif; ?>
 					<?php endforeach; ?>

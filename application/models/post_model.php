@@ -8,11 +8,12 @@ class Post_model extends MY_Model
 	//public $before_dropdown = array( 'order_by(name)' );
 
 	// Get Records
-	public function get_records( $post_type = false )
+	public function get_records( $post_type = false, $id = false )
 	{
 		// Construct Query
-		$this->db->select( 'p.id, p.post_type, p.author_id, p.title, p.content,p.featured_image, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		$this->db->select( 'p.id, p.post_type, p.author_id,m.filename as featured_image_filename, p.title, p.content,p.featured_image, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+		$this->db->join( 'media m', 'm.id = p.featured_image', 'left outer' );
 
 		if( $post_type )
 		{
@@ -27,6 +28,43 @@ class Post_model extends MY_Model
 		{
 			$rows = $query->result_array();
 			return $rows;
+		}
+
+		return false;
+	}
+
+
+		// Get Records
+	public function get_by_id( $id = false )
+	{
+		// Construct Query
+		$this->db->select( 'p.id, p.post_type,p.post_date, p.author_id,m.filename as featured_image_filename, p.title, p.content,p.featured_image, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
+		$this->db->join( 'media m', 'm.id = p.featured_image', 'left outer' );
+
+		if( $id )
+		{
+			$this->db->where( 'p.id', $id);
+		}
+
+		$atts['single'] = TRUE;
+
+		// Run Query
+		$query = $this->db->get( 'posts p' );
+
+		if($query->num_rows > 0)
+		{
+			if( !empty( $atts['single'] ) )
+			{
+				$row = $query->row_array();
+				return $row;
+			}
+			else
+			{
+				$rows = $query->result_array();
+				return $rows;
+			}
+			
 		}
 
 		return false;

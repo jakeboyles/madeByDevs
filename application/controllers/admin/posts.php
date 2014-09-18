@@ -66,7 +66,7 @@ class Posts extends Admin_Controller
 		$this->load->library('user_agent');
 
 		// Retrieve Record Data From Database
-		$data['record'] = $this->Post_model->get( $id );
+		$data['record'] = $this->Post_model->get_by_id( $id );
 
 		// Get a List of Categories
 		$data['categories'] = $this->Category_model->get_records();

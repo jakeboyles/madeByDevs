@@ -2,11 +2,18 @@
 
 	<!-- START Header cycler -->
 	<div id="carousel-head-show" class="carousel slide" data-ride="carousel">
-<!-- 	  <ol class="carousel-indicators">
-		<li data-target="#carousel-head-show" data-slide-to="0" class="active"></li>
-		<li data-target="#carousel-head-show" data-slide-to="1"></li>
-		<li data-target="#carousel-head-show" data-slide-to="2"></li>
-	  </ol> -->
+	  <ol class="carousel-indicators hidden-xs">
+	  	<?php $i = 0; ?>
+	  	<?php foreach($sliders as $slider): ?>
+	  		<?php if($i==0) { ?>
+			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>" class="active"></li>
+			<?php  } else { ?>
+			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>"></li>
+			<?php 
+			}
+			$i++; ?>
+		<?php endforeach; ?>
+	  </ol>
 	  <div class="carousel-inner">
 
 	  	<?php 
@@ -14,9 +21,7 @@
 	  	foreach($sliders as $slider): 
 	  	if($counter==0):
 	  	?>
-
-	  	<?php elseif($counter==1): ?>
-	  		<div class="item active">
+	  	  	<div class="item active">
 			  <img src="<?php echo base_url('uploads').'/slider-'.$sliders[$counter]['filename']; ?>" alt="<?php echo $slider['title']; ?>">
 				  <div class="content">
 				  	<h3><?php echo $sliders[$counter]['title']; ?></h3>
@@ -48,7 +53,7 @@
 			<div class="team-header">
 				<h3 class="team-name-primary">Division</h3>
 				<h3 class="team-name-secondary">Leaderboard</h3>
-				<h5 class="team-date">fall 2012</h5>
+				<h5 class="team-date"><?php echo $league[0]['current_season_name']; ?></h5>
 			</div>
 
 			<div class="division_headline">

@@ -140,6 +140,11 @@
 						<div class="form-group">
 							<?php echo form_upload( array('name' => 'featured_image', 'class' => 'form-control', 'id' => 'featured_image', 'value' => set_value( 'featured_image' ) ) ); ?>
 						</div>
+
+						<?php if(!empty($record['featured_image'])): ?>
+							<img class='edit-featured-image' src="<?php echo base_url('uploads').'/'.$record['featured_image_filename'] ; ?>" />
+						<?php endif; ?>
+
 					</div>
 				</div>
 				

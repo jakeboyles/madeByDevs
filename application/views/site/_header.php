@@ -78,8 +78,8 @@
 						?>
 						<li>
 							<div class="score-head">
-								<div class="match col-xs-12"><?php echo $game['home_team'];?> v <?php echo $game['away_team'];?></div>
-								<div class="division col-xs-12 text-right"><?php echo $game['division'];?></div>
+								<div class="match col-xs-12"><a href="<?php echo base_url('teams').'/page/'.$game['team_home_id']; ?>"><?php echo $game['home_team'];?></a> v <a href="<?php echo base_url('teams').'/page/'.$game['team_away_id']; ?>"><?php echo $game['away_team'];?></a></div>
+								<div class="division col-xs-12 text-right"><a href="<?php echo base_url('divisions').'/page/'.$game['division_id']; ?>"><?php echo $game['division'];?></a></div>
 							</div>
 							<div class="score-body">
 								<?php 
