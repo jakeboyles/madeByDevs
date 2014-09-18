@@ -160,7 +160,7 @@ class Post_model extends MY_Model
 			}
 
 			// Return Insert ID
-			return $insert_id;
+			return true;
 		}
 
 		return false;
