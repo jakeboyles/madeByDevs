@@ -73,7 +73,8 @@ class League_model extends MY_Model
 		$zip = $this->get_records();
 		$zipcode = $zip[0]['weather_zipcode'];
 
-		$url = 'http://api.wunderground.com/api/b7cad9535c67ac03/conditions/q/'.$zipcode.'.json';
+
+		$url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zipcode.'&sensor=false';
 
 		$ch = curl_init();
 		// Disable SSL verification
@@ -88,6 +89,24 @@ class League_model extends MY_Model
 		curl_close($ch);
 
 		$result = json_decode($result,true);
+
+
+		$url = 'api.openweathermap.org/data/2.5/weather?q='.$result['results'][0]['address_components'][1]['long_name'];
+
+		$ch = curl_init();
+		// Disable SSL verification
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// Will return the response, if false it print the response
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Set the url
+		curl_setopt($ch, CURLOPT_URL,$url);
+		// Execute
+		$result=curl_exec($ch);
+		// Closing
+		curl_close($ch);
+
+		$result = json_decode($result,true);
+
 		// Will dump a beauty json :3
 		return $result;
 	}
