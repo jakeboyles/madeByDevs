@@ -75,7 +75,7 @@
 					<th>Team</th>
 					<th>GP</th>
 					<th>GD</th>
-					<th>Points</th>
+					<th>Pts</th>
 				</tr>
 				<tr>
 					<th colspan="6"><div class="dashed">&nbsp;</div></th>
