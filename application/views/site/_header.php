@@ -9,7 +9,7 @@
 		<link href="<?php echo base_url('assets/site/assets/css/main.min.css'); ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/site/assets/js/plugins/bootstrap-datepicker/css/datepicker.css'); ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/site/assets/js/plugins/lightbox2/css/lightbox.css'); ?>" rel="stylesheet">
-		<link href="<?php echo base_url('assets/site/assets/fonts/weather-icons/css/weather-icons.min.css'); ?>" rel="stylesheet">
+		<link href="<?php echo base_url('assets/site/assets/fonts/weather-icons-master/css/weather-icons.min.css'); ?>" rel="stylesheet">
 
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
