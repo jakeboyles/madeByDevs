@@ -83,7 +83,7 @@
 					<button type="submit" class="btn btn-primary">Register</button>
 
 					<h2>Already Registered?</h2>
-					<a class="btn btn-primary pull-right" href="<?php echo base_url('login'); ?>">Login</a>
+					<a class="btn btn-primary pull-left" href="<?php echo base_url('login'); ?>">Login</a>
 
 				<!-- END Form -->
 
