@@ -332,10 +332,11 @@ class Post_model extends MY_Model
 	public function fetch_posts($limit = FALSE, $start = FALSE, $post_type = FALSE) {
 
 		$this->db->limit($limit, $start);
-        $this->db->select( 'p.id, p.post_type,pc.category_id,c.name as category, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
+        $this->db->select( 'p.id, p.post_type,pc.category_id,m.filename,c.name as category, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 		$this->db->join( 'post_categories pc', 'pc.post_id = p.id', 'left outer' );
 		$this->db->join( 'categories c', 'c.id = pc.category_id', 'left outer' );
+		$this->db->join( 'media m', 'm.id = p.featured_image', 'left outer' );
 		$this->db->order_by( 'p.post_date', 'DESC' );
 		$this->db->where('post_date <=',date("Y-m-d H:i:s",strtotime("0 day")));
 		$names = array(10,9);

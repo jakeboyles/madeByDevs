@@ -22,6 +22,9 @@ class Home extends Site_Controller
 
 		$data['headlines'] = $this->Post_model->fetch_posts_by_category(1,10);
 
+		$data['post'] = $this->Post_model->fetch_posts(1,0,'post');
+		$data['post'] = $data['post'][0];
+
 		$data['leaders'] = $this->Division_model->get_division_leaders($data['league'][0]['current_season_id']);
 
 		// Load View

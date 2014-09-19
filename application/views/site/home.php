@@ -1,10 +1,10 @@
 <div id="content" class="col-md-8 col-md-push-4">
 
 	<!-- START Header cycler -->
+	<?php if(!empty($sliders)): ?>
 	<div id="carousel-head-show" class="carousel slide" data-ride="carousel">
 	  <ol class="carousel-indicators hidden-xs">
 	  	<?php $i = 0; ?>
-	  	<?php if(!empty($sliders)): ?>
 	  	<?php foreach($sliders as $slider): ?>
 	  		<?php if($i==0) { ?>
 			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>" class="active"></li>
@@ -14,13 +14,11 @@
 			}
 			$i++; ?>
 		<?php endforeach; ?>
-		<?php endif; ?>
 	  </ol>
 	  <div class="carousel-inner">
 
 	  	<?php 
 	  	$counter = 0;
-	  	if(!empty($sliders)):
 	  	foreach($sliders as $slider): 
 	  	if($counter==0):
 	  	?>
@@ -43,7 +41,6 @@
 		<?php 
 		$counter++;
 		endforeach; 
-		endif;
 		?>
 	  </div>
 	  <a class="left carousel-control" href="#carousel-head-show" data-slide="prev">
@@ -53,22 +50,23 @@
 		<span class="glyphicon glyphicon-chevron-right"></span>
 	  </a>
 	</div>
+	<?php endif; ?>
 	<!-- END Header Cycler -->
-			<div class="team-standings">
-			<div class="team-header">
-				<h3 class="team-name-primary">Division</h3>
-				<h3 class="team-name-secondary">Leaderboard</h3>
-				<h5 class="team-date"><?php echo $league[0]['current_season_name']; ?></h5>
-			</div>
-			<?php if(!empty($headlines[0]['filename'])): ?>
+	<div class="team-standings">
+		<div class="team-header">
+			<h3 class="team-name-primary">Division</h3>
+			<h3 class="team-name-secondary">Leaderboard</h3>
+			<h5 class="team-date"><?php echo $league[0]['current_season_name']; ?></h5>
+		</div>
+		<?php if(!empty($headlines[0]['filename'])): ?>
 			<div class="division_headline">
 			<img src="<?php echo base_url('uploads').'/slider-'.$headlines[0]['filename']; ?>" />
 				<div class="content">
-					<p><?php echo $headlines[0]['title']; ?>
+					<p><?php echo $headlines[0]['title']; ?></p>
 				</div>
 			</div>
-			<?php endif; ?>
-			<table class="sortable-table table table-striped stripe-pattern-one">
+		<?php endif; ?>
+		<table class="sortable-table table table-striped stripe-pattern-one">
 			<thead>
 				<tr>
 					<th class="hidden-xs">Div</th>
@@ -114,6 +112,37 @@
 				
 			</tbody>
 		</table>
+	</div>
+
+
+	<div class="recent-news">
+		<div class="team-standings">
+			<div class="team-header">
+				<h3 class="team-name-primary">Latest News</h3>
+			</div>
+		</div>
+
+		<div class="post">
+			<?php if(!empty($post['filename'])): ?>
+			<div class='row'>
+				<div class='col-md-3'>
+					<img src="<?php echo base_url('uploads').'/'.$post['filename']; ?>" />
+				</div>
+
+				<div class='col-md-8 col-md-offset-1'>
+					<h2><a href="<?php echo base_url().$post['slug']; ?>"><?php echo $post['title']; ?></a></h2>
+					<?php echo $post['content']; ?>
+					<a class='btn btn-primary' href="<?php echo base_url().$post['slug']; ?>">Read More</a>
+				</div>
+			</div>
+
+			<?php else: ?>
+				<div class='col-md-12'>
+					<h2><?php echo $post['title']; ?></h2>
+					<?php echo $post['content']; ?>
+				</div>
+			<?php endif; ?>
+		</div>
 	</div>
 
 </div><!-- end .col-md-8 col-md-push-4 -->
