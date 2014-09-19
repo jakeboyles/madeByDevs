@@ -41,16 +41,14 @@
 
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="<?php echo base_url(); ?>">Home</a></li>
-						<li><a href="<?php echo base_url('about'); ?>">About Us</a></li>
+						<li><a href="<?php echo base_url('about'); ?>">About</a></li>
 						<li><a href="<?php echo base_url('divisions'); ?>">Divisions</a></li>
 						<li><a href="<?php echo base_url('history'); ?>">History</a></li>
 						<li><a href="<?php echo base_url('directions'); ?>">Directions</a></li>
 						<li><a href="<?php echo base_url('rules'); ?>">Rules</a></li>
-						<li><a href="<?php echo base_url('teams'); ?>">Team Pages</a></li>
+						<li><a href="<?php echo base_url('teams'); ?>">Teams</a></li>
 						<!-- <li><a href="<?php echo base_url('cms/blog'); ?>">News</a></li> -->
-						<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
-						<li><a href="<?php echo base_url('register'); ?>" class="signup">Sign Up</a></li>
+						<li><a href="<?php echo base_url('login'); ?>">Account</a></li>
 					</ul>
 				</div>
 

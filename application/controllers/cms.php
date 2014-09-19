@@ -151,8 +151,7 @@ class Cms extends Site_Controller
 		// Get all posts in pagination style (Number per page, page number, type of content)
 		$data['blogs'] = $this->Post_model->fetch_posts($config["per_page"], $page,'post');
 
-		$config['total_rows'] = count($data['blogs']);
-
+		$config['total_rows'] = count($this->Post_model->count_posts('post'));
 
 		$this->pagination->initialize($config);
 
