@@ -137,10 +137,12 @@
 			</div>
 
 			<?php else: ?>
-				<div class='col-md-12'>
-					<h2><a href="<?php echo base_url().$post['slug']; ?>"><?php echo $post['title']; ?></a></h2>
-					<?php echo $post['content']; ?>
-					<a class='btn btn-primary' href="<?php echo base_url().$post['slug']; ?>">Read More</a>
+				<div class="row">
+					<div class='col-md-12'>
+						<h2><a href="<?php echo base_url().$post['slug']; ?>"><?php echo $post['title']; ?></a></h2>
+						<?php echo $post['content']; ?>
+						<a class='btn btn-primary' href="<?php echo base_url().$post['slug']; ?>">Read More</a>
+					</div>
 				</div>
 			<?php endif; ?>
 		</div>
