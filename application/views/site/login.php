@@ -32,7 +32,8 @@
 
 					<button type="submit" class="btn btn-primary">Login</button>
 
-					<a class="btn btn-primary pull-right" href="<?php echo base_url('register'); ?>">Signup</a>
+					<h2>Still Need to Register?</h2>
+					<a class="btn btn-primary pull-left" href="<?php echo base_url('register'); ?>">Signup</a>
 
 				<!-- END Form -->
 
