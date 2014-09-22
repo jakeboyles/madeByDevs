@@ -81,7 +81,8 @@ class Leagues extends Admin_Controller
 		// Validation Rules
 		$this->form_validation->set_rules('name', 'Season Name', 'required');
 		$this->form_validation->set_rules('current_season_id', 'Current Season', 'required');
-		$this->form_validation->set_rules('previous_season_id', 'Previous Season', 'does_not_match[current_season_id]');;
+		$this->form_validation->set_rules('previous_season_id', 'Previous Season', 'does_not_match[current_season_id]');
+		$this->form_validation->set_rules('weather', 'Zipcdoe', 'numeric');
 
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
