@@ -380,4 +380,77 @@ $(document).ready(function(){
 	}
 
 
+	// Add/Edit Modal Form
+	$('#add-game-form').on('submit', function(e){
+		// Prevent Default Function
+		e.preventDefault();
+
+		// Set Vars
+		var thisForm = $(this);
+		var formErrorContainer = $(thisForm).find('.ajax-form-errors');
+		var formErrorList = $(thisForm).find('.ajax-form-errors ul');
+		var ajaxURL = thisForm.data('ajax-url');
+
+		// AJAX Request to Add Record
+		$.ajax({
+			url: ajaxURL,
+			type: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(response) {
+
+				// Error
+				if( response.result === 'error' )
+				{
+					formErrorList.html( response.errors );
+					formErrorContainer.removeClass('hide');
+				}
+				// Success
+				else
+				{
+					window.location.replace(response.redirect);
+				}
+
+			}
+		});
+
+	});
+
+
+
+	// Add/Edit Modal Form
+	$('#edit-team-form').on('submit', function(e){
+		// Prevent Default Function
+		e.preventDefault();
+
+		// Set Vars
+		var thisForm = $(this);
+		var formErrorContainer = $(thisForm).find('.ajax-form-errors');
+		var formErrorList = $(thisForm).find('.ajax-form-errors ul');
+		var ajaxURL = thisForm.data('ajax-url');
+
+		// AJAX Request to Add Record
+		$.ajax({
+			url: ajaxURL,
+			type: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(response) {
+				// Error
+				if( response.result === 'error' )
+				{
+					formErrorList.html( response.errors );
+					formErrorContainer.removeClass('hide');
+				}
+				// Success
+				else
+				{
+					window.location.replace(response.redirect);
+				}
+			}
+		});
+	});
+
+
+
 });

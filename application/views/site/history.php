@@ -30,6 +30,7 @@
 							<?php
 								$games_won = $division['games_won'];
 								$epg = ( $games_won * 3 + $division['games_tied'] ) / $division['games_played'];
+								$epg = number_format((float)$epg, 2, '.', '');
 								$formatter = new NumberFormatter('en_US', NumberFormatter::PERCENT);
 							?>
 							<td><a href="<?php echo base_url('divisions').'/history/'.$division['division_id'] ;?>"><?php echo $division['name']; ?></a></td>

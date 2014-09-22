@@ -32,10 +32,17 @@
 									</ul>
 								</div>
 								<?php endif; ?>
-								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/games/add/', array( 'id' => 'add-team-form') ); ?>
+								<?php echo form_open( '', array( 'id' => 'add-game-form', 'data-ajax-url' => base_url("admin/games/add_ajax")) ); ?>
+
+								<div class="alert alert-error hide ajax-form-errors">
+									<h4>Form Submission Errors</h3>
+									<ul>
+									<?php echo validation_errors('<li>','</li>'); ?>
+									</ul>
+								</div>
+								<!-- END Display Error Messages -->
 
 								<div class="form-group">
 									<?php echo form_label( 'Session*', 'session_id', array( 'class' => 'form-label' ) ); ?>
@@ -104,7 +111,7 @@
 								</div>
 
 
-								<button type="submit" class="btn btn-primary">Add Game</button>
+								<button type="submit" id="add_game" class="btn btn-primary">Add Game</button>
 
 								<?php echo form_close(); ?>
 								<!-- END Form -->

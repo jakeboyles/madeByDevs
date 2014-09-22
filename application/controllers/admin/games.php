@@ -163,7 +163,7 @@ class Games extends Admin_Controller
 	// Add New Record via AJAX
 	public function add_ajax()
 	{
-		if( $this->input->post('add_game') && $this->_validation() )
+		if( $this->input->post() && $this->_validation() )
 		{
 			// Insert Record Into Database
 			// Create JSON For DataTable View
@@ -177,13 +177,14 @@ class Games extends Admin_Controller
 			);
 		}
 
-		echo json_encode( $data );
+		echo json_encode($data);
+
 	}
 
 	// Edit Record via AjAX
 	public function edit_ajax( $id = FALSE )
 	{
-		if( $this->input->post('edit_game') && $id )
+		if( $this->input->post() && $id )
 		{
 			$data = array();
 

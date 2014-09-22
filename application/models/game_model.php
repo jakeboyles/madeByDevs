@@ -292,6 +292,7 @@ class Game_model extends MY_Model
 			$score_away = !empty( $game['score_away'] ) ? $game['score_away'] : 0;
 			$data_array = array(
 				'result' => 'success',
+				'redirect' =>base_url('admin/games').'/edit/'.$game['id'],
 				'insert_id' => $insert_id,
 				'row' => array(
 					$insert_id, 
@@ -345,6 +346,7 @@ class Game_model extends MY_Model
 			$data_array = array(
 				'result' => 'success',
 				'update_id' => $game['id'],
+				'redirect' =>base_url('admin/games').'/edit/'.$id,
 				'row' => array(
 					$game['id'], 
 					$game['division'], 

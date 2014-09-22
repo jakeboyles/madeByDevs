@@ -35,8 +35,10 @@
 								Won
 							<?php elseif($team['tie']=='1'): ?>
 								Tie
-							<?php else: ?>
+							<?php elseif($team['loss']=='1'): ?>
 								Lost
+							<?php else: ?>
+								-
 							<?php endif; ?>
 						</td>
 						<td><?php echo $team['score_home'] . "-" . $team["score_away"]; ?></td>

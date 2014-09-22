@@ -38,6 +38,7 @@
 				if($team['games_played']!='0') 
 				{
 					$epg = ($team['games_won']*3+$team['games_tied'])/$team['games_played'];
+					$epg = number_format((float)$epg, 2, '.', '');
 				} 
 				else 
 				{

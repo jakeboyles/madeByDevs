@@ -35,7 +35,15 @@
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
-								<?php echo form_open( 'admin/games/edit/'.$record['id'], array( 'id' => 'edit-team-form') ); ?>
+								<?php echo form_open( '', array( 'id' => 'edit-team-form', 'data-ajax-url' => base_url("admin/games/edit_ajax/".$record['id'])) ); ?>
+
+								<div class="alert alert-error hide ajax-form-errors">
+									<h4>Form Submission Errors</h3>
+									<ul>
+									<?php echo validation_errors('<li>','</li>'); ?>
+									</ul>
+								</div>
+								<!-- END Display Error Messages -->
 
 								<div class="form-group">
 									<?php echo form_label( 'Session*', 'session_id', array( 'class' => 'form-label' ) ); ?>

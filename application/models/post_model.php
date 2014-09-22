@@ -115,7 +115,7 @@ class Post_model extends MY_Model
 						$config2['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
 						$config2['maintain_ratio'] = TRUE;
 						$config2['width'] = 800;
-						$config2['height'] = 350;
+						$config2['height'] = 450;
 						$config2['create_thumb'] = false;
 
 						$this->load->library('image_lib', $config2);
@@ -124,7 +124,6 @@ class Post_model extends MY_Model
 						{
 						    echo $this->image_lib->display_errors();
 						}
-
 
 					}		
 			}
