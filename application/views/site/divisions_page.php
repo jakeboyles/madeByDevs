@@ -39,7 +39,7 @@
 
 				function compareOrder($a, $b)
 				{
-				  return $a['win_loss'] < $b['win_loss'];
+				  return ($a'games_won']*3)+($a['games_tied']*1) < ($b['games_won']*3)+($b['games_tied']*1);
 				}
 
 				if(!empty($leaders)):
