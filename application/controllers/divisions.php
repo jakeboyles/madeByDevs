@@ -59,7 +59,7 @@ class Divisions extends Site_Controller
 		$atts = array( 'where' => 'l.id = 1', 'single' => true );
 		$data['league'] = $this->League_model->get_records( $atts );
 
-		$data['history'] = $this->Division_model->get_team_stats( $division_id, '5' );
+		$data['history'] = $this->Division_model->get_team_stats( $division_id );
 
 		// Get Current Season's Teams and Stats
 		//$data['current_season_teams'] = $this->Team_model->get_current_season_teams();
