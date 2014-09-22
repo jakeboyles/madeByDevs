@@ -944,6 +944,8 @@ class Team_model extends MY_Model
 		$this->db->join( 'teams t', 't.id = gt.opponent_id', 'left outer' );
 		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 		$this->db->where('gt.team_id',$id);
+		$this->db->where('g.score_home !=','0');
+		$this->db->where('g.score_away !=','0');
 		$query = $this->db->get( 'game_teams gt' );
 
 		$fields = array();
