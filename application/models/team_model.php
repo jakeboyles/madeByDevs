@@ -24,6 +24,11 @@ class Team_model extends MY_Model
 			$this->db->where( $atts['where'] );
 		}
 
+		if( !empty( $atts['active'] ) )
+		{
+			$this->db->where( 'active', 1 );
+		}
+
 		// Run Query
 		$query = $this->db->get( 'teams t' );
 

@@ -16,8 +16,9 @@ class Teams extends Site_Controller
 	// Display the Location Search
 	public function index( $id = FALSE )
 	{
+		$atts['active'] = true;
 		// Store Data to Pass to View
-		$data['teams'] = $this->Team_model->get_records();
+		$data['teams'] = $this->Team_model->get_records($atts);
 
 		// Load View
 		$data['page_title'] = 'Team Search';
