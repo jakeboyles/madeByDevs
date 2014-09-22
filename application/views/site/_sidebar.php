@@ -30,14 +30,14 @@ $weather = $ci->League_model->get_weather('45056');
 				<h3>Current Weather</h3>
 				<span class="date"><?php echo date('m/d h:m a', time()); ?></span>
 			</div>
-		<div class="col-xs-12 col-md-5">
+		<div class="col-xs-12 col-xs-5">
 			<span class='city'><?php echo $weather['name']; ?></span>
 			<span class='condition'><?php echo $weather['weather'][0]['main']; ?></span>
 		</div>
-		<div class="col-xs-12 col-md-3">
+		<div class="col-xs-12 col-xs-3">
 			<i class='wi <?php echo weatherIcon($weather['weather'][0]['icon']); ?>'></i>
 		</div>
-		<div class="col-xs-12 col-md-4">
+		<div class="col-xs-12 col-xs-4">
 			<span class='temp'>
 				<?php
 				 $temp = ($weather['main']['temp'] - 273.15)* 1.8000+ 32.00 ; 
