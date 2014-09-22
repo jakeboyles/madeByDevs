@@ -271,7 +271,7 @@ class Game_model extends MY_Model
 			$rows = $query->result_array();
 			$season_id = $rows[0]['season_id'];
 			// Combine Date and Time Form Fields into a Single mySQL datetime Field
-			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
+			$game_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
 
 			// Insert Data
 			$data = array(
@@ -384,7 +384,7 @@ class Game_model extends MY_Model
 			$rows = $query->result_array();
 			$season_id = $rows[0]['season_id'];
 			// Combine Date and Time Form Fields into a Single mySQL datetime Field
-			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
+			$game_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
 
 			// Update Data
 			$data = array(
