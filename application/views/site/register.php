@@ -77,7 +77,7 @@
 
 					<?php echo form_hidden('user_type_id', '4'); ?>
 
-
+					<br><br>
 					<button type="submit" class="btn btn-primary">Register</button>
 
 					<h2>Already Registered?</h2>
