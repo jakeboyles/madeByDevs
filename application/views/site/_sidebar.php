@@ -51,7 +51,7 @@ $weather = $ci->League_model->get_weather('45056');
 
 
 	<!-- Ad Widget -->
-	<img src="http://placehold.it/750x450/ff69b4/ffffff&text=Display+Ad" />
+	<!-- <img src="http://placehold.it/750x450/ff69b4/ffffff&text=Display+Ad" /> -->
 
 </div><!-- end .col-md-pull-8 col-md-4 -->
 
