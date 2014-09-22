@@ -32,7 +32,7 @@
 
 					<div class="form-group">
 						<?php echo form_label( 'Birthday', 'birthday', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'birthday', 'class' => 'form-control', 'id' => 'birthday', 'value' => set_value('birthday') ) ); ?>
+						<?php echo form_input( array('name' => 'birthday', 'class' => 'form-control date input-append', 'id' => 'birthday', 'value' => set_value('birthday') ) ); ?>
 					</div>
 
 					<div class="form-group">
