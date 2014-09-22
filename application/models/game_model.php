@@ -252,6 +252,8 @@ class Game_model extends MY_Model
 			// Else Delete It from Database
 			else
 			{
+				$this->db->where('game_id', $id);
+				$this->db->delete('game_teams');
 				$this->Game_model->delete( $id );
 			}
 		}
