@@ -275,16 +275,16 @@ class Game_model extends MY_Model
 
 			// Insert Data
 			$data = array(
-				'session_id' => $post['session_id'],
-				'division_id' => $post['division_id'],
-				'location_id' => $post['location_id'],
-				'location_field_id' => empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
-				'team_home_id' => $post['team_home_id'],
-				'team_away_id' => $post['team_away_id'],
-				'game_date_time' => $game_date_time,
-				'score_home' => 0,
-				'score_away' => 0,
-				'game_type' => 'soccer',
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'location_id'=>empty( $post['location_id'] ) ? NULL : $post['location_id'],
+				'location_field_id'=>empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'game_date_time'=>$game_time,
+				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
+				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
 				'season_id'=>empty( $season_id ) ? '0' : $season_id,
 			);
 
@@ -376,20 +376,29 @@ class Game_model extends MY_Model
 	{
 		if( $id && $post )
 		{
+
+			$this->db->select('season_id');
+			$this->db->where('id', $post['session_id']);
+			$query = $this->db->get('sessions');
+
+			$rows = $query->result_array();
+			$season_id = $rows[0]['season_id'];
 			// Combine Date and Time Form Fields into a Single mySQL datetime Field
 			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
 
 			// Update Data
 			$data = array(
-				//'session_id' => $post['session_id'],
-				'division_id' => $post['division_id'],
-				'location_id' => $post['location_id'],
-				'location_field_id' => empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
-				'team_home_id' => $post['team_home_id'],
-				'team_away_id' => $post['team_away_id'],
-				'game_date_time' => $game_date_time,
-				'score_home' => empty( $post['score_home'] ) && $post['score_home'] != 0 ? NULL : $post['score_home'],
-				'score_away' => empty( $post['score_away'] ) && $post['score_away'] != 0 ? NULL : $post['score_away'],
+				'session_id'=>empty( $post['session_id'] ) ? NULL : $post['session_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'division_id'=>empty( $post['division_id'] ) ? NULL : $post['division_id'],
+				'location_id'=>empty( $post['location_id'] ) ? NULL : $post['location_id'],
+				'location_field_id'=>empty( $post['location_field_id'] ) ? NULL : $post['location_field_id'],
+				'team_home_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'team_away_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'game_date_time'=>$game_time,
+				'score_home'=>empty( $post['team_away_id'] ) ? '0' : $post['score_home'],
+				'score_away'=>empty( $post['score_away'] ) ? '0' : $post['score_away'],
+				'season_id'=>empty( $season_id ) ? '0' : $season_id,
 			);
 
 			// Update Record in Database

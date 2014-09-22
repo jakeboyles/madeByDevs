@@ -23,15 +23,6 @@
 
 							<div class="col-md-8 col-sm-8 col-xs-8">
 
-								<!-- START Display Error Messages -->
-								<?php if(validation_errors() && $this->input->post()): ?>
-								<div class="alert alert-error">
-									<h4>Form Submission Errors</h3>
-									<ul>
-									<?php echo validation_errors('<li>','</li>'); ?>
-									</ul>
-								</div>
-								<?php endif; ?>
 
 								<!-- START Form -->
 								<?php echo form_open( '', array( 'id' => 'add-game-form', 'data-ajax-url' => base_url("admin/games/add_ajax")) ); ?>
