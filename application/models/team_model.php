@@ -843,14 +843,24 @@ class Team_model extends MY_Model
 
 				$data2 = array(
 					'team_logo' => $image,
+					'description' => empty( $post['description'] ) ? NULL : $post['description'],
 				);
 
 				$this->db->where('id',$id);
 
 				$this->db->update('teams',$data2); 
 
-			}		
+			}	
+
 		}
+
+			$data2 = array(
+					'description' => empty( $post['team_description'] ) ? NULL : $post['team_description'],
+				);
+
+			$this->db->where('id',$id);
+
+			$this->db->update('teams',$data2);
 
 		foreach($_FILES as $key => $photo) 
 		{

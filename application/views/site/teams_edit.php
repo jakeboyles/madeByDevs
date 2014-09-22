@@ -62,6 +62,13 @@
 				<?php endif; ?>
 			</div>
 
+			<div class="form-group">
+				<?php echo form_label( 'Team Description', 'team_description', array( 'class' => 'form-label' ) ); ?>
+				<!-- <i class="fa fa-question-circle pointer" data-toggle="popover" data-placement="bottom" data-content="Only showing teams that are found in the selected division."></i> -->
+				<!-- <span class="help">e.g. </span> -->
+				<?php echo form_textarea( array('name' => 'team_description', 'class' => 'form-control', 'id' => 'team_description', 'value' => set_value( 'team_description', $record['description'] ) ) ); ?>
+			</div>
+
 			<h2>Add / Edit - Team Photos</h2>
 
 			<div class="form-group">
@@ -80,7 +87,7 @@
 			</div>
 
 			<br>
-			<button type="submit" class="btn btn-primary">Update Images</button>
+			<button type="submit" class="btn btn-primary">Update Team</button>
 
 		<?php echo form_hidden( 'add_location', TRUE ); ?>
 		<?php echo form_close(); ?>
