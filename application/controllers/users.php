@@ -9,6 +9,7 @@ class Users extends Site_Controller
 
 		// Load Database Model to Be Used in Methods
 		$this->load->model( 'User_model' );
+		$this->load->model( 'Division_model' );
 	}
 
 	// Display All Records View
@@ -23,21 +24,20 @@ class Users extends Site_Controller
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post() && $this->_validation() )
+		if( $this->input->post() && $this->_team_validation() )
 		{
 			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->User_model->insert_record( $this->input->post() ) )
+			if( $insert_id = $this->User_model->insert_record_and_team( $this->input->post() ) )
 			{
 				redirect('/');
 			}
 		}
+		
+		$data['divisions'] = $this->Division_model->dropdown( 'divisions', 'id', 'name' );
+		$this->load->site_template( 'register', $data );
 
-		// Get a List of User Types for Dropdown
-		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
-
-		// Load Add Record Form View
-		$this->load->site_template( 'home', $data );
 	}
+
 
 	// Edit Record View
 	public function edit( $id = FALSE )
@@ -122,6 +122,42 @@ class Users extends Site_Controller
 				$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'matches[password]');
 			}
 		}
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	private function _team_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('gender', 'Gender', '');
+		$this->form_validation->set_rules('postal', 'Postal Code', '');
+		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+
+		// Custom Validation Messages
+		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
+
+		// Only Run this Validation on Add User
+	
+			// Email Validation
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+
+			// Password Validation
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password_confirm', 'Re-Type Password', 'required|matches[password]');
+
+
 		
 		// Return True if Validation Passes
 		if ($this->form_validation->run())

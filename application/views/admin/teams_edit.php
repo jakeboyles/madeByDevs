@@ -48,7 +48,10 @@
 								</div>
 								<?php endif; ?>
 								<!-- END New Record Added Message -->
-
+								<?php 
+								$active[0] = "Inactive";
+								$active[1] = "Active";
+								?>
 								<!-- START Form -->
 								<?php echo form_open_multipart( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-form') ); ?>
 
@@ -67,6 +70,12 @@
 										<?php echo form_label( 'Team Captain', 'captain_user_id', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. This allows a non admin user help manage this team.</span>
 										<?php echo form_dropdown( 'captain_user_id', array( '' => '') + $captains, set_value( 'captain_user_id', $record['captain_user_id'] ), 'class="pretty-select"' ); ?>
+									</div>
+
+									<div class="form-group">
+										<?php echo form_label( 'Team Active', 'active', array( 'class' => 'form-label' ) ); ?>
+										<span class="help">e.g. Is this team currently active.</span>
+										<?php echo form_dropdown( 'active', array( '' => '') + $active, set_value( 'active', $record['active'] ), 'class="pretty-select"' ); ?>
 									</div>
 
 									<div class="form-group">

@@ -61,6 +61,40 @@ class User_model extends MY_Model
 		return false;
 	}
 
+		// Add Record
+	public function insert_record_and_team( $post = FALSE )
+	{
+		if( $post )
+		{
+			// Insert Data
+			$data = array(
+				'user_type_id' => 4,
+				'email' => $post['email'],
+				'password' => $this->password_hash( $post['password'] ),
+				'first_name' => $post['first_name'],
+				'last_name' => $post['last_name'],
+				'gender' => empty( $post['gender'] ) ? NULL : $post['gender'],
+				'postal' => empty( $post['postal'] ) ? NULL : $post['postal'],
+				'birthday' => empty( $post['birthday'] ) ? NULL : $this->mysql_date( $post['birthday'] )
+			);
+
+			// Insert to Database and Store Insert ID
+			$insert_id = $this->insert( $data );
+
+			$team_data = array(
+				'name' => empty($post['team_name']) ? NULL : $post['team_name'],
+				'division_id' => empty($post['division']) ? NULL : $post['division'],
+				'captain_user_id' => $this->db->insert_id(),
+			);
+
+			$insert_id = $this->db->insert('teams', $team_data );
+
+			return $insert_id;
+		}
+
+		return false;
+	}
+
 	// Edit Record
 	public function update_record( $id = FALSE, $post = FALSE )
 	{

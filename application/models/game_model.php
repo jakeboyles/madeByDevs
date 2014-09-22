@@ -264,6 +264,12 @@ class Game_model extends MY_Model
 	{
 		if( $post )
 		{
+			$this->db->select('season_id');
+			$this->db->where('id', $post['session_id']);
+			$query = $this->db->get('sessions');
+
+			$rows = $query->result_array();
+			$season_id = $rows[0]['season_id'];
 			// Combine Date and Time Form Fields into a Single mySQL datetime Field
 			$game_date_time = $this->mysql_datetime( $post['game_date'] . ' ' . $post['game_time'] );
 
@@ -278,7 +284,8 @@ class Game_model extends MY_Model
 				'game_date_time' => $game_date_time,
 				'score_home' => 0,
 				'score_away' => 0,
-				'game_type' => 'soccer'
+				'game_type' => 'soccer',
+				'season_id'=>empty( $season_id ) ? '0' : $season_id,
 			);
 
 			// Insert to Database and Store Insert ID
@@ -305,6 +312,57 @@ class Game_model extends MY_Model
 					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
 				)
 			);
+
+
+			$data2 = array(
+				'game_id'=>$insert_id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+			);
+
+			if($data['score_home']>$data['score_away'])
+			{
+				$data2['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data2['tie']=1;
+			} 
+			else
+			{
+				$data2['loss']=1;
+			}
+
+			$this->db->insert('game_teams',$data2);
+
+
+			$data3 = array(
+				'game_id'=>$insert_id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+			);
+
+			if($data['score_away']>$data['score_home'])
+			{
+				$data3['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data3['tie']=1;
+			} 
+			else
+			{
+				$data3['loss']=1;
+			}
+
+			$this->db->insert('game_teams',$data3);
+
 
 			// Return Data Array
 			return $data_array;
@@ -358,6 +416,62 @@ class Game_model extends MY_Model
 					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
 				)
 			);
+
+			// Update Record in Database
+			$this->update( $id, $data );
+
+			$data2 = array(
+				'game_id'=>$id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+				'opponent_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+			);
+
+			if($data['score_home']>$data['score_away'])
+			{
+				$data2['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data2['tie']=1;
+			} 
+			else
+			{
+				$data2['loss']=1;
+			}
+
+			$this->db->where('game_id',$id);
+			$this->db->where('team_id',$post['home_start']);
+			$this->db->update('game_teams',$data2);
+
+
+			$data3 = array(
+				'game_id'=>$id,
+				'win'=> 0,
+				'loss'=> 0,
+				'tie'=> 0,
+				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
+				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
+			);
+
+			if($data['score_away']>$data['score_home'])
+			{
+				$data3['win'] = 1;
+			} 
+			elseif ($data['score_home'] === $data['score_away']) 
+			{
+				$data3['tie']=1;
+			} 
+			else
+			{
+				$data3['loss']=1;
+			}
+
+			$this->db->where('game_id',$id);
+			$this->db->where('team_id',$post['away_start']);
+			$this->db->update('game_teams',$data3);
 			
 			// Return Data Array
 			return $data_array;

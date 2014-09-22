@@ -6,7 +6,7 @@ class Register extends Site_Controller
 		parent::__construct();
 
 		// Load Models Needed
-		//$this->load->model('Division_model');
+		$this->load->model('Division_model');
 	}
 
 	// Display the Location Search
@@ -18,6 +18,7 @@ class Register extends Site_Controller
 		// Load View
 		//$data['page_title'] = 'Divisions';
 		$data = array();
+		$data['divisions'] = $this->Division_model->dropdown( 'divisions', 'id', 'name' );
 		$this->load->site_template( 'register', $data );
 	}
 }

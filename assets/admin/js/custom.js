@@ -445,7 +445,7 @@ $(document).ready(function(){
 				// Success
 				else
 				{
-					window.location.replace(response.redirect);
+					//window.location.replace(response.redirect);
 				}
 			}
 		});

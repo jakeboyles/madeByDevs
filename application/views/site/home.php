@@ -2,7 +2,7 @@
 
 	<!-- START Header cycler -->
 	<?php if(!empty($sliders)): ?>
-	<div id="carousel-head-show" class="carousel slide" data-ride="carousel">
+	<div id="carousel-head-show" class="carousel slide hidden-xs" data-ride="carousel">
 	  <ol class="carousel-indicators hidden-xs">
 	  	<?php $i = 0; ?>
 	  	<?php foreach($sliders as $slider): ?>
@@ -30,7 +30,7 @@
 				  </div>
 			</div>
 		<?php else: ?>
-			<div class="item">
+			<div class="item hidden-xs">
 			  <img src="<?php echo base_url('uploads').'/slider-'.$slider['filename']; ?>" alt="<?php echo $slider['title']; ?>">
 				  <div class="content">
 				  	<h3><?php echo $slider['title']; ?></h3>
@@ -51,6 +51,63 @@
 	  </a>
 	</div>
 	<?php endif; ?>
+
+
+
+		<?php if(!empty($sliders)): ?>
+	<div id="carousel-head-show" class="carousel slide visible-xs" data-ride="carousel">
+	  <ol class="carousel-indicators hidden-xs">
+	  	<?php $i = 0; ?>
+	  	<?php foreach($sliders as $slider): ?>
+	  		<?php if($i==0) { ?>
+			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>" class="active"></li>
+			<?php  } else { ?>
+			<li data-target="#carousel-head-show" data-slide-to="<?php echo $i; ?>"></li>
+			<?php 
+			}
+			$i++; ?>
+		<?php endforeach; ?>
+	  </ol>
+	  <div class="carousel-inner">
+
+	  	<?php 
+	  	$counter = 0;
+	  	foreach($sliders as $slider): 
+	  	if($counter==0):
+	  	?>
+	  	  	<div class="item active">
+			  <img src="<?php echo base_url('uploads').'/slider-small-'.$sliders[$counter]['filename']; ?>" alt="<?php echo $slider['title']; ?>">
+				  <div class="content">
+				  	<h3><?php echo $sliders[$counter]['title']; ?></h3>
+				  	<?php echo $sliders[$counter]['content']; ?>
+				  </div>
+			</div>
+		<?php else: ?>
+			<div class="item hidden-xs">
+			  <img src="<?php echo base_url('uploads').'/slider-small-'.$slider['filename']; ?>" alt="<?php echo $slider['title']; ?>">
+				  <div class="content">
+				  	<h3><?php echo $slider['title']; ?></h3>
+				  	<?php echo $slider['content']; ?>
+				  </div>
+			</div>
+		<?php endif; ?>
+		<?php 
+		$counter++;
+		endforeach; 
+		?>
+	  </div>
+	  <a class="left carousel-control" href="#carousel-head-show" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-head-show" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	  </a>
+	</div>
+	<?php endif; ?>
+
+
+
+
 	<!-- END Header Cycler -->
 	<div class="team-standings">
 		<div class="team-header">

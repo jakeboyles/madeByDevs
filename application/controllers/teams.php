@@ -32,25 +32,34 @@ class Teams extends Site_Controller
 
 		$data['record'] = $this->Team_model->get( $id );
 
-		$data['logo'] = $this->Team_model->get_logo( $id );
-
-		$data['roster'] = $this->Team_model->get_team_roster( $id );
-
-		if(!empty($errors))
+		if($this->session->userdata('user_id') === $data['record']['captain_user_id'])
 		{
-			$data['errors'] = $errors;
+
+			$data['logo'] = $this->Team_model->get_logo( $id );
+
+			$data['roster'] = $this->Team_model->get_team_roster( $id );
+
+				if(!empty($errors))
+				{
+					$data['errors'] = $errors;
+				}
+
+			//var_dump($this->db->last_query());
+			$data['players'] = $this->User_model->get_players();
+
+			// Create Data for Position Dropdown
+			$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
+
+			$atts = array( 'where' => 'l.id = 1', 'single' => true );
+			$data['league'] = $this->League_model->get_records( $atts );
+
+			$this->load->site_template( 'teams_edit', $data );
+
 		}
-
-		//var_dump($this->db->last_query());
-		$data['players'] = $this->User_model->get_players();
-
-		// Create Data for Position Dropdown
-		$data['positions'] = $this->Team_model->dropdown( 'positions', 'id', 'name' );
-
-		$atts = array( 'where' => 'l.id = 1', 'single' => true );
-		$data['league'] = $this->League_model->get_records( $atts );
-
-		$this->load->site_template( 'teams_edit', $data );
+		else 
+		{
+			redirect("login");
+		}
 	}
 
 

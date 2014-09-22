@@ -131,6 +131,10 @@
 
 								</div>
 
+								<?php echo form_hidden('home_start', $record['team_home_id']); ?>
+
+								<?php echo form_hidden('away_start', $record['team_away_id']); ?>
+
 
 								<button type="submit" class="btn btn-primary">Edit Game</button>
 

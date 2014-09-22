@@ -94,7 +94,8 @@ class Team_model extends MY_Model
 				'team_logo' =>  empty( $logo ) ? NULL : $logo,
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description'],
-				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info']
+				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info'],
+				'active' => empty( $post['active'] ) ? NULL : $post['active'],
 			);
 
 			// Update Record in Database

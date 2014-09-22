@@ -110,19 +110,45 @@ class Post_model extends MY_Model
 
 						$image = $this->db->insert_id();
 
-						$config2['image_library'] = 'GD2';
-						$config2['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
-						$config2['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
-						$config2['maintain_ratio'] = TRUE;
-						$config2['width'] = 800;
-						$config2['height'] = 450;
-						$config2['create_thumb'] = false;
+						$this->load->library('image_lib');
 
-						$this->load->library('image_lib', $config2);
-
-						if ( ! $this->image_lib->fit())
+						for( $i = 2; $i < 4; $i++ )
 						{
-						    echo $this->image_lib->display_errors();
+							if($i==2) 
+							{
+								$config['image_library'] = 'GD2';
+								$config['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+								$config['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
+								$config['maintain_ratio'] = TRUE;
+								$config['width'] = 800;
+								$config['height'] = 350;
+								$config['create_thumb'] = false;
+
+								$this->image_lib->initialize($config);  
+
+								if ( ! $this->image_lib->fit())
+								{
+								    echo $this->image_lib->display_errors();
+								}
+							}
+							elseif($i==3)
+							{
+								$config['image_library'] = 'GD2';
+								$config['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+								$config['new_image'] = 'uploads/'."slider-small-".$imagefile['upload_data']['file_name'];
+								$config['maintain_ratio'] = TRUE;
+								$config['width'] = 800;
+								$config['height'] = 450;
+								$config['create_thumb'] = false;
+								 $this->image_lib->clear();
+
+								 $this->image_lib->initialize($config);  
+
+								if ( ! $this->image_lib->fit())
+								{
+								    echo $this->image_lib->display_errors();
+								}
+							}
 						}
 
 					}		
@@ -205,19 +231,45 @@ class Post_model extends MY_Model
 						$image = $this->db->insert_id();
 
 
-						$config2['image_library'] = 'GD2';
-						$config2['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
-						$config2['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
-						$config2['maintain_ratio'] = TRUE;
-						$config2['width'] = 800;
-						$config2['height'] = 350;
-						$config2['create_thumb'] = false;
+						$this->load->library('image_lib');
 
-						$this->load->library('image_lib', $config2);
-
-						if ( ! $this->image_lib->fit())
+						for( $i = 2; $i < 4; $i++ )
 						{
-						    echo $this->image_lib->display_errors();
+							if($i==2) 
+							{
+								$config['image_library'] = 'GD2';
+								$config['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+								$config['new_image'] = 'uploads/'."slider-".$imagefile['upload_data']['file_name'];
+								$config['maintain_ratio'] = TRUE;
+								$config['width'] = 800;
+								$config['height'] = 350;
+								$config['create_thumb'] = false;
+
+								$this->image_lib->initialize($config);  
+
+								if ( ! $this->image_lib->fit())
+								{
+								    echo $this->image_lib->display_errors();
+								}
+							}
+							elseif($i==3)
+							{
+								$config['image_library'] = 'GD2';
+								$config['source_image'] = 'uploads/'.$imagefile['upload_data']['file_name'];
+								$config['new_image'] = 'uploads/'."slider-small-".$imagefile['upload_data']['file_name'];
+								$config['maintain_ratio'] = TRUE;
+								$config['width'] = 800;
+								$config['height'] = 450;
+								$config['create_thumb'] = false;
+								 $this->image_lib->clear();
+
+								 $this->image_lib->initialize($config);  
+
+								if ( ! $this->image_lib->fit())
+								{
+								    echo $this->image_lib->display_errors();
+								}
+							}
 						}
 
 

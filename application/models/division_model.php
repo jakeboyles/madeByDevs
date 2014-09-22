@@ -161,6 +161,7 @@ class Division_model extends MY_Model
 	{
 		$this->db->select( 't.id, t.name' );
 		$this->db->where( 't.division_id' , $division['id'] );
+		$this->db->where( 't.active' , 1 );
 		$query = $this->db->get('teams t');
 
 		$rows2 = $query->result_array();

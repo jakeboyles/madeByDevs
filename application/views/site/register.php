@@ -50,18 +50,6 @@
 						</div>
 					</div>
 
-
-					<div class="form-group">
-						<?php echo form_label( 'Type of User', 'user_type_id', array( 'class' => 'form-label' ) ); ?>
-						<div class="radio radio-success">
-							<?php echo form_radio( array( 'name' => 'user_type_id', 'id' => '4', 'value' => 'Team Captain', 'checked' => ( set_value('user_type_id') == 'Team Captain' ) ? TRUE : FALSE ) ); ?>
-							<label for="team captain">Team Captain</label>
-							<?php echo form_radio( array( 'name' => 'user_type_id', 'id' => '2', 'value' => 'Referee', 'checked' => ( set_value('user_type_id') == 'Referee' ) ? TRUE : FALSE ) ); ?>
-							<label for="referee">Referee</label>
-						</div>
-					</div>
-
-
 					<div class="form-group">
 						<?php echo form_label( 'Email Address', 'email', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_input( array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'value' => set_value('email') ) ); ?>
@@ -77,7 +65,17 @@
 						<?php echo form_password( array('name' => 'password_confirm', 'class' => 'form-control', 'id' => 'confirm_password', 'value' => set_value('confirm_password') ) ); ?>
 					</div>
 
-					<?php echo form_hidden('user_type_id', '3'); ?>
+					<div class="form-group">
+						<?php echo form_label( 'Team Name', 'team_name', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_input( array('name' => 'team_name', 'class' => 'form-control', 'id' => 'team_name', 'value' => set_value('team_name') ) ); ?>
+					</div>
+
+					<div class="form-group">
+						<?php echo form_label( 'Division', 'division', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_dropdown( 'division', array( '' => '') + $divisions, set_value( 'divisions' ), 'class="pretty-select col-xs-12" '  ); ?>
+					</div>
+
+					<?php echo form_hidden('user_type_id', '4'); ?>
 
 
 					<button type="submit" class="btn btn-primary">Register</button>
