@@ -533,7 +533,9 @@ class Division_model extends MY_Model
 
 			$config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5048';
+			$config['max_size']	= '5000';
+			$config['max_width']  = '2000';
+			$config['max_height']  = '2000';
 
 			$this->load->library('upload', $config);
 
