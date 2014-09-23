@@ -471,7 +471,6 @@ class Game_model extends MY_Model
 				'tie'=> 0,
 				'team_id'=>empty( $post['team_away_id'] ) ? NULL : $post['team_away_id'],
 				'opponent_id'=>empty( $post['team_home_id'] ) ? NULL : $post['team_home_id'],
-				'modified_by' => empty( $this->session->userdata('user_id') ) ? NULL : $this->session->userdata('user_id'),
 			);
 
 			if($data['score_away']>$data['score_home'])
