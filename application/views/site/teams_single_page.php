@@ -4,6 +4,9 @@
 	<div class="team">
 
 		<h1 class="pull-left"><?php echo $team['name']; ?></h1>
+		<?php if(!empty($is_captain)) : ?>
+			<a class="pull-right team-edit btn btn-primary" href="<?php echo base_url('teams/edit').'/'.$team['id']; ?>">Edit</a>
+		<?php endif; ?>
 
 		<?php if(!empty($photos[0])):?>
 			<div class="main_photo">

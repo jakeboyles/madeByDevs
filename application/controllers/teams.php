@@ -100,6 +100,11 @@ class Teams extends Site_Controller
 			$atts = array( 'where' => 't.id = ' . $id, 'single' => TRUE );
 			$data['team'] = $this->Team_model->get_records( $atts );
 
+			if($this->session->userdata('user_id') === $data['team']['captain_user_id'])
+			{
+				$data['is_captain'] = TRUE;
+			}
+
 			if( $data['team'] )
 			{
 				// Get Current Season ID
