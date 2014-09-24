@@ -28,6 +28,17 @@ $(document).ready(function(){
 		$( $(this).data('target') ).data('trigger', $(this) );
 	});
 
+
+	$("body").on("click",'#deletePicture',function() {
+		$('input[name="media_id"]').val("");
+		$(this).parent().hide();
+	})
+
+		$("body").on("click",'#deleteHeadline',function() {
+		$('input[name="headline_id"]').val("");
+		$(this).parent().hide();
+	})
+
 	// Initialize Popover for Standard Content
 	//$('[data-toggle="popover"]').popover();
 

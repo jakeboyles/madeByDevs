@@ -168,6 +168,8 @@ class Games extends Admin_Controller
 			// Insert Record Into Database
 			// Create JSON For DataTable View
 			$data = $this->Game_model->insert_game_ajax( $this->input->post() );
+
+			echo $data;
 		}
 		else
 		{

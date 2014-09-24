@@ -293,6 +293,8 @@ class Game_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->insert( $data );
 
+			$Game_id = $this->db->insert_id();
+
 			// Fetch This Game From the Database
 			$game = $this->get_records( array( 'where' => 'g.id = ' . $insert_id, 'limit' => 1 ) );
 
@@ -303,16 +305,6 @@ class Game_model extends MY_Model
 				'result' => 'success',
 				'redirect' =>base_url('admin/games').'/edit/'.$game['id'],
 				'insert_id' => $insert_id,
-				'row' => array(
-					$insert_id, 
-					$game['division'], 
-					$game['home_team'] . ' (' . $score_home . ')', 
-					$game['away_team'] . ' (' . $score_away . ')',  
-					$game['location'],
-					date( 'm/d/Y g:i A', strtotime( $game['game_date_time'] ) ), 
-					'<a href="#" class="btn active btn-primary" data-ajax-url="' . base_url( 'admin/games/edit_ajax/' . $game['id'] ) . '" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="' . $game['id'] . '"><i class="fa fa-edit"></i></a>
-					<a href="#" class="btn active btn-danger" data-ajax-url="' . base_url( 'admin/games/delete/' . $game['id'] ) . '" data-toggle="modal" data-target="#delete-modal" data-label="' . $game['home_team'] . ' vs ' . $game['away_team'] . '" data-row-id="' . $game['id'] . '"><i class="fa fa-times"></i></a>'
-				)
 			);
 
 

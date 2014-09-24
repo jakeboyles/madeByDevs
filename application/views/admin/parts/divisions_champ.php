@@ -17,6 +17,7 @@
 	<div class="col-xs-4">
 		<?php if(!empty($editing[0]['picture'])): ?>
 		<img class="division-edit-picture" src="<?php echo base_url('uploads')."/".$editing[0]['picture']; ?>" />
+		<a class="imageDelete" href="#" id="deletePicture">Delete</a>
 		<?php endif; ?>
 	</div>
 </div>
@@ -36,6 +37,7 @@
 	<div class="col-xs-4">
 		<?php if(!empty($editing[0]['headline_image'])): ?>
 		<img class="division-edit-picture" src="<?php echo base_url('uploads')."/".$editing[0]['headline_image']; ?>" />
+		<a class="imageDelete" href="#" id="deleteHeadline">Delete</a>
 		<?php endif; ?>
 	</div>
 </div>
@@ -48,6 +50,9 @@
 <?php echo form_hidden( 'headline_id',$editing[0]['headline_id'] ); ?>
 
 <?php echo form_hidden( 'season_id',$season ); ?>
+
+<input id="csrf" type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
+
 
 
 <?php else: ?>
@@ -79,6 +84,9 @@
 <?php echo form_hidden( 'season_id',$season ); ?>
 
 <?php echo form_hidden( 'updating', 'false' ); ?>
+
+<input id="csrf" type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
+ 
 
 <?php endif; ?>
 

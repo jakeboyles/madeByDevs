@@ -7490,3 +7490,11 @@ input[type="checkbox"] {
   max-width:230px;
   margin-top:10px;
 }
+
+.imageDelete {
+    bottom: 0;
+    left: 15px;
+    position: absolute;
+    z-index:9999;
+}
+
