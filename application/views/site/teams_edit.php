@@ -1,7 +1,7 @@
 <div id="content" class="team_edit col-md-8 col-md-push-4">
 	<div class="row">
 		<h1 class='pull-left'>Manage Team - <?php echo $record['name']; ?></h1>
-		<a class="pull-right view_page btn btn-primary" href="/teams/page/<?php echo $record['id']?>" class='btn btn-primary'>View Page</a>
+		<a class="pull-right view_page btn btn-primary" href="<?php echo base_url("teams/page")."/".$record['id']?>" class='btn btn-primary'>View Page</a>
 	</div>
 
 	<?php if(validation_errors() && $this->input->post()): ?>
