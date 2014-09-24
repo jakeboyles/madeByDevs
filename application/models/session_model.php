@@ -330,7 +330,9 @@ class Session_model extends MY_Model
 
 	public function get_seasons( )
 	{
-		$this->db->select( 's.name,s.year_start,s.year_end, s.id' );
+		$this->db->select( 'dc.team_id,t.name as team_name, s.name,s.year_start,s.year_end, s.id' );
+		$this->db->join( 'division_champions dc', 'dc.season_id = s.id', 'left outer' );
+		$this->db->join( 'teams t', 'dc.team_id = t.id', 'left outer' );
 		$query = $this->db->get( 'seasons s' );
 
 		// If Rows Were Found, Return Them

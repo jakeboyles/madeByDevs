@@ -13,6 +13,7 @@
 						<tr>
 							<th>id</th>
 							<th>Seasons</th>
+							<th>Champion</th>
 							<th><input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"></th>
 						</tr>
 					</thead>
@@ -22,6 +23,7 @@
 							<tr id="<?php echo $season['id']; ?>">
 								<td><?php echo $season['id']; ?></td>
 								<td><?php echo $season['name']; ?></td>
+								<td><?php echo $season['team_name']; ?></td>
 								<td>
 									<a href="#" class="btn active btn-primary" data-ajax-url="<?php echo base_url('admin/divisions/add_champion/' . $record['id'].'-'.$season['id']); ?>" data-toggle="modal" data-target="#edit-modal" data-label="" data-row-id="<?php echo $season['id']; ?>"><i class="fa fa-edit"></i></a>
 								</td>

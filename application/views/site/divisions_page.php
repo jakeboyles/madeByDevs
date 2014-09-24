@@ -90,7 +90,7 @@
 <h2>Past Champions</h2>
 <div class="row">
 <?php if(!empty($historical_season['name'])): ?>
-	<div class="team-standings team-champions col-md-12 col-xs-12">
+	<div class="team-standings past-champ team-champions col-md-12 col-xs-12">
 		<div class="team-header">
 			<h3 class="team-name-primary"><?php echo $division['name']; ?> <span class="pull-right"><?php echo $historical_season['year_end']; ?> </h3>
 			<h3 class="team-name-secondary"><?php echo $historical_season['season']; ?> Champions</h3>

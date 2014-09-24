@@ -2,7 +2,7 @@
 <?php if(!empty($editing)): ?>
 
 <div class="form-group">
-	<?php echo form_label( 'Champion *', 'name', array( 'class' => 'form-label' ) ); ?>
+	<?php echo form_label( 'Champion', 'name', array( 'class' => 'form-label' ) ); ?>
 	<!-- <span class="help">e.g. </span> -->
 	<?php echo form_dropdown( 'winner_id', array( '' => '') + $teams, set_value( 'winner_id',$editing[0]['team_id'] ), 'class="pretty-select"' ); ?>
 </div>
@@ -10,7 +10,7 @@
 
 <div class="form-group row">
 	<div class="col-xs-8">
-		<?php echo form_label( 'Champion Image *', 'name', array( 'class' => 'form-label' ) ); ?>
+		<?php echo form_label( 'Champion Image', 'name', array( 'class' => 'form-label' ) ); ?>
 		<!-- <span class="help">e.g. </span> -->
 		<?php echo form_upload( array('name' => 'upload', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'upload') ) ); ?>
 	</div>
@@ -22,14 +22,14 @@
 </div>
 
 <div class="form-group">
-	<?php echo form_label( 'Headline *', 'name', array( 'class' => 'form-label' ) ); ?>
+	<?php echo form_label( 'Headline', 'name', array( 'class' => 'form-label' ) ); ?>
 	<!-- <span class="help">e.g. </span> -->
 	<?php echo form_input( array('name' => 'headline', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name',$editing[0]['headline'] ) ) ); ?>
 </div>
 
 <div class="form-group row">
 	<div class="col-xs-8">
-		<?php echo form_label( 'Headline Image *', 'name', array( 'class' => 'form-label' ) ); ?>
+		<?php echo form_label( 'Headline Image', 'name', array( 'class' => 'form-label' ) ); ?>
 		<!-- <span class="help">e.g. </span> -->
 		<?php echo form_upload( array('name' => 'headline_image', 'class' => 'form-control', 'id' => 'name', 'value' => set_value( 'name') ) ); ?>
 	</div>
