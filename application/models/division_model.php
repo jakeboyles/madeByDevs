@@ -181,8 +181,8 @@ class Division_model extends MY_Model
 			g.season_id,
 			');
 		$this->db->where( 'gt.team_id' , $team['id'] );
-		$this->db->where( 'g.score_home !=' , '0' );
-		$this->db->where( 'g.score_away !=' , '0' );
+		// $this->db->where( 'g.score_home !=' , '0' );
+		// $this->db->where( 'g.score_away !=' , '0' );
 		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 
 		if(!empty($division_id)) {
@@ -196,7 +196,6 @@ class Division_model extends MY_Model
 		$query = $this->db->get('game_teams gt');
 
 		$games = $query->result_array();
-
 		return $games;
 	}
 
