@@ -178,6 +178,8 @@
 
 		<?php endif; ?>
 
+		<a class="btn btn-primary pull-left" href="<?php echo base_url("teams/history").'/'.$team['id']; ?>">See Full Team History</a>
+
 		<!-- Team History -->
 		<!-- To Do: Display team history. Not currently in scope -->
 

@@ -164,7 +164,7 @@ class Team_model extends MY_Model
 	}
 
 	// Fetch a Team Schedule for Each Session in the Active Season
-	public function get_current_schedule( $team_id = FALSE, $active_sessions = FALSE )
+	public function get_current_schedule( $team_id = FALSE, $active_sessions = FALSE, $season_id = FALSE )
 	{
 		/*
 		if( $team_id && $active_sessions )
@@ -217,7 +217,7 @@ class Team_model extends MY_Model
 			}
 		}
 		*/
-		if ( $team_id && $active_sessions )
+		if ( $team_id )
 		{
 			$this->db->select('
 				g.id, g.game_date_time, g.score_home, g.score_away, g.session_id, g.team_home_id, g.team_away_id, 
@@ -230,7 +230,7 @@ class Team_model extends MY_Model
 			$this->db->join( 'teams thome', 'thome.id = g.team_home_id' );
 			$this->db->join( 'teams taway', 'taway.id = g.team_away_id' );
 			$this->db->where( '(team_home_id = ' . $team_id . ' OR team_away_id = ' . $team_id . ')' );
-			$this->db->where_in( 'g.session_id', $active_sessions );
+			$this->db->where('g.season_id',$season_id);
 			$this->db->order_by( 'g.game_date_time', 'ASC' );
 			$query = $this->db->get( 'games g' );
 

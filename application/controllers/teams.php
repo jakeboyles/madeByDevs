@@ -121,7 +121,7 @@ class Teams extends Site_Controller
 				if( $data['active_sessions'] )
 				{
 					// Fetch Game Schedule for All Sessions in the Current Season for this Team
-					$data['games'] = $this->Team_model->get_current_schedule( $data['team']['id'], $data['active_sessions'] );
+					$data['games'] = $this->Team_model->get_current_schedule( $data['team']['id'],'false',$data['league']['current_season_id'] );
 
 					// Fetch Roster for All Sessions in the Current Season for this Team
 					$data['roster'] = $this->Team_model->get_team_roster( $data['team']['id'] );

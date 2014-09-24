@@ -16,7 +16,7 @@ class History extends Site_Controller
 		//$data['divisions'] = $this->Division_model->get_records();
 
 		// Load View
-		$data['page_title'] = 'Divisions';
+		$data['page_title'] = 'History';
 		$data['division_leaders'] = $this->Division_model->get_division_leaders();
 		$this->load->site_template( 'history', $data );
 		

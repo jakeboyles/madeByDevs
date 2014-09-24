@@ -175,7 +175,7 @@
 	<div class="recent-news">
 		<div class="team-standings">
 			<div class="team-header">
-				<h3 class="team-name-primary">Latest News</h3>
+				<h1>Latest News</h1>
 			</div>
 		</div>
 

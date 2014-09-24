@@ -346,6 +346,7 @@ class Division_model extends MY_Model
 						$games = 0;
 						$wins = 0;
 						$ties = 0;
+						$losses = 0;
 
 						$teams_win_loss = $this->get_win_loss_by_team($team, $division['id'], $season_id);
 
@@ -373,6 +374,10 @@ class Division_model extends MY_Model
 								if($game['tie']=='1'){
 									$ties++;
 								}
+
+								if($game['loss']=='1'){
+									$losses++;
+								}
 								
 							}
 
@@ -387,8 +392,11 @@ class Division_model extends MY_Model
 						$stat['games_played'] = $games;
 						$stat['games_won'] = $wins;
 						$stat['games_tied'] = $ties;
+						$stat['games_lost'] = $losses;
 						$stat['points'] = $points;
 						$stat['points_against'] = $points_against;
+
+						echo json_encode($stat);
 
 						$teams_total[] = $stat;
 
