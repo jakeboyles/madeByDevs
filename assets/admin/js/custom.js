@@ -419,7 +419,8 @@ $(document).ready(function(){
 				// Success
 				else
 				{
-					window.location.replace(response.redirect);
+					var url = response.redirect+"?success=true";
+					window.location.replace(url);
 				}
 
 			}

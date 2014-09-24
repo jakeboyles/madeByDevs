@@ -37,6 +37,8 @@ class Games extends Admin_Controller
 			}
 		}
 
+		$this->load->library('user_agent');
+
 		// // Create Data for Divisions Dropdown
 		$data['related_divisions'] = $this->Team_model->dropdown( 'divisions', 'id', 'name' );
 
@@ -62,6 +64,12 @@ class Games extends Admin_Controller
 			redirect( 'admin/games' );
 
 		}
+
+		if($_GET['success']=='true')
+		{
+			$data['success'] = "TRUE";
+		}
+
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
@@ -169,7 +177,7 @@ class Games extends Admin_Controller
 			// Create JSON For DataTable View
 			$data = $this->Game_model->insert_game_ajax( $this->input->post() );
 
-			echo $data;
+
 		}
 		else
 		{
