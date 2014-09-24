@@ -396,8 +396,6 @@ class Division_model extends MY_Model
 						$stat['points'] = $points;
 						$stat['points_against'] = $points_against;
 
-						echo json_encode($stat);
-
 						$teams_total[] = $stat;
 
 					}
