@@ -15,9 +15,9 @@
 			<thead>
 				<tr>
 					<th>Opponent</th>
-					<th>Result</th>
-					<th>Score</th>
-					<th>Date</th>
+					<th>Wins</th>
+					<th>Losses</th>
+					<th>Ties</th>
 
 				</tr>
 				<tr>
@@ -29,20 +29,10 @@
 				<?php foreach($history as $team): 
 				?>
 					<tr>
-						<td><a href="<?php echo base_url('teams/head_to_head').'/'.$main_team['id'].'-'.$team['opponent_id'] ;?>"><?php echo $team['opponent']; ?></a></td>
-						<td>
-							<?php if($team['win']=='1'):?>
-								Won
-							<?php elseif($team['tie']=='1'): ?>
-								Tie
-							<?php elseif($team['loss']=='1'): ?>
-								Lost
-							<?php else: ?>
-								-
-							<?php endif; ?>
-						</td>
-						<td><?php echo $team['score_home'] . "-" . $team["score_away"]; ?></td>
-						<td><?php echo date('m/d/Y h:m A',strtotime($team['game_date_time'])); ?></td>
+						<td><a href="<?php echo base_url('teams/head_to_head').'/'.$main_team['id'].'-'.$team['opponent_id'] ;?>"><?php echo $team['name']; ?></a></td>
+						<td><?php echo $team['win']; ?></td>
+						<td><?php echo $team['loss']; ?></td>
+						<td><?php echo $team['tie']; ?></td>
 					</tr>
 				<?php endforeach; ?>
 				<?php endif; ?>

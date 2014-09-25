@@ -944,17 +944,71 @@ class Team_model extends MY_Model
 		$this->db->join( 'teams t', 't.id = gt.opponent_id', 'left outer' );
 		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 		$this->db->where('gt.team_id',$id);
-		// $this->db->where('g.score_home !=','0');
-		// $this->db->where('g.score_away !=','0');
 		$query = $this->db->get( 'game_teams gt' );
 
-		$fields = array();
+		$teams = array();
+		$teamsCount = array();
 
 		$rows = $query->result_array();
 
-		if( $query->num_rows() > 0 )
+		if( $rows )
 		{
-			$rows = $query->result_array();
+			
+			foreach($rows as $row) 
+			{
+				$team = array();
+
+
+				if(in_array($row['opponent_id'], $teamsCount)) 
+				{
+					if($row['win'])
+					{
+						$teams[$row['opponent_id']]['win'] = $teams[$row['opponent_id']]['win']+1;
+					}
+
+					if($row['loss'])
+					{
+						$teams[$row['opponent_id']]['loss'] = $teams[$row['opponent_id']]['loss']+1;
+					}
+
+					if($row['tie'])
+					{
+						$teams[$row['opponent_id']]['tie'] = $teams[$row['opponent_id']]['tie']+1;
+					}
+				}
+				else 
+				{
+					$teamsCount[] = $row['opponent_id'];
+					$teams[$row['opponent_id']]['name'] = $row['opponent'];
+					$teams[$row['opponent_id']]['opponent_id'] = $row['opponent_id'];
+					if($row['win'])
+					{
+						$teams[$row['opponent_id']]['win'] =1;
+						$teams[$row['opponent_id']]['tie'] = 0;
+						$teams[$row['opponent_id']]['loss'] = 0;
+					}
+
+					if($row['loss'])
+					{
+						$teams[$row['opponent_id']]['loss'] = 1;
+						$teams[$row['opponent_id']]['win'] = 0;
+						$teams[$row['opponent_id']]['tie'] = 0;
+					}
+
+					if($row['tie'])
+					{
+						$teams[$row['opponent_id']]['tie'] = 1;
+						$teams[$row['opponent_id']]['win'] = 0;
+						$teams[$row['opponent_id']]['loss'] = 0;
+					}
+				}
+
+			}
+
+			//die(json_encode($teamsCount));
+
+			return $teams;
+
 		}
 
 		return $rows;;
