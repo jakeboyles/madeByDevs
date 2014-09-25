@@ -38,6 +38,7 @@
 				if($team['games_played']!='0') 
 				{
 					$epg = ($team['games_won']*3+$team['games_tied'])/$team['games_played'];
+					$points= ($team['games_won']*3)+($team['games_tied']*1);
 					$epg = number_format((float)$epg, 2, '.', '');
 				} 
 				else 
@@ -56,7 +57,7 @@
 							<td>0%</td>
 						<?php endif; ?>
 						<td><?php echo $epg; ?></td>
-						<td><?php echo $team['games_played']*$epg;?></td>
+						<td><?php echo $points; ?></td>
 					</tr>
 				<?php endforeach; ?>
 				
