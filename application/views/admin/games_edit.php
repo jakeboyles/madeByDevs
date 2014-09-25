@@ -32,10 +32,9 @@
 									</ul>
 								</div>
 								<?php endif; ?>
-
-								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/games/add') ): ?>
+								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/games/edit/').'/'.$record['id'] ): ?>
 								<div class="alert alert-success">
-									Record successfully added.
+									Record successfully updated.
 								</div>
 								<?php endif; ?>
 								<!-- END Display Error Messages -->
