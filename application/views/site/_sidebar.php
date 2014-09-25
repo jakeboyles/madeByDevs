@@ -2,7 +2,7 @@
 $ci =&get_instance();
 $ci->load->model( 'Post_model' );
 $ci->load->model( 'League_model' );
-$latest_posts = $ci->Post_model->fetch_posts('3');
+$latest_posts = $ci->Post_model->fetch_posts('3','0','post');
 
 $weather = $ci->League_model->get_weather('45056');
 
