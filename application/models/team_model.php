@@ -1004,7 +1004,7 @@ class Team_model extends MY_Model
 
 			}
 
-			//die(json_encode($teamsCount));
+			die(json_encode($teams));
 
 			return $teams;
 
