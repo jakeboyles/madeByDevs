@@ -65,12 +65,6 @@ class Games extends Admin_Controller
 
 		}
 
-		if($_GET['success']=='true')
-		{
-			$data['success'] = "TRUE";
-		}
-
-
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
 
