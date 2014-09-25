@@ -164,7 +164,7 @@ class Divisions extends Admin_Controller
 
 		$data['related_sessions'] = $this->Session_model->get_related_sessions($division_id);
 
-		$data['all_sessions'] = $this->Session_model->get_related_sessions_dropdown($division_id);
+		$data['all_sessions'] = $this->Session_model->get_related_sessions($division_id);
 
 		$data['teams'] = $this->Team_model->get_team_by_division($division_id);
 
