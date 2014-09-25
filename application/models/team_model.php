@@ -986,17 +986,21 @@ class Team_model extends MY_Model
 						$teams[$row['opponent_id']]['tie'] = 0;
 						$teams[$row['opponent_id']]['loss'] = 0;
 					}
-
-					if($row['loss']==1)
+					elseif($row['loss']==1)
 					{
 						$teams[$row['opponent_id']]['loss'] = 1;
 						$teams[$row['opponent_id']]['win'] = 0;
 						$teams[$row['opponent_id']]['tie'] = 0;
 					}
-
-					if($row['tie']==1)
+					elseif($row['tie']==1)
 					{
 						$teams[$row['opponent_id']]['tie'] = 1;
+						$teams[$row['opponent_id']]['win'] = 0;
+						$teams[$row['opponent_id']]['loss'] = 0;
+					}
+					else
+					{
+						$teams[$row['opponent_id']]['tie'] = 0;
 						$teams[$row['opponent_id']]['win'] = 0;
 						$teams[$row['opponent_id']]['loss'] = 0;
 					}
