@@ -77,16 +77,17 @@
 						?>
 						<li>
 							<div class="score-head">
-								<div class="match col-xs-12"><a href="<?php echo base_url('teams').'/page/'.$game['team_home_id']; ?>"><?php echo $game['home_team'];?></a> vs. <a href="<?php echo base_url('teams').'/page/'.$game['team_away_id']; ?>"><?php echo $game['away_team'];?></a></div>
+								<?php 
+								$date = Date('m/d', strtotime($game['game_date_time']))
+								?>
+								<div class="match col-xs-7"><a href="<?php echo base_url('teams').'/page/'.$game['team_home_id']; ?>"><?php echo $game['home_team'];?></a> vs. <a href="<?php echo base_url('teams').'/page/'.$game['team_away_id']; ?>"><?php echo $game['away_team'];?></a></div>
+								<div class="col-xs-5 text-right date-location"><span class="date"><?php echo $date;?></span></div>
 								<div class="division col-xs-12 text-left"><a href="<?php echo base_url('divisions').'/page/'.$game['division_id']; ?>"><?php echo $game['division'];?></a></div>
 							</div>
 							<div class="score-body">
-								<?php 
-								$date = Date('m/d/y', strtotime($game['game_date_time']))
-								?>
 								<div class="row">
-								<div class="col-xs-6 date-location"><span class="date"><?php echo $date;?></span><br/><span class="location"><?php echo $game['location'];?></span></div>
 								<div class="col-xs-6 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
+								<span class="location"><?php echo $game['location'];?></span>
 								</div>
 							</div>
 						</li>

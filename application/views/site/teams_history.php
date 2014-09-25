@@ -18,6 +18,8 @@
 					<th>Wins</th>
 					<th>Losses</th>
 					<th>Ties</th>
+					<th>GF</th>
+					<th>GA</th>
 
 				</tr>
 				<tr>
@@ -59,6 +61,32 @@
 							if(!empty($team['tie']))
 							{
 							echo $team['tie']; 
+							}
+							else
+							{
+								echo '0';
+							}
+							?>
+						</td>
+
+						<td>
+							<?php 
+							if(!empty($team['goals_for']))
+							{
+							echo $team['goals_for']; 
+							}
+							else
+							{
+								echo '0';
+							}
+							?>
+						</td>
+
+						<td>
+							<?php 
+							if(!empty($team['goals_against']))
+							{
+							echo $team['goals_against']; 
 							}
 							else
 							{

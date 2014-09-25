@@ -951,6 +951,8 @@ class Team_model extends MY_Model
 			t.name as opponent,
 			g.score_home,
 			g.score_away,
+			g.team_home_id,
+			g.team_away_id,
 			gt.win,
 			gt.opponent_id,
 			gt.loss,
@@ -990,12 +992,39 @@ class Team_model extends MY_Model
 					{
 						$teams[$row['opponent_id']]['tie'] = $teams[$row['opponent_id']]['tie']+1;
 					}
+
+					if($row['opponent_id']==$row['team_home_id'])
+					{
+						$teams[$row['opponent_id']]['goals_against'] = $teams[$row['opponent_id']]['goals_against']+$row['score_home'];
+						$teams[$row['opponent_id']]['goals_for'] = $teams[$row['opponent_id']]['goals_for']+$row['score_away'];
+					}
+					else 
+					{
+						$teams[$row['opponent_id']]['goals_against'] = $teams[$row['opponent_id']]['goals_against']+$row['score_away'];
+						$teams[$row['opponent_id']]['goals_for'] = $teams[$row['opponent_id']]['goals_for']+$row['score_home'];
+					}
+
+
 				}
 				else 
 				{
 					$teamsCount[] = $row['opponent_id'];
 					$teams[$row['opponent_id']]['name'] = $row['opponent'];
 					$teams[$row['opponent_id']]['opponent_id'] = $row['opponent_id'];
+
+					$teams[$row['opponent_id']]['goals_for'] = $row['opponent_id'];
+					$teams[$row['opponent_id']]['goals_against'] = $row['opponent_id'];
+
+					if($row['opponent_id']==$row['team_home_id'])
+					{
+						$teams[$row['opponent_id']]['goals_against'] = $row['score_home'];
+						$teams[$row['opponent_id']]['goals_for'] = $row['score_away'];
+					}
+					else 
+					{
+						$teams[$row['opponent_id']]['goals_against'] = $row['score_away'];
+						$teams[$row['opponent_id']]['goals_for'] = $row['score_home'];
+					}
 
 					if($row['win']==1)
 					{

@@ -381,7 +381,6 @@ class Post_model extends MY_Model
 
 
 	public function fetch_posts($limit = FALSE, $start = FALSE, $post_type = FALSE) {
-		var_dump($post_type);
 		$this->db->limit($limit, $start);
         $this->db->select( 'p.id, p.post_type,pc.category_id,m.filename,c.name as category, p.author_id, p.title, p.content, p.slug, p.created_at, p.modified_at, u.first_name as author_first_name, u.last_name as author_last_name' );
 		$this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
@@ -403,8 +402,6 @@ class Post_model extends MY_Model
 		// Run Query
 		$query = $this->db->get( 'posts p' );
 
-		var_dump($this->db->last_query());
-		exit();
 
  
 		// If Rows Were Found, Return Them
