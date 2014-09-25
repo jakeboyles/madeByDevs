@@ -38,7 +38,7 @@
 							}
 							else
 							{
-								echo '0'
+							echo '0';
 							}
 							?>
 						</td>
@@ -50,7 +50,7 @@
 							}
 							else
 							{
-								echo '0'
+								echo '0';
 							}
 							?>
 						</td>
@@ -62,7 +62,7 @@
 							}
 							else
 							{
-								echo '0'
+								echo '0';
 							}
 							?>
 						</td>
