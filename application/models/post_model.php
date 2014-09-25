@@ -394,9 +394,10 @@ class Post_model extends MY_Model
 		$this->db->where('category_id', NULL);
 		$this->db->or_where_not_in('category_id', $names);
 
-
-			$this->db->where( 'post_type', 'post');
-
+		if( !empty($post_type) )
+		{
+			$this->db->where( 'post_type', $post_type );
+		}
 
 		// Run Query
 		$query = $this->db->get( 'posts p' );

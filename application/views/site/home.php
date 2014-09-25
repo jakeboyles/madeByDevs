@@ -3,6 +3,7 @@
 	<!-- START Header cycler -->
 	<?php if(!empty($sliders)): ?>
 	<div id="carousel-head-show" class="carousel slide hidden-xs" data-ride="carousel">
+	<?php if(count($sliders)>1): ?>
 	  <ol class="carousel-indicators hidden-xs">
 	  	<?php $i = 0; ?>
 	  	<?php foreach($sliders as $slider): ?>
@@ -15,6 +16,7 @@
 			$i++; ?>
 		<?php endforeach; ?>
 	  </ol>
+	  </div>
 	  <div class="carousel-inner">
 
 	  	<?php 
