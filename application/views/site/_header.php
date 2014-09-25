@@ -86,7 +86,7 @@
 							</div>
 							<div class="score-body">
 								<div class="row">
-								<div class="col-xs-6 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
+								<div class="col-xs-5 final-score"><?php echo $game['score_home']?>-<?php echo $game['score_away']?> Final</div>
 								<span class="location"><?php echo $game['location'];?></span>
 								</div>
 							</div>
