@@ -115,9 +115,9 @@ $('.jcarousel')
 			height = element.height(),
             width = element.innerWidth();
         if (width > 1000) {
-            width = width / 4;
+            width = width / 5;
         } else if (width > 768) {
-            width = width / 3;
+            width = width / 5;
         } else if (width > 450) {
             width = width / 2;
         }

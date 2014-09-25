@@ -524,8 +524,8 @@ class Game_model extends MY_Model
 			g.id, g.session_id, g.division_id, g.location_id, g.game_date_time, g.team_home_id, g.team_away_id, g.score_home, g.score_away, g.created_at, g.modified_at,
 			l.name as location,
 			d.name as division,
-			t.name as home_team,
-			t2.name as away_team
+			t.abbreviation as home_team,
+			t2.abbreviation as away_team
 		' );
 		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
 		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
