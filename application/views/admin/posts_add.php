@@ -120,6 +120,8 @@
 
 					<div class="grid-body">
 						<div class="form-group">
+							<a href="#" data-toggle="popover" data-placement="right" data-content="Note that these are the active divisions for this session."><i class="fa fa-question-circle"></i></a>
+							<span class="help">Images crop to 800x350px, and crop from the middle of the image.</span>
 							<?php echo form_upload( array('name' => 'featured_image', 'class' => 'form-control', 'id' => 'featured_image', 'value' => set_value( 'featured_image' ) ) ); ?>
 						</div>
 					</div>

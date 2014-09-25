@@ -49,11 +49,14 @@
 								<?php endif; ?>
 								<!-- END New Record Added Message -->
 								<?php 
+								$approved[0] = "Not Approved";
+								$approved[1] = "Approved";
+
 								$active[0] = "Inactive";
 								$active[1] = "Active";
 								?>
 								<!-- START Form -->
-								<?php echo form_open_multipart( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-form') ); ?>
+								<?php echo form_open_multipart( 'admin/teams/edit/' . $record['id'], array( 'id' => 'edit-team-forms') ); ?>
 
 									<div class="form-group">
 										<?php echo form_label( 'Team Name*', 'name', array( 'class' => 'form-label' ) ); ?>
@@ -71,16 +74,29 @@
 										<span class="help">e.g. This allows a non admin user help manage this team.</span>
 										<?php echo form_dropdown( 'captain_user_id', array( '' => '') + $captains, set_value( 'captain_user_id', $record['captain_user_id'] ), 'class="pretty-select"' ); ?>
 									</div>
+									<div class="row">
+										<div class="form-group col-xs-6">
+											<?php echo form_label( 'Team Approved', 'approved', array( 'class' => 'form-label' ) ); ?>
+											<span class="help">e.g. Is this team currently approved.</span>
+											<?php echo form_dropdown( 'approved', array( '' => '') + $approved, set_value( 'approved', $record['approved'] ), 'class="pretty-select"' ); ?>
+										</div>
 
-									<div class="form-group">
-										<?php echo form_label( 'Team Active', 'active', array( 'class' => 'form-label' ) ); ?>
-										<span class="help">e.g. Is this team currently active.</span>
-										<?php echo form_dropdown( 'active', array( '' => '') + $active, set_value( 'active', $record['active'] ), 'class="pretty-select"' ); ?>
+										<div class="form-group col-xs-6">
+											<?php echo form_label( 'Team Active', 'active', array( 'class' => 'form-label' ) ); ?>
+											<span class="help">e.g. Is this team currently approved.</span>
+											<?php echo form_dropdown( 'active', array( '' => '') + $active, set_value( 'active', $record['active'] ), 'class="pretty-select"' ); ?>
+										</div>
 									</div>
 
 									<div class="form-group">
 										<?php echo form_label( 'Team Description', 'description', array( 'class' => 'form-label' ) ); ?>
 										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
+									</div>
+
+									<div class="form-group">
+										<?php echo form_label( 'Team Abbreviation *', 'abberviation', array( 'class' => 'form-label' ) ); ?>
+										<!-- <span class="help">e.g. </span> -->
+										<?php echo form_input( array('name' => 'abbreviation', 'class' => 'form-control', 'id' => 'abberviation', 'value' => set_value( 'abbreviation', $record['abbreviation'] ) ) ); ?>
 									</div>
 
 									<div class="form-group">

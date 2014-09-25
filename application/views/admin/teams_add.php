@@ -62,6 +62,13 @@
 									</div>
 
 									<div class="form-group">
+										<?php echo form_label( 'Team Abbreviation *', 'abbreviation', array( 'class' => 'form-label' ) ); ?>
+										<!-- <span class="help">e.g. </span> -->
+										<?php echo form_input( array('name' => 'abbreviation', 'class' => 'form-control', 'id' => 'abbreviation', 'value' => set_value( 'abbreviation' ) ) ); ?>
+									</div>
+
+
+									<div class="form-group">
 										<?php echo form_label( 'Additional Information', 'additional_information', array( 'class' => 'form-label' ) ); ?>
 										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_textarea( array('name' => 'additional_info', 'class' => 'form-control', 'id' => 'additional_information', 'value' => set_value( 'additional_information' ) ) ); ?>

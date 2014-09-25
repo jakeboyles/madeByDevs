@@ -161,7 +161,7 @@ class Division_model extends MY_Model
 	{
 		$this->db->select( 't.id, t.name' );
 		$this->db->where( 't.division_id' , $division['id'] );
-		$this->db->where( 't.active' , 1 );
+		$this->db->where( 't.approved' , 1 );
 		$query = $this->db->get('teams t');
 
 		$rows2 = $query->result_array();
@@ -692,6 +692,7 @@ class Division_model extends MY_Model
 		$this->db->join( 'seasons s', 's.id = dc.season_id', 'left outer' );
 		$this->db->where('dc.season_id',$season_id);
 		$this->db->where('dc.division_id',$division_id);
+		$this->db->where('t.approved',1);
 
 		$atts['single'] = 'true';
 

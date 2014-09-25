@@ -48,6 +48,8 @@
 		<div class="description">
 			<?php echo nl2br( $team['description'] ); ?>
 		</div>
+		<?php else: ?>
+		<P>It appears this team has not yet filled out a description</p>
 		<?php endif; ?>
 
 		<!-- Team Schedule -->
@@ -124,7 +126,10 @@
 				</ul>
 			</div>
 
+		<?php else: ?>
+			<P>This team does not have any games scheduled for this season</p>
 		<?php endif; ?>
+
 
 		<!-- Team Roster -->
 		<?php if( !empty( $roster ) ): ?>
@@ -176,6 +181,8 @@
 				</ul>
 			</div>
 
+		<?php else: ?>
+			<P>This team has not yet added any players to their team</p>
 		<?php endif; ?>
 
 		<a class="btn btn-primary" href="<?php echo base_url("teams/history").'/'.$team['id']; ?>">See Full Team History</a>

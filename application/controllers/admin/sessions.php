@@ -120,7 +120,7 @@ class Sessions extends Admin_Controller
 	{
 		// Return a List of Usable Teams
 		$this->load->model( 'Team_model' );
-		$data['teams'] = $this->Team_model->get_teams_by_division( $division_id );
+				$data['teams'] = $this->Team_model->get_team_by_division( $division_id, TRUE );
 
 		// Load Teams Form View
 		$this->load->view( 'admin/parts/team_dropdowns', $data );

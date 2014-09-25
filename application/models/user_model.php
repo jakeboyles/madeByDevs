@@ -85,6 +85,8 @@ class User_model extends MY_Model
 				'name' => empty($post['team_name']) ? NULL : $post['team_name'],
 				'division_id' => empty($post['division']) ? NULL : $post['division'],
 				'captain_user_id' => $this->db->insert_id(),
+				'active' => 0,
+				'approved' => 0,
 			);
 
 			$insert_id = $this->db->insert('teams', $team_data );

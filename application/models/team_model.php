@@ -13,6 +13,8 @@ class Team_model extends MY_Model
 		$this->db->select('
 			t.id, t.captain_user_id, t.name,t.additional_info, t.description, t.team_logo, t.status, t.created_at, t.modified_at, u.first_name, u.last_name, 
 			u.id as user_id, u.email, 
+			t.active,
+			t.approved,
 			d.id as division_id, d.name as division
 		');
 		$this->db->join( 'users u', 'u.id = t.captain_user_id', 'left outer' );
@@ -26,7 +28,7 @@ class Team_model extends MY_Model
 
 		if( !empty( $atts['active'] ) )
 		{
-			$this->db->where( 'active', 1 );
+			$this->db->where( 'approved', 1 );
 		}
 
 		// Run Query
@@ -63,7 +65,8 @@ class Team_model extends MY_Model
 				'division_id' => empty( $post['division_id'] ) ? NULL : $post['division_id'],
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description'],
-				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info']
+				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info'],
+				'abbreviation' => empty( $post['abbreviation'] ) ? NULL : $post['abbreviation'],
 			);
 
 			// Insert to Database and Store Insert ID
@@ -100,7 +103,9 @@ class Team_model extends MY_Model
 				'captain_user_id' => empty( $post['captain_user_id'] ) ? NULL : $post['captain_user_id'],
 				'description' => empty( $post['description'] ) ? NULL : $post['description'],
 				'additional_info' => empty( $post['additional_info'] ) ? NULL : $post['additional_info'],
+				'approved' => empty( $post['approved'] ) ? 0 : $post['approved'],
 				'active' => empty( $post['active'] ) ? NULL : $post['active'],
+				'abbreviation' => empty( $post['abbreviation'] ) ? NULL : $post['abbreviation'],
 			);
 
 			// Update Record in Database
@@ -692,6 +697,8 @@ class Team_model extends MY_Model
 		$this->db->where( 'g.division_id' , $division_id );
 		$this->db->join( 'teams h', 'h.id = g.team_home_id', 'left outer' );
 		$this->db->join( 'teams a', 'a.id = g.team_away_id', 'left outer' );
+		$this->db->where( 'h.approved' , '1' );
+		$this->db->where( 'a.approved' , '1' );
 
 		$query = $this->db->get( 'games g' );
 		$rows = $query->result_array();
@@ -727,10 +734,15 @@ class Team_model extends MY_Model
 
 
 		// Get Divisions in session
-	public function get_team_by_division( $id = FALSE )
+	public function get_team_by_division( $id = FALSE, $active = FALSE )
 	{
 		$this->db->select( 't.name,t.id' );
 		$this->db->where( 'division_id' , $id );
+		$this->db->where( 'approved' , 1 );
+		if($active!==FALSE)
+		{
+			$this->db->where( 'active' , 1 );
+		}
 		$query= $this->db->get('teams t');
 
 		$teams = array();
@@ -913,6 +925,10 @@ class Team_model extends MY_Model
 		$this->db->join( 'teams t', 't.id = g.team_home_id', 'left outer' );
 		$this->db->join( 'teams t2', 't2.id = g.team_away_id', 'left outer' );
 		$this->db->where('g.id',$id);
+		$this->db->where('t.approved',1);
+		$this->db->where('t2.approved',1);
+		$this->db->where('t.active','1');
+		$this->db->where('t2.active','1');
 		$query = $this->db->get( 'games g' );
 
 		$fields = array();
@@ -944,6 +960,7 @@ class Team_model extends MY_Model
 		$this->db->join( 'teams t', 't.id = gt.opponent_id', 'left outer' );
 		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 		$this->db->where('gt.team_id',$id);
+		$this->db->where('t.approved',1);
 		$query = $this->db->get( 'game_teams gt' );
 
 		$teams = array();
@@ -1031,6 +1048,7 @@ class Team_model extends MY_Model
 		$this->db->join( 'games g', 'g.id = gt.game_id', 'left outer' );
 		$this->db->where('gt.team_id',$team_id);
 		$this->db->where('gt.opponent_id',$opponent_id);
+		$this->db->where('t.approved',1);
 		$query = $this->db->get( 'game_teams gt' );
 
 		$fields = array();

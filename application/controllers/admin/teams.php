@@ -235,7 +235,7 @@ class Teams extends Admin_Controller
 		$this->form_validation->set_rules('division_id', 'Division', 'required');
 		$this->form_validation->set_rules('captain_user_id', 'Team Captain', '');
 		$this->form_validation->set_rules('description', 'Team Description', '');
-		
+		$this->form_validation->set_rules('abbreviation', 'Abbreviation', 'required');
 		// Return True if Validation Passes
 		if ($this->form_validation->run())
 		{
@@ -295,7 +295,7 @@ class Teams extends Admin_Controller
 
 	public function get_teams_by_game( $id = FALSE )
 	{
-			$data['teams'] = $this->Team_model->get_by_game( $id );
+			$data['teams'] = $this->Team_model->get_by_game( $id, 'TRUE' );
 			$data['teams'] = $data['teams'][0];
 			$data['home_team'] = $this->Team_model->get_team_roster($data['teams']['home_team_id'], $id);
 			$data['away_team'] = $this->Team_model->get_team_roster($data['teams']['away_team_id'], $id);

@@ -65,6 +65,21 @@
 
 		<?php endif; ?>
 
+		<!-- Location Fields -->
+		<?php if( !empty( $fields ) ): ?>
+		<div class="fields">
+			<h2>Fields</h2>
+			<ul class="list-grey-alternating">
+				<?php foreach( $fields as $field ): ?>
+				<li>
+					<a href="<?php echo base_url('directions/field/'. $field['id']); ?>"><?php echo $field['name']; ?> <i class="fa fa-chevron-right"></i></a>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php endif; ?>
+		
+
 		<!-- Location Description -->
 		<?php if( !empty( $location['description'] ) ): ?>
 		<div class="description">
@@ -98,19 +113,7 @@
 		</div>
 		<?php endif; ?>
 
-		<!-- Location Fields -->
-		<?php if( !empty( $fields ) ): ?>
-		<div class="fields">
-			<h2>Fields</h2>
-			<ul class="list-grey-alternating">
-				<?php foreach( $fields as $field ): ?>
-				<li>
-					<a href="<?php echo base_url('directions/field/'. $field['id']); ?>"><?php echo $field['name']; ?> <i class="fa fa-chevron-right"></i></a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-		<?php endif; ?>
+	
 
 	</div>
 	<?php else: ?>

@@ -93,7 +93,7 @@ class Games extends Admin_Controller
 		$data['sessions'] = $this->Session_model->dropdown( 'sessions', 'id', 'name' );
 
 		// Get only that teams that fall under a division
-		$data['teams'] = $this->Team_model->get_team_by_division( $data['record']['division_id'] );
+		$data['teams'] = $this->Team_model->get_team_by_division( $data['record']['division_id'], TRUE );
 
 		// Load Edit Record Form
 		$this->load->admin_template( 'games_edit', $data );
@@ -231,7 +231,7 @@ class Games extends Admin_Controller
 
 			// Return a List of Usable Teams
 			$this->load->model( 'Team_model' );
-			$data['teams'] = $this->Team_model->get_teams_by_division( $division_id );
+			$data['teams'] = $this->Team_model->get_teams_by_division( $division_id, TRUE );
 
 			// Get a list of divisions this Session has a relationship with
 			$this->load->model( 'Session_model' );
