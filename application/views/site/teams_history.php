@@ -30,9 +30,39 @@
 				?>
 					<tr>
 						<td><a href="<?php echo base_url('teams/head_to_head').'/'.$main_team['id'].'-'.$team['opponent_id'] ;?>"><?php echo $team['name']; ?></a></td>
-						<td><?php echo $team['win']; ?></td>
-						<td><?php echo $team['loss']; ?></td>
-						<td><?php echo $team['tie']; ?></td>
+						<td>
+							<?php 
+							if(!empty($team['win'])){
+							echo $team['win']; 
+							}
+							else
+							{
+								echo '0'
+							}
+							?>
+						</td>
+						<td>
+							<?php 
+							if(!empty($team['loss'])){
+							echo $team['loss']; 
+							}
+							else
+							{
+								echo '0'
+							}
+							?>
+						</td>
+						<td>
+							<?php 
+							if(!empty($team['tie'])){
+							echo $team['tie']; 
+							}
+							else
+							{
+								echo '0'
+							}
+							?>
+						</td>
 					</tr>
 				<?php endforeach; ?>
 				<?php endif; ?>
