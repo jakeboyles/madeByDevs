@@ -32,7 +32,8 @@
 						<td><a href="<?php echo base_url('teams/head_to_head').'/'.$main_team['id'].'-'.$team['opponent_id'] ;?>"><?php echo $team['name']; ?></a></td>
 						<td>
 							<?php 
-							if(!empty($team['win'])){
+							if(!empty($team['win']))
+							{
 							echo $team['win']; 
 							}
 							else
@@ -43,7 +44,8 @@
 						</td>
 						<td>
 							<?php 
-							if(!empty($team['loss'])){
+							if(!empty($team['loss']))
+							{
 							echo $team['loss']; 
 							}
 							else
@@ -54,7 +56,8 @@
 						</td>
 						<td>
 							<?php 
-							if(!empty($team['tie'])){
+							if(!empty($team['tie']))
+							{
 							echo $team['tie']; 
 							}
 							else
