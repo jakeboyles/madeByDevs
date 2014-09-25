@@ -127,6 +127,7 @@
 			</div>
 
 		<?php else: ?>
+			<h3><?php echo $league['current_season_name']; ?> Schedule</h3>
 			<P>This team does not have any games scheduled for this season</p>
 		<?php endif; ?>
 
@@ -182,6 +183,7 @@
 			</div>
 
 		<?php else: ?>
+			<h3><?php echo $league['current_season_name']; ?> Roster</h3>
 			<P>This team has not yet added any players to their team</p>
 		<?php endif; ?>
 
