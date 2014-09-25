@@ -956,22 +956,20 @@ class Team_model extends MY_Model
 			
 			foreach($rows as $row) 
 			{
-				$team = array();
-
 
 				if(in_array($row['opponent_id'], $teamsCount)) 
 				{
-					if($row['win'])
+					if($row['win']==1)
 					{
 						$teams[$row['opponent_id']]['win'] = $teams[$row['opponent_id']]['win']+1;
 					}
 
-					if($row['loss'])
+					if($row['loss']==1)
 					{
 						$teams[$row['opponent_id']]['loss'] = $teams[$row['opponent_id']]['loss']+1;
 					}
 
-					if($row['tie'])
+					if($row['tie']==1)
 					{
 						$teams[$row['opponent_id']]['tie'] = $teams[$row['opponent_id']]['tie']+1;
 					}
@@ -981,21 +979,22 @@ class Team_model extends MY_Model
 					$teamsCount[] = $row['opponent_id'];
 					$teams[$row['opponent_id']]['name'] = $row['opponent'];
 					$teams[$row['opponent_id']]['opponent_id'] = $row['opponent_id'];
-					if($row['win'])
+
+					if($row['win']==1)
 					{
 						$teams[$row['opponent_id']]['win'] =1;
 						$teams[$row['opponent_id']]['tie'] = 0;
 						$teams[$row['opponent_id']]['loss'] = 0;
 					}
 
-					if($row['loss'])
+					if($row['loss']==1)
 					{
 						$teams[$row['opponent_id']]['loss'] = 1;
 						$teams[$row['opponent_id']]['win'] = 0;
 						$teams[$row['opponent_id']]['tie'] = 0;
 					}
 
-					if($row['tie'])
+					if($row['tie']==1)
 					{
 						$teams[$row['opponent_id']]['tie'] = 1;
 						$teams[$row['opponent_id']]['win'] = 0;
