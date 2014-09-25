@@ -16,7 +16,7 @@
 			$i++; ?>
 		<?php endforeach; ?>
 	  </ol>
-	  </div>
+	<?php endif; ?>
 	  <div class="carousel-inner">
 
 	  	<?php 
