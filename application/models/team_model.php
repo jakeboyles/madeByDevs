@@ -982,7 +982,7 @@ class Team_model extends MY_Model
 
 					if($row['win']==1)
 					{
-						$teams[$row['opponent_id']]['win'] =1;
+						$teams[$row['opponent_id']]['win'] = 1;
 						$teams[$row['opponent_id']]['tie'] = 0;
 						$teams[$row['opponent_id']]['loss'] = 0;
 					}
@@ -1003,8 +1003,6 @@ class Team_model extends MY_Model
 				}
 
 			}
-
-			die(json_encode($teams));
 
 			return $teams;
 
