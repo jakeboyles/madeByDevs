@@ -149,11 +149,13 @@ class Divisions extends Admin_Controller
 
 		$this->load->helper('url');
 
+		if( $this->input->post() && $division_id )
+		{
+			// Update selected sessions to this division
+			$data['divisions'] = $this->Session_model->update_sessions( $division_id );
+		}
 		// Return a List of Usable Teams
 		$this->load->model( 'Session_model' );
-
-		// Update selected sessions to this division
-		$data['divisions'] = $this->Session_model->update_sessions( $division_id );
 
 		$this->load->library('user_agent');
 

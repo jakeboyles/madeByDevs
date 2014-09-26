@@ -377,6 +377,7 @@ class Session_model extends MY_Model
 
 			$allData = array();
 
+
 			// Add Current Session/Division Relationships
 			if( !empty( $this->input->post('divisions') ) )
 			{	
@@ -387,11 +388,9 @@ class Session_model extends MY_Model
 						'division_id' => $id,
 					);
 
-					array_push($allData,$data);
-				}
+					$this->insert( $data, FALSE, 'session_divisions' );
 
-				// Insert all the records with only one call to the db
-				$this->db->insert_batch('session_divisions',$allData); 
+				}
 
 			}
 

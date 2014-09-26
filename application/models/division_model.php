@@ -130,7 +130,7 @@ class Division_model extends MY_Model
 	// Get Divisions in session
 	public function get_divisions( $id = FALSE )
 	{
-
+		die($id);
 		$this->db->select( 'sd.division_id,d.name' );
 		$this->db->join( 'divisions d', 'd.id = sd.division_id', 'left outer' );
 		$this->db->where( 'session_id' , $id );
@@ -147,7 +147,7 @@ class Division_model extends MY_Model
 			{
 				$divisions[$row['division_id']] = $row["name"];
 			}
-
+			die(json_encode($divisions));
 			return $divisions;
 
 		}
