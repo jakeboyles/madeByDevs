@@ -37,6 +37,13 @@
 									Record successfully updated.
 								</div>
 								<?php endif; ?>
+
+								<?php if( $this->agent->is_referral() && $this->agent->referrer() == base_url('admin/games/add') ): ?>
+								<div class="alert alert-success">
+									Record successfully added.
+								</div>
+								<?php endif; ?>
+
 								<!-- END Display Error Messages -->
 
 								<!-- START Form -->
@@ -103,15 +110,14 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<?php echo form_label( 'Location*', 'location_id', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_dropdown( 'location_id', array( '' => '') + $locations, set_value( 'location_id', $record['location_id']  ), 'id="game-locations-dropdown" class="pretty-select" data-ajax-url="' . base_url('admin/locations/get_fields_ajax') . '"' ); ?>
 									</div>
-
+									<?php if(!empty($locationfields)): ?>
 									<div class="form-group col-md-6 location-fields-dropdown">
 										<?php echo form_label( 'Field', 'location_field_id', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
 										<?php echo form_dropdown( 'location_field_id', array( '' => '') + $locationfields, set_value( 'location_field_id', $record['location_field_id'] ),  'class="pretty-select"' ); ?>
 									</div>
+									<?php endif; ?>
 
 								</div>
 								<div class="row">
