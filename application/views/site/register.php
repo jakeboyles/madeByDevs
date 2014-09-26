@@ -21,18 +21,20 @@
 				<!-- START Form -->
 
 					<div class="form-group">
-						<?php echo form_label( 'First Name', 'firstname', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_label( 'First Name *', 'firstname', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_input( array('name' => 'first_name', 'class' => 'form-control', 'id' => 'firstname', 'value' => set_value('firstname') ) ); ?>
 					</div>
 
 					<div class="form-group">
-						<?php echo form_label( 'Last Name', 'lastname', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_label( 'Last Name *', 'lastname', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_input( array('name' => 'last_name', 'class' => 'form-control', 'id' => 'lastname', 'value' => set_value('lastname') ) ); ?>
 					</div>
 
 					<div class="form-group">
-						<?php echo form_label( 'Birthday', 'birthday', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'birthday', 'class' => 'form-control date input-append', 'id' => 'birthday', 'value' => set_value('birthday') ) ); ?>
+						<?php echo form_label( 'Birthday *', 'birthday', array( 'class' => 'birthdaylabel form-label' ) ); ?>
+						<?php echo form_dropdown( 'month', array( '' => '') + $months, '01', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
+						<?php echo form_dropdown( 'day', array( '' => '') + $days, '01', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
+						<?php echo form_dropdown( 'year', array( '' => '') + $years, '1970', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
 					</div>
 
 					<div class="form-group">
@@ -56,17 +58,17 @@
 					</div>
 
 					<div class="form-group">
-						<?php echo form_label( 'Password', 'password', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_label( 'Password *', 'password', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_password( array('name' => 'password', 'class' => 'form-control', 'id' => 'password', 'value' => set_value('password') ) ); ?>
 					</div>
 
 					<div class="form-group">
-						<?php echo form_label( 'Confirm Password', 'confirm_password', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_label( 'Confirm Password *', 'confirm_password', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_password( array('name' => 'password_confirm', 'class' => 'form-control', 'id' => 'confirm_password', 'value' => set_value('confirm_password') ) ); ?>
 					</div>
 
 					<div class="form-group">
-						<?php echo form_label( 'Team Name', 'team_name', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_label( 'Team Name *', 'team_name', array( 'class' => 'form-label' ) ); ?>
 						<?php echo form_input( array('name' => 'team_name', 'class' => 'form-control', 'id' => 'team_name', 'value' => set_value('team_name') ) ); ?>
 					</div>
 

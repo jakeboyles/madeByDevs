@@ -739,6 +739,7 @@ class Team_model extends MY_Model
 		$this->db->select( 't.name,t.id' );
 		$this->db->where( 'division_id' , $id );
 		$this->db->where( 'approved' , 1 );
+		$this->db->order_by("t.name", "asc"); 
 		if($active!==FALSE)
 		{
 			$this->db->where( 'active' , 1 );

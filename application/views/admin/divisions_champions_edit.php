@@ -44,7 +44,7 @@
 					</div>
 
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Edit Field</button>
+					<button type="submit" class="btn btn-primary" data-action="add-row" data-id="">Edit Champion</button>
 				</div>
 
 				<?php echo form_hidden( 'parent_id', $record['id'] ); ?>

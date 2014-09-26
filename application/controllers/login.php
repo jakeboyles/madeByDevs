@@ -70,9 +70,9 @@ class Login extends Site_Controller
 		}
 
 		// Check if the User Has the Right Permissions - Must have a user_type_id of 1 (admin)
-		elseif ( $this->user['user_type_id'] != 1 )
+		elseif ( $this->user['user_type_id'] == 1 )
 		{
-			$this->form_validation->set_message('can_log_in', 'You do not have the correct permission to login.');
+			$this->form_validation->set_message('can_log_in', 'Please login using the admin panel.');
 			return false;
 		}
 

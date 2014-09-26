@@ -32,7 +32,10 @@ class Users extends Site_Controller
 				redirect('/');
 			}
 		}
-		
+		$this->load->library('Dob_dropdown');
+		$data['months']= $this->dob_dropdown->buildMonthDropdown('drop_month', 'drop_month');
+		$data['days']= $this->dob_dropdown->buildDayDropdown('drop_day', 'drop_day');
+		$data['years']= $data['dropyear'] = $this->dob_dropdown->buildYearDropdown('drop_year', 'drop_year');
 		$data['divisions'] = $this->Division_model->dropdown( 'divisions', 'id', 'name' );
 		$this->load->site_template( 'register', $data );
 
@@ -143,7 +146,10 @@ class Users extends Site_Controller
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('gender', 'Gender', '');
 		$this->form_validation->set_rules('postal', 'Postal Code', '');
-		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+		$this->form_validation->set_rules('month', 'Month', 'required|numeric|min_length[2]|max_length[2]|');
+		$this->form_validation->set_rules('day', 'Day', 'required|numeric|min_length[1]|max_length[2]|');
+		$this->form_validation->set_rules('year', 'Year', 'required|numeric|min_length[4]|max_length[4]|');
+		$this->form_validation->set_rules('name', 'Team Name', 'required');
 
 		// Custom Validation Messages
 		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );

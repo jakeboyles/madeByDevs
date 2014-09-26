@@ -78,6 +78,7 @@ class Post_model extends MY_Model
 		if( $post && $post_type )
 		{
 
+			if(!empty($_FILES)) {
 			if($_FILES['featured_image']['error'] == '0')
 			{
 				$config['upload_path'] = './uploads/';
@@ -153,6 +154,7 @@ class Post_model extends MY_Model
 
 					}		
 			}
+			}
 
 			// Determine URL Slug
 			$slug = empty( $post['slug'] ) ? $post['title'] : $post['slug'];
@@ -201,7 +203,7 @@ class Post_model extends MY_Model
 	{
 		if( $id && $post )
 		{
-
+			if(!empty($_FILES)) {
 			if($_FILES['featured_image']['error'] == '0')
 			{
 				$config['upload_path'] = './uploads/';
@@ -276,6 +278,7 @@ class Post_model extends MY_Model
 						//die($config2['source_image']);
 
 					}		
+			}
 			}
 
 			// Determine URL Slug

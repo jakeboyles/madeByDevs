@@ -64,6 +64,12 @@
 									</div>
 
 									<div class="form-group">
+										<?php echo form_label( 'Team Abbreviation *', 'abberviation', array( 'class' => 'form-label' ) ); ?>
+										<!-- <span class="help">e.g. </span> -->
+										<?php echo form_input( array('name' => 'abbreviation', 'class' => 'form-control', 'id' => 'abberviation', 'value' => set_value( 'abbreviation', $record['abbreviation'] ) ) ); ?>
+									</div>
+
+									<div class="form-group">
 										<?php echo form_label( 'Division*', 'division_id', array( 'class' => 'form-label' ) ); ?>
 										<span class="help">e.g. Which division does this team belong in?</span>
 										<?php echo form_dropdown( 'division_id', array( '' => '') + $divisions, set_value( 'division_id', $record['division_id'] ), 'class="pretty-select"' ); ?>
@@ -91,12 +97,6 @@
 									<div class="form-group">
 										<?php echo form_label( 'Team Description', 'description', array( 'class' => 'form-label' ) ); ?>
 										<?php echo form_textarea( array('name' => 'description', 'class' => 'form-control', 'id' => 'description', 'value' => set_value( 'description', $record['description'] ) ) ); ?>
-									</div>
-
-									<div class="form-group">
-										<?php echo form_label( 'Team Abbreviation *', 'abberviation', array( 'class' => 'form-label' ) ); ?>
-										<!-- <span class="help">e.g. </span> -->
-										<?php echo form_input( array('name' => 'abbreviation', 'class' => 'form-control', 'id' => 'abberviation', 'value' => set_value( 'abbreviation', $record['abbreviation'] ) ) ); ?>
 									</div>
 
 									<div class="form-group">

@@ -66,7 +66,8 @@ class User_model extends MY_Model
 	{
 		if( $post )
 		{
-			// Insert Data
+
+			$birthday = $post['month'].'/'.$post['day'].'/'.$post['year'];
 			$data = array(
 				'user_type_id' => 4,
 				'email' => $post['email'],
@@ -75,7 +76,7 @@ class User_model extends MY_Model
 				'last_name' => $post['last_name'],
 				'gender' => empty( $post['gender'] ) ? NULL : $post['gender'],
 				'postal' => empty( $post['postal'] ) ? NULL : $post['postal'],
-				'birthday' => empty( $post['birthday'] ) ? NULL : $this->mysql_date( $post['birthday'] )
+				'birthday' => empty( $post['month'] ) ? NULL : $this->mysql_date( $birthday )
 			);
 
 			// Insert to Database and Store Insert ID
