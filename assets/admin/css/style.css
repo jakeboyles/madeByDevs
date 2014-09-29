@@ -7481,20 +7481,4 @@ input[type="checkbox"] {
   text-indent: -2px;
 }
 
-.division-edit-picture {
-  max-width:100px;
-  margin-bottom:20px;
-}
-
-.edit-featured-image {
-  max-width:230px;
-  margin-top:10px;
-}
-
-.imageDelete {
-    bottom: 0;
-    left: 15px;
-    position: absolute;
-    z-index:9999;
-}
 

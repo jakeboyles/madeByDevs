@@ -67,13 +67,6 @@ class Login extends Admin_Controller
 			return false;
 		}
 
-		// Check if the User Has the Right Permissions - Must have a user_type_id of 1 (admin)
-		elseif ( $this->user['user_type_id'] != 1 )
-		{
-			$this->form_validation->set_message('can_log_in', 'You do not have the correct permission to login.');
-			return false;
-		}
-
 		// Passed Login Validation
 		else
 		{
@@ -90,7 +83,6 @@ class Login extends Admin_Controller
 		$this->session->set_userdata( array(
 			'email' => $this->input->post('email'),
 			'user_id' => $this->user['id'],
-			'user_type_id' => $this->user['user_type_id']
 		) );
 	}
 

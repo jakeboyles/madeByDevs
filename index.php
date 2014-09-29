@@ -24,9 +24,9 @@
 		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
 		{
 			$envs = array(
-				'development' => 'gothamsoccer.info',
-				'testing' => 'play.oodle.io',
-				'production' => 'gothamsoccer.com'
+				'development' => '',
+				'testing' => '',
+				'production' => ''
 			);
 			
 			if (isset($envs[$env]) && strpos($_SERVER['SERVER_NAME'], $envs[$env]) !== false) 

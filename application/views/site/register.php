@@ -1,7 +1,7 @@
 <div id="content" class="col-md-8 col-md-push-4">
 	<h1>Team Registration</h1>
 
-	<?php echo form_open( 'users/add', array( 'id' => 'add-division-form') ); ?>
+	<?php echo form_open( '', array( 'id' => 'register') ); ?>
 							
 		<div class="row">
 
@@ -30,27 +30,6 @@
 						<?php echo form_input( array('name' => 'last_name', 'class' => 'form-control', 'id' => 'lastname', 'value' => set_value('lastname') ) ); ?>
 					</div>
 
-					<div class="form-group">
-						<?php echo form_label( 'Birthday *', 'birthday', array( 'class' => 'birthdaylabel form-label' ) ); ?>
-						<?php echo form_dropdown( 'month', array( '' => '') + $months, '01', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
-						<?php echo form_dropdown( 'day', array( '' => '') + $days, '01', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
-						<?php echo form_dropdown( 'year', array( '' => '') + $years, '1970', 'class="col-xs-4 bday pretty-select col-xs-12" '  ); ?>
-					</div>
-
-					<div class="form-group">
-						<?php echo form_label( 'Postal Code', 'postalcode', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'postal', 'class' => 'form-control', 'id' => 'postalcode', 'value' => set_value('postalcode') ) ); ?>
-					</div>
-
-					<div class="form-group">
-						<?php echo form_label( 'Gender', 'gender', array( 'class' => 'form-label' ) ); ?>
-						<div class="radio radio-success">
-							<?php echo form_radio( array( 'name' => 'gender', 'id' => 'male', 'value' => 'Male', 'checked' => ( set_value('gender') == 'Male' ) ? TRUE : FALSE ) ); ?>
-							<label for="male">Male</label>
-							<?php echo form_radio( array( 'name' => 'gender', 'id' => 'female', 'value' => 'Female', 'checked' => ( set_value('gender') == 'Female' ) ? TRUE : FALSE ) ); ?>
-							<label for="female">Female</label>
-						</div>
-					</div>
 
 					<div class="form-group">
 						<?php echo form_label( 'Email Address', 'email', array( 'class' => 'form-label' ) ); ?>
@@ -67,23 +46,8 @@
 						<?php echo form_password( array('name' => 'password_confirm', 'class' => 'form-control', 'id' => 'confirm_password', 'value' => set_value('confirm_password') ) ); ?>
 					</div>
 
-					<div class="form-group">
-						<?php echo form_label( 'Team Name *', 'team_name', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'team_name', 'class' => 'form-control', 'id' => 'team_name', 'value' => set_value('team_name') ) ); ?>
-					</div>
 
-					<div class="form-group">
-						<?php echo form_label( 'Division', 'division', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_dropdown( 'division', array( '' => '') + $divisions, set_value( 'divisions' ), 'class="pretty-select col-xs-12" '  ); ?>
-					</div>
-
-					<?php echo form_hidden('user_type_id', '4'); ?>
-
-					<br><br>
 					<button type="submit" class="btn btn-primary">Register</button>
-
-					<h2>Already Registered?</h2>
-					<a class="btn btn-primary pull-left" href="<?php echo base_url('login'); ?>">Login</a>
 
 				<!-- END Form -->
 

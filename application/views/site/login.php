@@ -1,7 +1,7 @@
 <div id="content" class="col-md-8 col-md-push-4">
 	<h1>Login</h1>
 
-	<?php echo form_open( '/login', array( 'id' => 'add-division-form') ); ?>
+	<?php echo form_open( '/login', array( 'id' => 'login') ); ?>
 							
 		<div class="row">
 

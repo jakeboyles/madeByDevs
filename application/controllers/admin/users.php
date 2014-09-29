@@ -32,9 +32,6 @@ class Users extends Admin_Controller
 			}
 		}
 
-		// Get a List of User Types for Dropdown
-		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
-
 		// Load Add Record Form View
 		$this->load->admin_template( 'users_add', $data );
 	}
@@ -50,9 +47,6 @@ class Users extends Admin_Controller
 
 		// Load User Agent Library for Referrer Add Record Message
 		$this->load->library('user_agent');
-
-		// Get a List of User Types for Dropdown
-		$data['user_types'] = $this->User_model->dropdown( 'user_types', 'id', 'type' );
 
 		// Retrieve Record Data From Database
 		$data['record'] = $this->User_model->get( $id );
@@ -82,12 +76,8 @@ class Users extends Admin_Controller
 		$this->load->library('form_validation');
 		
 		// Validation Rules
-		$this->form_validation->set_rules('user_type_id', 'User Type', 'required');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
-		$this->form_validation->set_rules('gender', 'Gender', '');
-		$this->form_validation->set_rules('postal', 'Postal Code', '');
-		$this->form_validation->set_rules('birthday', 'Birthday', '');
 
 		// Custom Validation Messages
 		$this->form_validation->set_message( 'is_unique' , 'That Email Address is already registered to another user.' );
@@ -130,14 +120,6 @@ class Users extends Admin_Controller
 		}
 		
 		return false;
-	}
-
-
-	public function get_by_team( $id ) 
-	{
-		$data['players'] = $this->User_model->get_by_team( $id );
-
-		$this->load->view('site/ajax-parts/users-dropdown', $data);
 	}
 
 }
