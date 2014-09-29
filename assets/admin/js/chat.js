@@ -1,4 +1,4 @@
-$(document).ready(function() {	
+$(document).ready(function() {
 	var conversation = [[1,"sadsadsad"],[1,"asdsad"],[0,"asdsada"]];
 	$('.user-details-wrapper').click(function(){
 			set_user_details($(this).attr('data-user-name'),$(this).attr('data-chat-status'));

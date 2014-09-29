@@ -1,6 +1,5 @@
 /*** Very Large Screens **/
-@media only screen 
-and (min-width : 1600) {
+@media only screen and (min-width : 1600) {
 	.visible-xlg{
 		display: block !important;
 	}
@@ -8,8 +7,7 @@ and (min-width : 1600) {
 		display: none !important;
 	}
 }	
-@media only screen 
-and (min-width : 1824px) {	
+@media only screen and (min-width : 1824px) {	
 	body { 
 		 height:100%;
 	}
@@ -332,10 +330,7 @@ and (min-width : 1824px) {
 } 
 
 /* Portrait view of all tablet devices */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : portrait) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
      .page-sidebar .page-sidebar-wrapper{
         display: inline-block;
         float: left;
@@ -1043,10 +1038,7 @@ and (orientation : portrait) {
 
 
 /*** Retina Display Images **/
-@media only screen and (-webkit-min-device-pixel-ratio: 2.0),
-       only screen and (min--moz-device-pixel-ratio: 2.0),
-       only screen and (-o-min-device-pixel-ratio: 200/100),
-       only screen and (min-device-pixel-ratio: 2.0) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2.0),only screen and (min--moz-device-pixel-ratio: 2.0),only screen and (-o-min-device-pixel-ratio: 200/100),only screen and (min-device-pixel-ratio: 2.0) {
 		.grid.simple .grid-title .tools a{
   			background: url('../img/icon/portlet-tray-2x.png');
 			background-size: 199px 57px;
@@ -1130,4 +1122,5 @@ and (orientation : portrait) {
 	#Parks.list .meta.area{
 		display: none;
 	}
+}
 }

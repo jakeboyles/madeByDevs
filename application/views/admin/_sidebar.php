@@ -17,18 +17,17 @@
 			
 
 
-			<!-- League Management Menu -->
-			<p class="menu-title">League Management</p>
+			<p class="menu-title">Home</p>
 			<ul>
 
-				<li class="<?php echo $this->uri->segment(2) == 'league' ? 'active open' : ''; ?>">
+				<li class="<?php echo $this->uri->segment(2) == 'home' ? 'active open' : ''; ?>">
 					<a href="javascript:;">
 						<i class="fa fa-home"></i>
-						<span class="title">LHome</span>
+						<span class="title">Home</span>
 						<span class="arrow <?php echo $this->uri->segment(2) == 'home' ? '' : ''; ?>"></span>
 					</a>
 					<ul class="sub-menu">
-						<li><a href="<?php echo base_url( 'admin/'); ?>">All Leagues</a></li>
+						<!--<li><a href="<?php echo base_url( 'admin/'); ?>">All Leagues</a></li>-->
 					</ul>
 				</li>
 				
