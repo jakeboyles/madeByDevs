@@ -21,7 +21,7 @@ class MY_Form_validation extends CI_Form_validation {
 
 		if($str===$field)
 		{
-            $this->set_message('does_not_match', 'Active season can not equal previous season.');
+            $this->set_message('does_not_match', 'These Do Not Match');
             return false;
 		}
 		else 

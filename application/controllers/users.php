@@ -24,13 +24,9 @@ class Users extends Site_Controller
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post() && $this->_team_validation() )
+		if( $this->input->post() && $this->_validation() )
 		{
-			// If Successfully Inserted to DB, Redirect to Edit
-			if( $insert_id = $this->User_model->insert_record_and_team( $this->input->post() ) )
-			{
-				redirect('/');
-			}
+
 		}
 
 	}

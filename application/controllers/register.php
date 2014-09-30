@@ -6,7 +6,7 @@ class Register extends Site_Controller
 		parent::__construct();
 
 		// Load Model Sample
-		//$this->load->model('Division_model');
+		//$this->load->model('model');
 	}
 
 	// Display the register page

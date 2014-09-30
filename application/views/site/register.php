@@ -1,5 +1,5 @@
 <div id="content" class="col-md-8 col-md-push-4">
-	<h1>Team Registration</h1>
+	<h1>Registration</h1>
 
 	<?php echo form_open( '', array( 'id' => 'register') ); ?>
 							
