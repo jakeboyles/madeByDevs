@@ -1,0 +1,12 @@
+ {
+
+    "autoload": {
+        "classmap": ["application/core"]
+    },
+
+    "require": {
+         "kriswallsmith/buzz": "*"
+    }
+
+
+}  

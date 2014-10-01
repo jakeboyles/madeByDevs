@@ -12,7 +12,7 @@ class MY_Form_validation extends CI_Form_validation {
 	 */
 	public function does_not_match($str, $field)
 	{
-		if ( ! isset($_POST[$field]))
+		if ( !isset($_POST[$field]) )
 		{
 			return FALSE;
 		}
