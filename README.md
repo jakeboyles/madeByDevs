@@ -21,3 +21,12 @@ Composer is also installed on the framework. You can add libraries by adding the
 
 php composer.phar update
 ```
+
+**Grunt**
+
+Grunt also handles the front end preprocessing. You need to navigate into /assets/admin or /assets/site and run the following command when when making LESS changes or JS changes.
+```
+#!php
+
+grunt watch
+```
