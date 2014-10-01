@@ -15,10 +15,9 @@ php composer.phar install
 
 **Composer**
 
-Composer is also installed on the framework. You can add libraries by adding them in the composer.json file in the root directory. You will then need to run composer from the cli to pull it down. If you have updated composer.json, run 
+Composer is also installed on the framework. You can add libraries by adding them in the composer.json file in the root directory. You will then need to run composer from the cli to pull it down. If you have updated composer.json, run the following command from the CLI.
 ```
 #!php
 
 php composer.phar update
 ```
- from the CLI.
