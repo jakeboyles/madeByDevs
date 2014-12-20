@@ -1,0 +1,24 @@
+/* Make Select Boxes Full Width */
+.select2-container {
+	width: 100%;
+}
+
+/* Fix the duplicate Arrow */
+.select2-search-choice-close:before {
+	content: '';
+}
+
+/* Fix Grid Title Overflow Issue */
+.grid-title {
+	overflow: hidden;
+}
+
+/* Make Z-index higher for jquery plugins over Modal */
+.popover {
+	z-index: 9999 !important;
+}
+
+/* Add Generic Styling for a Pointer */
+.pointer {
+	cursor: pointer;
+}

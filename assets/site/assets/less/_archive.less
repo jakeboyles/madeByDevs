@@ -1,0 +1,45 @@
+.post-entry {
+
+	.post-title {
+		margin-bottom: 5px;
+		a {
+			text-decoration: none;
+		}
+	}
+
+	.post-date {
+		margin-bottom: 20px;
+		color: @gray;
+	}
+
+}
+
+.pagination {
+
+	ul {
+		overflow: hidden;
+		list-style: none;
+		padding: 0;
+
+		li {
+			float: left;
+			padding-right: 10px;
+
+			a {
+				text-decoration: none !important;
+				background: @gray-light;
+				padding: 0 10px;
+
+				&:hover {
+					background: @gray-lighter;
+				}
+			}
+
+			span {
+				background: @gray-light;
+				padding: 0 10px;
+				font-weight: 700;
+			}
+		}
+	}
+}

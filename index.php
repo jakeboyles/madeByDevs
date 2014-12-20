@@ -18,7 +18,39 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+
+	// Custom Environmental Function
+	function isEnv($env){
+		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
+		{
+			$envs = array(
+				'development' => '',
+				'testing' => '',
+				'production' => ''
+			);
+			
+			if (isset($envs[$env]) && strpos($_SERVER['SERVER_NAME'], $envs[$env]) !== false) 
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+
+	if( isEnv('development') )
+	{
+		define('ENVIRONMENT', 'development');
+	}
+	elseif( isEnv('testing') )
+	{
+		define('ENVIRONMENT', 'testing');
+	}
+	else
+	{
+		define('ENVIRONMENT', 'production');
+	}
+
+	//define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -37,6 +69,9 @@ if (defined('ENVIRONMENT'))
 		break;
 	
 		case 'testing':
+			error_reporting(E_ALL);
+		break;
+
 		case 'production':
 			error_reporting(0);
 		break;
@@ -57,6 +92,19 @@ if (defined('ENVIRONMENT'))
  *
  */
 	$system_path = 'system';
+
+
+
+ /*
+ * --------------------------------------------------------------------
+ * COMPOSER AUTOLOAD
+ * --------------------------------------------------------------------
+ */
+ 
+	include_once './vendor/autoload.php';  
+	
+
+
 
 /*
  *---------------------------------------------------------------
