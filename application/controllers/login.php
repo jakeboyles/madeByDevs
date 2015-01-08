@@ -12,8 +12,6 @@ class Login extends Site_Controller
 	// Display Login Page or Log the User In
 	public function index()
 	{
-
-		die("SHIT");
 		// If the Login Form Was Submitted
 		if($this->input->post())
 		{
