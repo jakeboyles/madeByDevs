@@ -5,9 +5,8 @@
     },
 
     "require": {
-         "kriswallsmith/buzz": "*",
          "org_heigl/hybridauth": "dev-master",
-         "php": "5.5.3"
+         "php": "~5.5.12"
     }
 
 
