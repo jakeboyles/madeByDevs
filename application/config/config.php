@@ -366,21 +366,13 @@ $config['proxy_ips'] = '';
 | for base controllers and some third-party libraries.
 |
 */
-// function __autoload($class)
-// {
-// 	if(strpos($class, 'CI_') !== 0)
-// 	{
-// 		@include_once( APPPATH . 'core/'. $class . EXT );
-// 	}
-// }
-
-// function __autoload($class) {
-//     if (substr($class,0,3) !== 'CI_') {
-//         if (file_exists($file = APPPATH . 'core/' . $class . EXT)) {
-//             include $file;
-//         }
-//     }
-// }
+function __autoload($class)
+{
+	if(strpos($class, 'CI_') !== 0)
+	{
+		@include_once( APPPATH . 'core/'. $class . EXT );
+	}
+}
 
 
 /* End of file config.php */

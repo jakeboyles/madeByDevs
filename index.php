@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 
 /*
  *---------------------------------------------------------------
@@ -91,7 +94,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = '/app/system';
+	$system_path = 'system';
 
 
 
@@ -120,7 +123,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = '/app/application';
+	$application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------
