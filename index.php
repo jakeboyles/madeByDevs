@@ -121,7 +121,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'app/application';
+	$application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------
