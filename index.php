@@ -25,7 +25,7 @@
 		{
 			$envs = array(
 				'development' => 'madebydevs.com',
-				'testing' => '',
+				'testing' => 'boiling-brook-6500.herokuapp.com',
 				'production' => ''
 			);
 			
