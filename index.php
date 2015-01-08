@@ -91,7 +91,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'system';
+	$system_path = '/app/system';
 
 
 
@@ -120,7 +120,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+	$application_folder = '/app/application';
 
 /*
  * --------------------------------------------------------------------
