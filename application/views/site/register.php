@@ -1,8 +1,7 @@
-<div id="content" class="col-md-8 col-md-push-4">
+<div id="content" class="col-md-10 col-md-push-2">
 	<h1>Registration</h1>
 
-	<?php echo form_open( '', array( 'id' => 'register') ); ?>
-							
+	<?php echo form_open( 'users/add', array( 'id' => 'register') ); ?>
 		<div class="row">
 
 			<div class="col-md-8 col-sm-8 col-xs-8">
@@ -21,15 +20,9 @@
 				<!-- START Form -->
 
 					<div class="form-group">
-						<?php echo form_label( 'First Name *', 'firstname', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'first_name', 'class' => 'form-control', 'id' => 'firstname', 'value' => set_value('firstname') ) ); ?>
+						<?php echo form_label( 'Name *', 'firstname', array( 'class' => 'form-label' ) ); ?>
+						<?php echo form_input( array('name' => 'name', 'class' => 'form-control', 'id' => 'firstname', 'value' => set_value('firstname') ) ); ?>
 					</div>
-
-					<div class="form-group">
-						<?php echo form_label( 'Last Name *', 'lastname', array( 'class' => 'form-label' ) ); ?>
-						<?php echo form_input( array('name' => 'last_name', 'class' => 'form-control', 'id' => 'lastname', 'value' => set_value('lastname') ) ); ?>
-					</div>
-
 
 					<div class="form-group">
 						<?php echo form_label( 'Email Address', 'email', array( 'class' => 'form-label' ) ); ?>

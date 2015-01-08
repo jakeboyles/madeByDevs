@@ -36,6 +36,21 @@ class Users extends Admin_Controller
 		$this->load->admin_template( 'users_add', $data );
 	}
 
+	public function profile($id = FALSE)
+	{
+
+		if($this->session->userdata('user_id')==$id)
+		{
+			$data['user'] = $this->User_model->get_records($id);
+			$data['user'] = $data['user'][0];
+			$this->load->site_template( 'user_profile',$data );	
+		}
+		else
+		{
+			redirect("login");
+		}
+	}
+
 	// Edit Record View
 	public function edit( $id = FALSE )
 	{

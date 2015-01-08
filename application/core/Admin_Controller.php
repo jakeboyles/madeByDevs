@@ -14,7 +14,7 @@ class Admin_Controller extends MY_Controller
 	{
 		if( ( !$this->session->userdata('email') || $this->session->userdata('user_type_id') != 1 ) && $this->uri->segment( 2 ) != 'login' )
 		{
-			redirect('admin/login');
+			redirect('login');
 		}
 	}
 

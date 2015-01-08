@@ -14,6 +14,7 @@ class Authenticate_model extends MY_Model
 		// Salt to Use for Password Hash
 		$password = $this->password_hash( $password );
 
+
 		// Look for a Match in The Database
 		$this->db->select( 'id, user_type_id' );
 		$this->db->where( 'email', $email );
@@ -29,11 +30,10 @@ class Authenticate_model extends MY_Model
 			//$user_id = $row->id;
 
 			// Update Last Login
-			$data = array(
-				'last_login' => $this->mysql_datetime()
-			);
+			// $data = array(
+			// 	'last_login' => $this->mysql_datetime()
+			// );
 			$this->db->where( 'id', $row['id'] );
-			$this->db->update( 'users',$data );
 
 			// Return User ID
 			return $row;

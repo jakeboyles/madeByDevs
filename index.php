@@ -24,7 +24,7 @@
 		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
 		{
 			$envs = array(
-				'development' => '',
+				'development' => 'madebydevs.com',
 				'testing' => '',
 				'production' => ''
 			);
@@ -73,7 +73,7 @@ if (defined('ENVIRONMENT'))
 		break;
 
 		case 'production':
-			error_reporting(0);
+			error_reporting(E_ALL);
 		break;
 
 		default:

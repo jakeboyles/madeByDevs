@@ -48,8 +48,6 @@ class Login extends Admin_Controller
 			// Log the User In		
 			$this->_login();
 			
-			// Redirect User
-			redirect('admin');
 		}
 	}
 
@@ -83,6 +81,7 @@ class Login extends Admin_Controller
 		$this->session->set_userdata( array(
 			'email' => $this->input->post('email'),
 			'user_id' => $this->user['id'],
+			'user_type_id' => '1',
 		) );
 	}
 

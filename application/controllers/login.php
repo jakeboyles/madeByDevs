@@ -84,8 +84,11 @@ class Login extends Site_Controller
 		$this->session->set_userdata( array(
 			'email' => $this->input->post('email'),
 			'user_id' => $this->user['id'],
+			'user_type_id' => '1',
+
 		) );
 	}
+
 
 	// Log The User Out
 	public function logout()
@@ -94,7 +97,7 @@ class Login extends Site_Controller
 		$this->session->sess_destroy();
 
 		// Send the User to the Login Page
-		redirect('admin/login');
+		redirect('login');
 	}
 
 }
