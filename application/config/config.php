@@ -13,7 +13,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'https://boiling-brook-6500.herokuapp.com/projects';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ $config['base_url']	= 'https://boiling-brook-6500.herokuapp.com/projects';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

@@ -50,7 +50,6 @@
 		define('ENVIRONMENT', 'production');
 	}
 
-
 	//define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
@@ -92,7 +91,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = '/app/system';
+	$system_path = 'system';
 
 
 
@@ -121,7 +120,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = '/app/application';
+	$application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------
