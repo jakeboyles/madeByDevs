@@ -1,11 +1,5 @@
- {
-
-    "autoload": {
-        "classmap": ["application/core"]
-    },
-
-    "require": {
-    }
-
-
-}  
+{
+  "require": {
+    "php": "~5.5.3"
+  }
+}

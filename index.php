@@ -1,6 +1,5 @@
 <?php
 
-die("TEST");
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -50,6 +49,8 @@ die("TEST");
 	{
 		define('ENVIRONMENT', 'production');
 	}
+
+	die(ENVIRONMENT);
 
 	//define('ENVIRONMENT', 'development');
 /*
