@@ -50,7 +50,6 @@
 		define('ENVIRONMENT', 'production');
 	}
 
-	die(ENVIRONMENT);
 
 	//define('ENVIRONMENT', 'development');
 /*
