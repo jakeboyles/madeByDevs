@@ -1,5 +1,5 @@
 <?php
-class Home extends Site_Controller
+class Home extends CI_Controller
 {
 	// Set Class Vars
 	var $user; // Set in correctLogin()
