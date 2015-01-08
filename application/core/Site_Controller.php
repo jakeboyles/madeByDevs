@@ -1,4 +1,5 @@
 <?php
+die("BOO");
 class Site_Controller extends MY_Controller
 {
 	function __construct()
