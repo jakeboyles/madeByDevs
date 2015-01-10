@@ -28,7 +28,7 @@ ini_set("display_errors", 1);
 		{
 			$envs = array(
 				'development' => 'madebydevs.com',
-				'testing' => 'madebydevs-oodle.rhcloud.com',
+				'testing' => 'madebydevs-jakeangularjs.rhcloud.com',
 				'production' => ''
 			);
 			
