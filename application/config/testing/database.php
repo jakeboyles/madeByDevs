@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = $OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT;
+$db['default']['hostname'] = $_ENV['OPENSHIFT_MYSQL_DB_HOST'];
 $db['default']['username'] = 'adminNmlMjpB';
 $db['default']['password'] = 'jthry4aXqV34';
 $db['default']['database'] = 'madebydevs';
