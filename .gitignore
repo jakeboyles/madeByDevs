@@ -1,0 +1,20 @@
+# Ignore CodeIgniter Cache
+application/cache/*
+!application/cache/index.html
+!application/cache/.htaccess
+
+# Ignore CodeIgniter Logs
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+
+# Ignore Database Configuration
+application/config/database.php
+
+# Frontend Items
+assets/codekit-config.json
+assets/.sass-cache
+
+# Ignore Uploads Directory
+uploads/admin_uploads/images/*
+uploads/*

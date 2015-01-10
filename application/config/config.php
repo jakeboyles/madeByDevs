@@ -1,5 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -26,7 +25,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +223,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = '01cjh4HtuG5alFqGhi2jAzOSJFCgYe2Z';
 
 /*
 |--------------------------------------------------------------------------
@@ -294,8 +293,8 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_expire' = The number in seconds the token should expire.
 */
 $config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_token_name'] = 'csrf_token';
+$config['csrf_cookie_name'] = 'csrf_cookie';
 $config['csrf_expire'] = 7200;
 
 /*
@@ -356,6 +355,24 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
+
+
+/*
+| -------------------------------------------------------------------
+|  Native Auto-load
+| -------------------------------------------------------------------
+| 
+| Nothing to do with cnfig/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+*/
+function __autoload($class)
+{
+	if(strpos($class, 'CI_') !== 0)
+	{
+		@include_once( APPPATH . 'core/'. $class . EXT );
+	}
+}
 
 
 /* End of file config.php */
