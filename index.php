@@ -104,7 +104,6 @@ if (defined('ENVIRONMENT'))
  * --------------------------------------------------------------------
  */
  
-	include_once './vendor/autoload.php';  
 	
 
 
