@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="col-md-4">
-					<p><i class="fa fa-user"></i>  <?php echo $project['name']; ?></p>
+					<a class="author" href="<?php echo base_url('users/profile').'/'.$project['author_id']; ?>"><p><i class="fa fa-user"></i>  <?php echo $project['name']; ?></p></a>
 				</div>
 
 				<div class="col-md-4">

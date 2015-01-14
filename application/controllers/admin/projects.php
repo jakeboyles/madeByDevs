@@ -18,7 +18,7 @@ class Projects extends Admin_Controller
 	public function add()
 	{
 		// If Form is Submitted Validate Form Data and Add Record to Database
-		if( $this->input->post() )
+		if( $this->input->post() && $this->_project_validation() )
 		{	
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Project_model->insert_record( $this->input->post() ) )
@@ -77,6 +77,27 @@ class Projects extends Admin_Controller
 
 			die();
 		}
+	}
+
+
+	private function _project_validation()
+	{
+		// Load Validation Library
+		$this->load->library('form_validation');
+		
+		// Validation Rules
+		$this->form_validation->set_rules('description', 'Description', 'required');
+		$this->form_validation->set_rules('technology', 'Technology', 'required');
+		$this->form_validation->set_rules('github', 'GitHub', 'required');
+		$this->form_validation->set_rules('title', 'Title', 'required');
+		
+		// Return True if Validation Passes
+		if ($this->form_validation->run())
+		{
+			return true;
+		}
+		
+		return false;
 	}
 
 

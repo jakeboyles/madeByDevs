@@ -15,14 +15,14 @@
 
 				<div class="col-md-4">
 					<div class="row">
-						<div class="col-xs-6">
+						<div class="col-xs-6 count">
+						<h2 class=""><?php echo count($comments); ?></h2>
 						<h3>Comments</h3>
-						<p><?php echo count($comments); ?></p>
 						</div>
 
 						<div class="col-xs-6">
+						<h2><?php echo count($projects); ?></h2>
 						<h3>Projects</h3>
-						<p><?php echo count($projects); ?></p>
 						</div>
 					</div>
 				</div>
@@ -31,11 +31,11 @@
 			</div>
 
 
-			<div class="col-md-11">
+			<div class="col-md-11 p-t-30">
 
 			<div class="col-md-6">
 
-			<H2>Projects</H2>
+			<H2 class="p-b-30"><i class="fa fa-code"></i> Projects</H2>
 
 			<?php if(!empty($projects)): ?>
 				<?php foreach($projects as $project): 
@@ -44,7 +44,7 @@
 					 endif; 
 					 ?>
 
-					 <div class="row">
+					 <div class="row p-b-30">
 					<div class="col-md-3">
 					<?php if(!empty($project['pictures'])) : ?>
 						<img src="/uploads/<?php echo $picture[0]->image ?>">
@@ -66,9 +66,9 @@
 			</div>
 
 
-			<div class="col-md-6">
+			<div class="col-md-5 col-md-offset-1">
 
-			<H2>Comments</H2>
+			<H2 class="p-b-30"><i class="fa fa-comment"></i> Comments</H2>
 
 			<?php foreach($comments as $project): ?>
 
@@ -77,8 +77,10 @@
 					<img src="/uploads/<?php echo $picture[0]->image ?>">
 				</div> -->
 
-				<div class="col-md-9">
-					<P><?php echo $project['comment']; ?></P>
+				<div class="col-md-9 comment">
+					<P><?php echo $project['comment']; ?><br>
+					<span class="on">on <a href="<?php echo base_url('projects/view/')."/".$project['project_id']; ?>"><?php echo $project['project_title']; ?></a></span>
+					</P>
 				</div>
 				</div>
 

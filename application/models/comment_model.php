@@ -10,9 +10,10 @@ class Comment_model extends MY_Model
 	public function get_records( $atts = FALSE )
 	{
 		// Construct Query
-		$this->db->select('u.id as user_id,c.id,c.author_id,c.comment,c.post,u.display_name,u.profile_pic,c.created_at,c.votes');
+		$this->db->select('p.title as project_title, p.id as project_id, u.id as user_id,c.id,c.author_id,c.comment,c.post,u.display_name,u.profile_pic,c.created_at,c.votes');
 
 		$this->db->join( 'users u', 'u.id = c.author_id', 'left outer' );
+		$this->db->join( 'projects p', 'p.id = c.post', 'left outer' );
 
 		if(!empty($atts)) {
 		$this->db->where( $atts ); 

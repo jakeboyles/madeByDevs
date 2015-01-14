@@ -102,6 +102,7 @@ class Project_model extends MY_Model
 				'author_id' => $this->session->userdata('user_id'),
 				'pictures' => json_encode($images),
 				'github' => $post['github'],
+				'title' => $post['title'],
 			);
 
 			// Insert to Database and Store Insert ID

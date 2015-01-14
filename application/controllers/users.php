@@ -63,8 +63,8 @@ class Users extends Site_Controller
 	public function profile($id = false)
 	{
 		$data['user'] = $this->User_model->get( $id );
-		$data['projects'] = $this->Project_model->get_records( array("author_id"=>$id) );
-		$data['comments'] = $this->Comment_model->get_records( array("author_id"=>$id) );
+		$data['projects'] = $this->Project_model->get_records( array("p.author_id"=>$id) );
+		$data['comments'] = $this->Comment_model->get_records( array("c.author_id"=>$id) );
 
 		$this->load->site_template( 'profile', $data );
 
