@@ -74,7 +74,7 @@ class User_model extends MY_Model
 			// Insert to Database and Store Insert ID
 			$insert_id = $this->db->insert('users',$data);
 
-			$this->login($post->email, $id);
+			$this->_login($post->email, $id);
 
 			return $insert_id;
 		}

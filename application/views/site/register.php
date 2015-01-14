@@ -42,6 +42,8 @@
 
 					<button type="submit" class="btn btn-primary">Register</button>
 
+					<a href="<?php echo base_url('hauth/login/Twitter'); ?>" class="btn btn-primary">Register With Twitter</a>
+
 				<!-- END Form -->
 
 			</div>
