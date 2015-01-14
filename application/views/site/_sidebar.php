@@ -14,7 +14,7 @@
 		<li><a href="<?php echo base_url('projects');?>"><i class="fa fa-code"></i><br> <span>Projects</span></a></li>
 		<li><a href="<?php echo base_url('leaders');?>"><i class="fa fa-trophy"></i><br> <span>Rankings</span></a></li>
 		<?php if($this->session->userdata('email')): ?>
-		<li><a href="#"><i class="fa fa-user"></i> <br> <span>Your Profile</span></a></li>
+		<li><a href="<?php echo base_url('/users/profile/'.$this->session->userdata('user_id'));?>"><i class="fa fa-user"></i> <br> <span>Your Profile</span></a></li>
 		<?php endif; ?>
 	</ul>
 

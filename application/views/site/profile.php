@@ -20,7 +20,7 @@
 						<h3>Comments</h3>
 						</div>
 
-						<div class="col-xs-6">
+						<div class="col-xs-6 count">
 						<h2><?php echo count($projects); ?></h2>
 						<h3>Projects</h3>
 						</div>
