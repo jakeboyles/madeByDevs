@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 
 
+
+
 $(".menu").on("click",function(){
 
 	if(!$(this).hasClass("active"))
@@ -76,13 +78,12 @@ $('body').on('change', '.chooseTech', function(e){
 
 $("body").on("click",'.fa-thumbs-up',function(){
 
-	var vs = $(this).parent().parent().find('.numVotes').data("votes");
-
-	$(this).parent().parent().find(".numVotes").html(vs+1);
 
 	var data = $(this).data('id');
 	var tech = $(this).data('tech');
-		var user = $(this).data('user');
+	var user = $(this).data('user');
+
+	var clicked = $(this);
 
 
 		var data = {
@@ -98,11 +99,25 @@ $("body").on("click",'.fa-thumbs-up',function(){
 				type: 'POST',
 				success: function( response ) {
 					// Load Results to Dom
-					var votes = $(this).find(".col-md-10" );
+					response = JSON.parse(response);
 
-					
-					votes = votes+1;
-					$(this).find(".numVotes").html( votes );
+					if(response.votes != true)
+					{
+						var votes = $(clicked).find(".col-md-10" );
+						votes = votes+1;
+						$(clicked).find(".numVotes").html( votes );
+
+						var vs = $(clicked).parent().parent().find('.numVotes').data("votes");
+
+						$(clicked).parent().parent().find(".numVotes").html(vs+1);
+					}
+					else {
+
+						var n = $('.comments').noty({
+							type: 'error',
+							text: 'You have already voted on this comment'
+						});
+					}
 					//formContainer.removeClass( 'hide' );
 					
 					// Re-Initialize jQuery Plugins on Dynamic Content
@@ -117,13 +132,12 @@ $("body").on("click",'.fa-thumbs-up',function(){
 
 $("body").on("click",'.fa-thumbs-down',function(){
 
-	var vs = $(this).parent().parent().find('.numVotes').data("votes");
-
-	$(this).parent().parent().find(".numVotes").html(vs-1);
 
 	var data = $(this).data('id');
 	var tech = $(this).data('tech');
 	var user = $(this).data('user');
+
+	var clicked = $(this);
 
 		var data = {
 			"id" : data,
@@ -137,15 +151,25 @@ $("body").on("click",'.fa-thumbs-down',function(){
 				data: data,
 				type: 'POST',
 				success: function( response ) {
-					// Load Results to Dom
-					var votes = $(this).find(".col-md-10" );
+					response = JSON.parse(response);
+					
+					if(response.votes != true)
+					{
+						var votes = $(clicked).find(".col-md-10" );
+						votes = votes+1;
+						$(clicked).find(".numVotes").html( votes );
 
-					
-					votes = votes+1;
-					$(this).find(".numVotes").html( votes );
-					//formContainer.removeClass( 'hide' );
-					
-					// Re-Initialize jQuery Plugins on Dynamic Content
+						var vs = $(clicked).parent().parent().find('.numVotes').data("votes");
+
+						$(clicked).parent().parent().find(".numVotes").html(vs-1);
+					}
+					else {
+
+						var n = $('.comments').noty({
+							type: 'error',
+							text: 'You have already voted on this comment'
+						});
+					}
 				},
 			});
 
