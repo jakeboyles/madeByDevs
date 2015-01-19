@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 's-cdbr-iron-east-01.cleardb.net';
-$db['default']['username'] = 'baf9a4eedd0a28';
-$db['default']['password'] = '1460bf36';
-$db['default']['database'] = 'heroku_7782d1d95e95a92';
+$db['default']['hostname'] = $_ENV['OPENSHIFT_MYSQL_DB_HOST'];
+$db['default']['username'] = 'adminNmlMjpB';
+$db['default']['password'] = 'jthry4aXqV34';
+$db['default']['database'] = 'madebydevs';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
