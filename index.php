@@ -27,9 +27,9 @@ ini_set("display_errors", 1);
 		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
 		{
 			$envs = array(
-				'development' => 'madebydevs.com',
+				'development' => 'madebydevs.dev',
 				'testing' => 'madebydevs-jakeangularjs.rhcloud.com',
-				'production' => ''
+				'production' => 'madebydevs.com'
 			);
 			
 			if (isset($envs[$env]) && strpos($_SERVER['SERVER_NAME'], $envs[$env]) !== false) 
