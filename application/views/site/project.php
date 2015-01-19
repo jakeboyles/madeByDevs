@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="col-md-4">
-						<P><i class="fa fa-calendar"></i> <?php echo date("m/d",strtotime($project['date_posted'])); ?></P>
+						<P><i class="fa fa-calendar"></i> <span class="moment"><?php echo date("Y-m-d H:i:s",strtotime($project['date_posted'])); ?></span></P>
 				</div>
 
 				<div class="col-md-4">
@@ -70,7 +70,7 @@
 			<?php foreach($comments as $comment): ?>
 				<div class="comment row">
 					<div class="col-md-2">
-						<img src="<?php echo $comment['profile_pic']; ?>">
+						<?php echo profile_image($comment['profile_pic']); ?>
 					</div>
 
 					<div class="col-md-10">
@@ -78,7 +78,7 @@
 						<p><?php echo $comment['comment']; ?></p>
 
 						<span><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-up"></i></span>
-						<span class="p-l-15"><i data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['user_id']; ?>' class="fa fa-thumbs-down"></i></span>
+						<span  class="p-l-15"><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-down"></i></span>
 						 <span data-votes="<?php echo $comment['votes']; ?>" class="numVotes p-l-15"><?php echo $comment['votes']; ?></span> Votes
 	<!-- 					<?php echo $comment['created_at']; ?>
 	 -->			</div>

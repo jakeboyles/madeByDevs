@@ -29,7 +29,7 @@ class Leader_model extends MY_Model
 				foreach($rows as $row) 
 				{
 					$leader['name'] = $row['name'];
-					$query = $this->db->query("select users.profile_pic,users.display_name, count(user) as votes from votes LEFT OUTER JOIN users ON users.id = votes.user WHERE technology = ".$row['id']." group by user ORDER BY votes desc LIMIT 5");
+					$query = $this->db->query("select users.id,users.profile_pic,users.display_name, count(user) as votes from votes LEFT OUTER JOIN users ON users.id = votes.user WHERE technology = ".$row['id']." group by user ORDER BY votes desc LIMIT 5");
 					$leaders = $query->result_array();
 
 					$leader['leaders'] =  $leaders;

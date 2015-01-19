@@ -4,8 +4,13 @@ $(document).ready(function(){
 
 
 
+var now = moment();
 
 
+var dis = moment($(".moment")).fromNow();
+
+
+$(".moment").html(dis);
 
 
 $(".menu").on("click",function(){

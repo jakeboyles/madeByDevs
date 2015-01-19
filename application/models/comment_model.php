@@ -35,6 +35,23 @@ class Comment_model extends MY_Model
 
 	public function add_vote($id,$user, $down =false)
 	{
+
+
+		$this->db->select('*');
+
+		$this->db->where('comment', $id['id']);
+		$this->db->where('user',$id['user']);
+
+		$query = $this->db->get( 'votes v' );
+
+		// If Rows Were Found, Return Them
+		if($query->num_rows > 0)
+		{
+			return array("votes" => true);
+		}
+
+
+
 		if($down==false)
 		{
 			$this->db->set('votes', 'votes+1',FALSE);
@@ -51,6 +68,7 @@ class Comment_model extends MY_Model
 			'comment' => $id['id'],
 			'user' => $id['user'],
 			'technology' => $id['tech'],
+			'type' => $down,
 		);
 
 		// Insert to Database and Store Insert ID

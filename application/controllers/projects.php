@@ -43,6 +43,18 @@ class Projects extends Site_Controller
 	}
 
 
+	// Display Login Page or Log the User In
+	public function search( $search = FALSE )
+	{
+		// Load Login Form View
+		//$this->load->view('admin/login');
+		$data['projects'] = $this->Project_model->search($this->input->post('search'));
+		$data['tech']  = $this->Project_model->dropdown( 'technology', 'id', 'name' );
+		$this->load->site_template( 'projects', $data );
+
+	}
+
+
 
 
 	public function get_by_id()

@@ -14,13 +14,13 @@
 			<div class="pull-left col-md-12 leader">
 			<div class="row">
 				<div class="col-md-2">
-					<img src="<?php echo $no['profile_pic']; ?>">
+					<?php echo profile_image($no['profile_pic']); ?>
 				</div>
-
 				<div class="col-md-10">
 					<h4><?php echo $no['display_name']; ?></h4>
 					<p><i class="fa fa-thumbs-up"></i> <?php echo $no['votes']; ?></p>
 				</div>
+
 			</div>
 			</div>
 

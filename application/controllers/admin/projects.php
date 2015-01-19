@@ -57,6 +57,7 @@ class Projects extends Admin_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Comment_model->add_vote( $this->input->post(), $id, true ) )
 			{
+				die(json_encode($insert_id));
 			}
 
 			die();

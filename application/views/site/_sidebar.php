@@ -21,10 +21,16 @@
 	<div class="showMenu">
 		<ul>
 			<div class="searchContain">
-				<input type="input" class="search">
+
+				<?php echo form_open_multipart( 'projects/search', array( 'id' => 'register') ); ?>
+				<input type="input" name="search" class="search">
 				<i class="fa fa-search"></i>
+				<input type="submit" class="hide">
+				<?php echo form_close(); ?>
+
+
 			</div>
-			<h3>Projects</h3>
+			<h3 class="m-t-50">Projects</h3>
 			<li><a href="<?php echo base_url('admin/projects/add');?>">Create Project</a></li>
 			<li><a href="<?php echo base_url('projects');?>">View Projects</a></li>
 
@@ -38,8 +44,8 @@
 				<li><a href="<?php echo base_url('/login');?>">Login</a></li>
 			<?php endif; ?>
 
-			<li><a href="#">Search Members</a></li>
-			<li><a href="<?php echo base_url('leaders');?>">See Leaderboard</a></li>
+<!-- 			<li><a href="#">Search Members</a></li>
+ -->			<li><a href="<?php echo base_url('leaders');?>">See Leaderboard</a></li>
 
 
 

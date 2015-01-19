@@ -103,6 +103,7 @@ class Project_model extends MY_Model
 				'pictures' => json_encode($images),
 				'github' => $post['github'],
 				'title' => $post['title'],
+				'date_posted' =>date("Y-m-d H:i:s"),
 			);
 
 			// Insert to Database and Store Insert ID
@@ -112,6 +113,21 @@ class Project_model extends MY_Model
 		}
 
 		return false;
+	}
+
+
+	public function search($search_term = FALSE)
+	{
+		$search_term = urldecode($search_term);
+		$this->db->select('projects.author_id,projects.id, projects.description,projects.date_posted,u.display_name as name,t.id as techid, t.name as technology,projects.pictures,projects.title,projects.github');
+		$this->db->from('projects');
+		$this->db->join( 'technology t', 't.id = projects.technology', 'left outer' );
+		$this->db->join( 'users u', 'u.id = projects.author_id', 'left outer' );
+		$this->db->like('description', $search_term);
+		$this->db->or_like('title', $search_term);
+		$this->db->or_like('t.name', $search_term);
+		$query = $this->db->get();
+	   	return $query->result_array();
 	}
 
 
