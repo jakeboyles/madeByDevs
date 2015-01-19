@@ -31,7 +31,7 @@
 				</div>
 
 				<div class="form-group col-md-12">
-					<?php echo form_label( 'GitHub Link', 'github', array( 'class' => 'form-label' ) ); ?><br>
+					<?php echo form_label( 'Link *', 'github', array( 'class' => 'form-label' ) ); ?><br>
 					<?php echo form_input( array('name' => 'github', 'class' => 'form-control', 'id' => 'github', 'value' => set_value('github') ) ); ?>
 				</div>
 

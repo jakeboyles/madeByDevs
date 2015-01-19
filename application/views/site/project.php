@@ -29,7 +29,7 @@
 				</div>
 
 				<div class="col-md-4">
-						<P><i class="fa fa-github"></i> <?php echo $project['github'] ?></P>
+						<P><i class="fa fa-anchor"></i> <?php echo $project['github'] ?></P>
 				</div>
 
 				<div class="col-md-12">
