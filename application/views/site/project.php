@@ -46,6 +46,8 @@
 		</div>
 
 
+
+		<?php if(!$this->session->userdata('email')): ?>
 		<div class="col-md-12">
 			<?php echo form_open_multipart( 'admin/projects/addComment/'.$project['id'], array( 'id' => 'register') ); ?>
 
@@ -62,7 +64,7 @@
 
 			<?php echo form_close(); ?>
 		</div>
-
+	<?php endif; ?>
 			<div class="col-md-12 comments">
 			<h2>Comments</h2>
 
