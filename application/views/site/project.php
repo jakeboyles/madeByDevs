@@ -47,7 +47,7 @@
 
 
 
-		<?php if(!$this->session->userdata('email')): ?>
+		<?php if($this->session->userdata('email')): ?>
 		<div class="col-md-12">
 			<?php echo form_open_multipart( 'admin/projects/addComment/'.$project['id'], array( 'id' => 'register') ); ?>
 
