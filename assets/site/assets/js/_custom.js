@@ -9,6 +9,10 @@ var now = moment();
 
 var dis = moment($(".moment")).fromNow();
 
+$(".mobileShow").on("click",function(){
+	$(".menu").toggle();
+})
+
 
 $(".moment").html(dis);
 

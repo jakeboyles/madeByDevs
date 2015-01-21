@@ -9,6 +9,8 @@
 	<meta content="" name="author" />
 
 	<!-- BEGIN PLUGIN CSS -->
+			<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 	<link href="<?php echo base_url(); ?>assets/admin/css/main.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
 	<link href="<?php echo base_url(); ?>assets/admin/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>

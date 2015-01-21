@@ -13,7 +13,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://www.madebydevs.com';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------

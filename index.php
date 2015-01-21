@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -27,7 +26,7 @@ ini_set("display_errors", 1);
 		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
 		{
 			$envs = array(
-				'development' => 'madebydevs.dev',
+				'development' => 'madebydevs.us',
 				'testing' => 'madebydevs-jakeangularjs.rhcloud.com',
 				'production' => 'madebydevs.com'
 			);
