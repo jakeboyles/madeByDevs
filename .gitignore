@@ -18,3 +18,4 @@ assets/.sass-cache
 # Ignore Uploads Directory
 uploads/admin_uploads/images/*
 uploads/*
+uploads
