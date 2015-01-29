@@ -26,7 +26,6 @@ class Projects extends Admin_Controller
 				redirect('/projects/view/'.$insert_id);
 			}
 
-			die();
 		}
 		$data['tech']  = $this->Project_model->dropdown( 'technology', 'id', 'name' );
 		$this->load->site_template( 'add_project', $data );
@@ -73,7 +72,7 @@ class Projects extends Admin_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Project_model->add_comment($this->input->post(), $id ) )
 			{
-				redirect('/projects/view/'.$id);
+				return true;
 			}
 
 			die();

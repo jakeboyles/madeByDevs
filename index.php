@@ -26,7 +26,7 @@ ini_set("display_errors", 1);
 		if(isset($_SERVER) && isset($_SERVER['SERVER_NAME'])) 
 		{
 			$envs = array(
-				'development' => 'madebydevs.us',
+				'development' => 'localhost',
 				'testing' => 'madebydevs-jakeangularjs.rhcloud.com',
 				'production' => 'madebydevs.com'
 			);

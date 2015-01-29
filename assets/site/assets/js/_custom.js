@@ -55,6 +55,64 @@ $(".menu").on("click",function(){
 
 
 
+$("body").on('click','#addQuestion',function(e){
+	e.preventDefault();
+
+		// Vars
+
+		var myForm = $('#askQuestion');
+		var data= new FormData(myForm[0]);
+
+		var url = $(this).data('ajax-url');
+
+	
+
+		// Display Location Fields Dropdown
+
+		$.ajax({
+			url: url,
+			data: data,
+			processData: false,
+			contentType: false,
+			mimeType:"multipart/form-data",
+			type: 'POST',
+			success: function( response ) {
+				 location.reload(); 
+			},
+		});
+})
+
+
+
+$("body").on('click','#leaveComment',function(e){
+	e.preventDefault();
+
+		// Vars
+
+		var myForm = $('#commentForm');
+		var data= new FormData(myForm[0]);
+
+		var url = $(this).data('ajax-url');
+
+	
+
+		// Display Location Fields Dropdown
+
+		$.ajax({
+			url: url,
+			data: data,
+			processData: false,
+			contentType: false,
+			mimeType:"multipart/form-data",
+			type: 'POST',
+			success: function( response ) {
+				 location.reload(); 
+			},
+		});
+})
+
+
+
 
 $('body').on('change', '.chooseTech', function(e){
 		e.preventDefault();

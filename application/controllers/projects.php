@@ -9,6 +9,7 @@ class Projects extends Site_Controller
 		parent::__construct();
 		$this->load->model( 'Project_model' );
 		$this->load->model( 'Comment_model' );
+		$this->load->model( 'Question_model' );
 		$this->load->helper('text');
 	}
 
@@ -39,6 +40,7 @@ class Projects extends Site_Controller
 		$data['project'] = $this->Project_model->get_records(array("p.id"=>$id));
 		$data['project'] = $data['project'][0];
 		$data['comments'] = $this->Comment_model->get_records(array("c.post"=>$id));
+		$data['questions'] = $this->Question_model->get_records(array("q.project_id"=>$id));
 		$this->load->site_template( 'project', $data );
 	}
 

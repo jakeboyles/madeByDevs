@@ -42,30 +42,18 @@
 
 				<p class="contentText"><?php echo $project['description']; ?></p>
 
+				<div class="col-md-12 question">
+					<P class="m-t-30 addQuestion">Have a question on this project? <a data-toggle="modal" data-target=".questionModal" href="">Ask the author!</a></P>
+					<P class="m-t-30">You can also <a data-toggle="modal" data-target=".commentModal" href="">comment on the project!</a></P>
+				</div>
+
 			</div>
 		</div>
 
 
 
-		<?php if($this->session->userdata('email')): ?>
-		<div class="col-md-12">
-			<?php echo form_open_multipart( 'admin/projects/addComment/'.$project['id'], array( 'id' => 'register') ); ?>
+		<div class="col-md-6 commentSection">
 
-			<h2>Add Comment</h2>
-
-				<div class="form-group col-xs-6 col-xs-offset-3">
-					<?php echo form_label( 'Comment', 'logo', array( 'class' => 'form-label' ) ); ?>
-					<?php echo form_textarea( array('name' => 'comment', 'class' => 'form-control', 'id' => 'comment', 'value' => set_value('description') ) ); ?>
-				</div>
-
-				<div class="col-md-6 col-md-offset-3">
-				<button type="submit" class="btn btn-primary pull-left">Submit</button>
-				</div>
-
-			<?php echo form_close(); ?>
-		</div>
-	<?php endif; ?>
-			<div class="col-md-12 comments">
 			<h2>Comments</h2>
 
 			<?php if(!empty($comments)): ?>
@@ -82,16 +70,99 @@
 						<span><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-up"></i></span>
 						<span  class="p-l-15"><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-down"></i></span>
 						 <span data-votes="<?php echo $comment['votes']; ?>" class="numVotes p-l-15"><?php echo $comment['votes']; ?></span> Votes
-	<!-- 					<?php echo $comment['created_at']; ?>
-	 -->			</div>
+	 				</div>
 				</div>
 			<?php endforeach; ?>
 			<?php else: ?>
 				<P>There are no comments right now, how about adding one?</P>
 			<?php endif;?>
-			</div>
 		</div>
+
+
+		<div class="col-md-6">
+
+			<h2>Questions</h2>
+
+			<?php if(!empty($questions)): ?>
+			<?php foreach($questions as $question): ?>
+				<div class="questionInfo row">
+					<div class="col-md-2">
+ 						<?php echo profile_image($question['profile_pic']); ?>
+ 					</div>
+
+					<div class="col-md-10">
+						<h3>Question:</h3>
+						<p><?php echo $question['question']; ?></p>
+						<?php if(!empty($question['answer'])): ?>
+						<h3>Answer:</h3>
+						<p><?php echo $question['answer']; ?></p>
+						<?php endif; ?>
+	 				</div>
+				</div>
+			<?php endforeach; ?>
+			<?php else: ?>
+				<P>There are no questions right now.</P>
+			<?php endif;?>
+		</div>
+
 </div>
+
+
+
+<div class="modal questionModal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Ask a question...</h4>
+      </div>
+      <div class="modal-body clearfix">
+        <form id="askQuestion" enctype="multipart/form-data">
+        	<div class="form-group col-md-12">
+				<?php echo form_label( 'Question *', 'description', array( 'class' => 'form-label' ) ); ?>
+				<?php echo form_textarea( array('name' => 'question', 'class' => 'form-control', 'id' => 'theQuestion', 'value' => set_value('description') ) ); ?>
+			</div>
+
+			<div class="form-group col-xs-6">
+				<?php echo form_label( 'Want to show an image? *', 'logo', array( 'class' => 'form-label' ) ); ?>
+				<?php echo form_upload( array('name' => 'picture','multiple' => '', 'class' => 'form-controll', 'id' => 'logo', 'value' => set_value( 'logo' ) ) ); ?>
+			</div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="addQuestion" data-ajax-url="<?php echo base_url() ?>questions/addQuestion/<?php echo $project['id']; ?>" class="btn btn-primary">Ask It</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+<div class="modal commentModal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Leave A Comment...</h4>
+      </div>
+      <div class="modal-body clearfix">
+        <form id="commentForm" enctype="multipart/form-data">
+        	<div class="form-group col-md-12">
+				<?php echo form_label( 'Comment *', 'comment', array( 'class' => 'form-label' ) ); ?>
+				<?php echo form_textarea( array('name' => 'comment', 'class' => 'form-control', 'id' => 'theQuestion', 'value' => set_value('description') ) ); ?>
+			</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['id']; ?>" class="btn btn-primary">Comment</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
