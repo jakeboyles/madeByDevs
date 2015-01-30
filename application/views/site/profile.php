@@ -10,13 +10,15 @@
 
 				<div class="col-md-4">
 				<h3><i class="fa fa-user"></i> <?php echo $user['display_name']; ?></h3>
-				<h5><i class="fa fa-envelope"></i>  <?php echo $user['email']; ?></h5>
+				<?php if(!empty($user['email'])): ?>
+					<h5><i class="fa fa-envelope"></i>  <?php echo $user['email']; ?></h5>
+				<?php endif; ?>
 				</div>
 
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-xs-6 count">
-						<h2 class=""><?php echo count($comments); ?></h2>
+						<h2><?php echo count($comments); ?></h2>
 						<h3>Comments</h3>
 						</div>
 
