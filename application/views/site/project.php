@@ -42,10 +42,12 @@
 
 				<p class="contentText"><?php echo $project['description']; ?></p>
 
+				<?php if(!empty($this->session->userdata('user_id'))): ?>
 				<div class="col-md-12 question">
 					<P class="m-t-30 addQuestion">Have a question on this project? <a data-toggle="modal" data-target=".questionModal" href="">Ask the author!</a></P>
 					<P class="m-t-30">You can also <a data-toggle="modal" data-target=".commentModal" href="">comment on the project!</a></P>
 				</div>
+				<?php endif; ?>
 
 			</div>
 		</div>
