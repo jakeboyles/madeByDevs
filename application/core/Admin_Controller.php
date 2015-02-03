@@ -5,6 +5,13 @@ class Admin_Controller extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->load->model( 'Notification_model' );
+		$stuff = $this->Notification_model->get_records($this->session->userdata('user_id'));
+		if(!empty($stuff)) 
+		{
+		$this->site_data = sizeof($stuff);
+		}
+		
 		// Check if The User is Logged In
 		$this->user_is_logged_in();
 	}

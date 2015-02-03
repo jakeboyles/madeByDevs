@@ -11,6 +11,7 @@ class Users extends Site_Controller
 		$this->load->model( 'User_model' );
 		$this->load->model( 'Project_model' );
 		$this->load->model( 'Comment_model' );
+		$this->load->model( 'Notification_model' );
 				$this->load->helper('text');
 
 
@@ -65,7 +66,7 @@ class Users extends Site_Controller
 		$data['user'] = $this->User_model->get( $id );
 		$data['projects'] = $this->Project_model->get_records( array("p.author_id"=>$id) );
 		$data['comments'] = $this->Comment_model->get_records( array("c.author_id"=>$id) );
-
+		$data['notifications'] = $this->Notification_model->get_records($this->session->userdata('user_id'));
 		$this->load->site_template( 'profile', $data );
 
 	}

@@ -1,6 +1,5 @@
 	<div class="sidebar col-md-2">
 	<a href="<?php echo base_url('/'); ?>"><img class="logo" src="<?php echo base_url('assets/site/assets/img/logo.png'); ?>"></a>
-
 	<ul>
 		<li class="menu"><a href="#">
 		<svg width="50" height="50">
@@ -14,9 +13,13 @@
 		<li><a href="<?php echo base_url('projects');?>"><i class="fa fa-code"></i><br> <span>Projects</span></a></li>
 		<li><a href="<?php echo base_url('leaders');?>"><i class="fa fa-trophy"></i><br> <span>Rankings</span></a></li>
 		<?php if($this->session->userdata('email')): ?>
-		<li><a href="<?php echo base_url('/users/profile/'.$this->session->userdata('user_id'));?>"><i class="fa fa-user"></i> <br> <span>Your Profile</span></a></li>
+			<?php if(!empty($this->site_data)) {
+				$showNotes=true;
+			} else { $showNotes = false; } ?>
+		<li><a href="<?php echo base_url('/users/profile/'.$this->session->userdata('user_id'));?>"><i class="fa fa-user"><?php if($showNotes): ?><i class="nots"><?php echo $this->site_data; ?></i><?php endif; ?></i> <br> <span>Your Profile </span></a></li>
 		<?php endif; ?>
 	</ul>
+
 
 	<div class="showMenu">
 		<ul>

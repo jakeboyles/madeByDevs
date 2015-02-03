@@ -42,6 +42,7 @@ ini_set("display_errors", 1);
 	if( isEnv('development') )
 	{
 		define('ENVIRONMENT', 'development');
+		ini_set('display_errors', 1);
 	}
 	elseif( isEnv('testing') )
 	{
@@ -104,7 +105,6 @@ if (defined('ENVIRONMENT'))
  */
  
 	
-
 
 
 /*

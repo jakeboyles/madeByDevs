@@ -90,12 +90,20 @@
  						<?php echo profile_image($question['profile_pic']); ?>
  					</div>
 
-					<div class="col-md-10">
+					<div id="questions" class="col-md-10">
 						<h3>Question:</h3>
 						<p><?php echo $question['question']; ?></p>
 						<?php if(!empty($question['answer'])): ?>
 						<h3>Answer:</h3>
 						<p><?php echo $question['answer']; ?></p>
+						<?php endif; ?>
+
+						<?php if(($this->session->userdata('user_id')===$project['author_id'] ) && $question['status']==0) :?>
+							<form id="commentForm" enctype="multipart/form-data">
+									<?php echo form_label( 'Answer *', 'comment', array( 'class' => 'form-label' ) ); ?>
+									<?php echo form_textarea( array('name' => 'comment', 'class' => 'form-control', 'id' => 'theQuestion', 'value' => set_value('description') ) ); ?>
+									<button type="button" id="answerQuestion" data-id="<?php echo $project['id']; ?>" data-ajax-url="<?php echo base_url() ?>questions/answerQuestion/<?php echo $question['id']; ?>" class="m-t-20 btn btn-primary">Answer It</button>
+							</form>
 						<?php endif; ?>
 	 				</div>
 				</div>
@@ -127,7 +135,7 @@
 				<?php echo form_label( 'Want to show an image? *', 'logo', array( 'class' => 'form-label' ) ); ?>
 				<?php echo form_upload( array('name' => 'picture','multiple' => '', 'class' => 'form-controll', 'id' => 'logo', 'value' => set_value( 'logo' ) ) ); ?>
 			</div>
-
+			<input type="hidden" name="author" value="<?php echo $project['author_id']; ?>">
         </form>
       </div>
       <div class="modal-footer">

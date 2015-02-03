@@ -13,6 +13,9 @@
 				<?php if(!empty($user['email'])): ?>
 					<h5><i class="fa fa-envelope"></i>  <?php echo $user['email']; ?></h5>
 				<?php endif; ?>
+				<?php if($this->site_data>0): ?>
+					<h5><a data-toggle="modal" data-target=".questionModal" href=""><i class="fa fa-exclamation-circle text-danger"></i> You Have <?php echo $this->site_data; ?> Notifications</a><h5>
+				<?php endif; ?>
 				</div>
 
 				<div class="col-md-4">
@@ -101,3 +104,29 @@
 	</div>
 
 </div>
+
+
+<div class="modal questionModal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Notifications</h4>
+      </div>
+      <div class="modal-body clearfix">
+        <form id="commentForm" enctype="multipart/form-data">
+        	<div class="form-group col-md-12">
+				<?php foreach($notifications as $notification): ?>
+					<h3><a href="<?php echo base_url('projects/view/').'/'.$notification['notification_id'].'#questions'; ?>">You have a new <?php echo $notification['name'];?> to be answered.</a></h3>
+				<?php endforeach; ?>
+			</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['id']; ?>" class="btn btn-primary">Comment</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

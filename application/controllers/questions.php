@@ -11,6 +11,7 @@ class Questions extends Site_Controller
 		$this->load->model( 'Comment_model' );
 		$this->load->model( 'Question_model' );
 		$this->load->model( 'Leader_model' );
+		$this->load->model( 'Notification_model' );
 		$this->load->helper('text');
 	}
 
@@ -30,10 +31,30 @@ class Questions extends Site_Controller
 			// If Successfully Inserted to DB, Redirect to Edit
 			if( $insert_id = $this->Question_model->add_question($id, $this->input->post() ) )
 			{
+				$this->Notification_model->add_notification(1,$this->input->post('author'),$id);
 				return true;
 			}
 
 		}
+	}
+
+	public function answerQuestion($id)
+	{
+		if( $this->input->post() )
+		{	
+
+			$post = $this->input->post();
+
+			// If Successfully Inserted to DB, Redirect to Edit
+			if( $insert_id = $this->Question_model->answer_question($id, $this->input->post() ) )
+			{
+
+				$test = $this->Notification_model->delete_notification($post['id']);
+
+			}
+
+		}
+
 	}
 
 

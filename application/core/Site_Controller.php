@@ -1,9 +1,20 @@
 <?php
 class Site_Controller extends CI_Controller
 {
+
+	public $site_data;
+	
 	function __construct()
 	{
 		parent::__construct();
+		
+		$this->load->model( 'Notification_model' );
+		$stuff = $this->Notification_model->get_records($this->session->userdata('user_id'));
+		if(!empty($stuff)) 
+		{
+		$this->site_data = sizeof($stuff);
+		}
+
 	}
 
 	// Redirect the User to the Admin Login Page if Not Logged In

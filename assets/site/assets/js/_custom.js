@@ -77,7 +77,8 @@ $("body").on('click','#addQuestion',function(e){
 			mimeType:"multipart/form-data",
 			type: 'POST',
 			success: function( response ) {
-				 location.reload(); 
+				console.log(response);
+				 //location.reload(); 
 			},
 		});
 })
@@ -128,6 +129,42 @@ $('body').on('change', '.chooseTech', function(e){
 
 			$.ajax({
 				url: '/projects/get_by_id',
+				data: data,
+				type: 'POST',
+				success: function( response ) {
+					// Load Results to Dom
+					$(".projects").html( response );
+					//formContainer.removeClass( 'hide' );
+					
+					// Re-Initialize jQuery Plugins on Dynamic Content
+				},
+			});
+		
+		
+	});
+
+
+$('body').on('click', '#answerQuestion', function(e){
+		e.preventDefault();
+
+		// Vars
+		var url = $(this).data('ajax-url');
+
+		var id = $(this).data('id');
+
+		var answer = $(this).parent().find("textarea").val();
+
+
+
+		var data = {
+			"id" : id,
+			"answer": answer,
+		}
+
+		// Display Location Fields Dropdown
+
+			$.ajax({
+				url: url,
 				data: data,
 				type: 'POST',
 				success: function( response ) {

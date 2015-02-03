@@ -10,7 +10,7 @@ class Question_model extends MY_Model
 	public function get_records( $where = FALSE )
 	{
 		// Construct Query
-		$this->db->select('q.id,q.pictures,q.answer,q.asker,q.question,u.profile_pic');
+		$this->db->select('q.id,q.pictures,q.answer,q.asker,q.question,u.profile_pic,q.status');
 
 		$this->db->join( 'users u', 'u.id = q.asker', 'left outer' );
 
@@ -78,6 +78,33 @@ class Question_model extends MY_Model
 
 
 	}
+
+
+	public function answer_question( $id = FALSE, $post = FALSE )
+	{
+
+
+		if( $id && $post )
+		{
+
+
+				// Update Data
+				$data = array(
+					'answer' => $post['answer'],
+					'status' => 1,
+				);
+			
+
+			// Update Record in Database
+			$this->db->where("id",$id);
+
+			$this->db->update('questions', $data );
+
+			return true;
+		}
+		return false;
+	}
+
 
 
 	private function _add_image($post, $name)

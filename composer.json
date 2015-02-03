@@ -1,0 +1,8 @@
+{
+    "require": {
+        "kriswallsmith/buzz": "*"
+    },
+    "require-dev": {
+        "sebastian/phpcpd": "*"
+    }
+}
