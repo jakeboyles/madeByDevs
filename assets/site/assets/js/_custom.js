@@ -78,7 +78,7 @@ $("body").on('click','#addQuestion',function(e){
 			type: 'POST',
 			success: function( response ) {
 				console.log(response);
-				 //location.reload(); 
+				 location.reload(); 
 			},
 		});
 })
@@ -171,7 +171,7 @@ $('body').on('click', '#answerQuestion', function(e){
 					// Load Results to Dom
 					$(".projects").html( response );
 					//formContainer.removeClass( 'hide' );
-					
+					location.reload(); 
 					// Re-Initialize jQuery Plugins on Dynamic Content
 				},
 			});
