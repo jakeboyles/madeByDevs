@@ -42,7 +42,7 @@
 
 				<p class="contentText"><?php echo $project['description']; ?></p>
 
-				<?php if($this->session->userdata('user_id')==2): ?>
+				<?php if($this->session->userdata('user_type_id')==2): ?>
 				<div class="col-md-12 question">
 					<P class="m-t-30 addQuestion">Have a question on this project? <a data-toggle="modal" data-target=".questionModal" href="">Ask the author!</a></P>
 					<P class="m-t-30">You can also <a data-toggle="modal" data-target=".commentModal" href="">comment on the project!</a></P>
