@@ -20,7 +20,7 @@
 
 			<div class="row">
 				<div class="col-md-8">
-					<p><?php echo $project['project']['name']; ?></p>
+					<p><a href="<?php echo base_url('users/profile').'/'.$project['project']['author_id']; ?>"><?php echo $project['project']['name']; ?></a></p>
 				</div>
 				<div class="col-md-4">
 				<P class="pull-right"><?php echo date("m/d",strtotime($project['project']['date_posted'])); ?></P>

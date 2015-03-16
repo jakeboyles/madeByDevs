@@ -11,7 +11,7 @@ class Project_model extends MY_Model
 	{
 		// Construct Query
 		$this->db->select('
-			p.author_id,p.id, p.description,p.date_posted,u.display_name as name,t.id as techid, t.name as technology,p.pictures,p.title,p.github');
+			p.author_id,p.id, p.description,p.date_posted,u.id as author_id,u.display_name as name,t.id as techid, t.name as technology,p.pictures,p.title,p.github');
 
 		 $this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 		 $this->db->join( 'technology t', 't.id = p.technology', 'left outer' );
