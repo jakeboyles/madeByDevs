@@ -31,6 +31,7 @@
 
 					<P class="pull-left tech"><?php echo $project['project']['technology']; ?></P>
 					<span class="pull-right comments"><i class="fa fa-comments"></i> <?php echo $project['comments']; ?></span>
+					<span class="pull-right questions"><i class="fa fa-question"></i> <?php echo $project['questions']; ?></span>
 			</div>
 		</div>
 
