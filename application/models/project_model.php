@@ -28,8 +28,21 @@ class Project_model extends MY_Model
 		// If Rows Were Found, Return Them
 		if($query->num_rows > 0)
 		{
+			$projects = array();
 			$rows = $query->result_array();
-			return $rows;
+			foreach($rows as $row)
+			{
+				 $this->db->where('post',$row['id']);
+				  $this->db->from('comments');
+				  $count = $this->db->count_all_results();
+
+				  $project['project'] = $row;
+				  $project['comments'] = $count;
+
+				  array_push($projects,$project);
+			}
+
+			return $projects;
 		}
 
 		return false;

@@ -26,6 +26,7 @@ class Projects extends Site_Controller
 		//$this->load->view('admin/login');
 		$data['tech']  = $this->Project_model->dropdown( 'technology', 'id', 'name' );
 		$data['projects'] = $this->Project_model->get_records();
+
 		$this->load->site_template( 'projects', $data );
 	}
 
