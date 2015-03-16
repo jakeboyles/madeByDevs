@@ -62,6 +62,7 @@ class User_model extends MY_Model
 	{
 		if( $post )
 		{
+
 			// Insert Data
 			$data = array(
 				'user_type_id' => 1,
@@ -69,6 +70,8 @@ class User_model extends MY_Model
 				'display_name' => $post->displayName,
 				'hybridauth_provider_uid' => $post->identifier,
 				'profile_pic' => $post->photoURL,
+				'email' => empty( $post->email ) ? NULL : $post->email,
+
 			);
 
 			// Insert to Database and Store Insert ID
@@ -88,6 +91,7 @@ class User_model extends MY_Model
 
 		if( $post )
 		{
+
 			// Insert Data
 			$data = array(
 				'user_type_id' => 1,
@@ -95,6 +99,7 @@ class User_model extends MY_Model
 				'password' => '0',
 				'display_name' => $post->displayName,
 				'hybridauth_provider_uid' => $post->identifier,
+				'email' => $post->email,
 			);
 
 			// Insert to Database and Store Insert ID
@@ -112,6 +117,7 @@ class User_model extends MY_Model
 
 	public function is_in_db($id)
 	{
+
 
 		// Construct Query
 		$this->db->select('
