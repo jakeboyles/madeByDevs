@@ -128,7 +128,7 @@ $('body').on('change', '.chooseTech', function(e){
 		// Display Location Fields Dropdown
 
 			$.ajax({
-				url: '/projects/get_by_id',
+				url: 'projects/get_by_id',
 				data: data,
 				type: 'POST',
 				success: function( response ) {

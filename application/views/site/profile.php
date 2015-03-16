@@ -52,21 +52,21 @@
 
 			<?php if(!empty($projects)): ?>
 				<?php foreach($projects as $project): 
-					if(!empty($project['pictures'])) :
-					 $picture = json_decode($project['pictures']);
+					if(!empty($project['project']['pictures'])) :
+					 $picture = json_decode($project['project']['pictures']);
 					 endif; 
 					 ?>
 
 					 <div class="row p-b-30">
 					<div class="col-md-3">
-					<?php if(!empty($project['pictures'])) : ?>
-						<a href="<?php echo base_url('projects/view').'/'.$project['id']; ?>"><img src="/uploads/<?php echo $picture[0]->image ?>"></a>
+					<?php if(!empty($project['project']['pictures'])) : ?>
+						<a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>"><img src="/uploads/<?php echo $picture[0]->image ?>"></a>
 					<?php endif; ?>
 					</div>
 
 					<div class="col-md-9">
-						<h4><a href="<?php echo base_url('projects/view').'/'.$project['id']; ?>"><?php echo $project['title']; ?></a></h4>
-						<P><?php echo word_limiter($project['description'], 20); ?></P>
+						<h4><a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>"><?php echo $project['project']['title']; ?></a></h4>
+						<P><?php echo word_limiter($project['project']['description'], 20); ?></P>
 					</div>
 					</div>
 

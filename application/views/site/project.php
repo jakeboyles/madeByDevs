@@ -2,7 +2,7 @@
 
 
 		<?php 
-			$pics = $project['pictures'];
+			$pics = $project['project']['pictures'];
 			$pics = json_decode($pics);
 			$main = '';
 			if(is_array($pics)) {
@@ -17,30 +17,30 @@
 			<div class="projectContainer">
 
 				<div class="col-md-12">
-					<h2><?php echo $project['title']; ?></h2>
+					<h2><?php echo $project['project']['title']; ?></h2>
 				</div>
 
 				<div class="col-md-4">
-					<a class="author" href="<?php echo base_url('users/profile').'/'.$project['author_id']; ?>"><p><i class="fa fa-user"></i>  <?php echo $project['name']; ?></p></a>
+					<a class="author" href="<?php echo base_url('users/profile').'/'.$project['project']['author_id']; ?>"><p><i class="fa fa-user"></i>  <?php echo $project['project']['name']; ?></p></a>
 				</div>
 
 				<div class="col-md-4">
-						<P><i class="fa fa-calendar"></i> <span><?php echo date("m/d/y",strtotime($project['date_posted'])); ?></span></P>
+						<P><i class="fa fa-calendar"></i> <span><?php echo date("m/d/y",strtotime($project['project']['date_posted'])); ?></span></P>
 				</div>
 
 				<div class="col-md-4">
-						<P><i class="fa fa-anchor"></i> <?php echo $project['github'] ?></P>
+						<P><i class="fa fa-anchor"></i> <?php echo $project['project']['github'] ?></P>
 				</div>
 
 				<div class="col-md-12">
 
-					<a href="<?php echo base_url('projects/view').'/'.$project['id']; ?>">
+					<a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>">
 						<img class="" src="<?php echo base_url('uploads').'/'.$main ?>">
 					</a>
 
 				</div>
 
-				<p class="contentText"><?php echo $project['description']; ?></p>
+				<p class="contentText"><?php echo $project['project']['description']; ?></p>
 
 				<?php if($this->session->userdata('user_type_id')==2 || $this->session->userdata('user_type_id')==1): ?>
 				<div class="col-md-12 question">
@@ -100,11 +100,11 @@
 						<p><?php echo $question['answer']; ?></p>
 						<?php endif; ?>
 
-						<?php if(($this->session->userdata('user_id')===$project['author_id'] ) && $question['status']==0) :?>
+						<?php if(($this->session->userdata('user_id')===$project['project']['author_id'] ) && $question['status']==0) :?>
 							<form id="commentForm" enctype="multipart/form-data">
 									<?php echo form_label( 'Answer *', 'comment', array( 'class' => 'form-label' ) ); ?>
 									<?php echo form_textarea( array('name' => 'comment', 'class' => 'form-control', 'id' => 'theQuestion', 'value' => set_value('description') ) ); ?>
-									<button type="button" id="answerQuestion" data-id="<?php echo $project['id']; ?>" data-ajax-url="<?php echo base_url() ?>questions/answerQuestion/<?php echo $question['id']; ?>" class="m-t-20 btn btn-primary">Answer It</button>
+									<button type="button" id="answerQuestion" data-id="<?php echo $project['project']['id']; ?>" data-ajax-url="<?php echo base_url() ?>questions/answerQuestion/<?php echo $question['id']; ?>" class="m-t-20 btn btn-primary">Answer It</button>
 							</form>
 						<?php endif; ?>
 	 				</div>
@@ -137,12 +137,12 @@
 				<?php echo form_label( 'Want to show an image? *', 'logo', array( 'class' => 'form-label' ) ); ?>
 				<?php echo form_upload( array('name' => 'picture','multiple' => '', 'class' => 'form-controll', 'id' => 'logo', 'value' => set_value( 'logo' ) ) ); ?>
 			</div>
-			<input type="hidden" name="author" value="<?php echo $project['author_id']; ?>">
+			<input type="hidden" name="author" value="<?php echo $project['project']['author_id']; ?>">
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="addQuestion" data-ajax-url="<?php echo base_url() ?>questions/addQuestion/<?php echo $project['id']; ?>" class="btn btn-primary">Ask It</button>
+        <button type="button" id="addQuestion" data-ajax-url="<?php echo base_url() ?>questions/addQuestion/<?php echo $project['project']['id']; ?>" class="btn btn-primary">Ask It</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -168,7 +168,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['id']; ?>" class="btn btn-primary">Comment</button>
+        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['project']['id']; ?>" class="btn btn-primary">Comment</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
