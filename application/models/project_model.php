@@ -15,6 +15,7 @@ class Project_model extends MY_Model
 
 		 $this->db->join( 'users u', 'u.id = p.author_id', 'left outer' );
 		 $this->db->join( 'technology t', 't.id = p.technology', 'left outer' );
+		 $this->db->order_by('id','desc');
 
 		 if(!empty($atts)) {
 			$this->db->where( $atts ); 
@@ -48,6 +49,7 @@ class Project_model extends MY_Model
 		// Look for Custom Where Query
 
 		$this->db->where( 'technology', $this->input->post('technology') ); 
+		 $this->db->order_by('id','asc');
 
 
 		// Run Query

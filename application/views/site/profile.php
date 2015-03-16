@@ -21,12 +21,20 @@
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-xs-6 count">
+						<?php if($comments!=false): ?>
 						<h2><?php echo count($comments); ?></h2>
+						<?php else: ?>
+						<h2>0</h2>
+						<?php endif; ?>
 						<h3>Comments</h3>
 						</div>
 
 						<div class="col-xs-6 count">
+						<?php if($projects!=false): ?>
 						<h2><?php echo count($projects); ?></h2>
+						<?php else: ?>
+						<h2>0</h2>
+						<?php endif; ?>
 						<h3>Projects</h3>
 						</div>
 					</div>

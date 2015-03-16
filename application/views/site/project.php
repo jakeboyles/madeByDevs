@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="col-md-4">
-						<P><i class="fa fa-calendar"></i> <span class="moment"><?php echo date("Y-m-d H:i:s",strtotime($project['date_posted'])); ?></span></P>
+						<P><i class="fa fa-calendar"></i> <span><?php echo date("m/d/y",strtotime($project['date_posted'])); ?></span></P>
 				</div>
 
 				<div class="col-md-4">
