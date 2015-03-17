@@ -33,11 +33,10 @@
 				</div>
 
 				<div class="col-md-12">
-				<?php if(!empty($main)): ?>
+
 					<a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>">
-						<img class="" src="<?php echo base_url('uploads').'/'.$main ?>">
+						<?php echo project_image($main); ?>
 					</a>
-				<?php endif; ?>
 
 				</div>
 
