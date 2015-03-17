@@ -69,8 +69,8 @@
 						<h3><?php echo $comment['display_name']; ?></h3>
 						<p><?php echo $comment['comment']; ?></p>
 
-						<span><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-up"></i></span>
-						<span  class="p-l-15"><i data-tech="<?php echo $project['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-down"></i></span>
+						<span><i data-tech="<?php echo $project['project']['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-up"></i></span>
+						<span  class="p-l-15"><i data-tech="<?php echo $project['project']['techid']; ?>" data-user="<?php echo $comment['user_id']; ?>" data-id='<?php echo $comment['id']; ?>' class="fa fa-thumbs-down"></i></span>
 						 <span data-votes="<?php echo $comment['votes']; ?>" class="numVotes p-l-15"><?php echo $comment['votes']; ?></span> Votes
 	 				</div>
 				</div>

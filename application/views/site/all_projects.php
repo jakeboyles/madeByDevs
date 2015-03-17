@@ -15,7 +15,7 @@
 		<div class="col-md-4 project">
 		<div class="projectContainer">
 		<a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>">
-		<img src="<?php echo base_url('uploads').'/'.$main ?>">
+		<?php echo project_image($main); ?>
 		</a>
 
 			<div class="row">
