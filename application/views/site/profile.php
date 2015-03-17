@@ -57,12 +57,11 @@
 					 endif; 
 					 ?>
 
-					 <div class="row p-b-30">
+					<div class="row p-b-30">
 					<div class="col-md-3">
-					<?php if(!empty($project['project']['pictures'])) : ?>
+					<?php if(!empty($picture[0]->image)) : ?>
 						<a href="<?php echo base_url('projects/view').'/'.$project['project']['id']; ?>">
-						<?php echo project_image($picture[0]->image); ?>
-
+							<?php echo project_image($picture[0]->image); ?>
 						</a>
 					<?php endif; ?>
 					</div>
