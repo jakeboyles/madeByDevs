@@ -13,7 +13,7 @@
 				<?php if(!empty($user['email'])): ?>
 					<h5><i class="fa fa-envelope"></i>  <?php echo $user['email']; ?></h5>
 				<?php endif; ?>
-				<?php if($this->site_data>0): ?>
+				<?php if($this->site_data>0 &&  $this->session->userdata('user_id')== $user['id'] ): ?>
 					<h5><a data-toggle="modal" data-target=".questionModal" href=""><i class="fa fa-exclamation-circle text-danger"></i> You Have <?php echo $this->site_data; ?> Notifications</a><h5>
 				<?php endif; ?>
 				</div>
@@ -134,7 +134,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['id']; ?>" class="btn btn-primary">Comment</button>
+        <button type="button" id="leaveComment" data-ajax-url="<?php echo base_url() ?>admin/projects/addComment/<?php echo $project['project']['id']; ?>" class="btn btn-primary">Comment</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
