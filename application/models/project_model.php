@@ -81,11 +81,16 @@ class Project_model extends MY_Model
 			foreach($rows as $row)
 			{
 				 $this->db->where('post',$row['id']);
-				  $this->db->from('comments');
-				  $count = $this->db->count_all_results();
+				 $this->db->from('comments');
+				 $count = $this->db->count_all_results();
+
+				 $this->db->where('project_id',$row['id']);
+				 $this->db->from('questions');
+				 $questions = $this->db->count_all_results();
 
 				  $project['project'] = $row;
 				  $project['comments'] = $count;
+				  $project['questions'] = $questions;
 
 				  array_push($projects,$project);
 			}
