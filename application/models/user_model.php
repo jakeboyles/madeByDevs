@@ -264,7 +264,7 @@ class User_model extends MY_Model
 				$config['image_library'] = 'gd2';
 				$config['source_image'] = './uploads/'. $image['upload_data']['file_name'];
 				$config['create_thumb'] = FALSE;
-				$config['maintain_ratio'] = FALSE;
+				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 500;
 				$config['height'] = 300;
 
