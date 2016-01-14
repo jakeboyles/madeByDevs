@@ -81,7 +81,7 @@
 		</div>
 
 
-		<div class="col-md-6">
+		<div class="col-md-6 questionSection">
 
 			<h2>Questions</h2>
 
