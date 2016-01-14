@@ -29,7 +29,7 @@ ini_set("display_errors", 1);
 			$envs = array(
 				'development' => 'madebydevs.com',
 				'testing' => 'madebydevs-oodle.rhcloud.com',
-				'production' => ''
+				'production' => '104.236.123.134'
 			);
 			
 			if (isset($envs[$env]) && strpos($_SERVER['SERVER_NAME'], $envs[$env]) !== false) 

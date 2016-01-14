@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 's-cdbr-iron-east-01.cleardb.net';
-$db['default']['username'] = 'baf9a4eedd0a28';
-$db['default']['password'] = '1460bf36';
-$db['default']['database'] = 'heroku_7782d1d95e95a92';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'madeByDevs';
+$db['default']['password'] = 'Baseball_200';
+$db['default']['database'] = 'madeByDevs';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
