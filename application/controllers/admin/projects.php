@@ -33,6 +33,25 @@ class Projects extends Admin_Controller
 	}
 
 
+	// Add New Record View
+	public function edit($id = false)
+	{
+		// If Form is Submitted Validate Form Data and Add Record to Database
+		if( $this->input->post() && $this->_project_validation() )
+		{	
+			// If Successfully Inserted to DB, Redirect to Edit
+			if( $insert_id = $this->Project_model->insert_record( $this->input->post() ) )
+			{
+				redirect('/projects/view/'.$insert_id);
+			}
+
+		}
+		$data['tech']  = $this->Project_model->dropdown( 'technology', 'id', 'name' );
+		$this->load->site_template( 'add_project', $data );
+
+	}
+
+
 	public function add_vote($id = false)
 	{
 		if( $this->input->post() )
