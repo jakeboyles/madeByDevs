@@ -58,8 +58,6 @@ class Projects extends Site_Controller
 	}
 
 
-
-
 	public function get_by_id()
 	{
 
