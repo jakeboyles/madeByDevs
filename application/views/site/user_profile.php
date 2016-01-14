@@ -35,7 +35,7 @@
 								<img src="<?php echo $user['profile_pic']; ?>">
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-8">
 
 								<div class="form-group col-md-12">
 									<?php echo form_label( 'Update Image', 'email', array( 'class' => 'form-label' ) ); ?><br>
