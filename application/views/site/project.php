@@ -62,7 +62,7 @@
 			<?php foreach($comments as $comment): ?>
 				<div class="comment row">
 					<div class="col-md-2">
-						<?php echo profile_image($comment['profile_pic']); ?>
+						<?php echo profile_image($comment['profile_pic'],$comment['user_id']); ?>
 					</div>
 
 					<div class="col-md-10">
