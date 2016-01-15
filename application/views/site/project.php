@@ -62,6 +62,7 @@
 			<?php foreach($comments as $comment): ?>
 				<div class="comment row">
 					<div class="col-md-2">
+						<?php echo json_encode($comment); ?>
 						<?php echo profile_image($comment['profile_pic'],$comment['user_id']); ?>
 					</div>
 
