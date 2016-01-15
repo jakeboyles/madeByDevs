@@ -89,7 +89,6 @@
 			<?php foreach($questions as $question): ?>
 				<div class="questionInfo row">
 					<div class="col-md-2">
-					<?php echo json_encode($question); ?>
  						<?php echo profile_image($question['profile_pic'],$question['user_id']); ?>
  					</div>
 

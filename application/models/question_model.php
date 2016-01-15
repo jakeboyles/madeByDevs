@@ -10,7 +10,7 @@ class Question_model extends MY_Model
 	public function get_records( $where = FALSE )
 	{
 		// Construct Query
-		$this->db->select('q.id,q.pictures,q.answer,q.asker,q.question,u.profile_pic,q.status');
+		$this->db->select('q.id,q.pictures,q.answer,q.asker,q.question,u.profile_pic,q.status,u.id as user_id');
 
 		$this->db->join( 'users u', 'u.id = q.asker', 'left outer' );
 
