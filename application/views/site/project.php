@@ -62,7 +62,6 @@
 			<?php foreach($comments as $comment): ?>
 				<div class="comment row">
 					<div class="col-md-2">
-						<?php echo json_encode($comment); ?>
 						<?php echo profile_image($comment['profile_pic'],$comment['user_id']); ?>
 					</div>
 
@@ -90,7 +89,7 @@
 			<?php foreach($questions as $question): ?>
 				<div class="questionInfo row">
 					<div class="col-md-2">
- 						<?php echo profile_image($question['profile_pic']); ?>
+ 						<?php echo profile_image($question['profile_pic'],$comment['user_id']); ?>
  					</div>
 
 					<div id="questions" class="col-md-10">
